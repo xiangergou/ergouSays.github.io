@@ -307,8 +307,37 @@
       
         
           
-            <ul>
-<li><img src="/2018/04/27/Singleton/psb.jpeg" alt="dsadsad"></li>
+            <h3 id="什么是单例？"><a href="#什么是单例？" class="headerlink" title="什么是单例？"></a>什么是单例？</h3><blockquote><p>保证一个类仅有一个实例，并提供一个访问他的全局访问点。</p>
+<footer><strong>曾探</strong><cite>javascript设计模式与探索实践</cite></footer></blockquote>      
+<div>单例模式是一种十分简单而且能够很简单的方式实现的一种设计模式。它是指在一个类中只有一个实例，即使你多次实例化这个类，它也只会返回一次实例化的对象，可以有效地避免资源的浪费，能减少不必要的内存开销, 并且在减少全局的函数和变量冲突也具有重要的意义。<br><br><p>   “单例实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。”<br>    <span style="float:right;display:block">   ——汤姆大叔的博客 深入理解javascript系列(25)</span> </p><br><br></div>
+
+<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><ul>
+<li>最简单的实现方式<br>在这之前，且让我们牢记单例的核心：<blockquote>
+<ol>
+<li>确保只有一个实例。</li>
+<li>提供全局访问。  </li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<p>看官是否有了想法了？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// ep</span><br><span class="line">let number = &#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>timeTool独一无二，放在全局作用域下，我们可以在任意位置调用它。这已然满足了单例模式的条件。<br>然而事实上，全局变量不算单例模式，只是在js开发中，我们将其当做单例模式来使用。 全局变量存在诸多问题，最主要的当属命名空间污染。 js创造者Brendan Eich也曾名言全局变量是设计上的失误。</p>
+<p>  最常见的情况是，项目由两个人合作，若都不注意全局污染，就容易出现变量重复声明的情况。<br>  </p>
+<ul>
+<li>使用命名空间<br>适当的使用命名空间，不会杜绝全局变量，但可以减少其数量。比如  <pre><code>// 开发者A
+let devA = {
+  name: function() {  
+      alert(&apos;a&apos;)
+  }
+}
+// 开发者B
+let devB = {
+  name: function() { 
+      alert(&apos;b&apos;)
+  }
+}
+</code></pre></li>
+<li>闭包封装私有变量</li>
 </ul>
 
           
@@ -430,7 +459,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-0.jpg" rel="gallery_cjghnc6ru0002w3oymrabt9sv"
+                 href="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-0.jpg" rel="gallery_cjghqiph7000119oyc6t6zw6g"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-0.jpg" itemprop="contentUrl"/>
               </a>
