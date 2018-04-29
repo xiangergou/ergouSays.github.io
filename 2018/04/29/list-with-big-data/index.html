@@ -80,16 +80,17 @@
 
 
 
-<meta name="description" content="总该出去看看">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ergou&#39;blog">
-<meta property="og:url" content="https://xiangergou.github.io/index.html">
+<meta name="description" content="前言本章探讨页面加载海量数据时，如何保证页面渲染流畅，不会出现因大量添加dom节点，导致浏览器卡死的情况。   实例举例创建web好友列表，可能会有成千上百个好友，若一个好友由一个节点表示，当我们渲染这个列表时，可能需要一次性的创建n多节点。123&amp;lt;body&amp;gt;  &amp;lt;ul id=&quot;list-with-big-data&quot;&amp;gt;1000个好友&amp;lt;/ul&amp;gt;&amp;lt;/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="页面海量数据加载 -- 分时函数 + requestAnimationFrame">
+<meta property="og:url" content="https://xiangergou.github.io/2018/04/29/list-with-big-data/index.html">
 <meta property="og:site_name" content="ergou&#39;blog">
-<meta property="og:description" content="总该出去看看">
+<meta property="og:description" content="前言本章探讨页面加载海量数据时，如何保证页面渲染流畅，不会出现因大量添加dom节点，导致浏览器卡死的情况。   实例举例创建web好友列表，可能会有成千上百个好友，若一个好友由一个节点表示，当我们渲染这个列表时，可能需要一次性的创建n多节点。123&amp;lt;body&amp;gt;  &amp;lt;ul id=&quot;list-with-big-data&quot;&amp;gt;1000个好友&amp;lt;/ul&amp;gt;&amp;lt;/">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-29T10:37:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ergou&#39;blog">
-<meta name="twitter:description" content="总该出去看看">
+<meta name="twitter:title" content="页面海量数据加载 -- 分时函数 + requestAnimationFrame">
+<meta name="twitter:description" content="前言本章探讨页面加载海量数据时，如何保证页面渲染流畅，不会出现因大量添加dom节点，导致浏览器卡死的情况。   实例举例创建web好友列表，可能会有成千上百个好友，若一个好友由一个节点表示，当我们渲染这个列表时，可能需要一次性的创建n多节点。123&amp;lt;body&amp;gt;  &amp;lt;ul id=&quot;list-with-big-data&quot;&amp;gt;1000个好友&amp;lt;/ul&amp;gt;&amp;lt;/">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/04/29/list-with-big-data/"/>
 
 
 
 
 
-  <title>ergou'blog - 以前看见山，总想知道山后面是什么</title>
+  <title>页面海量数据加载 -- 分时函数 + requestAnimationFrame | ergou'blog</title>
   
 
 
@@ -144,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/xiangergou">
       <img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png" alt="Fork me on GitHub">
@@ -261,9 +261,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -293,9 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/29/list-with-big-data/" itemprop="url">页面海量数据加载 -- 分时函数 + requestAnimationFrame</a></h1>
+          <h1 class="post-title" itemprop="name headline">页面海量数据加载 -- 分时函数 + requestAnimationFrame</h1>
         
 
         <div class="post-meta">
@@ -345,9 +343,7 @@
       
 
       
-        
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本章探讨页面加载海量数据时，如何保证页面渲染流畅，不会出现因大量添加dom节点，导致浏览器卡死的情况。  </p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本章探讨页面加载海量数据时，如何保证页面渲染流畅，不会出现因大量添加dom节点，导致浏览器卡死的情况。  </p>
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>举例创建web好友列表，可能会有成千上百个好友，若一个好友由一个节点表示，当我们渲染这个列表时，可能需要一次性的创建n多节点。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;ul id=<span class="string">"list-with-big-data"</span>&gt;<span class="number">1000</span>个好友&lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br></pre></td></tr></table></figure></p>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>思路无非动态生成li插入ul中，并设定li的文本内容。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局变量先扔这儿</span></span><br><span class="line"><span class="keyword">let</span> [ary, ul] = [<span class="keyword">new</span> <span class="built_in">Array</span>(), <span class="built_in">document</span>.querySelector(<span class="string">'#list-with-big-data'</span>)]</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">1</span>; i &lt; <span class="number">1000</span>; i++ )&#123;</span><br><span class="line">  ary.push(i)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h2 id="step-1-基础做法"><a href="#step-1-基础做法" class="headerlink" title="step 1 基础做法"></a>step 1 基础做法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderList</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>;i&lt;ary.length;i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">    li.innerHTML = ary[i];</span><br><span class="line">    ul.appendChild(li)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">renderList();</span><br></pre></td></tr></table></figure>
@@ -381,8 +377,6 @@ renderList();
 <p>【1】requestAnimationFrame会把每一帧中的所有DOM操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率<br>【2】在隐藏或不可见的元素中，requestAnimationFrame将不会进行重绘或回流，这当然就意味着更少的CPU、GPU和内存使用量<br>【3】requestAnimationFrame是由浏览器专门为动画提供的API，在运行时浏览器会自动优化方法的调用，并且如果页面不是激活状态下的话，动画会自动暂停，有效节省了CPU开销</p>
 </blockquote>
 
-          
-        
       
     </div>
     
@@ -399,272 +393,28 @@ renderList();
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/04/27/Singleton/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ergou_xiang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/logo.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ergou'blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/27/Singleton/" itemprop="url">Singleton</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-27T15:07:00+08:00">
-                2018-04-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="什么是单例？"><a href="#什么是单例？" class="headerlink" title="什么是单例？"></a>什么是单例？</h3><p></p><p> “保证一个类仅有一个实例，并提供一个访问他的全局访问点。”<br>    <span style="float:right;display:block">   ——曾探 javascript设计模式与探索实践</span><br></p>    <p></p>
-<p><div><br>    <p><br>        “单例实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。”<br>    <span style="float:right;display:block">   ——汤姆大叔的博客 深入理解javascript系列(25)单例模式</span><br>    </p><br>    单例模式是一种十分简单而且能够很简单的方式实现的一种设计模式。它是指在一个类中只有一个实例，即使你多次实例化这个类，它也只会返回一次实例化的对象，可以有效地避免资源的浪费，能减少不必要的内存开销, 并且在减少全局的函数和变量冲突也具有重要的意义。<br></div><br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/27/Singleton/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/04/26/first-blood/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ergou_xiang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/logo.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ergou'blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/26/first-blood/" itemprop="url">js设计模式之单例</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-26T15:37:50+08:00">
-                2018-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-0.jpg" rel="gallery_cjgkuwoei00039ooy59ulpi0f"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-0.jpg" itemprop="contentUrl"/>
+              <a href="/2018/04/27/Singleton/" rel="next" title="Singleton">
+                <i class="fa fa-chevron-left"></i> Singleton
               </a>
             
-          
+          </div>
 
-          
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
           </div>
         </div>
       
 
       
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -674,10 +424,11 @@ renderList();
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -685,6 +436,15 @@ renderList();
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjA3Ny8xMjYxMg"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -705,8 +465,17 @@ renderList();
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -752,6 +521,22 @@ renderList();
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">2.</span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">2.1.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step-1-基础做法"><span class="nav-number">3.</span> <span class="nav-text">step 1 基础做法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step-2-分时函数"><span class="nav-number">4.</span> <span class="nav-text">step 2 分时函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step-3-DocumentFragment-requestAnimationFrame"><span class="nav-number">5.</span> <span class="nav-text">step 3 DocumentFragment + requestAnimationFrame</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于requestAnimationFrame"><span class="nav-number">6.</span> <span class="nav-text">关于requestAnimationFrame</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -900,6 +685,10 @@ renderList();
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -928,6 +717,17 @@ renderList();
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
