@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ergou&#39;blog">
 <meta property="og:description" content="前言本章探讨页面加载海量数据时，如何保证页面渲染流畅，不会出现因大量添加dom节点，导致浏览器卡死的情况。   实例举例创建web好友列表，可能会有成千上百个好友，若一个好友由一个节点表示，当我们渲染这个列表时，可能需要一次性的创建n多节点。123&amp;lt;body&amp;gt;  &amp;lt;ul id=&quot;list-with-big-data&quot;&amp;gt;1000个好友&amp;lt;/ul&amp;gt;&amp;lt;/">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-29T10:37:25.000Z">
+<meta property="og:updated_time" content="2018-04-29T13:36:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="页面海量数据加载 -- 分时函数 + requestAnimationFrame">
 <meta name="twitter:description" content="前言本章探讨页面加载海量数据时，如何保证页面渲染流畅，不会出现因大量添加dom节点，导致浏览器卡死的情况。   实例举例创建web好友列表，可能会有成千上百个好友，若一个好友由一个节点表示，当我们渲染这个列表时，可能需要一次性的创建n多节点。123&amp;lt;body&amp;gt;  &amp;lt;ul id=&quot;list-with-big-data&quot;&amp;gt;1000个好友&amp;lt;/ul&amp;gt;&amp;lt;/">
@@ -235,7 +235,7 @@
       
         
         <li class="menu-item menu-item-随笔">
-          <a href="/essays/" rel="section">
+          <a href="/categories/随笔" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
             
@@ -345,7 +345,7 @@
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本章探讨页面加载海量数据时，如何保证页面渲染流畅，不会出现因大量添加dom节点，导致浏览器卡死的情况。  </p>
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>举例创建web好友列表，可能会有成千上百个好友，若一个好友由一个节点表示，当我们渲染这个列表时，可能需要一次性的创建n多节点。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;ul id=<span class="string">"list-with-big-data"</span>&gt;<span class="number">1000</span>个好友&lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>思路无非动态生成li插入ul中，并设定li的文本内容。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局变量先扔这儿</span></span><br><span class="line"><span class="keyword">let</span> [ary, ul] = [<span class="keyword">new</span> <span class="built_in">Array</span>(), <span class="built_in">document</span>.querySelector(<span class="string">'#list-with-big-data'</span>)]</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">1</span>; i &lt; <span class="number">1000</span>; i++ )&#123;</span><br><span class="line">  ary.push(i)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>思路无非动态生成li插入ul中，并设定li的文本内容。<br><a id="more"></a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局变量先扔这儿</span></span><br><span class="line"><span class="keyword">let</span> [ary, ul] = [<span class="keyword">new</span> <span class="built_in">Array</span>(), <span class="built_in">document</span>.querySelector(<span class="string">'#list-with-big-data'</span>)]</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">1</span>; i &lt; <span class="number">1000</span>; i++ )&#123;</span><br><span class="line">  ary.push(i)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h2 id="step-1-基础做法"><a href="#step-1-基础做法" class="headerlink" title="step 1 基础做法"></a>step 1 基础做法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderList</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>;i&lt;ary.length;i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">    li.innerHTML = ary[i];</span><br><span class="line">    ul.appendChild(li)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">renderList();</span><br></pre></td></tr></table></figure>
 <p>基础做法却能满足需求，然则实践中我们发现由于数据过多，页面渲染缓慢且造成卡顿。是故，就有了step2。<br>step2 基于js高阶函数之中的分时函数。  我们用renderData方法实现创创建节点的工作分批进行，将一次性创建1000节点，改为10毫秒创建8个节点。 renderData方法接受两个参数，fn为创建节点逻辑方法，count参数表示每批创建节点数量。</p>
 <h2 id="step-2-分时函数"><a href="#step-2-分时函数" class="headerlink" title="step 2 分时函数"></a>step 2 分时函数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderData</span>(<span class="params">fn, count</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> dataChunk = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; (<span class="built_in">Math</span>.min(ary.length, count || <span class="number">0</span>)); i++) &#123;</span><br><span class="line">      <span class="keyword">let</span> item = ary.shift()</span><br><span class="line">      fn(item)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> timeOut = setInterval(<span class="function"><span class="keyword">function</span> (<span class="params">params</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (ary.length === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> clearInterval(timeOut)</span><br><span class="line">      &#125;</span><br><span class="line">      dataChunk()</span><br><span class="line">    &#125;, <span class="number">10</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> renderList = renderData (<span class="function">(<span class="params">n</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>)</span><br><span class="line">  li.innerHTML = n</span><br><span class="line">  ul.appendChild(li)</span><br><span class="line">&#125;, <span class="number">8</span>)</span><br><span class="line">renderList();</span><br></pre></td></tr></table></figure>
@@ -409,6 +409,10 @@ renderList();
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/29/caoZhengChun/" rel="prev" title="曹正淳：我不过想，过得开心些。">
+                曹正淳：我不过想，过得开心些。 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -494,14 +498,32 @@ renderList();
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
             
 
           </nav>
