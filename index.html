@@ -276,6 +276,306 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/05/08/danmaku-demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ergou_xiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/logo.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ergou'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/08/danmaku-demo/" itemprop="url">danmaku-demo</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-08T10:52:02+08:00">
+                2018-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/闲来无事/" itemprop="url" rel="index">
+                    <span itemprop="name">闲来无事</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><div style="width:348px;height:451px;margin:0 auto"><br>  <img src="/2018/05/08/danmaku-demo/danmaku.jpeg" alt="实例"><br></div><br>demo级别的实现，原理也十分简单。</p>
+<blockquote>
+<p>随机弹幕颜色、速度、位置 + requestAnimationFrame，没了。</p>
+<ul>
+<li>html + css部分<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">// html</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content-opt"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content-text"</span> <span class="attr">class</span>=<span class="string">"content-text"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content-input"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"text"</span> <span class="attr">type</span>=<span class="string">"text"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"send"</span>&gt;</span>发送<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  // css</span><br><span class="line">	* &#123;</span><br><span class="line">		box-sizing: border-box;</span><br><span class="line">		outline: none;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	p &#123;</span><br><span class="line">		margin: .5em;</span><br><span class="line">		word-break: break-all;</span><br><span class="line">		-webkit-transform: translateZ(0);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.container &#123;</span><br><span class="line">		position: relative;</span><br><span class="line">		width: 700px;</span><br><span class="line">		height: 500px;</span><br><span class="line">		margin: auto;</span><br><span class="line">		padding-right: 200px;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.content &#123;</span><br><span class="line">		width: 100%;</span><br><span class="line">		height: 100%;</span><br><span class="line">		border: 1px solid #ccc;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.content-opt &#123;</span><br><span class="line">		position: absolute;</span><br><span class="line">		top: 0;</span><br><span class="line">		right: 0;</span><br><span class="line">		width: 200px;</span><br><span class="line">		height: 100%;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.content-text &#123;</span><br><span class="line">		height: calc(100% - 30px);</span><br><span class="line">		margin-bottom: 30px;</span><br><span class="line">		border: 1px solid #ccc;</span><br><span class="line">		overflow: auto;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.content-input &#123;</span><br><span class="line">		position: absolute;</span><br><span class="line">		bottom: 0;</span><br><span class="line">		width: 100%;</span><br><span class="line">		height: 30px;</span><br><span class="line">		border: 1px solid #ccc;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.content-input input &#123;</span><br><span class="line">		width: 70%;</span><br><span class="line">		padding: 2px;</span><br><span class="line">		border-radius: 5px;</span><br><span class="line">		border: 1px solid #ccc;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.content-input button &#123;</span><br><span class="line">		color:#fff;</span><br><span class="line">		padding: 3px 10px;</span><br><span class="line">		border: none;</span><br><span class="line">		border-radius: 5px;</span><br><span class="line">		background: rgb(153, 219, 245);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>js部分，也无甚可说，都简单实现。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">(function () &#123;</span><br><span class="line">  class Barrage &#123;</span><br><span class="line">    constructor(id) &#123;</span><br><span class="line">      this.domList = [];</span><br><span class="line">      this.dom = document.querySelector(&apos;#&apos; + id);</span><br><span class="line">      if (this.dom.style.position == &apos;&apos; || this.dom.style.position == &apos;static&apos;) &#123;</span><br><span class="line">        this.dom.style.position = &apos;relative&apos;;</span><br><span class="line">      &#125;</span><br><span class="line">      this.dom.style.overflow = &apos;hidden&apos;;</span><br><span class="line">      let rect = this.dom.getBoundingClientRect();</span><br><span class="line">      this.domWidth = rect.right - rect.left;</span><br><span class="line">      this.domHeight = rect.bottom - rect.top;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    shoot(text) &#123;</span><br><span class="line">      let div = document.createElement(&apos;div&apos;);</span><br><span class="line">      div.style.position = &apos;absolute&apos;;</span><br><span class="line">      div.style.transform = &apos;translateZ(0)&apos;;</span><br><span class="line">      div.style.left = this.domWidth + &apos;px&apos;;</span><br><span class="line">      div.style.top = (this.domHeight - 20) * +Math.random().toFixed(2) + &apos;px&apos;;</span><br><span class="line">      div.style.whiteSpace = &apos;nowrap&apos;;</span><br><span class="line">      div.style.color = &apos;#&apos; + Math.floor(Math.random() * 256).toString(10);</span><br><span class="line">      div.innerText = text;</span><br><span class="line">      this.dom.appendChild(div);</span><br><span class="line"></span><br><span class="line">      let roll = (timer) =&gt; &#123;</span><br><span class="line">        let now = +new Date();</span><br><span class="line">        roll.last = roll.last || now;</span><br><span class="line">        roll.timer = roll.timer || timer;</span><br><span class="line">        let left = div.offsetLeft;</span><br><span class="line">        let rect = div.getBoundingClientRect();</span><br><span class="line">        if (left &lt; (rect.left - rect.right)) &#123;</span><br><span class="line">          this.dom.removeChild(div);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          if (now - roll.last &gt;= roll.timer) &#123;</span><br><span class="line">            roll.last = now;</span><br><span class="line">            left -= 3;</span><br><span class="line">            div.style.left = left + &apos;px&apos;;</span><br><span class="line">          &#125;</span><br><span class="line">          requestAnimationFrame(roll);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      roll(50 * +Math.random().toFixed(2));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  let barage = new Barrage(&apos;content&apos;);</span><br><span class="line"></span><br><span class="line">  function appendList(text) &#123;</span><br><span class="line">    let p = document.createElement(&apos;p&apos;);</span><br><span class="line">    p.innerText = text;</span><br><span class="line">    document.querySelector(&apos;#content-text&apos;).appendChild(p);</span><br><span class="line">    p.scrollIntoView(false);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  document.querySelector(&apos;#send&apos;).onclick = () =&gt; &#123;</span><br><span class="line">    let text = document.querySelector(&apos;#text&apos;).value;</span><br><span class="line">    document.querySelector(&apos;#text&apos;).value = &apos;&apos;;</span><br><span class="line">    barage.shoot(text);</span><br><span class="line"></span><br><span class="line">    appendList(text);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  const textList = [&apos;弹幕&apos;, &apos;666&apos;, &apos;233333333&apos;, &apos;javascript&apos;, &apos;html&apos;, &apos;css&apos;, &apos;前端框架&apos;, &apos;Vue&apos;, &apos;React&apos;, &apos;Angular&apos;,</span><br><span class="line">    &apos;测试弹幕效果&apos;</span><br><span class="line">  ];</span><br><span class="line">  textList.forEach((s) =&gt; &#123;</span><br><span class="line">    barage.shoot(s);</span><br><span class="line">    appendList(s);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/05/07/chrome-plugin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ergou_xiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/logo.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ergou'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/07/chrome-plugin/" itemprop="url">谷歌自定义拓展</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-07T14:13:14+08:00">
+                2018-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/闲来无事/" itemprop="url" rel="index">
+                    <span itemprop="name">闲来无事</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><div style="width:348px;height:451px;margin:0 auto"><br>  <img src="/2018/05/07/chrome-plugin/history.jpeg" alt="实例"><br></div><br><strong><a href="http://open.chrome.360.cn/extension_dev/getstarted.html" target="_blank" rel="noopener">360翻译的Chrome开发文档</a></strong>点开，大照着helloworld敲，调试，完成。<br>能有多复杂。<br>主要无非就三个文件，manifest.json + popup.html + popup.js,  对，另外再加一个icon。  </p>
+<p>作为demo的”历史上的今天”说白了只是调了免费接口，将数据展示在谷歌扩展而已，html文件对应ui，js文件操作数据。manifest作为扩展参数设置。<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/07/chrome-plugin/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/04/29/caoZhengChun/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -295,7 +595,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/29/caoZhengChun/" itemprop="url">曹正淳：我不过不想再跪着</a></h1>
+                <a class="post-title-link" href="/2018/04/29/caoZhengChun/" itemprop="url">曹正淳：我不过,不想再跪着</a></h1>
         
 
         <div class="post-meta">
@@ -370,7 +670,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://upload-images.jianshu.io/upload_images/3988286-335007279ef99611.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" rel="gallery_cjglqliu90001e2oyajbspnh2"
+                 href="https://upload-images.jianshu.io/upload_images/3988286-335007279ef99611.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" rel="gallery_cjgx3bj010001deoy7aekea1l"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://upload-images.jianshu.io/upload_images/3988286-335007279ef99611.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" itemprop="contentUrl"/>
               </a>
@@ -786,7 +1086,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-0.jpg" rel="gallery_cjglqliuh0006e2oyowt2i624"
+                 href="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-0.jpg" rel="gallery_cjgx3bj25000ddeoyfavpie06"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-0.jpg" itemprop="contentUrl"/>
               </a>
@@ -886,7 +1186,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -897,7 +1197,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -908,7 +1208,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
