@@ -80,17 +80,17 @@
 
 
 
-<meta name="description" content="什么是单例？ “保证一个类仅有一个实例，并提供一个访问他的全局访问点。”       ——曾探 javascript设计模式与探索实践                 “单例实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。”">
+<meta name="description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)() _ 对象 我们想将所有以后要用的工具方法挂载到一个对象上，以便之后调用。看看_如何实现：12">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Singleton">
-<meta property="og:url" content="https://xiangergou.github.io/2018/04/27/Singleton/index.html">
+<meta property="og:title" content="underscore源码阅读系列-基础部分">
+<meta property="og:url" content="https://xiangergou.github.io/2018/05/21/underscore源码阅读系列-基础部分/index.html">
 <meta property="og:site_name" content="斯是陋室">
-<meta property="og:description" content="什么是单例？ “保证一个类仅有一个实例，并提供一个访问他的全局访问点。”       ——曾探 javascript设计模式与探索实践                 “单例实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。”">
+<meta property="og:description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)() _ 对象 我们想将所有以后要用的工具方法挂载到一个对象上，以便之后调用。看看_如何实现：12">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-29T14:19:36.000Z">
+<meta property="og:updated_time" content="2018-05-22T09:11:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Singleton">
-<meta name="twitter:description" content="什么是单例？ “保证一个类仅有一个实例，并提供一个访问他的全局访问点。”       ——曾探 javascript设计模式与探索实践                 “单例实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。”">
+<meta name="twitter:title" content="underscore源码阅读系列-基础部分">
+<meta name="twitter:description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)() _ 对象 我们想将所有以后要用的工具方法挂载到一个对象上，以便之后调用。看看_如何实现：12">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/2018/04/27/Singleton/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/05/21/underscore源码阅读系列-基础部分/"/>
 
 
 
 
 
-  <title>Singleton | 斯是陋室</title>
+  <title>underscore源码阅读系列-基础部分 | 斯是陋室</title>
   
 
 
@@ -276,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/04/27/Singleton/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/05/21/underscore源码阅读系列-基础部分/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ergou_xiang">
@@ -293,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Singleton</h1>
+          <h1 class="post-title" itemprop="name headline">underscore源码阅读系列-基础部分</h1>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-27T15:07:00+08:00">
-                2018-04-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-21T23:13:03+08:00">
+                2018-05-21
               </time>
             
 
@@ -328,8 +328,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
+                  <a href="/categories/underscore/" itemprop="url" rel="index">
+                    <span itemprop="name">underscore</span>
                   </a>
                 </span>
 
@@ -359,7 +359,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  696 字
+                  425 字
                 </span>
               
 
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  3 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -396,25 +396,17 @@
       
 
       
-        <h3 id="什么是单例？"><a href="#什么是单例？" class="headerlink" title="什么是单例？"></a>什么是单例？</h3><p></p><p> “保证一个类仅有一个实例，并提供一个访问他的全局访问点。”<br>    <span style="float:right;display:block">   ——曾探 javascript设计模式与探索实践</span><br></p>    <p></p>
-<p><div><br>    <p><br>        “单例实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。”<br>    <span style="float:right;display:block">   ——汤姆大叔的博客 深入理解javascript系列(25)单例模式</span><br>    </p><br>    单例模式是一种十分简单而且能够很简单的方式实现的一种设计模式。它是指在一个类中只有一个实例，即使你多次实例化这个类，它也只会返回一次实例化的对象，可以有效地避免资源的浪费，能减少不必要的内存开销, 并且在减少全局的函数和变量冲突也具有重要的意义。<br></div><br><a id="more"></a></p>
-<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><ul>
-<li>最简单的实现方式<br>在这之前，且让我们牢记单例的核心:<blockquote>
-<p>1.确保只有一个实例。<br>2.提供全局访问。  </p>
-</blockquote>
-</li>
-</ul>
-<p>&emsp;”这不就全局变量么~?”<br>&emsp;”不然，且看”<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ep</span></span><br><span class="line"><span class="keyword">let</span> number = &#123;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>number独一无二，放在全局作用域下，我们可以在任意位置调用。这已然满足了单例模式的条件。<br>然而事实上，全局变量并不算单例模式，只是在js开发中，我们只将其当做单例模式来使用。 全局变量存在诸多问题，最主要的当属命名空间污染。 js创造者Brendan Eich也曾名言全局变量是设计上的失误。</p>
-<p>  所谓命名空间污染，最常见的情况是，项目由两个人合作，若都不注意全局污染，就容易出现变量重复声明。以下几种方式可以相对减少全局变量带来的命名污染。<br>  </p>
+        <p>前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。<br>与jq相似，underscore也是采用<strong>立即执行函数</strong>包裹，以达到避免全局污染以及隐私保护等目的。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// .....执行逻辑</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+<h3 id="对象"><a href="#对象" class="headerlink" title="_ 对象"></a>_ 对象</h3><p> 我们想将所有以后要用的工具方法挂载到一个对象上，以便之后调用。看看_如何实现：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> root = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> _ = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    root._ = _;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在这里添加自己的方法</span></span><br><span class="line">    _.reverse = <span class="function"><span class="keyword">function</span>(<span class="params">string</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> string.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line">_.reverse(<span class="string">'hello'</span>);</span><br><span class="line">=&gt; <span class="string">'olleh'</span></span><br><span class="line"></span><br><span class="line"><span class="string">``</span><span class="string">`    </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> ### 执行环境判断</span></span><br><span class="line"><span class="string">underscore 对象 _ 会依托于当前的所处环境，挂载到不同的全局空间当中（浏览器的全局对象是 window，node 的全局对象是 global）。且看underscore如何实现：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javascript</span><br><span class="line">  <span class="keyword">var</span> root = (<span class="keyword">typeof</span> self == <span class="string">'object'</span> &amp;&amp; self.self == self &amp;&amp; self) ||</span><br><span class="line">           (<span class="keyword">typeof</span> global == <span class="string">'object'</span> &amp;&amp; global.global == global &amp;&amp; global) ||</span><br><span class="line">           <span class="keyword">this</span> ||</span><br><span class="line">           &#123;&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>逐一分析：</p>
 <ul>
-<li><p>使用命名空间<br>适当的使用命名空间，不会杜绝全局变量，但可以减少其数量。比如  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 开发者A</span></span><br><span class="line"><span class="keyword">let</span> devA = &#123;</span><br><span class="line">	name: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;  </span><br><span class="line">		alert(<span class="string">'a'</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 开发者B</span></span><br><span class="line"><span class="keyword">let</span> devB = &#123;</span><br><span class="line">	name: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">		alert(<span class="string">'b'</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>闭包封装私有变量<br>实现思路在于使用闭包方式来模拟私有数据。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mySingleton = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">/* 这里声明私有变量和方法 */</span></span><br><span class="line">    <span class="keyword">var</span> privateVariable = <span class="string">'something private'</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showPrivate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(privateVariable);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* 公有变量和方法（可以访问私有变量和方法） */</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        publicMethod: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            showPrivate();</span><br><span class="line">        &#125;,</span><br><span class="line">        publicVar: <span class="string">'the public can see this!'</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> single = mySingleton();</span><br><span class="line">single.publicMethod();  <span class="comment">// 输出 'something private'</span></span><br><span class="line"><span class="built_in">console</span>.log(single.publicVar); <span class="comment">// 输出 'the public can see this!'</span></span><br></pre></td></tr></table></figure>
+<li>最直观的，浏览器下的window，node下的global。 </li>
+<li><p>严格模式下this 返回 undefined，而非指向 Window。<br>考虑这两点，于是就有了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> root = </span><br><span class="line">(<span class="keyword">typeof</span> <span class="built_in">window</span> == <span class="string">'object'</span> &amp;&amp; <span class="built_in">window</span>.window == <span class="built_in">window</span> &amp;&amp; <span class="built_in">window</span>) || </span><br><span class="line">(<span class="keyword">typeof</span> global == <span class="string">'object'</span> &amp;&amp; global.global == global &amp;&amp; global);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<p>而在浏览器环境下，self 保存的就是当前 window 对象的引用。 underscore 用 self 代替 window 的原因主要用于一些不具有窗口的上下文环境中，比如 Web Workers。<br>关于 Web Workers，可翻阅《javascript高级程序设计》P697。</p>
+<p>之后合并关于小程序的兼容pr加上’{}’以及node 沙盒模块的兼容pr添加’this’，即得到最终版本。</p>
 
       
     </div>
@@ -439,8 +431,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/26/first-blood/" rel="next" title="js设计模式之单例">
-                <i class="fa fa-chevron-left"></i> js设计模式之单例
+              <a href="/2018/05/19/王家卫-我眼中的师徒四人/" rel="next" title="没有齐天大圣，我只是只猴子">
+                <i class="fa fa-chevron-left"></i> 没有齐天大圣，我只是只猴子
               </a>
             
           </div>
@@ -448,10 +440,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/29/list-with-big-data/" rel="prev" title="页面海量数据加载 -- 分时函数 + requestAnimationFrame">
-                页面海量数据加载 -- 分时函数 + requestAnimationFrame <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -592,7 +580,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是单例？"><span class="nav-number">1.</span> <span class="nav-text">什么是单例？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现方式"><span class="nav-number">2.</span> <span class="nav-text">实现方式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象"><span class="nav-number">1.</span> <span class="nav-text">_ 对象</span></a></li></ol></div>
             
 
           </div>
