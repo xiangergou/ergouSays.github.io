@@ -277,6 +277,184 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/05/26/移动端图片上传预览裁剪/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ergou_xiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/logo.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="斯是陋室">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/26/移动端图片上传预览裁剪/" itemprop="url">移动端图片上传预览裁剪</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-26T10:22:54+08:00">
+                2018-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue组件/" itemprop="url" rel="index">
+                    <span itemprop="name">vue组件</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  568 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>需求分析： 我们需要图片批量上传，图片预览、可选择性的编辑(裁剪)。</p>
+<ol>
+<li>图片上传<br>我们知道传统图片上传展示一般都是图片上传后返回地址，前端再由地址进行展示。<br>而此次我们采用createObjectURL将图片进行本地展示，待最终的调整后再进行上传的方式。<br>关于<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里是一个demo</span></span><br><span class="line">&lt;form action=<span class="string">"#"</span>&gt;  </span><br><span class="line">    &lt;input type=<span class="string">"file"</span> id=<span class="string">"fileInput"</span>&gt;  </span><br><span class="line">&lt;<span class="regexp">/form&gt;  </span></span><br><span class="line"><span class="regexp">&lt;div id="imgShow"&gt;&lt;/</span>div&gt;  </span><br><span class="line"><span class="keyword">var</span> fileInput = <span class="built_in">document</span>.getElementById(<span class="string">'fileInput'</span>)  </span><br><span class="line">  </span><br><span class="line">fileInput.addEventListener(<span class="string">'change'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;  </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.files)</span><br><span class="line"><span class="keyword">var</span> imgShow = <span class="built_in">document</span>.getElementById(<span class="string">'imgShow'</span>),  </span><br><span class="line">  files = <span class="keyword">this</span>.files,    <span class="comment">//原书这里是event.files，经过测试，修正为this.files  </span></span><br><span class="line">  url = <span class="built_in">window</span>.URL.createObjectURL(files[<span class="number">0</span>])    <span class="comment">//创建URL对象  </span></span><br><span class="line">  <span class="keyword">if</span> (url) &#123;  </span><br><span class="line">    <span class="keyword">if</span> (<span class="regexp">/image/</span>.test(files[<span class="number">0</span>].type)) &#123;    <span class="comment">//如果上传的文件类型为image  </span></span><br><span class="line">      imgShow.innerHTML = <span class="string">'&lt;img src="'</span> + url + <span class="string">'"&gt;'</span> </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">      imgShow.innerHTML = <span class="string">"not an image"</span>  </span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">    imgShow.innerHTML = <span class="string">'your browser doesnt support obj urls!'</span>  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;)  </span><br><span class="line"><span class="string">``</span><span class="string">`  </span></span><br><span class="line"><span class="string">step one:</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>html</span><br><span class="line">&lt;input type=<span class="string">"file"</span> </span><br><span class="line">    <span class="class"><span class="keyword">class</span></span>=<span class="string">"file-upload"</span> </span><br><span class="line">    multiple  </span><br><span class="line">    @change=<span class="string">"uploadImg($event)"</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/li&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>multiple字段支持多个值的文件上传，我们用以实现图片多张上传。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 选择图片 */</span></span><br><span class="line"><span class="keyword">async</span> uploadImg(e) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!e.target.value) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'取消上传...'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> uploadList = []</span><br><span class="line">  <span class="keyword">const</span> readFileAsync = <span class="function"><span class="params">file</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> reader = <span class="keyword">new</span> FileReader()</span><br><span class="line">    reader.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'读取异常....'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    reader.onload = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(e.target.result)</span><br><span class="line">      <span class="keyword">const</span> src = (<span class="keyword">typeof</span> e.target.result === <span class="string">'object'</span>)</span><br><span class="line">        <span class="comment">// 把Array Buffer转化为blob 如果是base64不需要</span></span><br><span class="line">        ? <span class="built_in">window</span>.URL.createObjectURL(<span class="keyword">new</span> Blob([e.target.result]))</span><br><span class="line">        : e.target.result</span><br><span class="line">      <span class="built_in">console</span>.log(src)</span><br><span class="line">      <span class="keyword">let</span> imageName = <span class="string">''</span></span><br><span class="line">      <span class="keyword">if</span> (!file.name) &#123;</span><br><span class="line">        imageName = <span class="string">''</span></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        imageName = file.name.split(<span class="string">'.'</span>)[<span class="number">0</span>].length &lt;= <span class="number">30</span></span><br><span class="line">          ? file.name.split(<span class="string">'.'</span>)[<span class="number">0</span>]</span><br><span class="line">          : file.name.split(<span class="string">'.'</span>)[<span class="number">0</span>].substr(<span class="number">0</span>, <span class="number">30</span>)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">let</span> _img = <span class="keyword">new</span> Image()</span><br><span class="line">      _img.src = src</span><br><span class="line">      <span class="keyword">let</span> [w, h] = []</span><br><span class="line">      _img.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        w = _img.width || <span class="number">800</span></span><br><span class="line">        h = _img.height || <span class="number">600</span></span><br><span class="line">        resolve(&#123;</span><br><span class="line">          src,</span><br><span class="line">          imageName,</span><br><span class="line">          w,</span><br><span class="line">          h</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 转化为base64</span></span><br><span class="line">    <span class="comment">// reader.readAsDataURL(file)</span></span><br><span class="line">    <span class="comment">// 转化为blob</span></span><br><span class="line">    reader.readAsArrayBuffer(file)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> files = e.target.files</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; files.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> ([<span class="string">'image/jpeg'</span>, <span class="string">'image/jpg'</span>, <span class="string">'image/png'</span>].indexOf(files[i].type) === <span class="number">-1</span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.$message.error(<span class="string">'请上传jpg/png的图片'</span>)</span><br><span class="line">      e.target.value = <span class="literal">null</span></span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    uploadList.push(<span class="keyword">await</span> readFileAsync(files[i]))</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.cropperList.push.apply(<span class="keyword">this</span>.cropperList, uploadList.map(<span class="function">(<span class="params">item, kindex</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      w: item.w,</span><br><span class="line">      h: item.h,</span><br><span class="line">      src: item.src,</span><br><span class="line">      imageName: item.imageName</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;))</span><br><span class="line">  <span class="keyword">this</span>.layer_cropper = <span class="literal">true</span></span><br><span class="line">  e.target.value = <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/05/22/underscore-1-8-3源码注解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -362,7 +540,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  9,182 字
+                  9,279 字
                 </span>
               
 
@@ -402,7 +580,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526992890895&di=24d7ec0d3d3bf8b06f6a2b31736af05a&imgtype=0&src=http%3A%2F%2Fwww.uedsc.com%2Fwp-content%2Fuploads%2F2015%2F08%2Funderscorejs.jpg" rel="gallery_cjhlvmgyy000m87oygfnt6tpu"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526992890895&di=24d7ec0d3d3bf8b06f6a2b31736af05a&imgtype=0&src=http%3A%2F%2Fwww.uedsc.com%2Fwp-content%2Fuploads%2F2015%2F08%2Funderscorejs.jpg" rel="gallery_cjhone3b5000ooloyk96g6fkn"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526992890895&di=24d7ec0d3d3bf8b06f6a2b31736af05a&imgtype=0&src=http%3A%2F%2Fwww.uedsc.com%2Fwp-content%2Fuploads%2F2015%2F08%2Funderscorejs.jpg" itemprop="contentUrl"/>
               </a>
@@ -416,7 +594,7 @@
 
       
         
-          <p>我听人说，当你闲的蛋疼的时候，去学学源码。<br>比如underscore？<br>比如underscore！<br>
+          <p>我听人说，当你闲的蛋疼的时候，去学学源码。<br>比如underscore。<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/22/underscore-1-8-3源码注解/#more" rel="contents">
@@ -778,7 +956,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526923397772&di=4e866679bb6f65bab3c3dad219a38415&imgtype=0&src=http%3A%2F%2Fs6.sinaimg.cn%2Fmiddle%2F6306f57fhbae64feec81e%26690" rel="gallery_cjhlvmgye000d87oyccl819bp"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526923397772&di=4e866679bb6f65bab3c3dad219a38415&imgtype=0&src=http%3A%2F%2Fs6.sinaimg.cn%2Fmiddle%2F6306f57fhbae64feec81e%26690" rel="gallery_cjhone3b0000ioloy88f49xum"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526923397772&di=4e866679bb6f65bab3c3dad219a38415&imgtype=0&src=http%3A%2F%2Fs6.sinaimg.cn%2Fmiddle%2F6306f57fhbae64feec81e%26690" itemprop="contentUrl"/>
               </a>
@@ -1514,7 +1692,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://upload-images.jianshu.io/upload_images/3988286-335007279ef99611.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" rel="gallery_cjhlvmgxb000687oyctjgvkii"
+                 href="https://upload-images.jianshu.io/upload_images/3988286-335007279ef99611.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" rel="gallery_cjhone3ad0003oloy0re034in"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://upload-images.jianshu.io/upload_images/3988286-335007279ef99611.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" itemprop="contentUrl"/>
               </a>
@@ -1907,175 +2085,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/04/26/first-blood/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ergou_xiang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/logo.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="斯是陋室">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/26/first-blood/" itemprop="url">js设计模式之单例</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-26T15:37:50+08:00">
-                2018-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  0 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-0.jpg" rel="gallery_cjhlvmgy2000a87oy92zjwh1t"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-0.jpg" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -2123,7 +2139,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2134,7 +2150,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2145,7 +2161,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -2197,7 +2213,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">15.7k</span>
+    <span title="Site words total count">16.4k</span>
   
 </div>
 
