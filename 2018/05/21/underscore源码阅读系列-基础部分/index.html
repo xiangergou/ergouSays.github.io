@@ -80,17 +80,17 @@
 
 
 
-<meta name="description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)() _ 对象 我们想将所有以后要用的工具方法挂载到一个对象上，以便之后调用。看看_如何实现：12">
+<meta name="description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)()">
 <meta property="og:type" content="article">
 <meta property="og:title" content="underscore源码阅读系列-基础部分">
 <meta property="og:url" content="https://xiangergou.github.io/2018/05/21/underscore源码阅读系列-基础部分/index.html">
 <meta property="og:site_name" content="斯是陋室">
-<meta property="og:description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)() _ 对象 我们想将所有以后要用的工具方法挂载到一个对象上，以便之后调用。看看_如何实现：12">
+<meta property="og:description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)()">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-22T09:50:15.000Z">
+<meta property="og:updated_time" content="2018-05-29T03:10:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="underscore源码阅读系列-基础部分">
-<meta name="twitter:description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)() _ 对象 我们想将所有以后要用的工具方法挂载到一个对象上，以便之后调用。看看_如何实现：12">
+<meta name="twitter:description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)()">
 
 
 
@@ -398,6 +398,7 @@
 
       
         <p>前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。<br>与jq相似，underscore也是采用<strong>立即执行函数</strong>包裹，以达到避免全局污染以及隐私保护等目的。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// .....执行逻辑</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <h3 id="对象"><a href="#对象" class="headerlink" title="_ 对象"></a>_ 对象</h3><p> 我们想将所有以后要用的工具方法挂载到一个对象上，以便之后调用。看看_如何实现：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> root = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> _ = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    root._ = _;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在这里添加自己的方法</span></span><br><span class="line">    _.reverse = <span class="function"><span class="keyword">function</span>(<span class="params">string</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> string.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line">_.reverse(<span class="string">'hello'</span>);</span><br><span class="line">=&gt; <span class="string">'olleh'</span></span><br><span class="line"></span><br><span class="line"><span class="string">``</span><span class="string">`    </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> ### 执行环境判断</span></span><br><span class="line"><span class="string">underscore 对象 _ 会依托于当前的所处环境，挂载到不同的全局空间当中（浏览器的全局对象是 window，node 的全局对象是 global）。且看underscore如何实现：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javascript</span><br><span class="line">  <span class="keyword">var</span> root = (<span class="keyword">typeof</span> self == <span class="string">'object'</span> &amp;&amp; self.self == self &amp;&amp; self) ||</span><br><span class="line">           (<span class="keyword">typeof</span> global == <span class="string">'object'</span> &amp;&amp; global.global == global &amp;&amp; global) ||</span><br><span class="line">           <span class="keyword">this</span> ||</span><br><span class="line">           &#123;&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>逐一分析：</p>
 <ul>
@@ -620,7 +621,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">17.0k</span>
+    <span title="Site words total count">17.5k</span>
   
 </div>
 

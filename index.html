@@ -296,7 +296,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/26/imgUpload/" itemprop="url">移动端图片上传预览裁剪</a></h1>
+                <a class="post-title-link" href="/2018/05/26/imgUpload/" itemprop="url">vue移动端图片上传预览裁剪组件</a></h1>
         
 
         <div class="post-meta">
@@ -362,7 +362,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  937 字
+                  1,393 字
                 </span>
               
 
@@ -378,7 +378,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  5 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -400,22 +400,15 @@
 
       
         
-          
-            <p>需求分析： 我们需要图片批量上传，图片预览、可选择性的编辑(裁剪)。<br><img src="demo.gif" alt="demo"></p>
-<h3 id="1-图片上传"><a href="#1-图片上传" class="headerlink" title="1. 图片上传"></a>1. 图片上传</h3><p>  我们知道传统图片上传展示一般都是图片上传后返回地址，前端再由地址进行展示。<br>而此次我们采用createObjectURL将图片进行本地展示，待最终的调整后再进行上传的方式。<br>关于createObjectURL<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里是一个demo</span></span><br><span class="line">&lt;form action=<span class="string">"#"</span>&gt;  </span><br><span class="line">    &lt;input type=<span class="string">"file"</span> id=<span class="string">"fileInput"</span>&gt;  </span><br><span class="line">&lt;<span class="regexp">/form&gt;  </span></span><br><span class="line"><span class="regexp">&lt;div id="imgShow"&gt;&lt;/</span>div&gt;  </span><br><span class="line"><span class="keyword">var</span> fileInput = <span class="built_in">document</span>.getElementById(<span class="string">'fileInput'</span>)  </span><br><span class="line">  </span><br><span class="line">fileInput.addEventListener(<span class="string">'change'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;  </span><br><span class="line"><span class="keyword">var</span> imgShow = <span class="built_in">document</span>.getElementById(<span class="string">'imgShow'</span>),  </span><br><span class="line">  files = <span class="keyword">this</span>.files,    <span class="comment">//原书这里是event.files，经过测试，修正为this.files  </span></span><br><span class="line">  url = <span class="built_in">window</span>.URL.createObjectURL(files[<span class="number">0</span>])    <span class="comment">//创建URL对象  </span></span><br><span class="line">  <span class="keyword">if</span> (url) &#123;  </span><br><span class="line">      imgShow.innerHTML = <span class="string">'&lt;img src="'</span> + url + <span class="string">'"&gt;'</span> </span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>  step one:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"file-upload"</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">multiple</span>  </span></span><br><span class="line"><span class="tag">    @<span class="attr">change</span>=<span class="string">"uploadImg($event)"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>  multiple字段支持多个值的文件上传，我们用以实现图片多张上传。<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 选择图片 */</span></span><br><span class="line"><span class="keyword">async</span> uploadImg(e) &#123;</span><br><span class="line">  <span class="keyword">const</span> uploadList = []</span><br><span class="line">  <span class="keyword">const</span> readFileAsync = <span class="function"><span class="params">file</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> reader = <span class="keyword">new</span> FileReader()</span><br><span class="line">    reader.onload = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> src = (<span class="keyword">typeof</span> e.target.result === <span class="string">'object'</span>)</span><br><span class="line">        <span class="comment">// 把Array Buffer转化为blob 如果是base64不需要</span></span><br><span class="line">        ? <span class="built_in">window</span>.URL.createObjectURL(<span class="keyword">new</span> Blob([e.target.result]))</span><br><span class="line">        : e.target.result</span><br><span class="line">        resolve(&#123;</span><br><span class="line">          src</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 转化为base64</span></span><br><span class="line">    <span class="comment">// reader.readAsDataURL(file)</span></span><br><span class="line">    <span class="comment">// 转化为blob</span></span><br><span class="line">    reader.readAsArrayBuffer(file)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> files = e.target.files</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; files.length; i++) &#123;</span><br><span class="line">    uploadList.push(<span class="keyword">await</span> readFileAsync(files[i]))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-图片预览"><a href="#2-图片预览" class="headerlink" title="2. 图片预览"></a>2. 图片预览</h3><p>大多数情况下的图片预览插件vue2-preview足以满足要求，然我们这基础上添加编辑功能，这就意味着我们要参照PhotoSwipe作出修改。</p>
-<p>我们采用extend创建vue“子类”的形式完成我们的priview功能。</p>
-<p>结构如下:<br>-Preview<br>–plugins<br>—index.js<br>—preview.vue</p>
-<p>我们在preview.vue文件下添加我们的photoswipe。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp"</span> <span class="attr">tabindex</span>=<span class="string">"-1"</span> <span class="attr">role</span>=<span class="string">"dialog"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__bg"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__scroll-wrap"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__container"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__item"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__item"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__item"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__ui pswp__ui--hidden"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__top-bar"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__counter"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"pswp__button pswp__button--close"</span> <span class="attr">title</span>=<span class="string">"Close (Esc)"</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"pswp__button pswp__button--share"</span> <span class="attr">title</span>=<span class="string">"Share"</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"pswp__button pswp__button--fs"</span> <span class="attr">title</span>=<span class="string">"Toggle fullscreen"</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"pswp__button pswp__button--zoom"</span> <span class="attr">title</span>=<span class="string">"Zoom in/out"</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__preloader"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__preloader__icn"</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__preloader__cut"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__preloader__donut"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__share-modal pswp__share-modal--hidden pswp__single-tap"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__share-tooltip"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"pswp__button pswp__button--arrow--left"</span> <span class="attr">title</span>=<span class="string">"Previous (arrow left)"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"pswp__button pswp__button--arrow--right"</span> <span class="attr">title</span>=<span class="string">"Next (arrow right)"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__caption"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pswp__caption__center"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"edit_img"</span> @<span class="attr">click.prevent.stop</span>=<span class="string">"previewEdit()"</span>&gt;</span></span><br><span class="line">      编辑</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>我们在页面收尾出添加“编辑”button,以作为裁剪功能的入口。<br>此处注意，当对photoswipe添加自定义方法时，需要在data()中添加“isClickableElement: function (el) {<br>  return /edit_img/.test(el.className)<br>}”, 解除其对自定义的限制，否则自定义事件是无法生效的。<br>在methods中，我们申明包括’open’、’close’以及我们自定义的’previewEdit’方法。<br>previewEdit向父组件发出“编辑”命令通知。父组件得到通知后，关闭预览组件并调用裁剪组件。<br><br><br>此时我们需要把preview.vue传到Vue.extend()里</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PreviewComponent <span class="keyword">from</span> <span class="string">'./preview.vue'</span></span><br><span class="line"><span class="keyword">let</span> $vm</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  install (Vue) &#123;</span><br><span class="line">    <span class="keyword">let</span> Preview = Vue.extend(PreviewComponent)</span><br><span class="line">    <span class="keyword">if</span> (!$vm) &#123;</span><br><span class="line">      $vm = <span class="keyword">new</span> Preview(&#123;<span class="attr">el</span>: <span class="built_in">document</span>.createElement(<span class="string">'div'</span>)&#125;)</span><br><span class="line">      <span class="built_in">document</span>.body.appendChild($vm.$el)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> preview = &#123;</span><br><span class="line">      open (index, list, params) &#123;</span><br><span class="line">        $vm.open(index, list, params)</span><br><span class="line">      &#125;,</span><br><span class="line">      close () &#123;</span><br><span class="line">        $vm.close()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    Vue.$preview = preview</span><br><span class="line">    Vue.mixin(&#123;</span><br><span class="line">      created: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.$preview = Vue.$preview</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当然还需要在main引入。</p>
-<p>至此，我们便可通过‘this.$preview.open(index, imgArr)’调用预览组件。</p>
-<h3 id="裁剪"><a href="#裁剪" class="headerlink" title="裁剪"></a>裁剪</h3><p>裁剪我们选择’vue-cropper’,参考“<a href="https://segmentfault.com/a/1190000009705227”" target="_blank" rel="noopener">https://segmentfault.com/a/1190000009705227”</a><br>规规矩矩调用，唯一踩过的坑是，组件调用时必须得设置父盒子宽高。</p>
-
-          
+          <p>需求分析： 我们需要移动端图片批量上传，图片预览、可选择性的编辑(裁剪等)。<br>最终效果完成如下：<br><img src="/2018/05/26/imgUpload/demo.gif" alt="demo"></p>
+<p>我们将上传、预览、裁剪分为三大块。初步想法是在预览组件(preview)添加自定义按钮“编辑”，调用“裁剪”组件，待裁剪完成，将图片数据返回于父组件–上传组件。   现在我们逐一分析各子组件。<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/26/imgUpload/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -587,7 +580,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526992890895&di=24d7ec0d3d3bf8b06f6a2b31736af05a&imgtype=0&src=http%3A%2F%2Fwww.uedsc.com%2Fwp-content%2Fuploads%2F2015%2F08%2Funderscorejs.jpg" rel="gallery_cjhpw5qip000p1poybmtqv5x9"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526992890895&di=24d7ec0d3d3bf8b06f6a2b31736af05a&imgtype=0&src=http%3A%2F%2Fwww.uedsc.com%2Fwp-content%2Fuploads%2F2015%2F08%2Funderscorejs.jpg" rel="gallery_cjhr3vw2k000p5xoy2f9jd3xs"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526992890895&di=24d7ec0d3d3bf8b06f6a2b31736af05a&imgtype=0&src=http%3A%2F%2Fwww.uedsc.com%2Fwp-content%2Fuploads%2F2015%2F08%2Funderscorejs.jpg" itemprop="contentUrl"/>
               </a>
@@ -601,7 +594,7 @@
 
       
         
-          <p>我听人说，当你闲的蛋疼的时候，去学学源码。<br>比如underscore。<br>
+          <p>我听人说，当你闲的蛋疼的时候，去学学源码。<br>比如underscore。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/22/underscore-1-8-3源码注解/#more" rel="contents">
@@ -778,20 +771,14 @@
 
       
         
-          
-            <p>前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。<br>与jq相似，underscore也是采用<strong>立即执行函数</strong>包裹，以达到避免全局污染以及隐私保护等目的。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// .....执行逻辑</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
-<h3 id="对象"><a href="#对象" class="headerlink" title="_ 对象"></a>_ 对象</h3><p> 我们想将所有以后要用的工具方法挂载到一个对象上，以便之后调用。看看_如何实现：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> root = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> _ = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    root._ = _;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在这里添加自己的方法</span></span><br><span class="line">    _.reverse = <span class="function"><span class="keyword">function</span>(<span class="params">string</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> string.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line">_.reverse(<span class="string">'hello'</span>);</span><br><span class="line">=&gt; <span class="string">'olleh'</span></span><br><span class="line"></span><br><span class="line"><span class="string">``</span><span class="string">`    </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> ### 执行环境判断</span></span><br><span class="line"><span class="string">underscore 对象 _ 会依托于当前的所处环境，挂载到不同的全局空间当中（浏览器的全局对象是 window，node 的全局对象是 global）。且看underscore如何实现：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javascript</span><br><span class="line">  <span class="keyword">var</span> root = (<span class="keyword">typeof</span> self == <span class="string">'object'</span> &amp;&amp; self.self == self &amp;&amp; self) ||</span><br><span class="line">           (<span class="keyword">typeof</span> global == <span class="string">'object'</span> &amp;&amp; global.global == global &amp;&amp; global) ||</span><br><span class="line">           <span class="keyword">this</span> ||</span><br><span class="line">           &#123;&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>逐一分析：</p>
-<ul>
-<li>最直观的，浏览器下的window，node下的global。 </li>
-<li><p>严格模式下this 返回 undefined，而非指向 Window。<br>考虑这两点，于是就有了</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> root = </span><br><span class="line">(<span class="keyword">typeof</span> <span class="built_in">window</span> == <span class="string">'object'</span> &amp;&amp; <span class="built_in">window</span>.window == <span class="built_in">window</span> &amp;&amp; <span class="built_in">window</span>) || </span><br><span class="line">(<span class="keyword">typeof</span> global == <span class="string">'object'</span> &amp;&amp; global.global == global &amp;&amp; global);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>而在浏览器环境下，self 保存的就是当前 window 对象的引用。 underscore 用 self 代替 window 的原因主要用于一些不具有窗口的上下文环境中，比如 Web Workers。<br>关于 Web Workers，可翻阅《javascript高级程序设计》P697。</p>
-<p>之后合并关于小程序的兼容pr加上’{}’以及node 沙盒模块的兼容pr添加’this’，即得到最终版本。</p>
-
-          
+          <p>前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。<br>与jq相似，underscore也是采用<strong>立即执行函数</strong>包裹，以达到避免全局污染以及隐私保护等目的。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// .....执行逻辑</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/21/underscore源码阅读系列-基础部分/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -963,7 +950,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526923397772&di=4e866679bb6f65bab3c3dad219a38415&imgtype=0&src=http%3A%2F%2Fs6.sinaimg.cn%2Fmiddle%2F6306f57fhbae64feec81e%26690" rel="gallery_cjhpw5qid000o1poyt67gso98"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526923397772&di=4e866679bb6f65bab3c3dad219a38415&imgtype=0&src=http%3A%2F%2Fs6.sinaimg.cn%2Fmiddle%2F6306f57fhbae64feec81e%26690" rel="gallery_cjhr3vw23000k5xoyxk02a356"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526923397772&di=4e866679bb6f65bab3c3dad219a38415&imgtype=0&src=http%3A%2F%2Fs6.sinaimg.cn%2Fmiddle%2F6306f57fhbae64feec81e%26690" itemprop="contentUrl"/>
               </a>
@@ -984,7 +971,7 @@
 <p>我听过女人的谎言无数，但这一句是真的。</p>
 <p>我拒绝了她，从头到尾没有正眼看过她一眼。</p>
 <p>她很难过。</p>
-<p>多年后，世人皆赞圣僧不为美色所惑，只有我知道，有的人只看一眼就会错。<br>
+<p>多年后，世人皆赞圣僧不为美色所惑，只有我知道，有的人只看一眼就会错。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/19/王家卫-我眼中的师徒四人/#more" rel="contents">
@@ -1161,9 +1148,9 @@
 
       
         
-          <p><div style="width:348px;margin:0 auto"><br>  <img src="农药.jpg" alt="农药"><br></div><br>1.很多年之后，我有个绰号叫西稳。其实任何人都可以变得稳健，只要你让他尝试无人支援的恐惧。</p>
+          <p><div style="width:348px;margin:0 auto"><br>  <img src="/2018/05/13/一代野师/农药.jpg" alt="农药"><br></div><br>1.很多年之后，我有个绰号叫西稳。其实任何人都可以变得稳健，只要你让他尝试无人支援的恐惧。</p>
 <p>我知道这世界上有一种打野是不会稳健的， 因为他太爱秀， 在我出道的时候， 我认识一个玩枪的， 因为他喜欢在东边出没， 所以很多年之后， 他有个绰号叫东浪。</p>
-<p>我叫达摩，现役荣耀打野位。<br>
+<p>我叫达摩，现役荣耀打野位。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/13/一代野师/#more" rel="contents">
@@ -1340,9 +1327,9 @@
 
       
         
-          <p><div style="width:490px;margin:10px auto"><br>  <img src="danmaku.jpeg" alt="实例"><br></div><br>demo级别的实现，原理十分简单。</p>
+          <p><div style="width:490px;margin:10px auto"><br>  <img src="/2018/05/08/danmaku-demo/danmaku.jpeg" alt="实例"><br></div><br>demo级别的实现，原理十分简单。</p>
 <blockquote>
-<p>随机弹幕颜色、速度、位置 + requestAnimationFrame，没了。<br>
+<p>随机弹幕颜色、速度、位置 + requestAnimationFrame，没了。<br></p></blockquote>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/08/danmaku-demo/#more" rel="contents">
@@ -1519,8 +1506,8 @@
 
       
         
-          <p><div style="width:348px;height:451px;margin:0 auto"><br>  <img src="chrome-plugin/history.jpeg" alt="实例"><br></div><br><strong><a href="http://open.chrome.360.cn/extension_dev/getstarted.html" target="_blank" rel="noopener">360翻译的Chrome开发文档</a></strong>点开，大照着helloworld敲，调试，完成。<br>能有多复杂。<br>主要无非就三个文件，manifest.json + popup.html + popup.js,  对，另外再加一个icon。  </p>
-<p>作为demo的”历史上的今天”说白了只是调了免费接口，将数据展示在谷歌扩展而已，html文件对应ui，js文件操作数据。manifest作为扩展参数设置。<br>
+          <p><div style="width:348px;height:451px;margin:0 auto"><br>  <img src="/2018/05/07/chrome-plugin/history.jpeg" alt="实例"><br></div><br><strong><a href="http://open.chrome.360.cn/extension_dev/getstarted.html" target="_blank" rel="noopener">360翻译的Chrome开发文档</a></strong>点开，大照着helloworld敲，调试，完成。<br>能有多复杂。<br>主要无非就三个文件，manifest.json + popup.html + popup.js,  对，另外再加一个icon。  </p>
+<p>作为demo的”历史上的今天”说白了只是调了免费接口，将数据展示在谷歌扩展而已，html文件对应ui，js文件操作数据。manifest作为扩展参数设置。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/07/chrome-plugin/#more" rel="contents">
@@ -1699,7 +1686,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://upload-images.jianshu.io/upload_images/3988286-335007279ef99611.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" rel="gallery_cjhpw5qh700031poy9fxlh1um"
+                 href="https://upload-images.jianshu.io/upload_images/3988286-335007279ef99611.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" rel="gallery_cjhr3vw0700035xoy3ffdmxa7"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://upload-images.jianshu.io/upload_images/3988286-335007279ef99611.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" itemprop="contentUrl"/>
               </a>
@@ -1873,7 +1860,7 @@
         
           <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本章探讨页面加载海量数据时，如何保证页面渲染流畅，不会出现因大量添加dom节点，导致浏览器卡死的情况。  </p>
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>举例创建web好友列表，可能会有成千上百个好友，若一个好友由一个节点表示，当我们渲染这个列表时，可能需要一次性的创建n多节点。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;ul id=<span class="string">"list-with-big-data"</span>&gt;<span class="number">1000</span>个好友&lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>思路无非动态生成li插入ul中，并设定li的文本内容。<br>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>思路无非动态生成li插入ul中，并设定li的文本内容。<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/04/29/list-with-big-data/#more" rel="contents">
@@ -2051,7 +2038,7 @@
       
         
           <h3 id="什么是单例？"><a href="#什么是单例？" class="headerlink" title="什么是单例？"></a>什么是单例？</h3><p></p><p> “保证一个类仅有一个实例，并提供一个访问他的全局访问点。”<br>    <span style="float:right;display:block">   ——曾探 javascript设计模式与探索实践</span><br></p>    <p></p>
-<p><div><br>    <p><br>        “单例实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。”<br>    <span style="float:right;display:block">   ——汤姆大叔的博客 深入理解javascript系列(25)单例模式</span><br>    </p><br>    单例模式是一种十分简单而且能够很简单的方式实现的一种设计模式。它是指在一个类中只有一个实例，即使你多次实例化这个类，它也只会返回一次实例化的对象，可以有效地避免资源的浪费，能减少不必要的内存开销, 并且在减少全局的函数和变量冲突也具有重要的意义。<br></div><br>
+<p><div><br>    <p><br>        “单例实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。”<br>    <span style="float:right;display:block">   ——汤姆大叔的博客 深入理解javascript系列(25)单例模式</span><br>    </p><br>    单例模式是一种十分简单而且能够很简单的方式实现的一种设计模式。它是指在一个类中只有一个实例，即使你多次实例化这个类，它也只会返回一次实例化的对象，可以有效地避免资源的浪费，能减少不必要的内存开销, 并且在减少全局的函数和变量冲突也具有重要的意义。<br></div><br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/04/27/Singleton/#more" rel="contents">
@@ -2220,7 +2207,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">17.0k</span>
+    <span title="Site words total count">17.5k</span>
   
 </div>
 

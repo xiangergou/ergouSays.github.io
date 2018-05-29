@@ -88,12 +88,12 @@
 <meta property="og:site_name" content="斯是陋室">
 <meta property="og:description" content="360翻译的Chrome开发文档点开，大照着helloworld敲，调试，完成。能有多复杂。主要无非就三个文件，manifest.json + popup.html + popup.js,  对，另外再加一个icon。   作为demo的”历史上的今天”说白了只是调了免费接口，将数据展示在谷歌扩展而已，html文件对应ui，js文件操作数据。manifest作为扩展参数设置。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://xiangergou.github.io/2018/05/07/chrome-plugin/chrome-plugin/history.jpeg">
+<meta property="og:image" content="https://xiangergou.github.io/2018/05/07/chrome-plugin/history.jpeg">
 <meta property="og:updated_time" content="2018-05-13T07:58:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="谷歌自定义小拓展-历史上的今天">
 <meta name="twitter:description" content="360翻译的Chrome开发文档点开，大照着helloworld敲，调试，完成。能有多复杂。主要无非就三个文件，manifest.json + popup.html + popup.js,  对，另外再加一个icon。   作为demo的”历史上的今天”说白了只是调了免费接口，将数据展示在谷歌扩展而已，html文件对应ui，js文件操作数据。manifest作为扩展参数设置。">
-<meta name="twitter:image" content="https://xiangergou.github.io/2018/05/07/chrome-plugin/chrome-plugin/history.jpeg">
+<meta name="twitter:image" content="https://xiangergou.github.io/2018/05/07/chrome-plugin/history.jpeg">
 
 
 
@@ -400,7 +400,7 @@
       
 
       
-        <p><div style="width:348px;height:451px;margin:0 auto"><br>  <img src="chrome-plugin/history.jpeg" alt="实例"><br></div><br><strong><a href="http://open.chrome.360.cn/extension_dev/getstarted.html" target="_blank" rel="noopener">360翻译的Chrome开发文档</a></strong>点开，大照着helloworld敲，调试，完成。<br>能有多复杂。<br>主要无非就三个文件，manifest.json + popup.html + popup.js,  对，另外再加一个icon。  </p>
+        <p><div style="width:348px;height:451px;margin:0 auto"><br>  <img src="/2018/05/07/chrome-plugin/history.jpeg" alt="实例"><br></div><br><strong><a href="http://open.chrome.360.cn/extension_dev/getstarted.html" target="_blank" rel="noopener">360翻译的Chrome开发文档</a></strong>点开，大照着helloworld敲，调试，完成。<br>能有多复杂。<br>主要无非就三个文件，manifest.json + popup.html + popup.js,  对，另外再加一个icon。  </p>
 <p>作为demo的”历史上的今天”说白了只是调了免费接口，将数据展示在谷歌扩展而已，html文件对应ui，js文件操作数据。manifest作为扩展参数设置。<br><a id="more"></a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  &#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"My First Extension"</span>,</span><br><span class="line">    <span class="string">"version"</span>: <span class="string">"1.0"</span>,</span><br><span class="line">    <span class="string">"description"</span>: <span class="string">"历史上的今天~"</span>,</span><br><span class="line">    <span class="string">"browser_action"</span>: &#123;</span><br><span class="line">        <span class="string">"default_title"</span>: <span class="string">"history"</span>,</span><br><span class="line">        <span class="string">"default_icon"</span>: <span class="string">"icon.png"</span>,</span><br><span class="line">        <span class="string">"default_popup"</span>: <span class="string">"popup.html"</span> <span class="comment">// 拓展默认主页</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"permissions"</span>: [</span><br><span class="line">       <span class="string">"tabs"</span>, <span class="string">"http://*/*"</span>, <span class="string">"https://*/*"</span> <span class="comment">// 跨域</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"manifest_version"</span>: <span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>小坑不提，主要”manifest_version”: 2,这个配置得加上,官方教程未指出。<br>再者，跨域方式得加上。<br>还有什么来着…算了忘了，反正demo很简单，要想做点更好玩儿的东西，下功夫琢磨文档就够了。<br>娘的，没做之前还以为多高大上的东西呢。 </p>
 
@@ -596,7 +596,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">17.0k</span>
+    <span title="Site words total count">17.5k</span>
   
 </div>
 
