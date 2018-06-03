@@ -250,8 +250,6 @@
 
   
 </nav>
-  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2012787&auto=0&height=66"></iframe>
-
 
 
  </div>
@@ -263,6 +261,398 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/06/01/js设计模式简介及应用场景/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ergou_xiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/logo.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="斯是陋室">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/01/js设计模式简介及应用场景/" itemprop="url">js设计模式简介及常用应用场景(草稿)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-01T15:57:09+08:00">
+                2018-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,525 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><style>strong{<br>    margin-bottom:5px;<br>}</style>   </p>
+<h3 id="我以为的设计模式"><a href="#我以为的设计模式" class="headerlink" title="我以为的设计模式:"></a>我以为的设计模式:</h3><p>窃以为设计模式是所有程序员进阶的必经之路。<br>从某种程度上说，设计模式是代码向着“高复用低耦合”靠拢的经验产物。  纵不去刻意学习，只要经验足够，或多或少都会有着相应的思想。 但有目标的学习无疑能缩短进程， 故在此罗列常见设计模式与适应场景，在之后的工作学习中若遇到类似问题，以此参考做专项突破，以期以点破面。</p>
+<blockquote>
+<p><b>所有设计模式主旨在于将变得事物与不变的事物分离开。<br>主要分三个类型:创建型、结构型和行为型。 </b></p>
+</blockquote>
+<h3 id="创建型："><a href="#创建型：" class="headerlink" title="创建型："></a>创建型：</h3><ul>
+<li><p><strong>一、Singleton，单例模式</strong><br>  简介： 保证一个类只有一个实例，并提供一个访问它的全局访问点 ；<br>  应用场景： 一个无状态的类使用单例模式节省内存资源。<br>  eg.   1. 唯一出现的模态框。 2. init的使用–使用命名空间</p>
+</li>
+<li><p><strong>二、Prototype，原型模式</strong><br>  简介： 用原型实例指定创建对象的种类，并且通过拷贝这些原型来创建新的对象。<br>  应用场景： 用new创建一个对象需要非常繁琐的数据准备或者权限。</p>
+</li>
+<li><p><strong>三、Builder，建造模式</strong><br>  简介： 将一个复杂对象的构建与他的表示相分离，使得同样的构建过程可以创建不同的表示。<br>  应用场景： 一个类的各个组成部分的具体实现类或者算法经常面临着变化，但是将他们组合在一起的算法却相对稳定。提供一种封装机制 将稳定的组合算法于易变的各个组成部分隔离开来。</p>
+</li>
+</ul>
+<h3 id="行为型："><a href="#行为型：" class="headerlink" title="行为型："></a>行为型：</h3><ul>
+<li><p><strong>四、Iterator，迭代器模式</strong><br>  简介： 提供一个方法顺序访问一个聚合对象的各个元素，而又不需要暴露该对象的内部表示。<br>  应用场景： 迭代。</p>
+</li>
+<li><p><strong>五、Observer，观察者模式</strong><br>  简介： 定义对象间一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知自动更新。<br>  应用场景： 某个实例的变化将影响其他多个对象。 时间解耦、对象解耦，可用与异步编程。<br>  eg. 1. vue双向数据绑定(典型) 2. 网站登录 3. 模块间通信</p>
+</li>
+<li><p><strong>六、Template Method，模板方法</strong><br>  简介： 定义一个操作中的算法的骨架，而将一些步骤延迟到子类中，TemplateMethod使得子类可以不改变一个算法的结构即可以重定义该算法的某些特定步骤。<br>  应用场景： 适用于算法的结构保持不变，同时由子类提供部分实现的情况。常被架构师用于搭建项目的框架，架构师定好了骨架，程序员继承了骨架的结构之后，负责往里面填空。<br>  ep: 1. “茶和咖啡问题”  2.“好莱坞法则”</p>
+</li>
+<li><p><strong>七、Command，命令模式</strong><br>  简介： 将一个请求封装为一个对象，从而使你可以用不同的请求对客户进行参数化，对请求排队和记录请求日志，以及支持可撤销的操作。<br>  应用场景： 有时候需要向某些对象发送请求，但是并不知道请求的接受者是谁，也不知道请求的操作是什么，将‘对象的请求者‘从’命令的执行者’中解耦。使用此模式的优点还在于，command对象拥有更长的生命周期，可以在程序运行的任何时刻去调用这个方法。<br>  ep： 独立的button和click的绑定。2. 宏命令(命令集合)</p>
+</li>
+<li><p><strong>八、Strategy，策略模式</strong><br>  简介： 定义一系列的算法，把他们一个个封装起来，并使他们可以互相替换，本模式使得算法可以独立于使用它们的客户。<br>  应用场景： 最实用的场合就是某个“类”中包含有大量的条件性语句，比如if…else 或者 switch。每一个条件分支都会引起该“类”的特定行为以不同的方式作出改变。以其维护一段庞大的条件性语句，不如将每一个行为划分为多个独立的对象。每一个对象被称为一个策略。设置多个这种策略对象，可以改进我们的代码质量，也更好的进行单元测试。<br>  ep：1. 表单验证。2. 动画。</p>
+</li>
+<li><p><strong>九、China of Responsibility，职责链模式</strong><br>  简介： 使多个对象都有机会处理请求，从而避免请求的送发者和接收者之间的耦合关系 </p>
+</li>
+<li><p><strong>十、Mediator，中介者模式： </strong><br>  简介： 用一个中介对象封装一些列的对象交互。</p>
+</li>
+</ul>
+<h3 id="结构型"><a href="#结构型" class="headerlink" title="结构型"></a>结构型</h3><ul>
+<li><p><strong>十一、Composite，组合模式</strong><br>  简介： 将对象组合成树形结构以表示部分整体的关系，Composite使得用户对单个对象和组合对象的使用具有一致性。<br>  应用场景： 宏命令</p>
+</li>
+<li><p><strong>十二、Facade，外观模式</strong><br>  简介： 为子系统中的一组接口提供一致的界面，fa?ade提供了一高层接口，这个接口使得子系统更容易使用。  </p>
+</li>
+<li><p><strong>十三、Proxy，代理模式</strong><br>  简介： 为其他对象提供一种代理以控制对这个对象的访问。<br>  适用场景：把对一个对象的访问, 交给另一个代理对象来操作.<br>  ep: 1. 图片预加载 2. 合并http请求 3. 缓存代理。</p>
+</li>
+<li><p><strong>十四、Adapter，适配器模式：</strong><br>  简介： 将一类的接口转换成客户希望的另外一个接口，Adapter模式使得原本由于接口不兼容而不能一起工作那些类可以一起工作。</p>
+</li>
+<li><p><strong>十五、Decrator，装饰模式：</strong><br>  简介： 动态地给一个对象增加一些额外的职责，就增加的功能来说，Decorator模式相比生成子类更加灵活。</p>
+</li>
+<li><p><strong>十六、Flyweight，享元模式 </strong></p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/05/31/proxy-表单验证到双向绑定/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ergou_xiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/logo.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="斯是陋室">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/31/proxy-表单验证到双向绑定/" itemprop="url">proxy-表单验证到双向绑定(一)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-31T18:35:48+08:00">
+                2018-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  300 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>从表单验证的设计模式改造，到proxy代理模式，再到proxy实现数据双向绑定。<br>传统的表单验证大抵由前端与后端做双重验证，本章探讨策略模式+装饰者模式+es6 proxy重写表单验证。<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/31/proxy-表单验证到双向绑定/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -400,26 +790,14 @@
 
       
         
-          
-            <p><img src="/2018/05/30/木剑温华/温华.jpeg" alt="江湖"></p>
-<p>我最喜欢你现在的模样<br>本本分分做着活计<br>脸上总挂着光</p>
-<p>你上给靠窗客人三两牛肉半斤绿蚁酒<br>转头回应隔壁嚷嚷着的小二结账<br>时常被小孩纠缠江湖是怎样剑影刀光  </p>
-<p>你说曾见识过那些仙子风月情长<br>也见过缺着门牙总爱陪主子傻笑的忠仆老黄<br>少不了再说说和你拜把子的那位长的是如何人模狗样  </p>
-<p>最调皮的二狗说你又扯谎<br>你还欠着他家两只鸡三袋粮<br>又怎么可能见过那么多人去过那么远的地方  </p>
-<p>你笑笑转头看见那位远处冒雨来看你的姑娘<br>你上前为她挡雨脸色涨红有些慌张<br>没来由嘀咕了句嘿江湖从来都在身旁不在远方   </p>
-<p>橘黄橘黄色的夕阳落在街上<br>村口又有少年骑着矮马出门闯荡<br>踌躇满志一腔热血一如你当年一样  </p>
-<p>那年浅草没了马蹄<br>那年春风春雨绿了湖堤<br>那年你背着木剑看了三千里山河无趣  </p>
-<!-- 那年你没有了四处撩拨姑娘的勇气 
-还穿那身江湖归去满经风霜的麻衣 
-也再未听你说要做天下第一  -->
-<!-- 那年你心心念月光长长至故里
-还穿着那身江湖归去满经风霜的麻衣  -->
-<p>你心里没有了快意恩仇的侠气<br>更愿意陪那群小孩聊天打屁<br>说江湖路远不如归去  </p>
-<p>你从不提起曾只差一步就能江湖美人无限风光<br>也不再听你说白云苍狗世事无常<br>只是转头回应那句小二上酒铿锵高亢  </p>
-<p>我最喜欢你现在的模样<br>揣着几斤情义放在家里热炕头上<br>等下酒时念叨几句曾有段浪荡的过往  </p>
-<pre><code>---木剑温华的江湖
-</code></pre>
-          
+          <p>我最喜欢你现在的模样<br>本本分分做着活计<br>脸上总挂着光<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/30/木剑温华/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -698,8 +1076,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/undescore源码阅读系列/" itemprop="url" rel="index">
-                    <span itemprop="name">undescore源码阅读系列</span>
+                  <a href="/categories/草稿/" itemprop="url" rel="index">
+                    <span itemprop="name">草稿</span>
                   </a>
                 </span>
 
@@ -769,7 +1147,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526992890895&di=24d7ec0d3d3bf8b06f6a2b31736af05a&imgtype=0&src=http%3A%2F%2Fwww.uedsc.com%2Fwp-content%2Fuploads%2F2015%2F08%2Funderscorejs.jpg" rel="gallery_cjhtbd788000lqdoyl1h76fea"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526992890895&di=24d7ec0d3d3bf8b06f6a2b31736af05a&imgtype=0&src=http%3A%2F%2Fwww.uedsc.com%2Fwp-content%2Fuploads%2F2015%2F08%2Funderscorejs.jpg" rel="gallery_cjhyc3xu6000v9ioyzodlrwy5"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526992890895&di=24d7ec0d3d3bf8b06f6a2b31736af05a&imgtype=0&src=http%3A%2F%2Fwww.uedsc.com%2Fwp-content%2Fuploads%2F2015%2F08%2Funderscorejs.jpg" itemprop="contentUrl"/>
               </a>
@@ -891,8 +1269,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/undescore源码阅读系列/" itemprop="url" rel="index">
-                    <span itemprop="name">undescore源码阅读系列</span>
+                  <a href="/categories/草稿/" itemprop="url" rel="index">
+                    <span itemprop="name">草稿</span>
                   </a>
                 </span>
 
@@ -1139,7 +1517,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526923397772&di=4e866679bb6f65bab3c3dad219a38415&imgtype=0&src=http%3A%2F%2Fs6.sinaimg.cn%2Fmiddle%2F6306f57fhbae64feec81e%26690" rel="gallery_cjhtbd7ag000tqdoymuj8uhbl"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526923397772&di=4e866679bb6f65bab3c3dad219a38415&imgtype=0&src=http%3A%2F%2Fs6.sinaimg.cn%2Fmiddle%2F6306f57fhbae64feec81e%26690" rel="gallery_cjhyc3xu8000z9ioybt2g2hk3"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526923397772&di=4e866679bb6f65bab3c3dad219a38415&imgtype=0&src=http%3A%2F%2Fs6.sinaimg.cn%2Fmiddle%2F6306f57fhbae64feec81e%26690" itemprop="contentUrl"/>
               </a>
@@ -1737,359 +2115,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/04/29/caoZhengChun/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ergou_xiang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/logo.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="斯是陋室">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/29/caoZhengChun/" itemprop="url">曹正淳：我不过,不想再跪着</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-29T22:29:20+08:00">
-                2018-04-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  2,299 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  8 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="https://upload-images.jianshu.io/upload_images/3988286-335007279ef99611.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" rel="gallery_cjhtbd7140001qdoyckk2ngkx"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://upload-images.jianshu.io/upload_images/3988286-335007279ef99611.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
-
-      
-        
-          <p>1.我叫曹正淳，是个阉人。</p>
-<p>第一次做阉人，是在七岁。 很少有人这么小就成为阉人，除非他有个跟我一样的爹。 他是个杀猪匠，杀很多猪，却总买不起猪肉。每次杀完猪都在水缸里洗手，他说每天这样就可以喝油水。 油水不是水，我明白他的意思。</p>
-<p>如果人一生分四季，在我七岁前，我的生活大抵还算的上春天。 我记得那年惊蛰似乎来得特别早，他从东门回家，亲自帮我净了身。那个晚上，我躺在床上，心想我这辈子再做不了男人了。</p>
-<p>  <br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/29/caoZhengChun/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/04/29/list-with-big-data/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ergou_xiang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/logo.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="斯是陋室">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/29/list-with-big-data/" itemprop="url">页面海量数据加载 -- 分时函数 + requestAnimationFrame</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-29T14:17:37+08:00">
-                2018-04-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  743 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本章探讨页面加载海量数据时，如何保证页面渲染流畅，不会出现因大量添加dom节点，导致浏览器卡死的情况。  </p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>举例创建web好友列表，可能会有成千上百个好友，若一个好友由一个节点表示，当我们渲染这个列表时，可能需要一次性的创建n多节点。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;ul id=<span class="string">"list-with-big-data"</span>&gt;<span class="number">1000</span>个好友&lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>思路无非动态生成li插入ul中，并设定li的文本内容。<br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/29/list-with-big-data/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2144,7 +2169,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2155,7 +2180,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2166,7 +2191,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -2218,7 +2243,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">17.9k</span>
+    <span title="Site words total count">19.8k</span>
   
 </div>
 

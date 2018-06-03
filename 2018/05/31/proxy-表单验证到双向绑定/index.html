@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="vue proxy," />
 
 
 
@@ -80,17 +80,18 @@
 
 
 
-<meta name="description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)()">
+<meta name="description" content="从表单验证的设计模式改造，到proxy代理模式，再到proxy实现数据双向绑定。传统的表单验证大抵由前端与后端做双重验证，本章探讨策略模式+装饰者模式+es6 proxy重写表单验证。">
+<meta name="keywords" content="vue proxy">
 <meta property="og:type" content="article">
-<meta property="og:title" content="underscore源码阅读系列-基础部分">
-<meta property="og:url" content="https://xiangergou.github.io/2018/05/21/underscore源码阅读系列-基础部分/index.html">
+<meta property="og:title" content="proxy-表单验证到双向绑定(一)">
+<meta property="og:url" content="https://xiangergou.github.io/2018/05/31/proxy-表单验证到双向绑定/index.html">
 <meta property="og:site_name" content="斯是陋室">
-<meta property="og:description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)()">
+<meta property="og:description" content="从表单验证的设计模式改造，到proxy代理模式，再到proxy实现数据双向绑定。传统的表单验证大抵由前端与后端做双重验证，本章探讨策略模式+装饰者模式+es6 proxy重写表单验证。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-31T10:39:22.000Z">
+<meta property="og:updated_time" content="2018-06-02T13:06:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="underscore源码阅读系列-基础部分">
-<meta name="twitter:description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)()">
+<meta name="twitter:title" content="proxy-表单验证到双向绑定(一)">
+<meta name="twitter:description" content="从表单验证的设计模式改造，到proxy代理模式，再到proxy实现数据双向绑定。传统的表单验证大抵由前端与后端做双重验证，本章探讨策略模式+装饰者模式+es6 proxy重写表单验证。">
 
 
 
@@ -120,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/2018/05/21/underscore源码阅读系列-基础部分/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/05/31/proxy-表单验证到双向绑定/"/>
 
 
 
 
 
-  <title>underscore源码阅读系列-基础部分 | 斯是陋室</title>
+  <title>proxy-表单验证到双向绑定(一) | 斯是陋室</title>
   
 
 
@@ -275,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/05/21/underscore源码阅读系列-基础部分/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/05/31/proxy-表单验证到双向绑定/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ergou_xiang">
@@ -292,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">underscore源码阅读系列-基础部分</h1>
+          <h1 class="post-title" itemprop="name headline">proxy-表单验证到双向绑定(一)</h1>
         
 
         <div class="post-meta">
@@ -304,8 +305,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-21T23:13:03+08:00">
-                2018-05-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-31T18:35:48+08:00">
+                2018-05-31
               </time>
             
 
@@ -327,8 +328,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/草稿/" itemprop="url" rel="index">
-                    <span itemprop="name">草稿</span>
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
                   </a>
                 </span>
 
@@ -358,7 +359,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  425 字
+                  300 字
                 </span>
               
 
@@ -374,7 +375,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2 分钟
+                  1 分钟
                 </span>
               
             </div>
@@ -395,18 +396,21 @@
       
 
       
-        <p>前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。<br>与jq相似，underscore也是采用<strong>立即执行函数</strong>包裹，以达到避免全局污染以及隐私保护等目的。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// .....执行逻辑</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<h3 id="对象"><a href="#对象" class="headerlink" title="_ 对象"></a>_ 对象</h3><p> 我们想将所有以后要用的工具方法挂载到一个对象上，以便之后调用。看看_如何实现：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> root = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> _ = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    root._ = _;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在这里添加自己的方法</span></span><br><span class="line">    _.reverse = <span class="function"><span class="keyword">function</span>(<span class="params">string</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> string.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line">_.reverse(<span class="string">'hello'</span>);</span><br><span class="line">=&gt; <span class="string">'olleh'</span></span><br><span class="line"></span><br><span class="line"><span class="string">``</span><span class="string">`    </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> ### 执行环境判断</span></span><br><span class="line"><span class="string">underscore 对象 _ 会依托于当前的所处环境，挂载到不同的全局空间当中（浏览器的全局对象是 window，node 的全局对象是 global）。且看underscore如何实现：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javascript</span><br><span class="line">  <span class="keyword">var</span> root = (<span class="keyword">typeof</span> self == <span class="string">'object'</span> &amp;&amp; self.self == self &amp;&amp; self) ||</span><br><span class="line">           (<span class="keyword">typeof</span> global == <span class="string">'object'</span> &amp;&amp; global.global == global &amp;&amp; global) ||</span><br><span class="line">           <span class="keyword">this</span> ||</span><br><span class="line">           &#123;&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>逐一分析：</p>
+        <p>从表单验证的设计模式改造，到proxy代理模式，再到proxy实现数据双向绑定。<br>传统的表单验证大抵由前端与后端做双重验证，本章探讨策略模式+装饰者模式+es6 proxy重写表单验证。<br><a id="more"></a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">"registerForm"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"user"</span>&gt;</span>请输入用户名:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">id</span>=<span class="string">"user"</span> <span class="attr">name</span>=<span class="string">"userName"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"pwd"</span>&gt;</span>请输入密码:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">id</span>=<span class="string">"pwd"</span> <span class="attr">name</span>=<span class="string">"passWord"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"btn btn-default"</span>&gt;</span>Submit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <ul>
-<li>最直观的，浏览器下的window，node下的global。 </li>
-<li><p>严格模式下this 返回 undefined，而非指向 Window。<br>考虑这两点，于是就有了</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> root = </span><br><span class="line">(<span class="keyword">typeof</span> <span class="built_in">window</span> == <span class="string">'object'</span> &amp;&amp; <span class="built_in">window</span>.window == <span class="built_in">window</span> &amp;&amp; <span class="built_in">window</span>) || </span><br><span class="line">(<span class="keyword">typeof</span> global == <span class="string">'object'</span> &amp;&amp; global.global == global &amp;&amp; global);</span><br></pre></td></tr></table></figure>
+<li><p>常见验证方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> registerForm = <span class="built_in">document</span>.querySelector(<span class="string">'#registerForm'</span>)</span><br><span class="line">registerForm.addEventListener(<span class="string">'submit'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (registerForm.userName.value === <span class="string">''</span>) &#123;</span><br><span class="line">      alert(<span class="string">'用户名不能为空！'</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (registerForm.userName.length &lt; <span class="number">6</span>) &#123;</span><br><span class="line">      alert(<span class="string">'用户名长度不能少于6位！'</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (registerForm.passWord.value === <span class="string">''</span>) &#123;</span><br><span class="line">      alert(<span class="string">'密码不能为空！'</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (registerForm.passWord.value.length &lt; <span class="number">6</span>) &#123;</span><br><span class="line">      alert(<span class="string">'密码长度不能少于6位！'</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;, <span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>策略模式改写<br>基于策略模式的程序由两部分构成。<blockquote>
+<ul>
+<li>策略类。 封装具体算法，负责具体计算过程。</li>
+</ul>
+</blockquote>
 </li>
 </ul>
-<p>而在浏览器环境下，self 保存的就是当前 window 对象的引用。 underscore 用 self 代替 window 的原因主要用于一些不具有窗口的上下文环境中，比如 Web Workers。<br>关于 Web Workers，可翻阅《javascript高级程序设计》P697。</p>
-<p>之后合并关于小程序的兼容pr加上’{}’以及node 沙盒模块的兼容pr添加’this’，即得到最终版本。</p>
+</li>
+<li>环境类。客户端调用，将请求委托于策略类。</li>
+</ul>
 
       
     </div>
@@ -422,6 +426,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/vue-proxy/" rel="tag"># vue proxy</a>
+          
+        </div>
+      
 
       
       
@@ -431,8 +441,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/19/王家卫-我眼中的师徒四人/" rel="next" title="没有齐天大圣，我只是只猴子">
-                <i class="fa fa-chevron-left"></i> 没有齐天大圣，我只是只猴子
+              <a href="/2018/05/30/木剑温华/" rel="next" title="雪中:木剑温华的江湖">
+                <i class="fa fa-chevron-left"></i> 雪中:木剑温华的江湖
               </a>
             
           </div>
@@ -441,8 +451,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/22/underscore-1-8-3源码注解/" rel="prev" title="underscore-1.9.0源码注解">
-                underscore-1.9.0源码注解 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/01/js设计模式简介及应用场景/" rel="prev" title="js设计模式简介及常用应用场景(草稿)">
+                js设计模式简介及常用应用场景(草稿) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -500,17 +510,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -574,22 +575,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象"><span class="nav-number">1.</span> <span class="nav-text">_ 对象</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
