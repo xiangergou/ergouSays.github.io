@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="vue proxy," />
+  <meta name="keywords" content="设计模式 策略," />
 
 
 
@@ -80,18 +80,18 @@
 
 
 
-<meta name="description" content="从表单验证的设计模式改造，到proxy代理模式，再到proxy实现数据双向绑定。传统的表单验证大抵由前端与后端做双重验证，本章探讨策略模式+装饰者模式+es6 proxy重写表单验证。">
-<meta name="keywords" content="vue proxy">
+<meta name="description" content="本章探讨应用策略模式对表单验证的改造。 工作原因又扯到了表单验证，加之最近在学习《javascript设计模式与开发实践》，此文瑾以作实践总结。">
+<meta name="keywords" content="设计模式 策略">
 <meta property="og:type" content="article">
-<meta property="og:title" content="proxy-表单验证到双向绑定(一)(草稿)">
+<meta property="og:title" content="策略模式改造表单验证(一)">
 <meta property="og:url" content="https://xiangergou.github.io/2018/05/31/proxy-表单验证到双向绑定/index.html">
 <meta property="og:site_name" content="斯是陋室">
-<meta property="og:description" content="从表单验证的设计模式改造，到proxy代理模式，再到proxy实现数据双向绑定。传统的表单验证大抵由前端与后端做双重验证，本章探讨策略模式+装饰者模式+es6 proxy重写表单验证。">
+<meta property="og:description" content="本章探讨应用策略模式对表单验证的改造。 工作原因又扯到了表单验证，加之最近在学习《javascript设计模式与开发实践》，此文瑾以作实践总结。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-03T04:49:17.000Z">
+<meta property="og:updated_time" content="2018-06-14T08:33:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="proxy-表单验证到双向绑定(一)(草稿)">
-<meta name="twitter:description" content="从表单验证的设计模式改造，到proxy代理模式，再到proxy实现数据双向绑定。传统的表单验证大抵由前端与后端做双重验证，本章探讨策略模式+装饰者模式+es6 proxy重写表单验证。">
+<meta name="twitter:title" content="策略模式改造表单验证(一)">
+<meta name="twitter:description" content="本章探讨应用策略模式对表单验证的改造。 工作原因又扯到了表单验证，加之最近在学习《javascript设计模式与开发实践》，此文瑾以作实践总结。">
 
 
 
@@ -127,7 +127,7 @@
 
 
 
-  <title>proxy-表单验证到双向绑定(一)(草稿) | 斯是陋室</title>
+  <title>策略模式改造表单验证(一) | 斯是陋室</title>
   
 
 
@@ -293,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">proxy-表单验证到双向绑定(一)(草稿)</h1>
+          <h1 class="post-title" itemprop="name headline">策略模式改造表单验证(一)</h1>
         
 
         <div class="post-meta">
@@ -359,7 +359,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  300 字
+                  1,061 字
                 </span>
               
 
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -396,21 +396,99 @@
       
 
       
-        <p>从表单验证的设计模式改造，到proxy代理模式，再到proxy实现数据双向绑定。<br>传统的表单验证大抵由前端与后端做双重验证，本章探讨策略模式+装饰者模式+es6 proxy重写表单验证。<br><a id="more"></a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">"registerForm"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"user"</span>&gt;</span>请输入用户名:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">id</span>=<span class="string">"user"</span> <span class="attr">name</span>=<span class="string">"userName"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"pwd"</span>&gt;</span>请输入密码:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">id</span>=<span class="string">"pwd"</span> <span class="attr">name</span>=<span class="string">"passWord"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"btn btn-default"</span>&gt;</span>Submit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<ul>
-<li><p>常见验证方式：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> registerForm = <span class="built_in">document</span>.querySelector(<span class="string">'#registerForm'</span>)</span><br><span class="line">registerForm.addEventListener(<span class="string">'submit'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (registerForm.userName.value === <span class="string">''</span>) &#123;</span><br><span class="line">      alert(<span class="string">'用户名不能为空！'</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (registerForm.userName.length &lt; <span class="number">6</span>) &#123;</span><br><span class="line">      alert(<span class="string">'用户名长度不能少于6位！'</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (registerForm.passWord.value === <span class="string">''</span>) &#123;</span><br><span class="line">      alert(<span class="string">'密码不能为空！'</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (registerForm.passWord.value.length &lt; <span class="number">6</span>) &#123;</span><br><span class="line">      alert(<span class="string">'密码长度不能少于6位！'</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;, <span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>策略模式改写<br>基于策略模式的程序由两部分构成。<blockquote>
-<ul>
-<li>策略类。 封装具体算法，负责具体计算过程。</li>
-</ul>
+        <p>本章探讨应用策略模式对表单验证的改造。 工作原因又扯到了表单验证，加之最近在学习《javascript设计模式与开发实践》，此文瑾以作实践总结。<br><a id="more"></a><br>常见验证方式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (registerForm.userName.value === <span class="string">''</span>) &#123;</span><br><span class="line">    alert(<span class="string">'用户名不能为空！'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (registerForm.userName.length &lt; <span class="number">6</span>) &#123;</span><br><span class="line">    alert(<span class="string">'用户名长度不能少于6位！'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;, <span class="literal">false</span>)</span><br></pre></td></tr></table></figure></p>
+<p>通过观察，不难发现，验证一般包含三个变数。</p>
+<blockquote>
+<ol>
+<li>value。(like: registerForm.userName.value)。</li>
+<li>验证规则名。(like:  ‘isEmpty’)；</li>
+<li>错误信息。 (like: ‘不能为空’)。</li>
+</ol>
 </blockquote>
-</li>
+<p>基于此，可以尝试构建一个validate(‘input’, ‘isEmpty’, ‘用户名不能为空！’)方法，完成表单验证。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// demo</span></span><br><span class="line"><span class="keyword">let</span> validate = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// msg,'错误信息的输出'</span></span><br><span class="line"> <span class="keyword">const</span> msg = &#123;</span><br><span class="line">    isEmpty: <span class="function">(<span class="params">errMsg = <span class="string">'不能为空'</span></span>) =&gt;</span> &#123;<span class="keyword">return</span> errMsg&#125;</span><br><span class="line"> &#125;</span><br><span class="line">  <span class="comment">// 验证类型</span></span><br><span class="line"><span class="keyword">let</span> validateTypes = &#123;</span><br><span class="line">    isEmpty:<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(value==<span class="literal">null</span> || value.length === <span class="number">0</span>)&#123;</span><br><span class="line">	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    isNum: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    	<span class="keyword">var</span> reg = <span class="regexp">/\d+/</span>;</span><br><span class="line">    	<span class="keyword">if</span>(!reg.test(value)) &#123;</span><br><span class="line">    	    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    	&#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">value,type, errMsg</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(validateTypes[type](value))&#123;</span><br><span class="line">        <span class="keyword">return</span> msg[type](errMsg);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(validate(<span class="string">""</span>, <span class="string">"isEmpty"</span>, <span class="string">'必须输入用户名'</span>)); <span class="comment">//必须输入用户名</span></span><br><span class="line"><span class="built_in">console</span>.log(validate(<span class="string">"xiangergou"</span>, <span class="string">"isEmpty"</span>)); <span class="comment">//undefine</span></span><br><span class="line"><span class="built_in">console</span>.log(validate(<span class="string">"test"</span>, <span class="string">"isNum"</span>)); <span class="comment">//必须为数字</span></span><br><span class="line"><span class="built_in">console</span>.log(validate(<span class="number">111</span>, <span class="string">"isNum"</span>));</span><br></pre></td></tr></table></figure>
+<p>不可避免，很多时候需要对一个input做多项验证。如，不能为空且必须为数值<br>多项验证:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> validate = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> messages = &#123;</span><br><span class="line">    	isEmpty: <span class="string">'不能为空'</span>,</span><br><span class="line">    	isNum: <span class="string">'必须为数字'</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> validateTypes = &#123;</span><br><span class="line">        isEmpty: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (value == <span class="literal">null</span> || value.length === <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    	&#125;,</span><br><span class="line">    	isNum: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> reg = <span class="regexp">/\d+/</span>;</span><br><span class="line">            <span class="keyword">if</span> (!reg.test(value)) &#123;</span><br><span class="line">            	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">value, type</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (validateTypes[type](value)) &#123;</span><br><span class="line">	    <span class="keyword">return</span> messages[type];</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Detects = <span class="function"><span class="keyword">function</span> (<span class="params">value, types</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> results = [];</span><br><span class="line">    <span class="keyword">for</span> (index <span class="keyword">in</span> types) &#123;</span><br><span class="line">        <span class="keyword">var</span> msg = validate(value, types[index]);</span><br><span class="line">        <span class="keyword">if</span> (msg) &#123;  <span class="comment">//如果信息存在</span></span><br><span class="line">            results.push(msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> results;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(Detects(<span class="string">""</span>, [<span class="string">"isEmpty"</span>, <span class="string">"isNum"</span>])); <span class="comment">//["不能为空", "必须为数字"]</span></span><br></pre></td></tr></table></figure></p>
+<p>当然我们也可参照原型模式做规范处理。</p>
+<pre><code class="javascript">    <span class="comment">// utils工具函数</span>
+<span class="keyword">var</span> validate = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="keyword">var</span> messages = {
+        isEmpty: <span class="string">'必须输入用户名'</span>,
+        isNum: <span class="string">'必须为数字'</span>
+    };
+
+    <span class="keyword">var</span> validateTypes = {
+        isEmpty: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>{
+            <span class="keyword">if</span> (value == <span class="literal">null</span> || value.length === <span class="number">0</span>) {
+                <span class="keyword">return</span> <span class="literal">true</span>;
+            }
+            <span class="keyword">return</span> <span class="literal">false</span>;
+        },
+        isNum: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>{
+            <span class="keyword">var</span> reg = <span class="regexp">/\d+/</span>;
+            <span class="keyword">if</span> (!reg.test(value)) {
+                <span class="keyword">return</span> <span class="literal">true</span>;
+            }
+            <span class="keyword">return</span> <span class="literal">false</span>;
+        }
+    };
+    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">value, type</span>) </span>{
+        <span class="keyword">if</span> (validateTypes[type](value)) {
+            <span class="keyword">return</span> messages[type];
+        }
+    }
+}) ();
+<span class="comment">// 所有验证结果布尔数组</span>
+<span class="keyword">var</span> Detects = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="keyword">this</span>.results = [];
+};
+
+Detects.prototype.add = <span class="function"><span class="keyword">function</span> (<span class="params">value, types</span>) </span>{
+    <span class="keyword">for</span> (<span class="keyword">var</span> index <span class="keyword">in</span> types) {
+        <span class="keyword">var</span> msg = validate(value, types[index]);
+        <span class="comment">// 强制类型转换 参考《你不知道的javascript》中卷 P46</span>
+        <span class="keyword">if</span> (!!msg) {
+            <span class="keyword">this</span>.results.push(msg);
+        }
+    }
+}
+Detects.prototype.getResult = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="keyword">var</span> result = <span class="keyword">this</span>.results;
+    <span class="keyword">return</span> result;
+}
+
+Detects.prototype.isTrue = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="keyword">var</span> result = <span class="keyword">this</span>.results;
+    <span class="keyword">return</span> result.length &gt; <span class="number">0</span> ? <span class="literal">false</span> : <span class="literal">true</span>;
+}
+
+<span class="comment">// 客户端调用</span>
+<span class="keyword">var</span> detectInstance = <span class="keyword">new</span> Detects();
+detectInstance.add(<span class="string">""</span>, [<span class="string">"isEmpty"</span>, <span class="string">"isNum"</span>]);
+detectInstance.add(<span class="string">"www"</span>, [<span class="string">"isEmpty"</span>, <span class="string">"isNum"</span>]);
+
+<span class="built_in">console</span>.log(detectInstance.getResult()); <span class="comment">//["必须输入用户名", "必须为数字", "必须为数字"]</span>
+
+<span class="keyword">if</span> (detectInstance.isTrue) {
+    <span class="built_in">console</span>.log(<span class="string">"有未通过验证的项"</span>);
+} <span class="keyword">else</span> {
+    <span class="built_in">console</span>.log(<span class="string">"都通过了验证"</span>);
+}
+</code></pre>
+<p>总结：<br>策略模式的组成:</p>
+<ul>
+<li>策略角色：策略类，通常由一个接口或者抽象类实现 (整个validate方法)。</li>
+<li>环境角色：持有一个策略类的引用，最终给客户端用的 (客户端调用部分)。  </li>
 </ul>
-</li>
-<li>环境类。客户端调用，将请求委托于策略类。</li>
+<p>策略模式的优缺点： </p>
+<ul>
+<li>策略模式利用组合、委托和多态等技术思想，可以有效的避免多种条件选择语句；</li>
+<li>策略模式提供了对开放-封闭原则的完美支持，易于理解，易于拓展； </li>
+<li>策略模式中的算法也可以复用在系统的其它地方，从而避免了许多重复的复制黏贴的工作；<br>  当然，有白自然有黑。</li>
+<li>编写难度加大，代码量变多了。 然窃以为代码量多寡并非衡量优劣的重要标准。 </li>
 </ul>
+<p>策略模式的意义:<br>策略模式使开发人员能够开发出由许多可替换的部分组成的软件，并且各个部分之间是弱连接的关系。<br><b>弱连接</b>的特性使软件具有更强的可扩展性，易于维护；更重要的是，它大大提高了软件的可重用性。</p>
+<p>这只是demo级别的实现，项目代码没贴，因为复杂了些，也难理解了些。后续应该会去琢磨下proxy重写表单验证，借以了解整个proxy。</p>
+<p>The End.</p>
 
       
     </div>
@@ -428,7 +506,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/vue-proxy/" rel="tag"># vue proxy</a>
+            <a href="/tags/设计模式-策略/" rel="tag"># 设计模式 策略</a>
           
         </div>
       
@@ -451,8 +529,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/01/js设计模式简介及应用场景/" rel="prev" title="js设计模式简介及常用应用场景(草稿)">
-                js设计模式简介及常用应用场景(草稿) <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/01/js设计模式简介及应用场景/" rel="prev" title="js设计模式简介及常用应用场景(更新中)">
+                js设计模式简介及常用应用场景(更新中) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -530,7 +608,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -604,7 +682,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">19.9k</span>
+    <span title="Site words total count">20.9k</span>
   
 </div>
 
