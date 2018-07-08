@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next gemini use-motion" lang="">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -80,18 +80,15 @@
 
 
 
-<meta name="description" content="demo级别的实现，原理十分简单。  随机弹幕颜色、速度、位置 + requestAnimationFrame，没了。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="danmaku-demo-js实现的弹幕效果">
 <meta property="og:url" content="https://xiangergou.github.io/2018/05/08/danmaku-demo/index.html">
 <meta property="og:site_name" content="斯是陋室">
-<meta property="og:description" content="demo级别的实现，原理十分简单。  随机弹幕颜色、速度、位置 + requestAnimationFrame，没了。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://xiangergou.github.io/2018/05/08/danmaku-demo/danmaku.jpeg">
-<meta property="og:updated_time" content="2018-05-28T06:43:48.000Z">
+<meta property="og:updated_time" content="2018-07-08T02:30:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="danmaku-demo-js实现的弹幕效果">
-<meta name="twitter:description" content="demo级别的实现，原理十分简单。  随机弹幕颜色、速度、位置 + requestAnimationFrame，没了。">
 <meta name="twitter:image" content="https://xiangergou.github.io/2018/05/08/danmaku-demo/danmaku.jpeg">
 
 
@@ -100,7 +97,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -149,9 +146,6 @@
 
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
-    <a href="https://github.com/xiangergou">
-      <img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png" alt="Fork me on GitHub">
-    </a>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -166,7 +160,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">以前看见山，总想知道山后面是什么</p>
+        <p class="site-subtitle"></p>
       
   </div>
 
@@ -397,9 +391,9 @@
       
 
       
-        <p><div style="width:490px;margin:10px auto"><br>  <img src="/2018/05/08/danmaku-demo/danmaku.jpeg" alt="实例"><br></div><br>demo级别的实现，原理十分简单。</p>
+        <p><div style="width:490px;margin:10px auto"><br>  <img src="/2018/05/08/danmaku-demo/danmaku.jpeg" alt="实例"><br></div><br><a id="more"></a><br>demo级别的实现，原理十分简单。</p>
 <blockquote>
-<p>随机弹幕颜色、速度、位置 + requestAnimationFrame，没了。<br><a id="more"></a></p>
+<p>随机弹幕颜色、速度、位置 + requestAnimationFrame，没了。  </p>
 <ul>
 <li>html + css部分<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">// html</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content-opt"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content-text"</span> <span class="attr">class</span>=<span class="string">"content-text"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content-input"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"text"</span> <span class="attr">type</span>=<span class="string">"text"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"send"</span>&gt;</span>发送<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  // css</span><br><span class="line">	* &#123;</span><br><span class="line">		box-sizing: border-box;</span><br><span class="line">		outline: none;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	p &#123;</span><br><span class="line">		margin: .5em;</span><br><span class="line">		word-break: break-all;</span><br><span class="line">		-webkit-transform: translateZ(0);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.container &#123;</span><br><span class="line">		position: relative;</span><br><span class="line">		width: 700px;</span><br><span class="line">		height: 500px;</span><br><span class="line">		margin: auto;</span><br><span class="line">		padding-right: 200px;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.content &#123;</span><br><span class="line">		width: 100%;</span><br><span class="line">		height: 100%;</span><br><span class="line">		border: 1px solid #ccc;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.content-opt &#123;</span><br><span class="line">		position: absolute;</span><br><span class="line">		top: 0;</span><br><span class="line">		right: 0;</span><br><span class="line">		width: 200px;</span><br><span class="line">		height: 100%;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.content-text &#123;</span><br><span class="line">		height: calc(100% - 30px);</span><br><span class="line">		margin-bottom: 30px;</span><br><span class="line">		border: 1px solid #ccc;</span><br><span class="line">		overflow: auto;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.content-input &#123;</span><br><span class="line">		position: absolute;</span><br><span class="line">		bottom: 0;</span><br><span class="line">		width: 100%;</span><br><span class="line">		height: 30px;</span><br><span class="line">		border: 1px solid #ccc;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.content-input input &#123;</span><br><span class="line">		width: 70%;</span><br><span class="line">		padding: 2px;</span><br><span class="line">		border-radius: 5px;</span><br><span class="line">		border: 1px solid #ccc;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	.content-input button &#123;</span><br><span class="line">		color:#fff;</span><br><span class="line">		padding: 3px 10px;</span><br><span class="line">		border: none;</span><br><span class="line">		border-radius: 5px;</span><br><span class="line">		background: rgb(153, 219, 245);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -476,11 +470,6 @@
           
 
   
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjA3Ny8xMjYxMg"></div>
-    </div>
-
-  
 
 
 
@@ -513,7 +502,7 @@
                 alt="ergou_xiang" />
             
               <p class="site-author-name" itemprop="name">ergou_xiang</p>
-              <p class="site-description motion-element" itemprop="description">总该出去看看</p>
+              <p class="site-description motion-element" itemprop="description">看见山，总想知道山后面是什么</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -523,7 +512,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -597,7 +586,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">21.5k</span>
+    <span title="Site words total count">21.6k</span>
   
 </div>
 
@@ -611,7 +600,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 -->
 
@@ -724,6 +713,13 @@
   
   
 
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
@@ -757,17 +753,6 @@
 
 
 
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
   
 
 

@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next gemini use-motion" lang="">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -80,21 +80,21 @@
 
 
 
-<meta name="description" content="需求分析： 我们需要移动端图片批量上传，图片预览、可选择性的编辑(裁剪等)。最终效果完成如下： 我们将上传、预览、裁剪分为三大块。初步想法是在预览组件(preview)添加自定义按钮“编辑”，调用“裁剪”组件，待裁剪完成，将图片数据返回于父组件–上传组件。   现在我们逐一分析各子组件。">
+<meta name="description" content="需求分析： 我们需要移动端图片批量上传，图片预览、可选择性的编辑(裁剪等)。最终效果完成如下：">
 <meta name="keywords" content="vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue移动端图片上传预览裁剪组件">
 <meta property="og:url" content="https://xiangergou.github.io/2018/05/26/imgUpload/index.html">
 <meta property="og:site_name" content="斯是陋室">
-<meta property="og:description" content="需求分析： 我们需要移动端图片批量上传，图片预览、可选择性的编辑(裁剪等)。最终效果完成如下： 我们将上传、预览、裁剪分为三大块。初步想法是在预览组件(preview)添加自定义按钮“编辑”，调用“裁剪”组件，待裁剪完成，将图片数据返回于父组件–上传组件。   现在我们逐一分析各子组件。">
+<meta property="og:description" content="需求分析： 我们需要移动端图片批量上传，图片预览、可选择性的编辑(裁剪等)。最终效果完成如下：">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://xiangergou.github.io/2018/05/26/imgUpload/demo.gif">
 <meta property="og:image" content="https://xiangergou.github.io/2018/05/26/imgUpload/demo2.gif">
 <meta property="og:image" content="https://xiangergou.github.io/2018/05/26/imgUpload/结构.jpeg">
-<meta property="og:updated_time" content="2018-05-29T03:09:58.000Z">
+<meta property="og:updated_time" content="2018-07-08T02:29:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue移动端图片上传预览裁剪组件">
-<meta name="twitter:description" content="需求分析： 我们需要移动端图片批量上传，图片预览、可选择性的编辑(裁剪等)。最终效果完成如下： 我们将上传、预览、裁剪分为三大块。初步想法是在预览组件(preview)添加自定义按钮“编辑”，调用“裁剪”组件，待裁剪完成，将图片数据返回于父组件–上传组件。   现在我们逐一分析各子组件。">
+<meta name="twitter:description" content="需求分析： 我们需要移动端图片批量上传，图片预览、可选择性的编辑(裁剪等)。最终效果完成如下：">
 <meta name="twitter:image" content="https://xiangergou.github.io/2018/05/26/imgUpload/demo.gif">
 
 
@@ -103,7 +103,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -152,9 +152,6 @@
 
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
-    <a href="https://github.com/xiangergou">
-      <img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png" alt="Fork me on GitHub">
-    </a>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -169,7 +166,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">以前看见山，总想知道山后面是什么</p>
+        <p class="site-subtitle"></p>
       
   </div>
 
@@ -400,8 +397,8 @@
       
 
       
-        <p>需求分析： 我们需要移动端图片批量上传，图片预览、可选择性的编辑(裁剪等)。<br>最终效果完成如下：<br><img src="/2018/05/26/imgUpload/demo.gif" alt="demo"></p>
-<p>我们将上传、预览、裁剪分为三大块。初步想法是在预览组件(preview)添加自定义按钮“编辑”，调用“裁剪”组件，待裁剪完成，将图片数据返回于父组件–上传组件。   现在我们逐一分析各子组件。<br><a id="more"></a></p>
+        <p>需求分析： 我们需要移动端图片批量上传，图片预览、可选择性的编辑(裁剪等)。<br>最终效果完成如下：<br><a id="more"></a><br><img src="/2018/05/26/imgUpload/demo.gif" alt="demo"></p>
+<p>我们将上传、预览、裁剪分为三大块。初步想法是在预览组件(preview)添加自定义按钮“编辑”，调用“裁剪”组件，待裁剪完成，将图片数据返回于父组件–上传组件。   现在我们逐一分析各子组件。</p>
 <h3 id="1-图片上传"><a href="#1-图片上传" class="headerlink" title="1. 图片上传"></a>1. 图片上传</h3><p>  我们知道传统上传图片的展示，一般基于图片上传至七牛或其他云后拿到图片地址，前端再由地址进行展示。  而此次我们换种方式，借用htlm5API <b>FileReader</b>, 利用createObjectURL将图片进行本地展示，待最终的调整后再进行上传。<br>  参考文档《jascript高级程序设计》第三版P690。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 关于createObjectURL的小demo</span></span><br><span class="line">&lt;form action=<span class="string">"#"</span>&gt;  </span><br><span class="line">    &lt;input type=<span class="string">"file"</span> id=<span class="string">"fileInput"</span>&gt;  </span><br><span class="line">&lt;<span class="regexp">/form&gt;  </span></span><br><span class="line"><span class="regexp">&lt;div id="imgShow"&gt;&lt;/</span>div&gt;  </span><br><span class="line"><span class="keyword">var</span> fileInput = <span class="built_in">document</span>.getElementById(<span class="string">'fileInput'</span>)  </span><br><span class="line">  </span><br><span class="line">fileInput.addEventListener(<span class="string">'change'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;  </span><br><span class="line"><span class="keyword">var</span> imgShow = <span class="built_in">document</span>.getElementById(<span class="string">'imgShow'</span>),  </span><br><span class="line">  files = <span class="keyword">this</span>.files,    <span class="comment">//原书这里是event.files，经过测试，修正为this.files  </span></span><br><span class="line">  url = <span class="built_in">window</span>.URL.createObjectURL(files[<span class="number">0</span>])    <span class="comment">//创建URL对象  </span></span><br><span class="line">  <span class="keyword">if</span> (url) &#123;  </span><br><span class="line">      imgShow.innerHTML = <span class="string">'&lt;img src="'</span> + url + <span class="string">'"&gt;'</span> </span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
 <p>效果如下：可以看见，图片经选择之后，可以直接展示在页面中。</p>
 <p><img src="/2018/05/26/imgUpload/demo2.gif" alt="demo2"></p>
@@ -461,8 +458,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/30/木剑温华/" rel="prev" title="雪中:木剑温华的江湖">
-                雪中:木剑温华的江湖 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/30/木剑温华/" rel="prev" title="木剑温华的江湖">
+                木剑温华的江湖 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -491,11 +488,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjA3Ny8xMjYxMg"></div>
-    </div>
 
   
 
@@ -539,7 +531,7 @@
                 alt="ergou_xiang" />
             
               <p class="site-author-name" itemprop="name">ergou_xiang</p>
-              <p class="site-description motion-element" itemprop="description">总该出去看看</p>
+              <p class="site-description motion-element" itemprop="description">看见山，总想知道山后面是什么</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -549,7 +541,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -639,7 +631,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">21.5k</span>
+    <span title="Site words total count">21.6k</span>
   
 </div>
 
@@ -653,7 +645,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 -->
 
@@ -766,6 +758,13 @@
   
   
 
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
@@ -799,17 +798,6 @@
 
 
 
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
   
 
 

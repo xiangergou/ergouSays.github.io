@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next gemini use-motion" lang="">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -80,18 +80,18 @@
 
 
 
-<meta name="description" content="前端开发中还原psd目前来说应用最多的该是rem。然而很多时候我们需要自己去计算rem值，或者依靠编辑器安装插件转换。 一番探索之后，总结出一套基于vue移动端px转rem脚手架。通过一系列的配置，在开发中可以直接使用设计图的尺寸开发，项目为我们自动编译，转换成rem。 1.vue init webpack myProject脚手架搭建，无甚好说。 这里安利一波vant，有赞的移动端ui框架。 2">
+<meta name="description" content="前端开发中还原psd目前来说应用最多的该是rem。然而很多时候我们需要自己去计算rem值，或者依靠编辑器安装插件转换。">
 <meta name="keywords" content="vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue移动端脚手架--px转rem(vue-cli + postcss-pxtorem)">
 <meta property="og:url" content="https://xiangergou.github.io/2018/06/26/vue-mobile-seed/index.html">
 <meta property="og:site_name" content="斯是陋室">
-<meta property="og:description" content="前端开发中还原psd目前来说应用最多的该是rem。然而很多时候我们需要自己去计算rem值，或者依靠编辑器安装插件转换。 一番探索之后，总结出一套基于vue移动端px转rem脚手架。通过一系列的配置，在开发中可以直接使用设计图的尺寸开发，项目为我们自动编译，转换成rem。 1.vue init webpack myProject脚手架搭建，无甚好说。 这里安利一波vant，有赞的移动端ui框架。 2">
+<meta property="og:description" content="前端开发中还原psd目前来说应用最多的该是rem。然而很多时候我们需要自己去计算rem值，或者依靠编辑器安装插件转换。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-26T13:41:42.000Z">
+<meta property="og:updated_time" content="2018-07-08T02:42:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue移动端脚手架--px转rem(vue-cli + postcss-pxtorem)">
-<meta name="twitter:description" content="前端开发中还原psd目前来说应用最多的该是rem。然而很多时候我们需要自己去计算rem值，或者依靠编辑器安装插件转换。 一番探索之后，总结出一套基于vue移动端px转rem脚手架。通过一系列的配置，在开发中可以直接使用设计图的尺寸开发，项目为我们自动编译，转换成rem。 1.vue init webpack myProject脚手架搭建，无甚好说。 这里安利一波vant，有赞的移动端ui框架。 2">
+<meta name="twitter:description" content="前端开发中还原psd目前来说应用最多的该是rem。然而很多时候我们需要自己去计算rem值，或者依靠编辑器安装插件转换。">
 
 
 
@@ -99,7 +99,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -148,9 +148,6 @@
 
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
-    <a href="https://github.com/xiangergou">
-      <img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png" alt="Fork me on GitHub">
-    </a>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -165,7 +162,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">以前看见山，总想知道山后面是什么</p>
+        <p class="site-subtitle"></p>
       
   </div>
 
@@ -337,7 +334,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  574 字
+                  575 字
                 </span>
               
 
@@ -374,8 +371,7 @@
       
 
       
-        <p>前端开发中还原psd目前来说应用最多的该是rem。然而很多时候我们需要自己去计算rem值，或者依靠编辑器安装插件转换。</p>
-<p>一番探索之后，总结出一套基于vue移动端px转rem脚手架。通过一系列的配置，在开发中可以直接使用设计图的尺寸开发，项目为我们自动编译，转换成rem。</p>
+        <p>前端开发中还原psd目前来说应用最多的该是rem。然而很多时候我们需要自己去计算rem值，或者依靠编辑器安装插件转换。<br><a id="more"></a><br>w<br>一番探索之后，总结出一套基于vue移动端px转rem脚手架。通过一系列的配置，在开发中可以直接使用设计图的尺寸开发，项目为我们自动编译，转换成rem。</p>
 <h2 id="1-vue-init-webpack-myProject"><a href="#1-vue-init-webpack-myProject" class="headerlink" title="1.vue init webpack myProject"></a>1.vue init webpack myProject</h2><p>脚手架搭建，无甚好说。 这里安利一波vant，有赞的移动端ui框架。</p>
 <h2 id="2-rem文件，动态改变根节点font-size属性值。"><a href="#2-rem文件，动态改变根节点font-size属性值。" class="headerlink" title="2.rem文件，动态改变根节点font-size属性值。"></a>2.rem文件，动态改变根节点font-size属性值。</h2><p>rem单位是相对于根节点的字体大小的，所以通过设置根节点的字体大小可以动态的改变rem的大小。<br>故而，我们需要方法实现自动设置根节点(即html)的font-size</p>
 <p>1、创建rem.js文件<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- utils/rem.js --&gt;</span><br><span class="line"><span class="comment">// 基准大小</span></span><br><span class="line"><span class="keyword">const</span> baseSize = <span class="number">32</span></span><br><span class="line"><span class="comment">// 设置 rem 函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setRem</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 当前页面宽度相对于 750 宽的缩放比例，可根据自己需要修改。</span></span><br><span class="line">  <span class="keyword">const</span> scale = <span class="built_in">document</span>.documentElement.clientWidth / <span class="number">750</span></span><br><span class="line">  <span class="comment">// 设置页面根节点字体大小</span></span><br><span class="line">  <span class="built_in">document</span>.documentElement.style.fontSize = (baseSize * <span class="built_in">Math</span>.min(scale, <span class="number">2</span>)) + <span class="string">'px'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line">setRem()</span><br><span class="line"><span class="comment">// 改变窗口大小时重新设置 rem</span></span><br><span class="line"><span class="built_in">window</span>.onresize = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  setRem()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -426,6 +422,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/07/08/puppeteer爬虫实战/" rel="prev" title="puppeteer爬虫实战">
+                puppeteer爬虫实战 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -452,11 +452,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjA3Ny8xMjYxMg"></div>
-    </div>
 
   
 
@@ -500,7 +495,7 @@
                 alt="ergou_xiang" />
             
               <p class="site-author-name" itemprop="name">ergou_xiang</p>
-              <p class="site-description motion-element" itemprop="description">总该出去看看</p>
+              <p class="site-description motion-element" itemprop="description">看见山，总想知道山后面是什么</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -510,7 +505,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -600,7 +595,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">21.5k</span>
+    <span title="Site words total count">21.6k</span>
   
 </div>
 
@@ -614,7 +609,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 -->
 
@@ -727,6 +722,13 @@
   
   
 
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
@@ -760,17 +762,6 @@
 
 
 
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
   
 
 
