@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #000; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #000, 0 0 5px     #000; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #000;    /*上边框颜色*/
+        border-left-color: #000;    /*左边框颜色*/
+    }
+    .header-line{
+      width:100%;
+      height:3px;
+      position: absolute;
+      top:0;left:0;
+      background:#000;
+      z-index:999;
+    }
+</style>
+<p class="header-line"></p>
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/icon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/icon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/icon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="alsotang 委实是个有趣的人。 最近读到他的包教不包会的node课程，加上之前在慕课网的爬虫教程，闲来无事整理外加实践了下。 大体思路 superagent      能够实现主动发起get/post/delete等请求，用以抓取网页 cheerio 能够对请求结果进行解析，解析方式和jquery的解析方式几乎完全相同，用以分析网页 eventproxy或async控制并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="superagent+cheerio+async+eventproxy 实现node社区微小爬虫">
+<meta property="og:url" content="https://xiangergou.github.io/2018/07/20/node爬虫/index.html">
+<meta property="og:site_name" content="斯是陋室">
+<meta property="og:description" content="alsotang 委实是个有趣的人。 最近读到他的包教不包会的node课程，加上之前在慕课网的爬虫教程，闲来无事整理外加实践了下。 大体思路 superagent      能够实现主动发起get/post/delete等请求，用以抓取网页 cheerio 能够对请求结果进行解析，解析方式和jquery的解析方式几乎完全相同，用以分析网页 eventproxy或async控制并发">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://github.com/xiangergou/-node-internet-worm/raw/master/assets/img/demo.jpeg">
+<meta property="og:updated_time" content="2018-07-20T08:11:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="superagent+cheerio+async+eventproxy 实现node社区微小爬虫">
+<meta name="twitter:description" content="alsotang 委实是个有趣的人。 最近读到他的包教不包会的node课程，加上之前在慕课网的爬虫教程，闲来无事整理外加实践了下。 大体思路 superagent      能够实现主动发起get/post/delete等请求，用以抓取网页 cheerio 能够对请求结果进行解析，解析方式和jquery的解析方式几乎完全相同，用以分析网页 eventproxy或async控制并发">
+<meta name="twitter:image" content="https://github.com/xiangergou/-node-internet-worm/raw/master/assets/img/demo.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xiangergou.github.io/2018/07/20/node爬虫/"/>
+
+
+
+
+
+  <title>superagent+cheerio+async+eventproxy 实现node社区微小爬虫 | 斯是陋室</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">斯是陋室</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-随笔">
+          <a href="/categories/随笔" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/07/20/node爬虫/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="留下">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="斯是陋室">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">superagent+cheerio+async+eventproxy 实现node社区微小爬虫</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T16:01:11+08:00">
+                2018-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/node/" itemprop="url" rel="index">
+                    <span itemprop="name">node</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,611 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>alsotang 委实是个有趣的人。 最近读到他的包教不包会的node课程，加上之前在慕课网的爬虫教程，闲来无事整理外加实践了下。</p>
+<h3 id="大体思路"><a href="#大体思路" class="headerlink" title="大体思路"></a>大体思路</h3><ul>
+<li><a href="http://visionmedia.github.io/superagent/" target="_blank" rel="noopener"><code>superagent</code></a>      能够实现主动发起get/post/delete等请求，用以抓取网页</li>
+<li><a href="https://github.com/cheeriojs/cheerio" target="_blank" rel="noopener"><code>cheerio</code></a> 能够对请求结果进行解析，解析方式和jquery的解析方式几乎完全相同，用以分析网页</li>
+<li><code>eventproxy</code>或<code>async</code>控制并发<a id="more"></a>
+</li>
+</ul>
+<p>再次安利<a href="https://github.com/nswbmw/N-blog/blob/master/book/3.1%20%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%80%E4%B8%AA%20Express%20%E9%A1%B9%E7%9B%AE.md#311-supervisor" target="_blank" rel="noopener"><code>supervisor</code></a>，委实好用</p>
+<h3 id="1-安装superagent、cheerio"><a href="#1-安装superagent、cheerio" class="headerlink" title="1. 安装superagent、cheerio"></a>1. 安装superagent、cheerio</h3><pre><code>npm install superagent cheerio --save
+</code></pre><p>此处叨扰几句–save 和–save-dev的区别  </p>
+<blockquote>
+<p>-save-dev 是你开发时候依赖的东西，–save 是你发布之后还依赖的东西。<br>比如，你写 ES6 代码，如果你想编译成 ES5 发布那么 babel 就是devDependencies。<br>如果你用了 jQuery，由于发布之后还是依赖jQuery，所以是dependencies。但是在 npm 里面除了二进制的依赖，似乎也不用区分是不是dev。<br>因为使用npm就是自己编译的意思，而不使用npm直接拿编译后的版本的，这些依赖项也看不到。</p>
+</blockquote>
+<h3 id="2-使用superagent和cheerio实现爬虫"><a href="#2-使用superagent和cheerio实现爬虫" class="headerlink" title="2. 使用superagent和cheerio实现爬虫"></a>2. 使用superagent和cheerio实现爬虫</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">"express"</span>);</span><br><span class="line"><span class="keyword">var</span> superagent = <span class="built_in">require</span>(<span class="string">"superagent"</span>);</span><br><span class="line"><span class="keyword">var</span> cheerio = <span class="built_in">require</span>(<span class="string">"cheerio"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">"/"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,resp</span>)</span>&#123;</span><br><span class="line">    superagent.get(<span class="string">"https://cnodejs.org/"</span>).end(<span class="function"><span class="keyword">function</span>(<span class="params">error,data</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(error)&#123;</span><br><span class="line">            <span class="keyword">return</span> next(error);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> $=cheerio.load(data.text);    </span><br><span class="line">        <span class="keyword">var</span> arr=[];</span><br><span class="line">        $(<span class="string">'#topic_list .topic_title'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">idx,element</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> $element=$(element);</span><br><span class="line">            arr.push(&#123;</span><br><span class="line">                <span class="string">"title"</span>:$element.attr(<span class="string">"title"</span>),</span><br><span class="line">                <span class="string">"href"</span>:$element.attr(<span class="string">"href"</span>)</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">        resp.send(arr);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">9527</span>)</span><br></pre></td></tr></table></figure>
+<p>我们扒的是node社区，里面…老好玩儿了。</p>
+<h3 id="eventproxy或async实现异步并发控制"><a href="#eventproxy或async实现异步并发控制" class="headerlink" title="eventproxy或async实现异步并发控制"></a>eventproxy或async实现异步并发控制</h3><p>我们知道，使用 superagent 和 cheerio 来取主页内容，那只需要发起一次 http get 请求就能办到。但我们需要取出每个主题的第一条评论，这就要求我们对每个主题的链接发起请求，并用 cheerio去取出其中的第一条评论。  </p>
+<blockquote>
+<p>线程并发委实是个很复杂的概念，比如线程间通信、死锁等，这里不多赘述。  </p>
+</blockquote>
+<p>原生方法实现并发<br>较为常见的是<code>计数器</code>控制，比如一共三个并发，我们期望其3个线程都完成后在执行下一步操作，then we can do<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> result=&#123;&#125;;</span><br><span class="line">$.get(<span class="string">"http://example.com/1.html"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    result.data1=data;</span><br><span class="line">    count++;</span><br><span class="line">    handler();</span><br><span class="line">&#125;);</span><br><span class="line">$.get(<span class="string">"http://example.com/2.html"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    result.data2=data;</span><br><span class="line">    count++;</span><br><span class="line">    handler();</span><br><span class="line">&#125;);</span><br><span class="line">$.get(<span class="string">"http://example.com/3.html"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    result.data3=data;</span><br><span class="line">    count++;</span><br><span class="line">    handler();</span><br><span class="line">&#125;);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handler</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(count==<span class="number">3</span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> html=getHtml(result);</span><br><span class="line">        <span class="keyword">return</span> html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当然还有  callback hell<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 参考 jquery 的 $.get 的方法</span></span><br><span class="line">$.get(<span class="string">"http://data1_source"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data1</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// something</span></span><br><span class="line">  $.get(<span class="string">"http://data2_source"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data2</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// something</span></span><br><span class="line">    $.get(<span class="string">"http://data3_source"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data3</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// something</span></span><br><span class="line">      <span class="keyword">var</span> html = fuck(data1, data2, data3);</span><br><span class="line">      render(html);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string">## 重头戏之一 eventproxy  </span></span><br><span class="line"><span class="string">我们尝试用eventproxy实现并发demo  </span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javascript</span><br><span class="line"><span class="keyword">var</span> ep = <span class="keyword">new</span> eventproxy();</span><br><span class="line">ep.all(<span class="string">'data1_event'</span>, <span class="string">'data2_event'</span>, <span class="string">'data3_event'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data1, data2, data3</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> html = fuck(data1, data2, data3);</span><br><span class="line">  render(html);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$.get(<span class="string">'http://data1_source'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">  ep.emit(<span class="string">'data1_event'</span>, data);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">$.get(<span class="string">'http://data2_source'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">  ep.emit(<span class="string">'data2_event'</span>, data);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">$.get(<span class="string">'http://data3_source'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">  ep.emit(<span class="string">'data3_event'</span>, data);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>很明显，eventproxy只是透明了计数器count的使用而已。</p>
+<blockquote>
+<p> 当三个事件未同时完成时，ep.emit() 调用之后不会做任何事；当三个事件都完成的时候，就会调用末尾的那个回调函数，来对它们进行统一处理。<br>eventproxy 提供了不少其他场景所需的 API，但最最常用的用法就是以上的这种，即：<br>先 var ep = new eventproxy(); 得到一个 eventproxy 实例。<br>告诉它你要监听哪些事件，并给它一个回调函数。ep.all(‘event1’, ‘event2’, function (result1, result2) {})。<br>在适当的时候 ep.emit(‘event_name’, eventData)。</p>
+</blockquote>
+<p>用eventproxy实现的代码我就不贴了，自己尝试了下就换成async了。  运行之后有些请求报错，很有可能是并发请求数量太多遭到服务器拒绝服务，要知道，除去 CNode 的话，别的网站有可能会因为你发出的并发连接数太多而当你是在恶意请求，把你的 IP 封掉。  </p>
+<h2 id="重头戏之二-async"><a href="#重头戏之二-async" class="headerlink" title="重头戏之二 async"></a>重头戏之二 async</h2><p>来看看demo<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="keyword">async</span>=<span class="built_in">require</span>(<span class="string">"async"</span>);</span><br><span class="line"><span class="keyword">var</span> currentCount=<span class="number">0</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"will create a url list size 10 !"</span>);</span><br><span class="line"><span class="keyword">var</span> urls=[];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">    urls.push(<span class="string">'http://www.example.com/'</span>+i+<span class="string">".html"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span>.mapLimit(urls,<span class="number">2</span>,<span class="function"><span class="keyword">function</span>(<span class="params">url,callback</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> delay=<span class="built_in">parseInt</span>(<span class="number">500</span>);</span><br><span class="line">    currentCount++;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"currentCount is :"</span>+currentCount+<span class="string">",current url is :"</span>+url+<span class="string">",use time is :"</span>+delay+<span class="string">" mm"</span>);</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        currentCount--;</span><br><span class="line">        callback(<span class="literal">null</span>,url+<span class="string">' html content '</span>);</span><br><span class="line">    &#125;,delay);</span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err,result</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"result:"</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(result);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>可以看出mapLimit核心的操作就是先放入需要异步操作的数据，再设定并发数；然后在第一个func中对其进行遍历执行，当执行完成后调用callback，最后所有callback会汇总到第二个func中。  </p>
+<p>最后看看最终代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;)</span><br><span class="line">var app = express()</span><br><span class="line">var superagent = require(&apos;superagent&apos;)</span><br><span class="line">var cheerio = require(&apos;cheerio&apos;)</span><br><span class="line">var url=require(&quot;url&quot;);</span><br><span class="line">var async = require(&apos;async&apos;)</span><br><span class="line"></span><br><span class="line">var baseUrl = &apos;https://cnodejs.org/&apos;</span><br><span class="line"></span><br><span class="line">app.get(&apos;/&apos;, function (req, res, next) &#123;</span><br><span class="line">  var concurrentCount = 0</span><br><span class="line"></span><br><span class="line">  superagent.get(baseUrl)</span><br><span class="line">    .end(function(err, sres) &#123;</span><br><span class="line">      if (err) &#123;</span><br><span class="line">        return next(err)</span><br><span class="line">      &#125;</span><br><span class="line">      var $ = cheerio.load(sres.text)</span><br><span class="line">      var urlArr = []</span><br><span class="line">      $(&apos;#topic_list .topic_title&apos;).each(function(index, el) &#123;</span><br><span class="line">        var $el = $(el)</span><br><span class="line">        var _url = url.resolve(baseUrl, $el.attr(&apos;href&apos;))</span><br><span class="line">        urlArr.push(_url)</span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">      async.mapLimit(urlArr, 5, function(url, callback) &#123;</span><br><span class="line">        console.log(&apos;当前并发数:&apos; + concurrentCount++);</span><br><span class="line">        superagent.get(url).end(function(err, resq) &#123;</span><br><span class="line">          if (err) &#123;</span><br><span class="line">            console.log(&quot;get \&quot;&quot;+url+&quot;\&quot; error !&quot;+err);</span><br><span class="line">            console.log(&quot;message info:&quot;+JSON.stringify(resq));</span><br><span class="line">          &#125;</span><br><span class="line">          var $ = cheerio.load(resq.text)</span><br><span class="line">          var jsonData = &#123;</span><br><span class="line">              title:$(&quot;.topic_full_title&quot;).text().trim(),</span><br><span class="line">              href:url,</span><br><span class="line">              firstcomment:$(&quot;.reply_area .markdown-text&quot;).eq(0).text().trim()</span><br><span class="line">          &#125;;</span><br><span class="line">          callback(null, jsonData);</span><br><span class="line">          concurrentCount--</span><br><span class="line">          console.log(&apos;释放并发数，当前并发数为:&apos; + concurrentCount);</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;, function(error,results) &#123;</span><br><span class="line"></span><br><span class="line">        res.send(results); </span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(9527)</span><br></pre></td></tr></table></figure></p>
+<p>后台检测数据大致如下<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Starting child process <span class="keyword">with</span> <span class="string">'node app'</span></span><br><span class="line">当前并发数:<span class="number">0</span></span><br><span class="line">当前并发数:<span class="number">1</span></span><br><span class="line">当前并发数:<span class="number">2</span></span><br><span class="line">当前并发数:<span class="number">3</span></span><br><span class="line">当前并发数:<span class="number">4</span></span><br><span class="line">当前并发数:<span class="number">5</span></span><br><span class="line">释放并发数，当前并发数为:<span class="number">5</span></span><br><span class="line">当前并发数:<span class="number">5</span></span><br><span class="line">释放并发数，当前并发数为:<span class="number">5</span></span><br><span class="line">当前并发数:<span class="number">5</span></span><br><span class="line">释放并发数，当前并发数为:<span class="number">5</span></span><br><span class="line">当前并发数:<span class="number">5</span></span><br><span class="line">释放并发数，当前并发数为:<span class="number">5</span></span><br><span class="line">当前并发数:<span class="number">5</span></span><br><span class="line">释放并发数，当前并发数为:<span class="number">5</span></span><br><span class="line">当前并发数:<span class="number">5</span></span><br><span class="line">释放并发数，当前并发数为:<span class="number">5</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>页面大致长这样儿<br><img src="https://github.com/xiangergou/-node-internet-worm/raw/master/assets/img/demo.jpeg" alt="index"> </p>
+<p>以上。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/15/观察者模式/" rel="next" title="观察者模式(demo)">
+                <i class="fa fa-chevron-left"></i> 观察者模式(demo)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avater.jpeg"
+                alt="留下" />
+            
+              <p class="site-author-name" itemprop="name">留下</p>
+              <p class="site-description motion-element" itemprop="description">以前看见山，总想知道山后面是什么</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#大体思路"><span class="nav-number">1.</span> <span class="nav-text">大体思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装superagent、cheerio"><span class="nav-number">2.</span> <span class="nav-text">1. 安装superagent、cheerio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用superagent和cheerio实现爬虫"><span class="nav-number">3.</span> <span class="nav-text">2. 使用superagent和cheerio实现爬虫</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eventproxy或async实现异步并发控制"><span class="nav-number">4.</span> <span class="nav-text">eventproxy或async实现异步并发控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重头戏之二-async"><span class="nav-number"></span> <span class="nav-text">重头戏之二 async</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">留下</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">24.8k</span>
+  
+</div>
+
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
