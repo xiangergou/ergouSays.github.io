@@ -89,7 +89,7 @@
 
 
 
-  <meta name="keywords" content="vue," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -100,18 +100,16 @@
 
 
 
-<meta name="description" content="前端开发中还原psd目前来说应用最多的该是rem。然而很多时候我们需要自己去计算rem值，或者依靠编辑器安装插件转换。">
-<meta name="keywords" content="vue">
-<meta property="og:type" content="article">
-<meta property="og:title" content="vue移动端脚手架--px转rem(vue-cli + postcss-pxtorem)">
-<meta property="og:url" content="https://xiangergou.github.io/2018/06/26/vue-mobile-seed/index.html">
+<meta name="description" content="以前看见山，总想知道山后面是什么">
+<meta property="og:type" content="website">
+<meta property="og:title" content="斯是陋室">
+<meta property="og:url" content="https://xiangergou.github.io/page/3/index.html">
 <meta property="og:site_name" content="斯是陋室">
-<meta property="og:description" content="前端开发中还原psd目前来说应用最多的该是rem。然而很多时候我们需要自己去计算rem值，或者依靠编辑器安装插件转换。">
+<meta property="og:description" content="以前看见山，总想知道山后面是什么">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-10T09:33:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue移动端脚手架--px转rem(vue-cli + postcss-pxtorem)">
-<meta name="twitter:description" content="前端开发中还原psd目前来说应用最多的该是rem。然而很多时候我们需要自己去计算rem值，或者依靠编辑器安装插件转换。">
+<meta name="twitter:title" content="斯是陋室">
+<meta name="twitter:description" content="以前看见山，总想知道山后面是什么">
 
 
 
@@ -141,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/2018/06/26/vue-mobile-seed/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/page/3/"/>
 
 
 
 
 
-  <title>vue移动端脚手架--px转rem(vue-cli + postcss-pxtorem) | 斯是陋室</title>
+  <title>斯是陋室</title>
   
 
 
@@ -166,7 +164,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -258,9 +257,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -273,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/06/26/vue-mobile-seed/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/04/27/Singleton/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -290,7 +289,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">vue移动端脚手架--px转rem(vue-cli + postcss-pxtorem)</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/27/Singleton/" itemprop="url">Singleton</a></h1>
         
 
         <div class="post-meta">
@@ -302,8 +303,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T20:44:17+08:00">
-                2018-06-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-27T15:07:00+08:00">
+                2018-04-27
               </time>
             
 
@@ -325,8 +326,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue/" itemprop="url" rel="index">
-                    <span itemprop="name">vue</span>
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
                   </a>
                 </span>
 
@@ -356,7 +357,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  575 字
+                  696 字
                 </span>
               
 
@@ -372,7 +373,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -393,18 +394,17 @@
       
 
       
-        <p>前端开发中还原psd目前来说应用最多的该是rem。然而很多时候我们需要自己去计算rem值，或者依靠编辑器安装插件转换。<br><a id="more"></a><br>w<br>一番探索之后，总结出一套基于vue移动端px转rem脚手架。通过一系列的配置，在开发中可以直接使用设计图的尺寸开发，项目为我们自动编译，转换成rem。</p>
-<h2 id="1-vue-init-webpack-myProject"><a href="#1-vue-init-webpack-myProject" class="headerlink" title="1.vue init webpack myProject"></a>1.vue init webpack myProject</h2><p>脚手架搭建，无甚好说。 这里安利一波vant，有赞的移动端ui框架。</p>
-<h2 id="2-rem文件，动态改变根节点font-size属性值。"><a href="#2-rem文件，动态改变根节点font-size属性值。" class="headerlink" title="2.rem文件，动态改变根节点font-size属性值。"></a>2.rem文件，动态改变根节点font-size属性值。</h2><p>rem单位是相对于根节点的字体大小的，所以通过设置根节点的字体大小可以动态的改变rem的大小。<br>故而，我们需要方法实现自动设置根节点(即html)的font-size</p>
-<p>1、创建rem.js文件<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- utils/rem.js --&gt;</span><br><span class="line"><span class="comment">// 基准大小</span></span><br><span class="line"><span class="keyword">const</span> baseSize = <span class="number">32</span></span><br><span class="line"><span class="comment">// 设置 rem 函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setRem</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 当前页面宽度相对于 750 宽的缩放比例，可根据自己需要修改。</span></span><br><span class="line">  <span class="keyword">const</span> scale = <span class="built_in">document</span>.documentElement.clientWidth / <span class="number">750</span></span><br><span class="line">  <span class="comment">// 设置页面根节点字体大小</span></span><br><span class="line">  <span class="built_in">document</span>.documentElement.style.fontSize = (baseSize * <span class="built_in">Math</span>.min(scale, <span class="number">2</span>)) + <span class="string">'px'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line">setRem()</span><br><span class="line"><span class="comment">// 改变窗口大小时重新设置 rem</span></span><br><span class="line"><span class="built_in">window</span>.onresize = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  setRem()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2、在main.js中引入rem.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'./utils/rem'</span></span><br></pre></td></tr></table></figure></p>
-<p>引入文件后，查看页面的html节点，是否有被自动添加 font-size。<br>注意：完成到这一步，也就是实现了rem布局，实际开发的时候，还是需要我们去计算对应的rem值去开发。<br>下一步我们就配置一下webpack，自动转换px为对应的rem值。</p>
-<h2 id="配置-postcss-pxtorem-自动转换px为rem"><a href="#配置-postcss-pxtorem-自动转换px为rem" class="headerlink" title="配置 postcss-pxtorem, 自动转换px为rem"></a>配置 postcss-pxtorem, 自动转换px为rem</h2><p>1、安装 postcss-pxtorem<br>$ npm install postcss-pxtorem -D</p>
-<p>2、修改根目录 .postcssrc.js 文件<br>找到 plugins 属性新增pxtorem的设置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"postcss-pxtorem"</span>: &#123;</span><br><span class="line">  <span class="string">"rootValue"</span>: <span class="number">32</span>,</span><br><span class="line">  <span class="string">"propList"</span>: [<span class="string">"*"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>按照上述配置项目后，即可在开发中直接使用 px 单位开发。<br>例如设计给出的设计图是 750 * 1136，那么可以直接在页面中写<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">750px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">1136px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>将被转换为<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">	<span class="attribute">widht</span>: <span class="number">23.4375rem</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">35.5rem</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>注意：此方法支持import 和 .vue单文件中style。暂不支持style中使用@import url();</p>
-
+        
+          <h3 id="什么是单例？"><a href="#什么是单例？" class="headerlink" title="什么是单例？"></a>什么是单例？</h3><p></p><p> “保证一个类仅有一个实例，并提供一个访问他的全局访问点。”<br>    <span style="float:right;display:block">   ——曾探 javascript设计模式与探索实践</span><br></p>    <p></p>
+<p><div><br>    <p><br>        “单例实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。”<br>    <span style="float:right;display:block">   ——汤姆大叔的博客 深入理解javascript系列(25)单例模式</span><br>    </p><br>    单例模式是一种十分简单而且能够很简单的方式实现的一种设计模式。它是指在一个类中只有一个实例，即使你多次实例化这个类，它也只会返回一次实例化的对象，可以有效地避免资源的浪费，能减少不必要的内存开销, 并且在减少全局的函数和变量冲突也具有重要的意义。<br></div><br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/27/Singleton/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
     
@@ -419,40 +419,14 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/vue/" rel="tag"># vue</a>
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/06/01/js设计模式简介及应用场景/" rel="next" title="js设计模式简介及常用应用场景(更新中)">
-                <i class="fa fa-chevron-left"></i> js设计模式简介及常用应用场景(更新中)
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/08/puppeteer爬虫实战/" rel="prev" title="puppeteer爬虫实战-爬取生成《ES6标准入门》PDF">
-                puppeteer爬虫实战-爬取生成《ES6标准入门》PDF <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -462,11 +436,14 @@
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
 
 
           </div>
@@ -474,10 +451,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -498,17 +471,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -572,22 +536,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-vue-init-webpack-myProject"><span class="nav-number">1.</span> <span class="nav-text">1.vue init webpack myProject</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-rem文件，动态改变根节点font-size属性值。"><span class="nav-number">2.</span> <span class="nav-text">2.rem文件，动态改变根节点font-size属性值。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-postcss-pxtorem-自动转换px为rem"><span class="nav-number">3.</span> <span class="nav-text">配置 postcss-pxtorem, 自动转换px为rem</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -752,10 +700,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
