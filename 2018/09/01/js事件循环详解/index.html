@@ -100,19 +100,16 @@
 
 
 
-<meta name="description" content="javascript是一门单线程的非阻塞的脚本语言。 所谓单线程，是指在JS引擎中负责解释和执行JavaScript代码的线程只有一个。不妨叫它主线程。 但是实际上还存在其他的线程。例如：处理AJAX请求的线程、处理DOM事件的线程、定时器线程、读写文件的线程(例如在Node.js中)等等。这些线程可能存在于JS引擎之内，也可能存在于JS引擎之外，在此我们不做区分。不妨叫它们工作线程。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js事件循环的理解">
 <meta property="og:url" content="https://xiangergou.github.io/2018/09/01/js事件循环详解/index.html">
 <meta property="og:site_name" content="斯是陋室">
-<meta property="og:description" content="javascript是一门单线程的非阻塞的脚本语言。 所谓单线程，是指在JS引擎中负责解释和执行JavaScript代码的线程只有一个。不妨叫它主线程。 但是实际上还存在其他的线程。例如：处理AJAX请求的线程、处理DOM事件的线程、定时器线程、读写文件的线程(例如在Node.js中)等等。这些线程可能存在于JS引擎之内，也可能存在于JS引擎之外，在此我们不做区分。不妨叫它们工作线程。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://xiangergou.github.io/2018/09/01/js事件循环详解/bg.jpeg">
 <meta property="og:image" content="https://xiangergou.github.io/2018/09/01/js事件循环详解/task.png">
-<meta property="og:updated_time" content="2018-09-01T12:40:33.000Z">
+<meta property="og:updated_time" content="2018-09-08T01:45:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js事件循环的理解">
-<meta name="twitter:description" content="javascript是一门单线程的非阻塞的脚本语言。 所谓单线程，是指在JS引擎中负责解释和执行JavaScript代码的线程只有一个。不妨叫它主线程。 但是实际上还存在其他的线程。例如：处理AJAX请求的线程、处理DOM事件的线程、定时器线程、读写文件的线程(例如在Node.js中)等等。这些线程可能存在于JS引擎之内，也可能存在于JS引擎之外，在此我们不做区分。不妨叫它们工作线程。">
 <meta name="twitter:image" content="https://xiangergou.github.io/2018/09/01/js事件循环详解/bg.jpeg">
 
 
@@ -373,10 +370,10 @@
       
 
       
-        <p><img src="/2018/09/01/js事件循环详解/bg.jpeg" alt="&#39;bg&#39;"></p>
+        <p><img src="/2018/09/01/js事件循环详解/bg.jpeg" alt="&#39;bg&#39;"><br><a id="more"></a></p>
 <p>javascript是一门单线程的非阻塞的脚本语言。</p>
 <p>所谓单线程，是指在JS引擎中负责解释和执行JavaScript代码的线程只有一个。不妨叫它<strong>主线程</strong>。</p>
-<p>但是实际上还存在其他的线程。例如：处理AJAX请求的线程、处理DOM事件的线程、定时器线程、读写文件的线程(例如在Node.js中)等等。这些线程可能存在于JS引擎之内，也可能存在于JS引擎之外，在此我们不做区分。不妨叫它们<strong>工作线程</strong>。<br><a id="more"></a></p>
+<p>但是实际上还存在其他的线程。例如：处理AJAX请求的线程、处理DOM事件的线程、定时器线程、读写文件的线程(例如在Node.js中)等等。这些线程可能存在于JS引擎之内，也可能存在于JS引擎之外，在此我们不做区分。不妨叫它们<strong>工作线程</strong>。</p>
 <h3 id="一、为什么是单线程？"><a href="#一、为什么是单线程？" class="headerlink" title="一、为什么是单线程？"></a>一、为什么是单线程？</h3><p>JavaScript的单线程，与它的用途有关。作为浏览器脚本语言，主要用途之一是操作DOM。</p>
 <p>在js高程有个例子，如果js同时有两个线程，同时对同一个dom进行操作，这时浏览器应该听哪个线程的，如何判断优先级？</p>
 <p>当然，现如今人们也意识到，单线程在保证了执行顺序的同时也限制了javascript的效率，因此开发出了<strong>web worker</strong>技术。这项技术号称让javascript成为一门多线程语言。</p>
@@ -463,6 +460,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/09/02/js基础-基本概念/" rel="prev" title="js深入理解(1)-基本概念(draft)">
+                js深入理解(1)-基本概念(draft) <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -542,7 +543,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -632,7 +633,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">29.1k</span>
+    <span title="Site words total count">30.8k</span>
   
 </div>
 
