@@ -100,20 +100,17 @@
 
 
 
-<meta name="description" content="js有七种内置类型    table th:first-of-type {     width: 200px;   }         类型 typeof     空值（null) typeof null === ‘Object’; // true   未定义（undefined） typeof undefined === “undefined”;  // true   布尔值（boolean">
 <meta name="keywords" content="js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js深入理解(1) - 内置类型">
-<meta property="og:url" content="https://xiangergou.github.io/2018/09/02/js系列-类型/index.html">
+<meta property="og:url" content="https://xiangergou.github.io/2018/09/02/js系列-内置类型/index.html">
 <meta property="og:site_name" content="斯是陋室">
-<meta property="og:description" content="js有七种内置类型    table th:first-of-type {     width: 200px;   }         类型 typeof     空值（null) typeof null === ‘Object’; // true   未定义（undefined） typeof undefined === “undefined”;  // true   布尔值（boolean">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://xiangergou.github.io/2018/09/02/js系列-类型/-.jpg">
-<meta property="og:updated_time" content="2018-09-09T06:36:10.000Z">
+<meta property="og:image" content="https://xiangergou.github.io/2018/09/02/js系列-内置类型/-.jpg">
+<meta property="og:updated_time" content="2018-09-09T13:09:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js深入理解(1) - 内置类型">
-<meta name="twitter:description" content="js有七种内置类型    table th:first-of-type {     width: 200px;   }         类型 typeof     空值（null) typeof null === ‘Object’; // true   未定义（undefined） typeof undefined === “undefined”;  // true   布尔值（boolean">
-<meta name="twitter:image" content="https://xiangergou.github.io/2018/09/02/js系列-类型/-.jpg">
+<meta name="twitter:image" content="https://xiangergou.github.io/2018/09/02/js系列-内置类型/-.jpg">
 
 
 
@@ -143,7 +140,7 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/2018/09/02/js系列-类型/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/09/02/js系列-内置类型/"/>
 
 
 
@@ -275,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/09/02/js系列-类型/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/09/02/js系列-内置类型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -358,7 +355,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,529 字
+                  2,253 字
                 </span>
               
 
@@ -374,7 +371,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  6 分钟
+                  9 分钟
                 </span>
               
             </div>
@@ -395,7 +392,7 @@
       
 
       
-        <p><img src="/2018/09/02/js系列-类型/-.jpg" alt="类型"><br>js有七种内置类型</p>
+        <p><img src="/2018/09/02/js系列-内置类型/-.jpg" alt="类型"><br><a id="more"></a><br>js有七种内置类型</p>
 <style>
   table th:first-of-type {
     width: 200px;
@@ -473,6 +470,19 @@
 <li>valueOf(); // 返回对象的字符串、数值或布尔值表示。</li>
 </ol>
 </blockquote>
+<h3 id="包装对象"><a href="#包装对象" class="headerlink" title="包装对象"></a>包装对象</h3><p>string具有属性和方法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'hello world'</span>;</span><br><span class="line"><span class="keyword">var</span> world = s.substring(s.indexOf(<span class="string">''</span>) + <span class="number">1</span>, s.length); <span class="comment">// "ello world"</span></span><br></pre></td></tr></table></figure></p>
+<p>字符串不是对象，如何会有属性以及方法？<br>事实上，主要引用了字符串s的属性，js会将字符串值通过调用new String(s)的方式转换成对象，这个对象继承了字符串的方法，并用来处理字符串的引用。  一旦属性引用结束，这个新创建的对象即被销毁。<br>同字符串一样，数字和布尔也具有各自的方法。   null和undefined没有包装对象。<br>访问其属性会返回错误。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'test'</span>;</span><br><span class="line">s.len = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">var</span> t= s.len;  <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>读取数字、字符串、布尔时，若试图给其添加属性，则只会将属性添加在临时对象上，不会保存下来。</p>
+<p>需注意的是，可通过String()、Nunber()、Boolean()等构造函数显示创建包装对象。</p>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>JavaScript 引用指向的是值。如果一个值有 10 个引用，这些引用指向的都是同一个值，它们相互之间没有引用 / 指向关系。</p>
+<p>简单值(即标量基本类型值，scalar primitive)总是通过值复制的方式来赋值/传递，包括 null、undefined、字符串、数字、布尔和 ES6 中的 symbol。</p>
+<p>复合值(compound value)——对象(包括数组和封装对象)和函数，则总是通过引用复制的方式来赋值 / 传递。</p>
+<p>由于引用指向的是值本身而非变量，所以一个引用无法更改另一个引用的指向。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">     <span class="keyword">var</span> b = a;</span><br><span class="line">     a; <span class="comment">// [1,2,3]</span></span><br><span class="line">     b; <span class="comment">// [1,2,3]</span></span><br><span class="line"><span class="comment">// 然后</span></span><br><span class="line">b = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]; a; <span class="comment">// [1,2,3] b; // [4,5,6]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数参数</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  x.push( <span class="number">4</span> );</span><br><span class="line">  x; <span class="comment">// [1,2,3,4]</span></span><br><span class="line">  <span class="comment">// 然后</span></span><br><span class="line">  x = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]; x.push( <span class="number">7</span> );</span><br><span class="line">  x; <span class="comment">// [4,5,6,7];</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">  foo( a );</span><br><span class="line">  a; <span class="comment">// 是[1,2,3,4]，不是[4,5,6,7]</span></span><br></pre></td></tr></table></figure></p>
+<p>我们向函数传递 a 的时候，实际是将引用 a 的一个复本赋值给 x，而 a 仍然指向 [1,2,3]。 在函数中我们可以通过引用 x 来更改数组的值(push(4) 之后变为 [1,2,3,4])。但 x = [4,5,6] 并不影响 a 的指向，所以 a 仍然指向 [1,2,3,4]。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 若想改变a为[4，5，6，7]</span></span><br><span class="line"> x.length = <span class="number">0</span>; <span class="comment">// 清空数组 </span></span><br><span class="line"> x.push( <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span> );</span><br><span class="line"> x; <span class="comment">// [4,5,6,7]</span></span><br></pre></td></tr></table></figure>
+<p>** 我们无法自行决定使用值复制还是引用复制，一切由值的类型来决定。</p>
+<p>如果要将标量基本类型值传递到函数内并进行更改，就需要将该值封装到一个复合<br>值(对象、数组等)中，然后通过引用复制的方式传递。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">wrapper</span>) </span>&#123;</span><br><span class="line">   wrapper.a = <span class="number">42</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">var</span> obj = &#123; <span class="attr">a</span>: <span class="number">2</span> &#125;;</span><br><span class="line"> foo( obj );</span><br><span class="line"> obj.a; <span class="comment">// 42</span></span><br></pre></td></tr></table></figure></p>
 <p>以上。</p>
 <p><br>  </p>
 <p>参开资料：<br>《javascript高级程序设计》<br>《javascript权威指南》<br>《你不知道的javascript》</p>
@@ -599,7 +609,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -654,7 +664,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#null、undefined"><span class="nav-number">1.</span> <span class="nav-text">null、undefined</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boolean"><span class="nav-number">2.</span> <span class="nav-text">Boolean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Number"><span class="nav-number">3.</span> <span class="nav-text">Number</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整型直接量"><span class="nav-number">3.1.</span> <span class="nav-text">整型直接量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浮点型直接量"><span class="nav-number">3.2.</span> <span class="nav-text">浮点型直接量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数值范围"><span class="nav-number">3.3.</span> <span class="nav-text">数值范围</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NaN"><span class="nav-number">3.4.</span> <span class="nav-text">NaN</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String"><span class="nav-number">4.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object"><span class="nav-number">5.</span> <span class="nav-text">Object</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#null、undefined"><span class="nav-number">1.</span> <span class="nav-text">null、undefined</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boolean"><span class="nav-number">2.</span> <span class="nav-text">Boolean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Number"><span class="nav-number">3.</span> <span class="nav-text">Number</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整型直接量"><span class="nav-number">3.1.</span> <span class="nav-text">整型直接量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浮点型直接量"><span class="nav-number">3.2.</span> <span class="nav-text">浮点型直接量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数值范围"><span class="nav-number">3.3.</span> <span class="nav-text">数值范围</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NaN"><span class="nav-number">3.4.</span> <span class="nav-text">NaN</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String"><span class="nav-number">4.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object"><span class="nav-number">5.</span> <span class="nav-text">Object</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包装对象"><span class="nav-number">6.</span> <span class="nav-text">包装对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用"><span class="nav-number">7.</span> <span class="nav-text">引用</span></a></li></ol></div>
             
 
           </div>
@@ -689,7 +699,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">32.3k</span>
+    <span title="Site words total count">33.0k</span>
   
 </div>
 
