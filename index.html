@@ -446,7 +446,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/02/js基础-基本概念/" itemprop="url">js深入理解(1)-基本概念(draft)</a></h1>
+                <a class="post-title-link" href="/2018/09/02/js基础-基本概念/" itemprop="url">js深入理解(1) - 内置类型</a></h1>
         
 
         <div class="post-meta">
@@ -469,6 +469,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js深入理解系列/" itemprop="url" rel="index">
+                    <span itemprop="name">js深入理解系列</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -490,7 +512,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0 字
+                  1,529 字
                 </span>
               
 
@@ -506,7 +528,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -529,7 +551,88 @@
       
         
           
-            
+            <p>js有七种内置类型</p>
+<style>
+  table th:first-of-type {
+    width: 200px;
+  }
+</style>
+
+<table>
+<thead>
+<tr>
+<th>   类型</th>
+<th style="text-align:center">typeof</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>空值（null)</td>
+<td style="text-align:center">typeof null === ‘Object’; // true</td>
+</tr>
+<tr>
+<td>未定义（undefined）</td>
+<td style="text-align:center">typeof undefined === “undefined”;  // true</td>
+</tr>
+<tr>
+<td>布尔值（boolean）</td>
+<td style="text-align:center">typeof true === “boolean”;         // true</td>
+</tr>
+<tr>
+<td>数字（number）</td>
+<td style="text-align:center">typeof 42 === “number”;            // true</td>
+</tr>
+<tr>
+<td>字符串（string）</td>
+<td style="text-align:center">typeof “42” === “string”;          // true</td>
+</tr>
+<tr>
+<td>对象（object）</td>
+<td style="text-align:center">typeof { life: 42 }  === “object”; // true</td>
+</tr>
+<tr>
+<td>符号（symbol)</td>
+<td style="text-align:center">typeof Symbol() === “symbol”;  // true</td>
+</tr>
+</tbody>
+</table>
+<p>typeof值得注意的地方</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> <span class="keyword">typeof</span> <span class="keyword">typeof</span> <span class="number">42</span>; <span class="comment">// "string",  typeof 运算符总是会返回一个字符串:</span></span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> <span class="keyword">typeof</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125; === <span class="string">"function"</span>; <span class="comment">// 函数在ESCAScript中属于对象，不是一种数据类型，然而函数也有一些特殊属性。  实际上是 object 的一个“子类型”。 函数是“可调用对象”，它有一个内部属 性 [[Call]]，该属性使其可以被调用。</span></span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> <span class="keyword">typeof</span> <span class="literal">null</span> === <span class="string">'Object'</span>; <span class="comment">// null 是基本类型中唯一的一个“假值”(falsy 或者 false-like，参见第 4 章)类型，typeof对它的返回值为 "object"。</span></span><br><span class="line"><span class="number">4.</span> <span class="keyword">var</span> a;</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// 'undefined'</span></span><br><span class="line"><span class="keyword">typeof</span> a === <span class="string">'undefined'</span>;</span><br><span class="line"></span><br><span class="line"><span class="number">5.</span> <span class="built_in">console</span>.log(b) <span class="comment">// 'not defined'</span></span><br><span class="line"><span class="keyword">typeof</span> b === <span class="string">'undefined'</span>; <span class="comment">// 实际应为undeclared</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>**：<br>1.typeof为操作符而非函数，故而括号可选。<br>2.多个脚本文件会在共享的全局命名空间中加载变量, 故而可通过typeof的安全防范机制，检查所有全局变量是否是全局对象的属性。</p>
+</blockquote>
+<h3 id="null、undefined"><a href="#null、undefined" class="headerlink" title="null、undefined"></a>null、undefined</h3><p>null表示空对象指针, undefined表未定义。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// undefined;</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// not defined;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span>(a); <span class="comment">// undefined;</span></span><br><span class="line"><span class="keyword">typeof</span>(b); <span class="comment">// undefined;</span></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h3><p>null、undefined、0、-0、NaN、””等假值布尔强制类型转换结果为 false。</p>
+<h3 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h3><p>js不区分整数值和浮点数值。js所有数值皆由浮点数表示。<br>与大部分现代编程语言(包括几乎所有的脚本语言)一样，JavaScript 中的数字类型是基于IEEE 754标准来实现的，该标准通常也被称为“浮点数”。JavaScript使用的是“双精度”格式(即 64 位二进制)。</p>
+<h4 id="整型直接量"><a href="#整型直接量" class="headerlink" title="整型直接量"></a>整型直接量</h4>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> intNum1 = <span class="number">50</span>; <span class="comment">// 10进制</span></span><br><span class="line"><span class="comment">// 8进制直接量以数字0开始，其后跟随0~7之间的数组组成序列</span></span><br><span class="line"><span class="keyword">var</span> intNum2 = <span class="number">0377</span>; <span class="comment">// 8进制的56; 3*64 + 7*8 + 7 = 255(十进制)</span></span><br><span class="line"><span class="keyword">var</span> intNum3 = <span class="number">079</span>; <span class="comment">// 无效的8进制，解析为79;</span></span><br><span class="line"><span class="comment">// 16进制直接量以"ox"或者"OX"为前缀， 结合0~9之间的数字和a(A)~f(F)之间的字母构成。a~f对应的表示数字为10~15.</span></span><br><span class="line"><span class="keyword">var</span> intNum4 = <span class="number">0xA</span>; <span class="comment">// 16进制的10;</span></span><br><span class="line"><span class="keyword">var</span> intNum5 = <span class="number">0xff</span>; <span class="comment">// 15*16 + 15 = 255(10进制);</span></span><br></pre></td></tr></table></figure>
+<p>** 八进制在严格模式下无效。</p>
+<h4 id="浮点型直接量"><a href="#浮点型直接量" class="headerlink" title="浮点型直接量"></a>浮点型直接量</h4><p>  浮点数值，即数值包含一个小数点，且其后必须至少有一位数字。<br>  1.保存浮点数值需要的内存空间是保存整数值的两倍，所以ECMAScript会不失时机的将浮点类型转换成整数类型。<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10.0</span>; <span class="comment">// -&gt; 10</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="number">1.</span>; <span class="comment">// -&gt; 1;</span></span><br></pre></td></tr></table></figure></p>
+<p>  特别大和特别小的数字默认用指数格式显示，用toExponential()输出结果。<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">5E10</span>;</span><br><span class="line">a;                  <span class="comment">// 50000000000</span></span><br><span class="line">a.toExponential();  <span class="comment">// "5e+10"</span></span><br></pre></td></tr></table></figure></p>
+<p>  2.浮点类型最高精度为17位小数，在算术运算时精读远远不及整数。<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0.1</span> + <span class="number">0.2</span> === <span class="number">0.3</span> <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
+<p>  处理这个问题最常见的方法是设置一个误差范围值，通常称为“机器精度”(machine epsilon)，对<br>JavaScript的数字来说，这个值通常是2^-52 (2.220446049250313e-16)。<br>从 ES6 开始，该值定义在 Number.EPSILON 中，我们可以直接拿来用，也可以为 ES6 之前<br>的版本写 polyfill:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="built_in">Number</span>.EPSILON) &#123;</span><br><span class="line">  <span class="built_in">Number</span>.EPSILON = <span class="built_in">Math</span>.pow(<span class="number">2</span>,<span class="number">-52</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 可以使用 Number.EPSILON 来比较两个数字是否相等(在指定的误差范围内):</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">numbersCloseEnoughToEqual</span>(<span class="params">n1,n2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.abs( n1 - n2 ) &lt; <span class="built_in">Number</span>.EPSILON;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">0.1</span> + <span class="number">0.2</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">0.3</span>;</span><br><span class="line">numbersCloseEnoughToEqual( a, b );</span><br><span class="line">numbersCloseEnoughToEqual( <span class="number">0.0000001</span>, <span class="number">0.0000002</span> );  <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="数值范围"><a href="#数值范围" class="headerlink" title="数值范围"></a>数值范围</h4><p>能够呈现的最大浮点数大约是 1.798e+308，它定义在 Number. MAX_VALUE 中。最小浮点数定义在 Number.MIN_VALUE 中，大约是 5e-324，它不是负数，但无限接近于0。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// js权威指南，高程都表示超出Number. MAX_VALUE范围都为Infinity,然事实上</span></span><br><span class="line"><span class="comment">// Number.MAX_VALUE+1的值仍然是 1.7976931348623157e+308，加100也是，</span></span><br><span class="line"><span class="comment">// 加1000还是，直到加到Number.MAX_VALUE*1e-15才会变成infinity。</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Number</span>. MAX_VALUE + <span class="number">1</span>; <span class="comment">// -&gt; 1.7976931348623157e+308</span></span><br></pre></td></tr></table></figure></p>
+<p>被零整除不报错，只会返回或负无穷; 特殊一点在于0除以0返回NaN(not a number);<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>/<span class="literal">Infinity</span>; <span class="comment">// 0</span></span><br><span class="line"><span class="number">-1</span>/<span class="literal">Infinity</span> <span class="comment">// -0</span></span><br><span class="line"><span class="literal">Infinity</span>/<span class="literal">Infinity</span>; <span class="comment">// NaN</span></span><br><span class="line"><span class="number">0</span> === <span class="number">-0</span> <span class="comment">// true;</span></span><br><span class="line"><span class="comment">// 两者完全相等，但作为除数时不等</span></span><br><span class="line"><span class="number">1</span>/<span class="number">-0</span> === <span class="number">1</span>/<span class="number">0</span>; <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
+<p>要确定某值是否超出范围的情况，可用isFinite()确定。</p>
+<h4 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a>NaN</h4><p>即非数值。 isNaN()函数用于检测其是否”不是数值”。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">isNaN</span>(<span class="literal">NaN</span>); <span class="comment">// true;</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="string">'blue'</span>); <span class="comment">// ！！！ true</span></span><br></pre></td></tr></table></figure></p>
+<p> ES6 开始我们可以使用工具函数 Number.isNaN(..)<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.isNaN( a ); <span class="comment">// true </span></span><br><span class="line"><span class="built_in">Number</span>.isNaN( b ); <span class="comment">// false——好!</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><p>字符串和数组很相似，它们都是类数组，都有 length 属性以及 indexOf(..)(从 ES5 开始数组支持此方法)和 concat(..) 方法:</p>
+<p>字符串本身是固定不变的，其成员函数不会改变其原始值，而是创建并返回一个新的字符串。与之相反，数组的成员函数都是在其原始值上进行操作。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">"foo"</span>;</span><br><span class="line"><span class="keyword">var</span> b = [<span class="string">"f"</span>,<span class="string">"o"</span>,<span class="string">"o"</span>];</span><br><span class="line">c = a.toUpperCase(); </span><br><span class="line">a === c;  <span class="comment">// false</span></span><br><span class="line">a; <span class="comment">// "foo"</span></span><br><span class="line">c; <span class="comment">// "FOO"</span></span><br></pre></td></tr></table></figure></p>
+<p>许多数组函数用来处理字符串很方便。虽然字符串没有这些函数，但可以通过“借用”数 组的非变更方法来处理字符串:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a.join;         <span class="comment">// undefined</span></span><br><span class="line">a.map;          <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="built_in">Array</span>.prototype.join.call( a, <span class="string">"-"</span> );</span><br><span class="line"> c;              <span class="comment">// "f-o-o"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>每个Object的实例都有下列属性和方法；</p>
+<blockquote>
+<ol>
+<li>constructor()； // 保存着用于创建当前对象的函数。</li>
+<li>hasOwnProperty(); // 用于检查给定的属性在当前对象实例中是否存在。</li>
+<li>isPropertyOf(); // 用于检查传入的对象是否是传入对象的原型</li>
+<li>toLocaleString()；// 返回对象的字符串表示，与执行环境地区对应。</li>
+<li>toString(); // 返回对象的字符串表示。</li>
+<li>valueOf(); // 返回对象的字符串、数值或布尔值表示。</li>
+</ol>
+</blockquote>
+<p>以上。</p>
+<p><br>  </p>
+<p>参开资料：<br>《javascript高级程序设计》<br>《javascript权威指南》<br>《你不知道的javascript》</p>
+
           
         
       
@@ -1971,7 +2074,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1982,7 +2085,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -2034,7 +2137,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">30.8k</span>
+    <span title="Site words total count">32.3k</span>
   
 </div>
 
