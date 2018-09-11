@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #000; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #000, 0 0 5px     #000; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #000;    /*上边框颜色*/
+        border-left-color: #000;    /*左边框颜色*/
+    }
+    .header-line{
+      width:100%;
+      height:3px;
+      position: absolute;
+      top:0;left:0;
+      background:#000;
+      z-index:999;
+    }
+</style>
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/icon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="js系列(3) - 语句和表达式">
+<meta property="og:url" content="https://xiangergou.github.io/2018/09/10/js系列-3-语句/index.html">
+<meta property="og:site_name" content="斯是陋室">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://xiangergou.github.io/2018/09/10/js系列-3-语句/bg.jpg">
+<meta property="og:updated_time" content="2018-09-11T13:59:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js系列(3) - 语句和表达式">
+<meta name="twitter:image" content="https://xiangergou.github.io/2018/09/10/js系列-3-语句/bg.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xiangergou.github.io/2018/09/10/js系列-3-语句/"/>
+
+
+
+
+
+  <title>js系列(3) - 语句和表达式 | 斯是陋室</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">斯是陋室</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-随笔">
+          <a href="/categories/随笔" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/09/10/js系列-3-语句/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="留下">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="斯是陋室">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">js系列(3) - 语句和表达式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-10T09:23:27+08:00">
+                2018-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,610 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>  <img src="/2018/09/10/js系列-3-语句/bg.jpg" alt="语句"><br>  <a id="more"></a></p>
+<p>语句相当于句子，表达式相当于短语，运算符(操作符)则相当于标点符号和连接词。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">3</span> * <span class="number">6</span>; <span class="comment">// 表达式；  '*' ：运算符</span></span><br><span class="line"><span class="keyword">var</span> b = a; <span class="comment">// 表达式</span></span><br><span class="line">b; <span class="comment">// 语句</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="语句的结果值"><a href="#语句的结果值" class="headerlink" title="语句的结果值"></a>语句的结果值</h3><p> 语句都有一个结果值(statement completion value，undefined 也算)。 获得结果值最直接的方法是在浏览器开发控制台中输入语句，默认情况下控制台会显示所执行的最后一条语句的结值。</p>
+<h3 id="表达式的副作用"><a href="#表达式的副作用" class="headerlink" title="表达式的副作用"></a>表达式的副作用</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">var</span> b = a++;</span><br><span class="line">a;  <span class="comment">// 43</span></span><br><span class="line">b;  <span class="comment">// 42</span></span><br></pre></td></tr></table></figure>
+<p>a++ 首先返回变量 a 的当前值 42(再将该值赋给 b)，然后将 a 的值加 1:</p>
+<p>为处理上述情况，可以使用逗号运算符将多个独立的表达式语句串联成一个语句:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">42</span>, b;</span><br><span class="line">b = ( a++, a );</span><br><span class="line">a;  <span class="comment">// 43</span></span><br><span class="line">b;  <span class="comment">// 43</span></span><br></pre></td></tr></table></figure></p>
+<p>(a++, a)中第二个表达式a在a++之后执行，结果为43，并被赋值给b。</p>
+<h3 id="复合语句和空语句"><a href="#复合语句和空语句" class="headerlink" title="复合语句和空语句"></a>复合语句和空语句</h3><p>花括号将语句括起来即为复合语句</p>
+<blockquote>
+<p>语句结尾无需分号，<br>块中语句需分号。 </p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 空语句举例 */</span></span><br><span class="line"><span class="comment">// 单单一个';'</span></span><br><span class="line">;</span><br><span class="line"><span class="comment">// for循环体为';'</span></span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;a.length;a[i++] = <span class="number">0</span>) ;</span><br></pre></td></tr></table></figure>
+<h3 id="声明语句"><a href="#声明语句" class="headerlink" title="声明语句"></a>声明语句</h3><p>var： 无法通过delete删除。  变量提升。<br>function:  函数定义不能出现在if或者while中。 函数提升。 函数不能删除，但能重写。</p>
+<h3 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h3><p>if语句后常跟else if， 事实上 JavaScript 没有 else if， 我们经常用到的else if实际上是这样的:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a) &#123; <span class="comment">// ..</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line"><span class="keyword">if</span> (b) &#123; <span class="comment">// ..</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line"><span class="comment">// .. &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>if (b) { .. } else { .. }，实际上，跟在else后面的一个单独的语句，带不带{ }都可以。</p>
+<h3 id="do-while语句"><a href="#do-while语句" class="headerlink" title="do while语句"></a>do while语句</h3><p>  后测试循环语句，表示循环体的代码最少被执行一次。</p>
+<h3 id="while语句"><a href="#while语句" class="headerlink" title="while语句"></a>while语句</h3><p>  若控制表达式恒为true，将创建无线循环。</p>
+<h3 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h3><p>  前测试语句。<br>  for循环中，省略初始化表达式、控制表达式、循环后表达式，将创建无限循环。</p>
+<h3 id="for-in语句"><a href="#for-in语句" class="headerlink" title="for in语句"></a>for in语句</h3><p>  枚举对象属性。<br>  for in循环输出的对象属性无序。</p>
+<h3 id="label-语句"><a href="#label-语句" class="headerlink" title="label 语句"></a>label 语句</h3><p>  label: statement<br>  一般配合for一起用。<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  foo: bar()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里的{ .. }不是一个孤立的对象常量，没有赋值。 事实上{ .. } 在这里只是一个普通的代码块.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 标签为foo的循环</span></span><br><span class="line">foo: <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">4</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> j=<span class="number">0</span>; j&lt;<span class="number">4</span>; j++) &#123;</span><br><span class="line">  <span class="comment">// 如果j和i相等，继续外层循环 </span></span><br><span class="line">  <span class="keyword">if</span> (j == i) &#123;</span><br><span class="line">  <span class="comment">// 跳转到foo的下一个循环</span></span><br><span class="line">      <span class="keyword">continue</span> foo;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 跳过奇数结果</span></span><br><span class="line">  <span class="keyword">if</span> ((j * i) % <span class="number">2</span> == <span class="number">1</span>) &#123;</span><br><span class="line">  <span class="comment">// 继续内层循环(没有标签的)</span></span><br><span class="line">    <span class="keyword">continue</span>; </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log( i, j );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  <span class="comment">// 1 0</span></span><br><span class="line">  <span class="comment">// 2 0</span></span><br><span class="line">  <span class="comment">// 2 1</span></span><br><span class="line">  <span class="comment">// 3 0</span></span><br><span class="line">  <span class="comment">// 3 2</span></span><br></pre></td></tr></table></figure>
+<p>contine foo 并不是指“跳转到标签 foo 所在位置继续执行”，而是“执行 foo 循环的下一轮循环”。所以这里的 foo 并非 goto。</p>
+<p>关于代码块，还有些坑。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[] + &#123;&#125;; <span class="comment">// "[object Object]"</span></span><br><span class="line">&#123;&#125; + []; <span class="comment">// 0</span></span><br></pre></td></tr></table></figure></p>
+<p>表面上看 + 运算符根据第一个操作数( [] 或 {} )的不同会产生不同的结果，实则不然。 第一行代码中，{} 出现在 + 运算符表达式中，因此它被当作一个值(空对象)来处理。[] 会被强制类型转换为””，而 {} 会被强制类型转换为”[object Object]”。<br>但在第二行代码中，{} 被当作一个独立的空代码块(不执行任何操作)。代码块结尾不需要分号，所以这里不存在语法上的问题。最后 + []将[]显式强制类型转换为 0 。</p>
+<h3 id="break-和-continue语句"><a href="#break-和-continue语句" class="headerlink" title="break 和 continue语句"></a>break 和 continue语句</h3><p>  break和continue通常和标签页一起使用，前者表示跳出当前循环进入标签标示的语句块的结束，或直接闭合这个语句块的执行。 而continue表示转而执行标签页循环。</p>
+<h3 id="with语句"><a href="#with语句" class="headerlink" title="with语句"></a>with语句</h3><p> 简化多次编写一个对象的工作。<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> qs = person.name;</span><br><span class="line"><span class="keyword">var</span> host = person.address;</span><br><span class="line"><span class="keyword">var</span> ur = person.age</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span>(person) &#123;</span><br><span class="line">  <span class="keyword">var</span> qs = name;</span><br><span class="line">  <span class="keyword">var</span> host = address;</span><br><span class="line">  <span class="keyword">var</span> ur = age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h3><p> 可以把它看作if..else if..else..的简化版本:<br>  switch使用全等，故不存在类型转换。<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (a) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">    <span class="comment">// 执行一些代码</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">42</span>:</span><br><span class="line">    <span class="comment">// 执行另外一些代码</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然而，有时可能会需要通过强制类型转换来进行相等比较, 这时就 需要做一些特殊处理:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">"42"</span>;</span><br><span class="line"><span class="keyword">switch</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">case</span> a == <span class="number">10</span>:</span><br><span class="line">    <span class="built_in">console</span>.log( <span class="string">"10 or '10'"</span> );</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> a == <span class="number">42</span>;</span><br><span class="line">    <span class="built_in">console</span>.log( <span class="string">"42 or '42'"</span> );</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    <span class="comment">// 永远执行不到这里</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">// 42 or '42'</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="throw语句"><a href="#throw语句" class="headerlink" title="throw语句"></a>throw语句</h3><p>  当程序出现错误或使用throw语句就会显示的抛出异常。<br>  经常使用Error类型及其子类型。 一个Error对象有name属性表示错误类型，一个message用来存放传递给构造函数的字符串。</p>
+<p>  当抛出异常时，js停止当前逻辑，并跳转至最近的异常处理程序。 与作用域链类似，寻找异常处理程序也是向上传播。</p>
+<h3 id="try-catch-finally语句"><a href="#try-catch-finally语句" class="headerlink" title="try/catch/finally语句"></a>try/catch/finally语句</h3><p>  try/catch/finally是js的异常处理语句，try定义需要处理的异常所在的代码块。<br>  finally语句定义与promise的finally类似，无论程序出错与否，都会执行finally语句。<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(e) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">finally</span>&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>  catch语句参数e表try抛出的error对象。 若try报错，且不存在处理此错误的catch语句，则解释器会先处理finally语句，之后向上查找。</p>
+<p>  try 中有 return 语句会出现什么情况?<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">42</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log( <span class="string">"Hello"</span> );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">"never runs"</span> );</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log( foo() );</span><br><span class="line"><span class="comment">// Hello</span></span><br><span class="line"><span class="comment">// 42</span></span><br></pre></td></tr></table></figure></p>
+<p>  return 42 先执行，并将 foo() 函数的返回值设置为 42。然后 try 执行完毕，接着执行 finally。最后 foo() 函数执行完毕，console.log(..) 显示返回值。<br>  同样：<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">continue</span>; </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log( i );</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 0 1 2 3 4 5 6 7 8 9</span></span><br></pre></td></tr></table></figure></p>
+<p>  continue 在每次循环之后，会在 i++ 执行之前执行 console.log(i)，所以结果是 0..9 而非1..10。</p>
+<p>  finally 中的 return 会覆盖 try 和 catch 中 return 的返回值:<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">42</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">finally</span> &#123;</span><br><span class="line">  <span class="comment">// 覆盖前面的 return 42 </span></span><br><span class="line">  <span class="keyword">return</span> <span class="string">"Hello"</span>;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line">baz();  <span class="comment">// Hello</span></span><br></pre></td></tr></table></figure></p>
+<p>以上。<br><br><br>参考资料：<br>《javascript高级程序设计》<br>《javascript权威指南》<br>《你不知道的javascript》</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/09/js系列-2-类型转换/" rel="next" title="js系列-类型转换(draft)">
+                <i class="fa fa-chevron-left"></i> js系列-类型转换(draft)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avater.jpeg"
+                alt="留下" />
+            
+              <p class="site-author-name" itemprop="name">留下</p>
+              <p class="site-description motion-element" itemprop="description">以前看见山，总想知道山后面是什么</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#语句的结果值"><span class="nav-number">1.</span> <span class="nav-text">语句的结果值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表达式的副作用"><span class="nav-number">2.</span> <span class="nav-text">表达式的副作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复合语句和空语句"><span class="nav-number">3.</span> <span class="nav-text">复合语句和空语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明语句"><span class="nav-number">4.</span> <span class="nav-text">声明语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#if语句"><span class="nav-number">5.</span> <span class="nav-text">if语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#do-while语句"><span class="nav-number">6.</span> <span class="nav-text">do while语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#while语句"><span class="nav-number">7.</span> <span class="nav-text">while语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for语句"><span class="nav-number">8.</span> <span class="nav-text">for语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for-in语句"><span class="nav-number">9.</span> <span class="nav-text">for in语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#label-语句"><span class="nav-number">10.</span> <span class="nav-text">label 语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#break-和-continue语句"><span class="nav-number">11.</span> <span class="nav-text">break 和 continue语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#with语句"><span class="nav-number">12.</span> <span class="nav-text">with语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switch语句"><span class="nav-number">13.</span> <span class="nav-text">switch语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#throw语句"><span class="nav-number">14.</span> <span class="nav-text">throw语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#try-catch-finally语句"><span class="nav-number">15.</span> <span class="nav-text">try/catch/finally语句</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">留下</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">34.7k</span>
+  
+</div>
+
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
