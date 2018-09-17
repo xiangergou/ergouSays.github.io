@@ -100,17 +100,16 @@
 
 
 
-<meta name="description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)()">
 <meta property="og:type" content="article">
-<meta property="og:title" content="underscore源码阅读系列-基础部分(更新中)">
-<meta property="og:url" content="https://xiangergou.github.io/2018/05/21/underscore源码阅读系列-基础部分/index.html">
+<meta property="og:title" content="webpack4实践">
+<meta property="og:url" content="https://xiangergou.github.io/2018/09/17/webpack4实践/index.html">
 <meta property="og:site_name" content="斯是陋室">
-<meta property="og:description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)()">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-03T04:50:11.000Z">
+<meta property="og:image" content="https://xiangergou.github.io/2018/09/17/webpack4实践/bg.jpg">
+<meta property="og:updated_time" content="2018-09-17T10:46:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="underscore源码阅读系列-基础部分(更新中)">
-<meta name="twitter:description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)()">
+<meta name="twitter:title" content="webpack4实践">
+<meta name="twitter:image" content="https://xiangergou.github.io/2018/09/17/webpack4实践/bg.jpg">
 
 
 
@@ -140,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/2018/05/21/underscore源码阅读系列-基础部分/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/09/17/webpack4实践/"/>
 
 
 
 
 
-  <title>underscore源码阅读系列-基础部分(更新中) | 斯是陋室</title>
+  <title>webpack4实践 | 斯是陋室</title>
   
 
 
@@ -272,7 +271,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/05/21/underscore源码阅读系列-基础部分/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/09/17/webpack4实践/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -289,7 +288,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">underscore源码阅读系列-基础部分(更新中)</h1>
+          <h1 class="post-title" itemprop="name headline">webpack4实践</h1>
         
 
         <div class="post-meta">
@@ -301,8 +300,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-21T23:13:03+08:00">
-                2018-05-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-17T12:04:38+08:00">
+                2018-09-17
               </time>
             
 
@@ -311,28 +310,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/草稿/" itemprop="url" rel="index">
-                    <span itemprop="name">草稿</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -355,7 +332,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  425 字
+                  854 字
                 </span>
               
 
@@ -371,7 +348,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -392,18 +369,45 @@
       
 
       
-        <p>前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。<br>与jq相似，underscore也是采用<strong>立即执行函数</strong>包裹，以达到避免全局污染以及隐私保护等目的。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// .....执行逻辑</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<h3 id="对象"><a href="#对象" class="headerlink" title="_ 对象"></a>_ 对象</h3><p> 我们想将所有以后要用的工具方法挂载到一个对象上，以便之后调用。看看_如何实现：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> root = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> _ = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    root._ = _;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在这里添加自己的方法</span></span><br><span class="line">    _.reverse = <span class="function"><span class="keyword">function</span>(<span class="params">string</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> string.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line">_.reverse(<span class="string">'hello'</span>);</span><br><span class="line">=&gt; <span class="string">'olleh'</span></span><br><span class="line"></span><br><span class="line"><span class="string">``</span><span class="string">`    </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> ### 执行环境判断</span></span><br><span class="line"><span class="string">underscore 对象 _ 会依托于当前的所处环境，挂载到不同的全局空间当中（浏览器的全局对象是 window，node 的全局对象是 global）。且看underscore如何实现：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javascript</span><br><span class="line">  <span class="keyword">var</span> root = (<span class="keyword">typeof</span> self == <span class="string">'object'</span> &amp;&amp; self.self == self &amp;&amp; self) ||</span><br><span class="line">           (<span class="keyword">typeof</span> global == <span class="string">'object'</span> &amp;&amp; global.global == global &amp;&amp; global) ||</span><br><span class="line">           <span class="keyword">this</span> ||</span><br><span class="line">           &#123;&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>逐一分析：</p>
-<ul>
-<li>最直观的，浏览器下的window，node下的global。 </li>
-<li><p>严格模式下this 返回 undefined，而非指向 Window。<br>考虑这两点，于是就有了</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> root = </span><br><span class="line">(<span class="keyword">typeof</span> <span class="built_in">window</span> == <span class="string">'object'</span> &amp;&amp; <span class="built_in">window</span>.window == <span class="built_in">window</span> &amp;&amp; <span class="built_in">window</span>) || </span><br><span class="line">(<span class="keyword">typeof</span> global == <span class="string">'object'</span> &amp;&amp; global.global == global &amp;&amp; global);</span><br></pre></td></tr></table></figure>
+        <p><img src="/2018/09/17/webpack4实践/bg.jpg" alt="webpack"><br><a id="more"></a></p>
+<h3 id="安装、打包设置"><a href="#安装、打包设置" class="headerlink" title="安装、打包设置"></a>安装、打包设置</h3><ol>
+<li><p>npm初始化、webpack安装</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir myWebpack &amp;&amp; cd myWebpack &amp;&amp; npm init -y</span><br><span class="line"></span><br><span class="line">cnpm i webpack webpack-cli -D</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<p>而在浏览器环境下，self 保存的就是当前 window 对象的引用。 underscore 用 self 代替 window 的原因主要用于一些不具有窗口的上下文环境中，比如 Web Workers。<br>关于 Web Workers，可翻阅《javascript高级程序设计》P697。</p>
-<p>之后合并关于小程序的兼容pr加上’{}’以及node 沙盒模块的兼容pr添加’this’，即得到最终版本。</p>
+<li><p>根目录下创建src文件夹，新建js文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/index.js</span></span><br><span class="line">  alert(<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根目录下新建webpack.config.js文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>) </span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">//选择的模式告诉webpack使用其内置的优化</span></span><br><span class="line">  <span class="comment">// "production" | "development" | "none"</span></span><br><span class="line">  mode : <span class="string">"development"</span>,</span><br><span class="line">  entry: <span class="string">'./src/index.js'</span>, <span class="comment">// 指定一个不同的入口起点（或者也可以指定多个入口起点）。</span></span><br><span class="line">  output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">"dist"</span>), <span class="comment">// Node中，__dirname 指向被执行 js 文件的绝对路径</span></span><br><span class="line">    filename: <span class="string">'bundle.js'</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改package.json:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">  <span class="string">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>,</span><br><span class="line">  <span class="string">"dev"</span>: <span class="string">"webpack --config webpack.config.js"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时执行npm run dev, 将生成dist文件夹以及bundle.js文件，表明打包成功。</p>
+</li>
+</ol>
+<h3 id="html模板、热更新加入"><a href="#html模板、热更新加入" class="headerlink" title="html模板、热更新加入"></a>html模板、热更新加入</h3><ol>
+<li><p>根目录创建index.html。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cnpm i webpack-dev-server html-webpack-plugin -D</span><br><span class="line"><span class="comment">// html-webpack-plugin用于简化html文件的创建.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在webpack.config.js中  添加如下代码</span></span><br><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>)</span><br><span class="line">plugins: [</span><br><span class="line">  <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">    template: <span class="string">'./index.html'</span></span><br><span class="line">  &#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>执行 npm run dev生成dist文件夹、文件夹下以根目录index.html为模板的index.html文件,该文件默认引入bundle.js。</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>加入热更新</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">cnpm i webpack-dev-server -D</span><br><span class="line"><span class="comment">// webpack-dev-server是一个轻量级的服务器，修改文件源码后，自动刷新页面将修改同步到页面上</span></span><br><span class="line"><span class="comment">// webpack.config.js修改代码</span></span><br><span class="line">devServer: &#123;</span><br><span class="line">  <span class="comment">// 本地服务器所加载的页面所在目录，它指定了服务器资源的根目录，如果不写入contentBase的值，那么contentBase默认是项目的目录。</span></span><br><span class="line">  contentBase: path.join(__dirname, <span class="string">'./dist'</span>), </span><br><span class="line">  open: <span class="literal">true</span>, <span class="comment">// 默认打开浏览器</span></span><br><span class="line">  port: <span class="number">9000</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//package.json修改代码， --config命令用于将前者修改为后者配置文件</span></span><br><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">  <span class="string">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>,</span><br><span class="line">  <span class="string">"dev"</span>: <span class="string">"webpack-dev-server --config webpack.config.js  --mode development"</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>执行npm run dev  热更新开启，此时修改代码，浏览器会有相应反应</p>
+</li>
+</ol>
+<h3 id="babel添加"><a href="#babel添加" class="headerlink" title="babel添加"></a>babel添加</h3><ol>
+<li><p>最后添加babel</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">cnpm i babel-core babel-loader babel-polyfill babel-preset-es2015 babel-preset-latest -D</span><br><span class="line"><span class="comment">// babel-core 的作用是把 js 代码分析成 ast ，方便各个插件分析语法进行相应的处理。</span></span><br><span class="line"><span class="comment">// 新的API，如es6、es7，以及一些定义在全局对象上的方法（比如Object.assign）都不会转码。</span></span><br><span class="line"><span class="comment">// 此时需要babel-polyfill，为当前环境提供一个垫片。</span></span><br><span class="line"><span class="comment">// babel-preset-env将替代babel-preset-es2015 ，支持ES6新语法的兼容性编译。</span></span><br><span class="line"><span class="comment">// babel-preset-latest 支持现有所有ECMAScript版本的新特性，包括处于stage 4里的特性（已经确定的规范，将被添加到下个年度的）。</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>: &#123;</span><br><span class="line">  rules: [&#123;</span><br><span class="line">    test: <span class="regexp">/\.js?&amp;/</span>, <span class="comment">// test 属性，用于标识出应该被对应的 loader 进行转换的某个或某些文件。</span></span><br><span class="line">    exclude: <span class="regexp">/(node_modules)/</span>, <span class="comment">// 排除掉不需要使用当前规则中的加载器去解析的文件.</span></span><br><span class="line">    loader: <span class="string">'babel-loader'</span>  <span class="comment">//需要的加载器</span></span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试<br>编辑src/index.js文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name</span><br><span class="line">  &#125;</span><br><span class="line">  getName() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> Person(<span class="string">'双月'</span>)</span><br><span class="line">alert(person.getName())</span><br></pre></td></tr></table></figure>
+<p>npm run dev执行，页面成功alert(‘双月’),表明babel引入成功。</p>
+</li>
+</ol>
+<p>  以上</p>
+<p>  参考资料<br>  <a href="https://webpack.docschina.org/concepts/#%E5%85%A5%E5%8F%A3-entry-" target="_blank" rel="noopener">webpack中文文档</a><br>  慕课网 javascript设计模式系统讲解与应用 第二章环境搭建 2-1 – 2-4<br>  <a href="https://blog.csdn.net/sinat_17775997/article/details/80116966" target="_blank" rel="noopener">webpack4</a></p>
 
       
     </div>
@@ -428,8 +432,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/19/王家卫-我眼中的师徒四人/" rel="next" title="没有齐天大圣，我只是只猴子">
-                <i class="fa fa-chevron-left"></i> 没有齐天大圣，我只是只猴子
+              <a href="/2018/09/15/js系列-4-变量、作用域和内存机制/" rel="next" title="js深入理解(4)-变量、作用域和内存机制(draft)">
+                <i class="fa fa-chevron-left"></i> js深入理解(4)-变量、作用域和内存机制(draft)
               </a>
             
           </div>
@@ -437,10 +441,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/22/underscore-1-8-3源码注解/" rel="prev" title="underscore-1.9.0源码注解(更新中)">
-                underscore-1.9.0源码注解(更新中) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -576,7 +576,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象"><span class="nav-number">1.</span> <span class="nav-text">_ 对象</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装、打包设置"><span class="nav-number">1.</span> <span class="nav-text">安装、打包设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#html模板、热更新加入"><span class="nav-number">2.</span> <span class="nav-text">html模板、热更新加入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#babel添加"><span class="nav-number">3.</span> <span class="nav-text">babel添加</span></a></li></ol></div>
             
 
           </div>

@@ -89,7 +89,7 @@
 
 
 
-  <meta name="keywords" content="随笔," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -100,20 +100,17 @@
 
 
 
-<meta name="description" content="1.我叫曹正淳，是个阉人。">
-<meta name="keywords" content="随笔">
+<meta name="description" content="变量：ECMAScript变量包含两种类型的值：基本类型和引用类型。 引用类型的值是保存在内存中的对象，操作对象时，实际上是在操作对象的引用而不是实际的对象。 故而，引用类型的值是按引用访问的。 变量当做参数传递：js所有参数都是按值传递的。 向函数参数传递基本类型的值的时候，被传递的参数会被复制给一个局部变量（即命名参数，就是arguments对象的第一个元素。）  function add(n">
 <meta property="og:type" content="article">
-<meta property="og:title" content="曹正淳：我不过,不想再跪着">
-<meta property="og:url" content="https://xiangergou.github.io/2018/04/29/caoZhengChun/index.html">
+<meta property="og:title" content="js深入理解(4)-变量、作用域和内存机制(draft)">
+<meta property="og:url" content="https://xiangergou.github.io/2018/09/15/js系列-4-变量、作用域和内存机制/index.html">
 <meta property="og:site_name" content="斯是陋室">
-<meta property="og:description" content="1.我叫曹正淳，是个阉人。">
+<meta property="og:description" content="变量：ECMAScript变量包含两种类型的值：基本类型和引用类型。 引用类型的值是保存在内存中的对象，操作对象时，实际上是在操作对象的引用而不是实际的对象。 故而，引用类型的值是按引用访问的。 变量当做参数传递：js所有参数都是按值传递的。 向函数参数传递基本类型的值的时候，被传递的参数会被复制给一个局部变量（即命名参数，就是arguments对象的第一个元素。）  function add(n">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3988286-335007279ef99611.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-07-08T02:30:33.000Z">
+<meta property="og:updated_time" content="2018-09-17T10:46:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="曹正淳：我不过,不想再跪着">
-<meta name="twitter:description" content="1.我叫曹正淳，是个阉人。">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3988286-335007279ef99611.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="js深入理解(4)-变量、作用域和内存机制(draft)">
+<meta name="twitter:description" content="变量：ECMAScript变量包含两种类型的值：基本类型和引用类型。 引用类型的值是保存在内存中的对象，操作对象时，实际上是在操作对象的引用而不是实际的对象。 故而，引用类型的值是按引用访问的。 变量当做参数传递：js所有参数都是按值传递的。 向函数参数传递基本类型的值的时候，被传递的参数会被复制给一个局部变量（即命名参数，就是arguments对象的第一个元素。）  function add(n">
 
 
 
@@ -143,13 +140,13 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/2018/04/29/caoZhengChun/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/09/15/js系列-4-变量、作用域和内存机制/"/>
 
 
 
 
 
-  <title>曹正淳：我不过,不想再跪着 | 斯是陋室</title>
+  <title>js深入理解(4)-变量、作用域和内存机制(draft) | 斯是陋室</title>
   
 
 
@@ -275,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/04/29/caoZhengChun/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/09/15/js系列-4-变量、作用域和内存机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -292,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">曹正淳：我不过,不想再跪着</h1>
+          <h1 class="post-title" itemprop="name headline">js深入理解(4)-变量、作用域和内存机制(draft)</h1>
         
 
         <div class="post-meta">
@@ -304,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-29T22:29:20+08:00">
-                2018-04-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-15T16:02:06+08:00">
+                2018-09-15
               </time>
             
 
@@ -314,28 +311,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -358,7 +333,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2,299 字
+                  1,998 字
                 </span>
               
 
@@ -374,7 +349,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  8 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -393,76 +368,51 @@
 
       
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="https://upload-images.jianshu.io/upload_images/3988286-335007279ef99611.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" rel="gallery_cjm66689f0001ies67c796gbl"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://upload-images.jianshu.io/upload_images/3988286-335007279ef99611.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
 
       
-        <p>1.我叫曹正淳，是个阉人。<br><a id="more"></a></p>
-<p>第一次做阉人，是在七岁。 很少有人这么小就成为阉人，除非他有个跟我一样的爹。 他是个杀猪匠，杀很多猪，却总买不起猪肉。每次杀完猪都在水缸里洗手，他说每天这样就可以喝油水。 油水不是水，我明白他的意思。</p>
-<p>如果人一生分四季，在我七岁前，我的生活大抵还算的上春天。 我记得那年惊蛰似乎来得特别早，他从东门回家，亲自帮我净了身。那个晚上，我躺在床上，心想我这辈子再做不了男人了。</p>
-<p>  <br></p>
-<p> 2.第二年开春，他给同村回家探亲的老太监很多好处，将我送进了宫。 我坐上了去皇宫的马车，他站在路口给那位老宦官俯首作揖，临了纵情大笑。“孩子，在里面好好做事, 爹的荣华富贵就靠你了”。我看着他，没有说话。心想是不是所有的爹都这样。 马车一路颠簸，跟我之后未知的命运一样渐行渐远。</p>
-<p>“打今儿起，我就做你的师父。 你就叫做小淳子，曹正淳这个名字，不要用了。进了这里，以后就只有眼前路，再没有身后身。”</p>
-<p>“孩子，别怨你爹，这个世道，人都这样。 穷怕了，以为那座皇宫都是黄金做的，只要进了那里，这辈子就不用再受苦，可其实…“</p>
-<p>“我也只是个打了一辈子杂的奴才。 这次带你进宫，还得回去跟内务府说情，怕是得用去我这一辈子攒下来的那点人情，才能留下你这个苦命孩子。”</p>
-<p>老人摸了摸我的头，“可又怎么能不带你呢，你爹已经帮你净身，我不带你，留你在村里受人嘲笑一辈子吗？。”</p>
-<p>我跪在地上，久久不愿起身。</p>
-<p>“师父！”</p>
-<p>  <br><br>3.不是什么人都能叫做太监的。在明朝，刚进宫时只能当典簿、长随、奉御，如果表现良好，方能被升迁为监丞，监丞再往上升是少监，少监的顶头上司才是闻名遐迩的太监。</p>
-<p>托着师父的照应，我在宫里安顿下来。师父没有妄自菲薄，他确实只是个没有丝毫势力背景的低等宦官。我在这宫里做着各种活计，最多的就是给人下跪，跪贵妃跪嫔妃跪答应跪所有人。      兴许是跪的次数多了，我对这种姿势产生了好奇，也不知是谁发明了这种姿势，为什么要我做这种姿势，为什么我不做这种姿势那些贵人就不高兴，为什么不是他们向我做这种姿势？   &nbsp;每次想到这儿我都被自己的想法吓一大跳, 随即立马专心跪着，心想我是个奴才，奴才该做的事，就是磕头。</p>
-<p>  <br><br>4.那天师父死了。也许是前一天，我不知道。  我在掖庭宫做着杂活，像往常一样，瞅着空去看师父，却被告知师父死了。听说是因为那天贵人不高兴，师父就一直跪着，不知怎么晕了过去，晕了就再没法再跪着，不跪着贵人就更不高兴。所以师父死了，就因为主子一时不高兴。</p>
-<p>“你师父？ 奥，那个老太监，我想起来了，他死了。”</p>
-<p>“你不知道么？都死好几天了！那天刘贵人心情不好，他在旁边跪着，不知怎么就倒在刘贵人脚下，刘贵人更生气了，打了板子，兴许是太老了，老太监一口气没上来就死了。”</p>
-<p>“别难过了小淳子，这宫里每天都死人，指不定哪天就轮到我们。这就是奴才的命，谁让我们是奴才呢。小淳子，你懂了么？”</p>
-<p>找到埋师父的乱葬岗，是在傍晚。那里很多人，很多死人，横七竖八堆得老高。我坐在地上，望着旁边这些一辈子兢兢业业却因莫须有的过错，死都没有葬身之地的人，觉着一阵悲凉。 或许我和他们都有同样的命运，或许明天我也会躺在这儿，这就是奴才的命么，可连死了连个像样的埋骨地都没有么？ 这堆的老高的尸体，算是所谓主子们的，京观？</p>
-<p>从死人堆了找到师父的尸首，我重新挖了个坑给埋了。跪在那块土堆前，良久没有说话。</p>
-<p>“师父，我不想作奴才了。”</p>
-<p>  <br><br>5.之后不久，我算计了几个跟我竞争的同僚，成功进入了东厂。很多年后，我有了个绰号叫曹阉狗。 阉就是太监，而狗，我想是因为狠毒。其实任何都可以狠毒，只要你让他尝试什么叫无助。</p>
-<p>东厂督主叫黄俨，不是小黄子，也不是小俨子，他可以叫本名，他不再是奴才，他成了主子。我也想，所以我去了。</p>
-<p>东厂不教礼仪，只教杀人。我们杀很多的人，也有很多人被杀，在这群人只剩下我一个之后，他给了我一本书。“天罡童子功。”</p>
-<p>我记着和我厮杀的最后一个人，我不知道他叫什么，只听说他是一个乱党，是那里杀人最快的人。</p>
-<p>他开口“你也喜欢下雨？”</p>
-<p>我抬抬眼“我不像你，我很忙”</p>
-<p>“但是，我听说你杀人很快。”</p>
-<p>我放下酒，看着碗里的涟漪“我是不是不该来”</p>
-<p>他笑了“我不懂，你为什么要来，可是，来都来了”</p>
-<p>我点点头，“是啊，来都来了。”</p>
-<p>他不说话，握住剑柄，杀气很重。</p>
-<p>他虽然很快，可我更狠，他临终一剑刺在我的下阴，我的刀却划过他的喉咙。</p>
-<p>“你失算了，我是个阉人。”</p>
-<p>“原来是东厂的人。”</p>
-<p>他突然笑了，眼神没了不甘，似乎看到了注定在我身上上演的悲剧。</p>
-<p>  <br></p>
-<p>6.从那以后，我被黄俨当做关门弟子，倾囊以授。不出十年，我已经是黄俨之下第一高手。我终于不必再被人叫做小淳子，我有了自己的名字，那个我已经忘了许久的名字，曹正淳。</p>
-<p>黄俨死后，我接手了东厂。我以为我终于不再是奴才了，我可以做主人了。直到某天我被下令屠掉一个朝廷重臣全族。 他叫张巨鹿，是个忠臣，整个朝廷都清楚。可鸟尽了，弓就得藏，这一点皇帝更清楚。</p>
-<p>其实屠族这种事我常做，和往常没什么不同。 只是这次我放走了在张府作马夫的老仆，他缺门牙的样子让我想起了师父。</p>
-<p>我为此差点掉了脑袋。</p>
-<p>从皇帝召见的宫殿出来，我看看了高高在上的宫门。 心想我原来还是狗，而狗的生死从来都只看主人的心情。</p>
-<p>  <br><br>7.我终于知道怎样才能真正作主，兵权。 在这之前，我需要灭掉护龙山庄。需要杀掉朱无视。    其实我很嫉妒铁胆神侯，因为他是皇室，他可以不用向任何人下跪，可以轻而易举得到武功秘籍，金钱权势。同样为皇帝做事，他可以大义凛然名正言顺，而我无论做什么都是残害忠良奸臣当道。 到最后，我背负所有骂名，皇帝想杀我，朱无视想杀我，天下人都想杀我。</p>
-<p>这叫我，如何甘心？</p>
-<p>天下熙攘，不总只为利往，有时也为了活着，为了有尊严的活着。</p>
-<p>可当我把朱无视成功送入牢狱，我带着酒去看他，看着他自杀身亡，心中竟有些悲哀。</p>
-<p>我的敌人是他么？恐怕不是。</p>
-<p>我想起来因为一点过失就把我一顿毒打的少监，想起了宫女听说师父死去时候的淡漠，想起来为师父送终的那个傍晚，想起来之后为皇帝杀过的每一个人，想起来皇帝欲除之我后快决绝的眼神。</p>
-<p>也许真正的敌人，是这宫中死寂般的沉默，是冰冷的体制下荡然无存的人情味。是等级森严下人泯灭掉的良心和尊严。</p>
-<p>我为铁胆神侯的死感到遗憾，我由衷的敬佩他。</p>
-<p>云罗郡主叫我曹阉狗，而只有朱无视，从来都会叫我曹正淳。</p>
-<p>拿到兵符的那一天，我第一次抬起头正视这个皇宫，从乾清宫到御花园，从紫金宫到奉天门，那时候，皇上也终于不敢叫我一声狗奴才。</p>
-<p>但是我真的不想做皇帝，我只是不想再做毫无尊严的奴才，我愿意拿一切去换师父复生，因为这个时候我们再去做活计的时候，再也不用跪着了吧。</p>
+        <p>变量：<br>ECMAScript变量包含两种类型的值：基本类型和引用类型。</p>
+<p>引用类型的值是保存在内存中的对象，操作对象时，实际上是在操作对象的引用而不是实际的对象。 故而，引用类型的值是按引用访问的。</p>
+<p>变量当做参数传递：<br>js所有参数都是按值传递的。</p>
+<p>向函数参数传递基本类型的值的时候，被传递的参数会被复制给一个局部变量（即命名参数，就是arguments对象的第一个元素。） </p>
+<p>function add(num){<br>  num += 10;<br>  retunrn num<br>};<br>var count = 12;<br>var result = add(count);<br>console.log(count) // 20; 没有变化<br>console.log(result) // 30;</p>
+<p>而向参数传递引用类型的值时，会把这个值在内存中的地址复制给局部变量。 故而局部变量的变化会反应在函数外部。</p>
+<p>function setName(obj){<br>  obj.name = ‘harry’;<br>}<br>var person = {};<br>setName(person);<br>console.log(person.name);  // harry</p>
+<p>变量被传递给setName函数之后被复制给了obj，obj和person引用的是同一个对象。</p>
+<p>之所以是按值传递而非按引用传递，完全取决于被对象被重写之后的函数返回：</p>
+<p>function setName(obj){<br>  obj.name = ‘harry’;<br>  var obj = new Object();<br>  obj.name = ‘potter’<br>}<br>var person = {};<br>setName(person);<br>console.log(person.name); // harry</p>
+<p>此处parson.name 仍然为harry而非改写之后的potter， 说明即使在函数内部修改了参数的值，原始的引用仍然保持未变。</p>
+<p>简单概括：<br>  var a = {}; // 此处 变量a保存指向{}的指针。<br>  var b = a; // 此时， b===a， b也保存指向{}的指针。<br>  a.name = ‘harry’; // 当对象添加属性，b因为指向相同的指针，故b也有相应的属性。<br>  b // {name: ‘harry’};</p>
+<p>  var a = {};  // 此时a重写，重新保存另一个对象的指针，自此，a变量断开与原先对象的指向关系。<br>  b // {name: ‘harry’}; 自此a的修改再无法影响到b。</p>
+<p>以上在js系列1引用章节有提及。</p>
+<p>内存：</p>
+<p>不管什么程序语言，内存生命周期基本是一致的：</p>
+<ol>
+<li><p>分配你所需要的内存</p>
+</li>
+<li><p>使用分配到的内存（读, 写）</p>
+</li>
+<li><p>不需要时将其释放/归还。</p>
+<p>JS 中的内存回收<br>垃圾回收算法主要依赖于引用的概念. 在内存管理的环境中, 一个对象如果有访问另一个对象的权限（隐式或者显式）, 叫做一个对象引用另一个对象. 例如: 一个Javascript对象具有对它原型的引用（隐式引用）和对它属性对象的引用（显式引用）.</p>
+<p>引用计数<br>跟踪记录每个值被引用的次数，声明一个变量并赋其一个引用类型的变量时，该次数就是一。 如果同一个值又被赋予另一个变量，该次数加1。 相反，包含当前引用的变量被改写获得另一个值，该次数-1，当次数为0时，说明没有办法再访问当前值，该值会在下次垃圾收集器运行时被收集。<br>var a = {}; // 此时，次数为1；<br>var b = a; // 次数+1；</p>
+<p>var a = []; // a被改写，次数-1；<br>var b = a; // b也被改写，自此次数减至0；之后{}会被回收。</p>
+<p>限制: 循环引用<br>function f() {<br>var o1 = {};<br>var o2 = {};<br>o1.p = o2; // o1 引用 o2<br>o2.p = o1; // o2 引用 o1. 这里会形成一个循环引用<br>}<br>f();</p>
+</li>
+</ol>
+<p>实际例子:</p>
+<p>var div;<br>window.onload = function(){<br>  div = document.getElementById(“myDivElement”);<br>  div.circularReference = div;<br>  div.lotsOfData = new Array(10000).join(“*”);<br>};<br>上面的例子里, myDivElement 这个 DOM 元素里的 circularReference 属性引用了 myDivElement, 造成了循环引用. IE 6, 7 使用引用计数方式对 DOM 对象进行垃圾回收. 该方式常常造成对象被循环引用时内存发生泄漏. 现代浏览器通过使用标记-清除内存回收算法, 来解决这一问题.</p>
+<p>标记-清除算法</p>
+<p>自动垃圾收集机制（GC：Garbage Collecation）</p>
+<p>这个算法假定设置一个叫做根 root 的对象（在Javascript里，根是全局对象）. 定期的, 垃圾回收器将从根开始, 找所有从根开始引用的对象, 然后找这些对象引用的对象, 从根开始,垃圾回收器将找到所有可以获得的对象和所有不能获得的对象.</p>
+<p> 标记：标记的过程其实就是，遍历所有的GC Roots，然后将所有GC Roots可达的对象标记为存活的对象。</p>
+<p>清除：清除的过程将遍历堆中所有的对象，将没有标记的对象全部清除掉。</p>
+<p>当程序运行期间，若可以使用的内存被耗尽的时候，GC线程就会被触发并将程序暂停，随后将依旧存活的对象标记一遍，最终再将堆中所有没被标记的对象全部清除掉，接下来便让程序恢复运行。</p>
+<p>内存泄露<br>1.意外创建全局变量<br>2 未销毁的定时器和回调函数<br>var serverData = loadData();<br>setInterval(function() {<br>    var renderer = document.getElementById(‘renderer’);<br>    if(renderer) {<br>        renderer.innerHTML = JSON.stringify(serverData);<br>    }<br>}, 5000); // 每 5 秒调用一次<br>如果后续 renderer 元素被移除, 整个定时器实际上没有任何作用. 但如果你没有回收定时器, 整个定时器依然有效, 不但定时器无法被内存回收, 定时器函数中的依赖也无法回收. 在这个案例中的 serverData 也无法被回收.</p>
+<p> 闭包</p>
+<p> DOM 引用<br> 对于一个 Dom 树的叶子节点的引用. 举个例子: 如果我们引用了一个表格中的 td 元素, 一旦在 Dom 中删除了整个表格, 我们直观的觉得内存回收应该回收除了被引用的 td 外的其他元素. 但是事实上, 这个 td 元素是整个表格的一个子元素, 并保留对于其父元素的引用. 这就会导致对于整个表格, 都无法进行内存回收. 所以我们要小心处理对于 Dom 元素的引用.</p>
+<p> 执行环境与作用域:<br>执行环境定义了变量或者函数有权访问其他数据<br>每个执行环境都一个对应的变量对象，比如在web浏览器中，全局环境被认为是window对象。<br>某环境代码执行完成，环境被销毁。其变量与函数定义也被销毁。</p>
+<p>所有变量（包括基本类型和引用类型）都存在于一个执行环境（也称为作用域）当中，这个执行环境决定了变量的生命周期，以及哪一部分代码可以访问其中的变量。以下是关于执行环境的几点总结：</p>
+<p>执行环境有全局执行环境（也称为全局环境）和函数执行环境之分；<br>每次进入一个新执行环境，都会创建一个用于搜索变量和函数的作用域链；<br>函数的局部环境不仅有权访问函数作用域中的变量，而且有权访问其包含（父）环境，乃至全局环境；<br>全局环境只能访问在全局环境中定义的变量和函数，而不能访问局部环境中的任何数据；<br>变量的执行环境有助于确定何时释放内存。<br>延长作用域链：try-catch语句的catch块；with语句。<br>JavaScript没有块级作用域：for语句创建的变量i即使在for循环执行结束后，也依旧会存在于循环外部的执行环境中；使用var声明会自动被添加到最接近的环境中。</p>
+<p>当代码在一个环境中执行的时候，就会形成一种叫做作用域链的东西，它的用途是保证对执行环境中有访问权限的变量和函数进行有序访问（指按照规则层次来访问），作用域链的前端，就是执行环境的变量对象。</p>
 
       
     </div>
@@ -478,12 +428,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/随笔/" rel="tag"># 随笔</a>
-          
-        </div>
-      
 
       
       
@@ -493,8 +437,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/29/list-with-big-data/" rel="next" title="页面海量数据加载 -- 分时函数 + requestAnimationFrame">
-                <i class="fa fa-chevron-left"></i> 页面海量数据加载 -- 分时函数 + requestAnimationFrame
+              <a href="/2018/09/10/js系列-3-语句/" rel="next" title="js深入理解(3) - 语句和表达式">
+                <i class="fa fa-chevron-left"></i> js深入理解(3) - 语句和表达式
               </a>
             
           </div>
@@ -503,8 +447,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/07/chrome-plugin/" rel="prev" title="谷歌自定义小拓展-历史上的今天">
-                谷歌自定义小拓展-历史上的今天 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/17/webpack4实践/" rel="prev" title="webpack4实践">
+                webpack4实践 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
