@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="斯是陋室">
 <meta property="og:description" content="变量：ECMAScript变量包含两种类型的值：基本类型和引用类型。 引用类型的值是保存在内存中的对象，操作对象时，实际上是在操作对象的引用而不是实际的对象。 故而，引用类型的值是按引用访问的。 变量当做参数传递：js所有参数都是按值传递的。 向函数参数传递基本类型的值的时候，被传递的参数会被复制给一个局部变量（即命名参数，就是arguments对象的第一个元素。）  function add(n">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-17T10:46:42.000Z">
+<meta property="og:updated_time" content="2018-09-18T04:00:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js深入理解(4)-变量、作用域和内存机制(draft)">
 <meta name="twitter:description" content="变量：ECMAScript变量包含两种类型的值：基本类型和引用类型。 引用类型的值是保存在内存中的对象，操作对象时，实际上是在操作对象的引用而不是实际的对象。 故而，引用类型的值是按引用访问的。 变量当做参数传递：js所有参数都是按值传递的。 向函数参数传递基本类型的值的时候，被传递的参数会被复制给一个局部变量（即命名参数，就是arguments对象的第一个元素。）  function add(n">
@@ -333,7 +333,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,998 字
+                  2,304 字
                 </span>
               
 
@@ -349,7 +349,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  7 分钟
+                  8 分钟
                 </span>
               
             </div>
@@ -409,10 +409,17 @@
 <p>内存泄露<br>1.意外创建全局变量<br>2 未销毁的定时器和回调函数<br>var serverData = loadData();<br>setInterval(function() {<br>    var renderer = document.getElementById(‘renderer’);<br>    if(renderer) {<br>        renderer.innerHTML = JSON.stringify(serverData);<br>    }<br>}, 5000); // 每 5 秒调用一次<br>如果后续 renderer 元素被移除, 整个定时器实际上没有任何作用. 但如果你没有回收定时器, 整个定时器依然有效, 不但定时器无法被内存回收, 定时器函数中的依赖也无法回收. 在这个案例中的 serverData 也无法被回收.</p>
 <p> 闭包</p>
 <p> DOM 引用<br> 对于一个 Dom 树的叶子节点的引用. 举个例子: 如果我们引用了一个表格中的 td 元素, 一旦在 Dom 中删除了整个表格, 我们直观的觉得内存回收应该回收除了被引用的 td 外的其他元素. 但是事实上, 这个 td 元素是整个表格的一个子元素, 并保留对于其父元素的引用. 这就会导致对于整个表格, 都无法进行内存回收. 所以我们要小心处理对于 Dom 元素的引用.</p>
-<p> 执行环境与作用域:<br>执行环境定义了变量或者函数有权访问其他数据<br>每个执行环境都一个对应的变量对象，比如在web浏览器中，全局环境被认为是window对象。<br>某环境代码执行完成，环境被销毁。其变量与函数定义也被销毁。</p>
+<p> 执行环境与作用域:<br>执行环境定义了变量或者函数有权访问其他数据。</p>
+<p>每个执行环境都一个对应的变量对象，比如在web浏览器中，全局环境被认为是window对象。<br>某环境代码执行完成，环境被销毁。其变量与函数定义也被销毁。</p>
 <p>所有变量（包括基本类型和引用类型）都存在于一个执行环境（也称为作用域）当中，这个执行环境决定了变量的生命周期，以及哪一部分代码可以访问其中的变量。以下是关于执行环境的几点总结：</p>
 <p>执行环境有全局执行环境（也称为全局环境）和函数执行环境之分；<br>每次进入一个新执行环境，都会创建一个用于搜索变量和函数的作用域链；<br>函数的局部环境不仅有权访问函数作用域中的变量，而且有权访问其包含（父）环境，乃至全局环境；<br>全局环境只能访问在全局环境中定义的变量和函数，而不能访问局部环境中的任何数据；<br>变量的执行环境有助于确定何时释放内存。<br>延长作用域链：try-catch语句的catch块；with语句。<br>JavaScript没有块级作用域：for语句创建的变量i即使在for循环执行结束后，也依旧会存在于循环外部的执行环境中；使用var声明会自动被添加到最接近的环境中。</p>
-<p>当代码在一个环境中执行的时候，就会形成一种叫做作用域链的东西，它的用途是保证对执行环境中有访问权限的变量和函数进行有序访问（指按照规则层次来访问），作用域链的前端，就是执行环境的变量对象。</p>
+<p>当代码在一个环境中执行时，会创建变量对象的一个作用域链。作用域链的用途是保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端，始终都是当前执行的代码所在环境的变量对象。如果这个环境是函数，则将其活动对象作为变量对象。活动对象在一开始时只包含一个变量，即arguments对象(这个对象在全局环境中是不存在的)。作用域链中的下一个变量对象来自包含(外部)环境，而再下一个变量对象则来自下一个包含环境。这样一直延续到全局执行环境；全局执行环境始终是作用域链中的最后一个对象。</p>
+<p>，当JavaScript代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution context)。<br>对于每个执行上下文，都有三个重要属性：</p>
+<p>变量对象(Variable object，VO)<br>作用域链(Scope chain)<br>this</p>
+<p>函数的作用域在函数定义的时候就决定了。 这是因为函数有一个内部属性 [[scope]]，当函数创建的时候，就会保存所有父变量对象到其中，你可以理解 [[scope]] 就是所有父变量对象的层级链，但是注意：[[scope]] 并不代表完整的作用域链！</p>
+<p>function foo() {<br>    function bar() {<br>        …<br>    }<br>}复制代码函数创建时，各自的[[scope]]为：</p>
+<p>foo.[[scope]] = [<br>  globalContext.VO<br>];</p>
+<p>bar.[[scope]] = [<br>    fooContext.AO,<br>    globalContext.VO<br>];</p>
 
       
     </div>
@@ -521,7 +528,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -595,7 +602,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">41.5k</span>
+    <span title="Site words total count">45.3k</span>
   
 </div>
 
