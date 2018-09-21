@@ -100,17 +100,17 @@
 
 
 
-<meta name="description" content="执行环境与作用域:执行环境定义了变量或者函数有权访问其他数据。 每个执行环境都一个对应的变量对象，比如在web浏览器中，全局环境被认为是window对象。某环境代码执行完成，环境被销毁。其变量与函数定义也被销毁。 所有变量（包括基本类型和引用类型）都存在于一个执行环境（也称为作用域）当中，这个执行环境决定了变量的生命周期，以及哪一部分代码可以访问其中的变量。以下是关于执行环境的几点总结： 执行环境">
+<meta name="description" content="执行环境(执行上下文)所有变量（包括基本类型和引用类型）都存在于一个执行环境当中，这个执行环境决定了变量的生命周期，以及哪一部分代码可以访问其中的变量。以下是关于执行环境的几点总结： 执行环境有全局执行环境（也称为全局环境）和函数执行环境之分；函数的局部环境不仅有权访问函数作用域中的变量，而且有权访问其包含（父）环境，乃至全局环境；全局环境只能访问在全局环境中定义的变量和函数，而不能访问局部环境中">
 <meta property="og:type" content="article">
-<meta property="og:title" content="js系列-5-作用域(draft)">
+<meta property="og:title" content="js系列-5-执行环境与作用域(draft)">
 <meta property="og:url" content="https://xiangergou.github.io/2018/09/20/js系列-5-作用域/index.html">
-<meta property="og:site_name" content="斯是陋室">
-<meta property="og:description" content="执行环境与作用域:执行环境定义了变量或者函数有权访问其他数据。 每个执行环境都一个对应的变量对象，比如在web浏览器中，全局环境被认为是window对象。某环境代码执行完成，环境被销毁。其变量与函数定义也被销毁。 所有变量（包括基本类型和引用类型）都存在于一个执行环境（也称为作用域）当中，这个执行环境决定了变量的生命周期，以及哪一部分代码可以访问其中的变量。以下是关于执行环境的几点总结： 执行环境">
+<meta property="og:site_name" content="月落天白">
+<meta property="og:description" content="执行环境(执行上下文)所有变量（包括基本类型和引用类型）都存在于一个执行环境当中，这个执行环境决定了变量的生命周期，以及哪一部分代码可以访问其中的变量。以下是关于执行环境的几点总结： 执行环境有全局执行环境（也称为全局环境）和函数执行环境之分；函数的局部环境不仅有权访问函数作用域中的变量，而且有权访问其包含（父）环境，乃至全局环境；全局环境只能访问在全局环境中定义的变量和函数，而不能访问局部环境中">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-20T11:29:57.000Z">
+<meta property="og:updated_time" content="2018-09-21T06:02:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="js系列-5-作用域(draft)">
-<meta name="twitter:description" content="执行环境与作用域:执行环境定义了变量或者函数有权访问其他数据。 每个执行环境都一个对应的变量对象，比如在web浏览器中，全局环境被认为是window对象。某环境代码执行完成，环境被销毁。其变量与函数定义也被销毁。 所有变量（包括基本类型和引用类型）都存在于一个执行环境（也称为作用域）当中，这个执行环境决定了变量的生命周期，以及哪一部分代码可以访问其中的变量。以下是关于执行环境的几点总结： 执行环境">
+<meta name="twitter:title" content="js系列-5-执行环境与作用域(draft)">
+<meta name="twitter:description" content="执行环境(执行上下文)所有变量（包括基本类型和引用类型）都存在于一个执行环境当中，这个执行环境决定了变量的生命周期，以及哪一部分代码可以访问其中的变量。以下是关于执行环境的几点总结： 执行环境有全局执行环境（也称为全局环境）和函数执行环境之分；函数的局部环境不仅有权访问函数作用域中的变量，而且有权访问其包含（父）环境，乃至全局环境；全局环境只能访问在全局环境中定义的变量和函数，而不能访问局部环境中">
 
 
 
@@ -146,7 +146,7 @@
 
 
 
-  <title>js系列-5-作用域(draft) | 斯是陋室</title>
+  <title>js系列-5-执行环境与作用域(draft) | 月落天白</title>
   
 
 
@@ -176,7 +176,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">斯是陋室</span>
+        <span class="site-title">月落天白</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -281,7 +281,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="斯是陋室">
+      <meta itemprop="name" content="月落天白">
     </span>
 
     
@@ -289,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">js系列-5-作用域(draft)</h1>
+          <h1 class="post-title" itemprop="name headline">js系列-5-执行环境与作用域(draft)</h1>
         
 
         <div class="post-meta">
@@ -355,7 +355,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,203 字
+                  1,478 字
                 </span>
               
 
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  4 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -392,28 +392,40 @@
       
 
       
-        <p>执行环境与作用域:<br>执行环境定义了变量或者函数有权访问其他数据。</p>
-<p>每个执行环境都一个对应的变量对象，比如在web浏览器中，全局环境被认为是window对象。<br>某环境代码执行完成，环境被销毁。其变量与函数定义也被销毁。</p>
-<p>所有变量（包括基本类型和引用类型）都存在于一个执行环境（也称为作用域）当中，这个执行环境决定了变量的生命周期，以及哪一部分代码可以访问其中的变量。以下是关于执行环境的几点总结：</p>
-<p>执行环境有全局执行环境（也称为全局环境）和函数执行环境之分；<br>每次进入一个新执行环境，都会创建一个用于搜索变量和函数的作用域链；<br>函数的局部环境不仅有权访问函数作用域中的变量，而且有权访问其包含（父）环境，乃至全局环境；<br>全局环境只能访问在全局环境中定义的变量和函数，而不能访问局部环境中的任何数据；<br>变量的执行环境有助于确定何时释放内存。<br>延长作用域链：try-catch语句的catch块；with语句。<br>JavaScript没有块级作用域：for语句创建的变量i即使在for循环执行结束后，也依旧会存在于循环外部的执行环境中；使用var声明会自动被添加到最接近的环境中。</p>
-<p>当代码在一个环境中执行时，会创建变量对象的一个作用域链。作用域链的用途是保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端，始终都是当前执行的代码所在环境的变量对象。如果这个环境是函数，则将其活动对象作为变量对象。活动对象在一开始时只包含一个变量，即arguments对象(这个对象在全局环境中是不存在的)。作用域链中的下一个变量对象来自包含(外部)环境，而再下一个变量对象则来自下一个包含环境。这样一直延续到全局执行环境；全局执行环境始终是作用域链中的最后一个对象。</p>
-<p>变量对象VO</p>
-<p>变量对象VO是与执行上下文相关的特殊对象,用来存储上下文的函数声明，函数形参和变量。在global全局上下文中，变量对象也是全局对象自身，在函数上下文中，变量对象被表示为活动对象AO。</p>
-<p>变量对象VO存储上下文中声明的以下内容<br>{<br>函数声明FD(如果在函数上下文中),—-不包含函数表达式<br>函数形参function arguments,<br>变量声明–注意b=10不是变量，但是var b = 10;是变量，有变量声明提升<br>alert(a); // undefined<br>alert(b); // “b” 没有声明</p>
-<p>b = 10;<br>var a = 20;<br>1<br>2<br>}</p>
-<p>活动变量AO<br>当函数被调用后，这个特殊的活动对象就被创建了。它包含普通参数与特殊参数对象（具有索引属性的参数映射表）。活动对象在函数上下文中作为变量对象使用。</p>
-<p>在函数执行上下文中，VO是不能直接访问的，此时由活动对象(activation object,缩写为AO)扮演VO的角色。</p>
-<p>VO(functionContext) === AO;<br>1<br>Arguments对象是活动对象的一个属性，它包括如下属性：</p>
-<p>callee — 指向当前函数的引用</p>
-<p>length — 真正传递的参数个数</p>
-<p>，当JavaScript代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution context)。<br>对于每个执行上下文，都有三个重要属性：</p>
-<p>变量对象(Variable object，VO)<br>作用域链(Scope chain)<br>this</p>
-<p>函数的作用域在函数定义的时候就决定了。<br>这是因为函数有一个内部属性 [[scope]]，当函数创建的时候，就会保存所有父变量对象到其中，你可以理解 [[scope]] 就是所有父变量对象的层级链，但是注意：[[scope]] 并不代表完整的作用域链！</p>
+        <h3 id="执行环境-执行上下文"><a href="#执行环境-执行上下文" class="headerlink" title="执行环境(执行上下文)"></a>执行环境(执行上下文)</h3><p>所有变量（包括基本类型和引用类型）都存在于一个执行环境当中，这个执行环境决定了变量的生命周期，以及哪一部分代码可以访问其中的变量。以下是关于执行环境的几点总结：</p>
+<p>执行环境有全局执行环境（也称为全局环境）和函数执行环境之分；<br>函数的局部环境不仅有权访问函数作用域中的变量，而且有权访问其包含（父）环境，乃至全局环境；<br>全局环境只能访问在全局环境中定义的变量和函数，而不能访问局部环境中的任何数据；<br>变量的执行环境有助于确定何时释放内存。</p>
+<h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3><p>当代码在一个环境中执行时，会创建变量对象的一个作用域链。  作用域链的用途是保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端，始终都是当前执行的代码所在环境的<strong>变量对象</strong>。     如果这个环境是函数，则将其<strong>活动对象</strong>作为变量对象。活动对象在一开始时只包含一个变量，即arguments对象(这个对象在全局环境中是不存在的)。  作用域链中的下一个变量对象来自包含(外部)环境，而再下一个变量对象则来自下一个包含环境。这样一直延续到全局执行环境；全局执行环境始终是作用域链中的最后一个对象。</p>
+<h4 id="变量对象VO"><a href="#变量对象VO" class="headerlink" title="变量对象VO"></a>变量对象VO</h4><p>变量对象VO是与执行上下文相关的特殊对象,用来存储上下文的函数声明，函数形参和变量。在global全局上下文中，变量对象也是全局对象自身，在函数上下文中，变量对象被表示为活动对象AO。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 变量对象VO存储上下文中声明的以下内容 </span></span><br><span class="line">&#123; </span><br><span class="line">  <span class="comment">// 函数声明FD(如果在函数上下文中),—-不包含函数表达式 </span></span><br><span class="line">  <span class="comment">// 函数形参function arguments, </span></span><br><span class="line">  <span class="comment">// 变量声明–注意b=10不是变量，但是var b = 10;是变量，有变量声明提升 </span></span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> b = <span class="number">20</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  test(<span class="number">30</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 全局上下文的变量对象</span></span><br><span class="line">  VO(globalContext) = &#123;</span><br><span class="line">    a: <span class="number">10</span>,</span><br><span class="line">    test: <span class="xml"><span class="tag">&lt;<span class="name">reference</span> <span class="attr">to</span> <span class="attr">function</span>&gt;</span></span></span><br><span class="line"><span class="xml">  &#125;;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">  // test函数上下文的变量对象</span></span><br><span class="line"><span class="xml">  VO(test functionContext) = &#123;</span></span><br><span class="line"><span class="xml">    x: 30,</span></span><br><span class="line"><span class="xml">    b: 20</span></span><br><span class="line"><span class="xml">  &#125;;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="活动变量-activation-object-缩写为AO"><a href="#活动变量-activation-object-缩写为AO" class="headerlink" title="活动变量(activation object,缩写为AO)"></a>活动变量(activation object,缩写为AO)</h4><p>  当函数被调用后，这个特殊的活动对象就被创建了。它包含普通参数与特殊参数对象（具有索引属性的参数映射表）。<br>  在函数执行上下文中，VO是不能直接访问的，此时由活动对象AO扮演VO的角色。</p>
+<p>  Arguments对象是活动对象的一个属性，它包括如下属性：</p>
+<p>  callee — 指向当前函数的引用<br>  length — 真正传递的参数个数<br>  properties-indexes (字符串类型的整数) 属性的值就是函数的参数值(按参数列表从左到右排列)。<br>  properties-indexes内部元素的个数等于arguments.length. properties-indexes 的值和实际传递进来的参数之间是共享的。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x, y, z</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 声明的函数参数数量arguments (x, y, z)</span></span><br><span class="line">  alert(foo.length); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 真正传进来的参数个数(only x, y)</span></span><br><span class="line">  alert(<span class="built_in">arguments</span>.length); <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 参数的callee是函数自身</span></span><br><span class="line">  alert(<span class="built_in">arguments</span>.callee === foo); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 参数共享</span></span><br><span class="line"></span><br><span class="line">  alert(x === <span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">// true</span></span><br><span class="line">  alert(x); <span class="comment">// 10</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">arguments</span>[<span class="number">0</span>] = <span class="number">20</span>;</span><br><span class="line">  alert(x); <span class="comment">// 20</span></span><br><span class="line"></span><br><span class="line">  x = <span class="number">30</span>;</span><br><span class="line">  alert(<span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">// 30</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 不过，没有传进来的参数z，和参数的第3个索引值是不共享的</span></span><br><span class="line"></span><br><span class="line">  z = <span class="number">40</span>;</span><br><span class="line">  alert(<span class="built_in">arguments</span>[<span class="number">2</span>]); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">arguments</span>[<span class="number">2</span>] = <span class="number">50</span>;</span><br><span class="line">  alert(z); <span class="comment">// 40</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="number">10</span>, <span class="number">20</span>);</span><br></pre></td></tr></table></figure></p>
+<h4 id="具体流程"><a href="#具体流程" class="headerlink" title="具体流程"></a>具体流程</h4><p>函数的作用域在函数定义的时候就决定了。<br>这是因为函数有一个内部属性 [[scope]]，当函数创建的时候，就会保存所有父变量对象到其中，你可以理解 [[scope]] 就是所有父变量对象的层级链，但是注意：[[scope]] 并不代表完整的作用域链！</p>
 <h5 id="函数创建"><a href="#函数创建" class="headerlink" title="函数创建"></a>函数创建</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 函数创建时，各自的[[scope]]为：</span></span><br><span class="line">foo.[[scope]] = [</span><br><span class="line">  globalContext.VO</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">bar.[[scope]] = [</span><br><span class="line">  fooContext.AO,</span><br><span class="line">  globalContext.VO</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
 <h4 id="函数调用："><a href="#函数调用：" class="headerlink" title="函数调用："></a>函数调用：</h4><p>当函数激活时，进入函数上下文，创建 VO/AO 后，就会将活动对象添加到作用链的前端。</p>
 <p>这时候执行上下文的作用域链，我们命名为 Scope：</p>
 <p>Scope = [AO].concat([[Scope]]);</p>
 <p>至此，作用域链创建完毕。</p>
+<p>创建阶段：<br>  <!-- 1. 创建执行环境，即执行上下文。 环境有与之关联的变量对象(即作用域)。  --><br>   <!-- fnContext = {VO: {形参， 变量， 函数声明}} --></p>
+<ol>
+<li>将父级变量对象即父级作用域保存在内部不可见属性[[scope]]中<br>fn.[[scope]] = [<br>globalContext.VO;<br>]</li>
+</ol>
+<p>执行阶段：<br>执行前阶段： 创建执行环境，即执行上下文。 每个环境都有与之关联的变量对象(即作用域)。 并且当前环境被推入环境栈。（执行上下文栈）</p>
+<ol>
+<li>ECStack = [fnContext, globalContent];</li>
+</ol>
+<p>将fn[[scope]]属性赋予当前执行环境。</p>
+<ol>
+<li><p>fnContext = { Scope: [fn.[[scope]]]}</p>
+</li>
+<li><p>在函数中，活动对象即为变量对象。起初只有arguments对象。 随着初始化活动对象，加入形参、函数声明、变量声明。<br>fnContext = {<br>AO: {     // 形参<br> arguments: {<br>   length: 0<br> },<br> ‘函数内声明的变量’: undefined,<br> ‘函数内声明的函数’: undefined<br>},<br>Scope: [fn.[[scope]]]<br>}</p>
+</li>
+<li><p>活动对象压入fn作用域链顶端，即活动对象作为变量对象放入变量对象数组头部。</p>
+</li>
+</ol>
+<p>fnContext = {<br>  AO: {     // 形参<br>    arguments: {<br>      length: 0<br>    },<br>    ‘声明的变量’: undefined,<br>    ‘声明的函数’: undefined<br>  },<br>  Scope: [AO, fn.[[scope]]]<br>}</p>
+<p>随着函数执行，修改AO的值：</p>
+<p>最后函数执行完毕， 函数环境从环境栈中弹出。<br>ECStack = [<br>    globalContext<br>];</p>
 
       
     </div>
@@ -447,6 +459,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/21/es6笔记之三/" rel="prev" title="es6笔记之三 -- 数组扩展">
+                es6笔记之三 -- 数组扩展 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -527,7 +543,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -582,7 +598,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#函数创建"><span class="nav-number">1.</span> <span class="nav-text">函数创建</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数调用："><span class="nav-number"></span> <span class="nav-text">函数调用：</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#执行环境-执行上下文"><span class="nav-number">1.</span> <span class="nav-text">执行环境(执行上下文)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域链"><span class="nav-number">2.</span> <span class="nav-text">作用域链</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#变量对象VO"><span class="nav-number">2.1.</span> <span class="nav-text">变量对象VO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#活动变量-activation-object-缩写为AO"><span class="nav-number">2.2.</span> <span class="nav-text">活动变量(activation object,缩写为AO)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体流程"><span class="nav-number">2.3.</span> <span class="nav-text">具体流程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#函数创建"><span class="nav-number">2.3.1.</span> <span class="nav-text">函数创建</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数调用："><span class="nav-number">2.4.</span> <span class="nav-text">函数调用：</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -617,7 +633,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">46.5k</span>
+    <span title="Site words total count">48.3k</span>
   
 </div>
 
