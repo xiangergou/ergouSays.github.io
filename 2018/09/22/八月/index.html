@@ -100,17 +100,17 @@
 
 
 
-<meta name="description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)()">
+<meta name="description" content="记得那会儿我和这小区的所有的街坊笑脸相迎，却并不打招呼。这就决定回返的路途愈发漫长。穿过巷道，小孩吵闹着站在高出路面两侧的水泥台阶上，很不安分，躲避着汽车的退让。老人们围在拐角处窃窃私语，见到新面孔，他们说，喝茶。我又笑，心想除了笑还能干什么呢？往前走，在面临转向的地方犹豫不决，在他们看来也许是我心生留恋。凭着忽远忽近的手机导航到处磕磕碰碰。还好天公作美，不需要忍受烈日曝晒。有路人经过就只好硬着头">
 <meta property="og:type" content="article">
-<meta property="og:title" content="underscore源码阅读系列-基础部分(更新中)">
-<meta property="og:url" content="https://xiangergou.github.io/2018/05/21/underscore源码阅读系列-基础部分/index.html">
+<meta property="og:title" content="八月">
+<meta property="og:url" content="https://xiangergou.github.io/2018/09/22/八月/index.html">
 <meta property="og:site_name" content="月落天白">
-<meta property="og:description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)()">
+<meta property="og:description" content="记得那会儿我和这小区的所有的街坊笑脸相迎，却并不打招呼。这就决定回返的路途愈发漫长。穿过巷道，小孩吵闹着站在高出路面两侧的水泥台阶上，很不安分，躲避着汽车的退让。老人们围在拐角处窃窃私语，见到新面孔，他们说，喝茶。我又笑，心想除了笑还能干什么呢？往前走，在面临转向的地方犹豫不决，在他们看来也许是我心生留恋。凭着忽远忽近的手机导航到处磕磕碰碰。还好天公作美，不需要忍受烈日曝晒。有路人经过就只好硬着头">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-03T04:50:11.000Z">
+<meta property="og:updated_time" content="2018-09-22T12:19:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="underscore源码阅读系列-基础部分(更新中)">
-<meta name="twitter:description" content="前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。与jq相似，underscore也是采用立即执行函数包裹，以达到避免全局污染以及隐私保护等目的。123(function()&amp;#123;  // .....执行逻辑&amp;#125;)()">
+<meta name="twitter:title" content="八月">
+<meta name="twitter:description" content="记得那会儿我和这小区的所有的街坊笑脸相迎，却并不打招呼。这就决定回返的路途愈发漫长。穿过巷道，小孩吵闹着站在高出路面两侧的水泥台阶上，很不安分，躲避着汽车的退让。老人们围在拐角处窃窃私语，见到新面孔，他们说，喝茶。我又笑，心想除了笑还能干什么呢？往前走，在面临转向的地方犹豫不决，在他们看来也许是我心生留恋。凭着忽远忽近的手机导航到处磕磕碰碰。还好天公作美，不需要忍受烈日曝晒。有路人经过就只好硬着头">
 
 
 
@@ -140,13 +140,13 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/2018/05/21/underscore源码阅读系列-基础部分/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/09/22/八月/"/>
 
 
 
 
 
-  <title>underscore源码阅读系列-基础部分(更新中) | 月落天白</title>
+  <title>八月 | 月落天白</title>
   
 
 
@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/05/21/underscore源码阅读系列-基础部分/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/09/22/八月/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -289,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">underscore源码阅读系列-基础部分(更新中)</h1>
+          <h1 class="post-title" itemprop="name headline">八月</h1>
         
 
         <div class="post-meta">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-21T23:13:03+08:00">
-                2018-05-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-22T20:11:18+08:00">
+                2018-09-22
               </time>
             
 
@@ -324,8 +324,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/草稿/" itemprop="url" rel="index">
-                    <span itemprop="name">草稿</span>
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
                   </a>
                 </span>
 
@@ -355,7 +355,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  425 字
+                  1,839 字
                 </span>
               
 
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -392,18 +392,16 @@
       
 
       
-        <p>前端不可避免需要各种工具函数，整日install别人工具库总是颇多掣肘，underscore的研习可以帮助我们实现这一野心。<br>与jq相似，underscore也是采用<strong>立即执行函数</strong>包裹，以达到避免全局污染以及隐私保护等目的。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// .....执行逻辑</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<h3 id="对象"><a href="#对象" class="headerlink" title="_ 对象"></a>_ 对象</h3><p> 我们想将所有以后要用的工具方法挂载到一个对象上，以便之后调用。看看_如何实现：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> root = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> _ = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    root._ = _;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在这里添加自己的方法</span></span><br><span class="line">    _.reverse = <span class="function"><span class="keyword">function</span>(<span class="params">string</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> string.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line">_.reverse(<span class="string">'hello'</span>);</span><br><span class="line">=&gt; <span class="string">'olleh'</span></span><br><span class="line"></span><br><span class="line"><span class="string">``</span><span class="string">`    </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> ### 执行环境判断</span></span><br><span class="line"><span class="string">underscore 对象 _ 会依托于当前的所处环境，挂载到不同的全局空间当中（浏览器的全局对象是 window，node 的全局对象是 global）。且看underscore如何实现：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javascript</span><br><span class="line">  <span class="keyword">var</span> root = (<span class="keyword">typeof</span> self == <span class="string">'object'</span> &amp;&amp; self.self == self &amp;&amp; self) ||</span><br><span class="line">           (<span class="keyword">typeof</span> global == <span class="string">'object'</span> &amp;&amp; global.global == global &amp;&amp; global) ||</span><br><span class="line">           <span class="keyword">this</span> ||</span><br><span class="line">           &#123;&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>逐一分析：</p>
-<ul>
-<li>最直观的，浏览器下的window，node下的global。 </li>
-<li><p>严格模式下this 返回 undefined，而非指向 Window。<br>考虑这两点，于是就有了</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> root = </span><br><span class="line">(<span class="keyword">typeof</span> <span class="built_in">window</span> == <span class="string">'object'</span> &amp;&amp; <span class="built_in">window</span>.window == <span class="built_in">window</span> &amp;&amp; <span class="built_in">window</span>) || </span><br><span class="line">(<span class="keyword">typeof</span> global == <span class="string">'object'</span> &amp;&amp; global.global == global &amp;&amp; global);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>而在浏览器环境下，self 保存的就是当前 window 对象的引用。 underscore 用 self 代替 window 的原因主要用于一些不具有窗口的上下文环境中，比如 Web Workers。<br>关于 Web Workers，可翻阅《javascript高级程序设计》P697。</p>
-<p>之后合并关于小程序的兼容pr加上’{}’以及node 沙盒模块的兼容pr添加’this’，即得到最终版本。</p>
+        <p>记得那会儿我和这小区的所有的街坊笑脸相迎，却并不打招呼。这就决定回返的路途愈发漫长。穿过巷道，小孩吵闹着站在高出路面两侧的水泥台阶上，很不安分，躲避着汽车的退让。老人们围在拐角处窃窃私语，见到新面孔，他们说，喝茶。我又笑，心想除了笑还能干什么呢？往前走，在面临转向的地方犹豫不决，在他们看来也许是我心生留恋。凭着忽远忽近的手机导航到处磕磕碰碰。还好天公作美，不需要忍受烈日曝晒。有路人经过就只好硬着头皮往下走，总是这样，耗费过多的精力和时间。 我站在楼下给他发短信，他说进门就是，用不用下去接。我冲着手机摇了摇头，说不用。<br><a id="more"></a></p>
+<p>上楼的时候碰到女孩，头发遮住侧脸，楼道里光线昏暗，经过的时候险些听到呼吸声。没有灯，我对她笑不知道她看见没有。</p>
+<p>门被开启，像是有柔软的光舒展进来。或许在我无法看见的地方，屋子的暗处，他们叫嚣着，随时准备冲出。不加选择的贸然闯入无疑损毁了一些东西，例如铺开在天花板上的私密谈话，无需费心就可经营的沉郁氛围以及扑落在地的皮屑。</p>
+<p>夏季刚下过一场雨，空中潮湿充满水汽，视线几乎透明。水泥球场上未干的块状水渍在烈日下摇晃，亮闪闪的一片。有哨音从远处传来，到靠墙的这片树荫下已经有些力不从心，平整的木材被横空劈断。我的一小块皮肤还暴露在树阴尽头的阳光中，汗津津的毛孔被放大，显得异常清晰。便携式调频收音机长久停留在固定的波段上。冒险去拨弄它没有任何意义，安稳就很好，安稳是富足中成长起来的好习惯。   我把目光落回到脚下的鞋上，浸在阳光里那部分有些发烫，脚指像被咬了一口似的猛然缩回来。明暗交接的缝合线弧度在鞋面上陡然增高，随后又笔直延伸开。周围的地上散落着几只蚂蚁，要是再往前几年无可以不费吹灰之力看清它们细微的纹路，兴致昂然地用火镜聚光，看它们在那个刺眼的光斑下滚动。我知道这样的时代已经一去不返了。我转动目光，看见到处都是墙。</p>
+<p>大多时候的晚上6点，走出楼梯，我们总能变得轻快起来。户外的凉风迎面涌来，不错的夏夜呢。在出门的地方我把喝光的易拉罐使劲朝墙上扔去，发出响亮的金属撞击声，随后又反弹回来，刺耳地在地上滚动了几下，我不禁暗自得意起来。她们两个在前面走得稍快一些，也并不因此有丝毫减慢的迹象。 呶呶嘴，自顾自走着，像每个九点来的时候一样。</p>
+<p>站牌下拥挤不堪。B支4迟迟未到。勉强扒开一丝缝隙挤进去，人群中惹来一阵抱怨和骚动。公交车司机仿佛坐定一般，面无表情地斜视着投币的乘客依次向后挪动，汇入身后的人流中。随着“哔呜”的一声，汽车欢快地跑起来。不时有人朝我脖颈呼气，我艰难挪动了一下身子暂避，盯着车窗外的风景。巨幅电影海报张挂在路边的墙上，不久之前我走近它，甚至打定决心享受被人们乐道的电影。四下看着却发现没人结伴，心想还是算了，孤独本就无可厚非。日光灯聚焦下，破旧的住宅楼上贴着一看就不是居民自制的条幅：“办好G20，当好东道主”。也是那个夜晚，我把回家提上了日程。        </p>
+<p>感谢灯光和飞蛾，夜里行走，像投入新的世界。在黑暗中摸索攀爬，一路上我们随时可以选择夺窗而逃。走入人群中，无法看到更多人，即便遇上也显得貌合神离。这样做的好处是不致分心，使我们专注于走动；而白昼不同，甚至恰恰相反。 </p>
+<p>在某个安静些的时刻，比如现在。深夜归来，几杯薄酒下肚，略带晕眩地投入可供躺倒的处所，趁睡意还在途中，我们变得真诚而伤感。B的微信点亮了我手机的光：“他妈的，没有一个能靠得住。”我听到这话却并不回应他。你们试过么？那也应该知道夜里尤其是酒后发声的危险。陌生，滞重，仿如初见。我自语了什么，声音在墙壁上游走，潜入它们的缝隙。这一切带来的可怕后果是，你觉得自己像个陌生人。对话初始变成了B的自言自语，他倒并不在意。就是这样一个人，在社会上这几年只是让他增添了很多浮于表面的东西，明白人不必绞尽脑汁就能很快刺穿。过去是永恒的话题。现在，喏，无非也就是看到的这个样子，一份拿不出手的工作，几个人无所事事，也没有更好的打算。 B说真的二狗，他们全是骗子。</p>
+<p>也是在这样的时候，连接玩笑之间的大片空白；抑或那些失眠结束，日期含混不清难以辨认的某个分界点，我能否有所察觉？它们被粗劣的画布缺乏粉饰地一笔带过，你很难用简单的好或者坏去定义。同样也无法确定这是否真的就无关紧要。只是恍惚中看着背影越走越远，只是无所适从，只是觉着慌乱。 像刚从泥水中伸出手挣扎着站起来又被一脚踩在满是泥水的头上。 也是在这个时候，开始知道除了爹妈，你对这个世界其实当真可有可无，无端狗又让良心吃了大半。</p>
+<p>某天晚上一行人坐滴滴，城市在我们面前铺展开，滴滴飞驰起来后路面变得异常开阔。一路上w忧心忡忡，这样下去也不是办法。他不停地说操不尽的心操不尽的心。z靠在车窗上给他女朋友打电话对这一切浑然不觉。我问z最后一次看见骡子是什么时候，他烦躁地扔下电话说哈哈其实骡子根本就没有存在过。我冲上去抓着他的衣领说你骗人，这不可能。z看着我说，真的没有，没有骡子这个人。滴滴司机的胳膊上刻着一个歪歪扭扭的“恨”字，对我们的争吵充耳不闻。w看着天说，云真让人操心。</p>
 
       
     </div>
@@ -428,8 +426,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/19/不过一场闹剧/" rel="next" title="没有齐天大圣，我只是只猴子">
-                <i class="fa fa-chevron-left"></i> 没有齐天大圣，我只是只猴子
+              <a href="/2018/09/21/图解http读书笔记-2-简单的http/" rel="next" title="图解http读书笔记-2-简单的http">
+                <i class="fa fa-chevron-left"></i> 图解http读书笔记-2-简单的http
               </a>
             
           </div>
@@ -437,10 +435,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/22/underscore-1-8-3源码注解/" rel="prev" title="underscore-1.9.0源码注解(更新中)">
-                underscore-1.9.0源码注解(更新中) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -492,17 +486,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -566,22 +551,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象"><span class="nav-number">1.</span> <span class="nav-text">_ 对象</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
