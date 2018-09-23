@@ -623,7 +623,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/21/es6笔记之三/" itemprop="url">es6笔记之三 -- 数组扩展</a></h1>
+                <a class="post-title-link" href="/2018/09/21/es6笔记之三/" itemprop="url">es6笔记之三 -- 改进的数组功能(draft)</a></h1>
         
 
         <div class="post-meta">
@@ -667,7 +667,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  34 字
+                  2,046 字
                 </span>
               
 
@@ -683,7 +683,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1 分钟
+                  9 分钟
                 </span>
               
             </div>
@@ -710,6 +710,96 @@
 <p>function push(array, …items) {<br>  array.push(…items);<br>}</p>
 <p>function add(x, y) {<br>  return x + y;<br>}</p>
 <p>const numbers = [4, 38];<br>add(…numbers) // 42</p>
+<h4 id="替代函数的-apply-方法"><a href="#替代函数的-apply-方法" class="headerlink" title="替代函数的 apply 方法"></a>替代函数的 apply 方法</h4><p>// ES5 的写法<br>function f(x, y, z) {<br>  // …<br>}<br>var args = [0, 1, 2];<br>f.apply(null, args);</p>
+<p>// ES6的写法<br>function f(x, y, z) {<br>  // …<br>}<br>let args = [0, 1, 2];<br>f(…args);</p>
+<h4 id="扩展运算符的应用"><a href="#扩展运算符的应用" class="headerlink" title="扩展运算符的应用"></a>扩展运算符的应用</h4><p>克隆数组<br>const a1 = [1, 2];<br>// 写法一<br>const a2 = […a1];<br>// 写法二<br>const […a2] = a1;</p>
+<p>合并数组</p>
+<p>const arr1 = [‘a’, ‘b’];<br>const arr2 = [‘c’];<br>const arr3 = [‘d’, ‘e’];</p>
+<p>// ES5 的合并数组<br>arr1.concat(arr2, arr3);<br>// [ ‘a’, ‘b’, ‘c’, ‘d’, ‘e’ ]</p>
+<p>// ES6 的合并数组<br>[…arr1, …arr2, …arr3]<br>// [ ‘a’, ‘b’, ‘c’, ‘d’, ‘e’ ]</p>
+<p>都是浅拷贝，使用的时候需要注意。</p>
+<p>与解构赋值结合</p>
+<p>first // undefined<br>rest  // []</p>
+<p>const [first, …rest] = [“foo”];<br>first  // “foo”<br>rest   // []</p>
+<p>字符串<br>扩展运算符还可以将字符串转为真正的数组。</p>
+<p>[…’hello’]<br>// [ “h”, “e”, “l”, “l”, “o” ]</p>
+<p>扩展运算符可将类数组转换为数组<br>扩展运算符内部调用的是数据结构的 Iterator 接口，因此只要具有 Iterator 接口的对象，都可以使用扩展运算符</p>
+<p>let arrayLike = {<br>  ‘0’: ‘a’,<br>  ‘1’: ‘b’,<br>  ‘2’: ‘c’,<br>  length: 3<br>};</p>
+<p>// TypeError: Cannot spread non-iterable object.<br>let arr = […arrayLike];</p>
+<p>当length&gt;3时，转换到数组会用undefined补全，反之，会截取后续数值。</p>
+<p>Generator 函数运行后，返回一个遍历器对象，因此也可以使用扩展运算符。</p>
+<p>const go = function*(){<br>  yield 1;<br>  yield 2;<br>  yield 3;<br>};</p>
+<p>[…go()] // [1, 2, 3]</p>
+<h3 id="Array-from"><a href="#Array-from" class="headerlink" title="Array.from()"></a>Array.from()</h3><p>Array.from方法用于将两类对象转为真正的数组：类似数组的对象（array-like object）和可遍历（iterable）的对象（包括 ES6 新增的数据结构 Set 和 Map）<br>所谓类似数组的对象，本质特征只有一点，即必须有length属性<br>因此，任何有length属性的对象，都可以通过Array.from方法转为数组，而此时扩展运算符就无法转换。</p>
+<p>只要是部署了 Iterator 接口的数据结构，Array.from都能将其转为数组。</p>
+<p>Array.from(‘hello’)<br>// [‘h’, ‘e’, ‘l’, ‘l’, ‘o’]</p>
+<p>let namesSet = new Set([‘a’, ‘b’])<br>Array.from(namesSet) // [‘a’, ‘b’]</p>
+<p>Array.from还可以接受第二个参数，作用类似于数组的map方法，用来对每个元素进行处理，将处理后的值放入返回的数组。</p>
+<p>Array.from(arrayLike, x =&gt; x <em> x);<br>// 等同于<br>Array.from(arrayLike).map(x =&gt; x </em> x);</p>
+<p>Array.from([1, 2, 3], (x) =&gt; x * x)</p>
+<p>function typesOf () {<br>  return Array.from(arguments, value =&gt; typeof value)<br>}<br>typesOf(null, [], NaN)<br>// [‘object’, ‘object’, ‘number’]</p>
+<h3 id="Array-of"><a href="#Array-of" class="headerlink" title="Array.of()"></a>Array.of()</h3><p>Array.of方法用于将一组值，转换为数组。</p>
+<p>数个数的不同，会导致Array()的行为有差异。Array.of方法用于弥补数组构造函数Array()的不足<br>Array() // []<br>Array(3) // [, , ,]<br>Array(3, 11, 8) // [3, 11, 8]</p>
+<p>Array.of() // []<br>Array.of(undefined) // [undefined]<br>Array.of(2) // [2]<br>Array.of(1, 2) // [1, 2]</p>
+<p>Array.of和Array.from()都可以用[].slice.call()</p>
+<h3 id="数组实例的-copyWithin"><a href="#数组实例的-copyWithin" class="headerlink" title="数组实例的 copyWithin()"></a>数组实例的 copyWithin()</h3><p>数组实例的copyWithin方法，在当前数组内部，将指定位置的成员复制到其他位置（会覆盖原有成员），然后返回当前数组。也就是说，使用这个方法，会修改当前数组。</p>
+<p>Array.prototype.copyWithin(target, start = 0, end = this.length)<br>它接受三个参数。</p>
+<p>target（必需）：从该位置开始替换数据。如果为负值，表示倒数。<br>start（可选）：从该位置开始读取数据，默认为 0。如果为负值，表示倒数。<br>end（可选）：到该位置前停止读取数据，默认等于数组长度。如果为负值，表示倒数。<br>这三个参数都应该是数值，如果不是，会自动转为数值。</p>
+<p>[1, 2, 3, 4, 5].copyWithin(0, 3)<br>// [4, 5, 3, 4, 5]</p>
+<p>数组实例的 find() 和 findIndex() § ⇧<br>数组实例的find方法，用于找出第一个符合条件的数组成员。它的参数是一个回调函数，所有数组成员依次执行该回调函数，直到找出第一个返回值为true的成员，然后返回该成员。如果没有符合条件的成员，则返回undefined。</p>
+<p>[1, 4, -5, 10].find((n) =&gt; n &lt; 0)<br>// -5</p>
+<p>数组实例的findIndex方法的用法与find方法非常类似，返回第一个符合条件的数组成员的位置，如果所有成员都不符合条件，则返回-1。</p>
+<p>[1, 5, 10, 15].findIndex(function(value, index, arr) {<br>  return value &gt; 9;<br>}) // 2</p>
+<p>这两个方法都可以接受第二个参数，用来绑定回调函数的this对象。</p>
+<p>function f(v){<br>  return v &gt; this.age;<br>}<br>let person = {name: ‘John’, age: 20};<br>[10, 12, 26, 15].find(f, person);    // 26</p>
+<p>另外，这两个方法都可以发现NaN，弥补了数组的indexOf方法的不足。</p>
+<p>[NaN].indexOf(NaN)<br>// -1</p>
+<p>[NaN].findIndex(y =&gt; Object.is(NaN, y))<br>// 0<br>上面代码中，indexOf方法无法识别数组的NaN成员，但是findIndex方法可以借助Object.is方法做到。</p>
+<h3 id="数组实例的-fill"><a href="#数组实例的-fill" class="headerlink" title="数组实例的 fill()"></a>数组实例的 fill()</h3><p>fill方法使用给定值，填充一个数组。</p>
+<p>[‘a’, ‘b’, ‘c’].fill(7)<br>// [7, 7, 7]</p>
+<p>new Array(3).fill(7)<br>// [7, 7, 7]<br>上面代码表明，fill方法用于空数组的初始化非常方便。数组中已有的元素，会被全部抹去。</p>
+<p>fill方法还可以接受第二个和第三个参数，用于指定填充的起始位置和结束位置。</p>
+<p>[‘a’, ‘b’, ‘c’].fill(7, 1, 2)<br>// [‘a’, 7, ‘c’]</p>
+<h4 id="includes"><a href="#includes" class="headerlink" title="includes"></a>includes</h4><p>includes与indexOf比较</p>
+<p>[1, 2, NaN].includes(NaN) // true<br>indexOf内部使用严格相等运算符（===）进行判断，这会导致对NaN的误判。</p>
+<p>数组实例的 flat()，flatMap()</p>
+<h4 id="数组实例的-flat-，flatMap"><a href="#数组实例的-flat-，flatMap" class="headerlink" title="数组实例的 flat()，flatMap()"></a>数组实例的 flat()，flatMap()</h4><p>数组的成员有时还是数组，Array.prototype.flat()用于将嵌套的数组“拉平”，变成一维的数组。该方法返回一个新数组，对原数据没有影响。</p>
+<p>[1, 2, [3, 4]].flat()<br>// [1, 2, 3, 4]<br>上面代码中，原数组的成员里面有一个数组，flat()方法将子数组的成员取出来，添加在原来的位置。</p>
+<p>flat()默认只会“拉平”一层，如果想要“拉平”多层的嵌套数组，可以将flat()方法的参数写成一个整数，表示想要拉平的层数，默认为1。</p>
+<p>[1, 2, [3, [4, 5]]].flat()<br>// [1, 2, 3, [4, 5]]</p>
+<p>[1, 2, [3, [4, 5]]].flat(2)<br>// [1, 2, 3, 4, 5]<br>上面代码中，flat()的参数为2，表示要“拉平”两层的嵌套数组。</p>
+<p>如果不管有多少层嵌套，都要转成一维数组，可以用Infinity关键字作为参数。</p>
+<p>[1, [2, [3]]].flat(Infinity)<br>// [1, 2, 3]</p>
+<p>如果原数组有空位，flat()方法会跳过空位。</p>
+<p>[1, 2, , 4, 5].flat()<br>// [1, 2, 4, 5]</p>
+<p>flatMap()方法对原数组的每个成员执行一个函数（相当于执行Array.prototype.map()），然后对返回值组成的数组执行flat()方法。该方法返回一个新数组，不改变原数组。</p>
+<p>flatMap()只能展开一层数组。</p>
+<h4 id="数组的空位"><a href="#数组的空位" class="headerlink" title="数组的空位"></a>数组的空位</h4><p>数组的空位指，数组的某一个位置没有任何值。比如，Array构造函数返回的数组都是空位。</p>
+<p>Array(3) // [, , ,]<br>上面代码中，Array(3)返回一个具有 3 个空位的数组。</p>
+<p>注意，空位不是undefined，一个位置的值等于undefined，依然是有值的。空位是没有任何值</p>
+<p>ES5 对空位的处理，已经很不一致了，大多数情况下会忽略空位。</p>
+<p>forEach(), filter(), reduce(), every() 和some()都会跳过空位。<br>map()会跳过空位，但会保留这个值<br>join()和toString()会将空位视为undefined，而undefined和null会被处理成空字符串。</p>
+<p>// forEach方法<br>[,’a’].forEach((x,i) =&gt; console.log(i)); // 1</p>
+<p>// filter方法<br>[‘a’,,’b’].filter(x =&gt; true) // [‘a’,’b’]</p>
+<p>// every方法<br>[,’a’].every(x =&gt; x===’a’) // true</p>
+<p>// reduce方法<br>[1,,2].reduce((x,y) =&gt; x+y) // 3</p>
+<p>// some方法<br>[,’a’].some(x =&gt; x !== ‘a’) // false</p>
+<p>// map方法<br>[,’a’].map(x =&gt; 1) // [,1]</p>
+<p>// join方法<br>[,’a’,undefined,null].join(‘#’) // “#a##”</p>
+<p>// toString方法<br>[,’a’,undefined,null].toString() // “,a,,”</p>
+<p>ES6 则是明确将空位转为undefined。</p>
+<p>Array.from方法会将数组的空位，转为undefined，也就是说，这个方法不会忽略空位。</p>
+<p>Array.from([‘a’,,’b’])<br>// [ “a”, undefined, “b” ]<br>扩展运算符（…）也会将空位转为undefined。</p>
+<p>[…[‘a’,,’b’]]<br>// [ “a”, undefined, “b” ]<br>copyWithin()会连空位一起拷贝。</p>
+<p>[,’a’,’b’,,].copyWithin(2,0) // [,”a”,,”a”]<br>fill()会将空位视为正常的数组位置。</p>
+<p>new Array(3).fill(‘a’) // [“a”,”a”,”a”]<br>for…of循环也会遍历空位。</p>
+<p>let arr = [, ,];<br>for (let i of arr) {<br>  console.log(1);<br>}<br>// 1<br>// 1</p>
+<p>entries()、keys()、values()、find()和findIndex()会将空位处理成undefined。</p>
+<p>// entries()<br>[…[,’a’].entries()] // [[0,undefined], [1,”a”]]</p>
+<p>// keys()<br>[…[,’a’].keys()] // [0,1]</p>
+<p>// values()<br>[…[,’a’].values()] // [undefined,”a”]</p>
+<p>// find()<br>[,’a’].find(x =&gt; true) // undefined</p>
+<p>// findIndex()<br>[,’a’].findIndex(x =&gt; true) // 0</p>
 
           
         
@@ -777,7 +867,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/20/js系列-5-作用域/" itemprop="url">js系列-5-执行环境与作用域(draft)</a></h1>
+                <a class="post-title-link" href="/2018/09/20/js系列-5-作用域/" itemprop="url">js系列-5-执行环境与作用域链</a></h1>
         
 
         <div class="post-meta">
@@ -843,7 +933,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,478 字
+                  1,622 字
                 </span>
               
 
@@ -881,43 +971,14 @@
 
       
         
-          
-            <h3 id="执行环境-执行上下文"><a href="#执行环境-执行上下文" class="headerlink" title="执行环境(执行上下文)"></a>执行环境(执行上下文)</h3><p>所有变量（包括基本类型和引用类型）都存在于一个执行环境当中，这个执行环境决定了变量的生命周期，以及哪一部分代码可以访问其中的变量。以下是关于执行环境的几点总结：</p>
-<p>执行环境有全局执行环境（也称为全局环境）和函数执行环境之分；<br>函数的局部环境不仅有权访问函数作用域中的变量，而且有权访问其包含（父）环境，乃至全局环境；<br>全局环境只能访问在全局环境中定义的变量和函数，而不能访问局部环境中的任何数据；<br>变量的执行环境有助于确定何时释放内存。</p>
-<h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3><p>当代码在一个环境中执行时，会创建变量对象的一个作用域链。  作用域链的用途是保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端，始终都是当前执行的代码所在环境的<strong>变量对象</strong>。     如果这个环境是函数，则将其<strong>活动对象</strong>作为变量对象。活动对象在一开始时只包含一个变量，即arguments对象(这个对象在全局环境中是不存在的)。  作用域链中的下一个变量对象来自包含(外部)环境，而再下一个变量对象则来自下一个包含环境。这样一直延续到全局执行环境；全局执行环境始终是作用域链中的最后一个对象。</p>
-<h4 id="变量对象VO"><a href="#变量对象VO" class="headerlink" title="变量对象VO"></a>变量对象VO</h4><p>变量对象VO是与执行上下文相关的特殊对象,用来存储上下文的函数声明，函数形参和变量。在global全局上下文中，变量对象也是全局对象自身，在函数上下文中，变量对象被表示为活动对象AO。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 变量对象VO存储上下文中声明的以下内容 </span></span><br><span class="line">&#123; </span><br><span class="line">  <span class="comment">// 函数声明FD(如果在函数上下文中),—-不包含函数表达式 </span></span><br><span class="line">  <span class="comment">// 函数形参function arguments, </span></span><br><span class="line">  <span class="comment">// 变量声明–注意b=10不是变量，但是var b = 10;是变量，有变量声明提升 </span></span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> b = <span class="number">20</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  test(<span class="number">30</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 全局上下文的变量对象</span></span><br><span class="line">  VO(globalContext) = &#123;</span><br><span class="line">    a: <span class="number">10</span>,</span><br><span class="line">    test: <span class="xml"><span class="tag">&lt;<span class="name">reference</span> <span class="attr">to</span> <span class="attr">function</span>&gt;</span></span></span><br><span class="line"><span class="xml">  &#125;;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">  // test函数上下文的变量对象</span></span><br><span class="line"><span class="xml">  VO(test functionContext) = &#123;</span></span><br><span class="line"><span class="xml">    x: 30,</span></span><br><span class="line"><span class="xml">    b: 20</span></span><br><span class="line"><span class="xml">  &#125;;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
-<h4 id="活动变量-activation-object-缩写为AO"><a href="#活动变量-activation-object-缩写为AO" class="headerlink" title="活动变量(activation object,缩写为AO)"></a>活动变量(activation object,缩写为AO)</h4><p>  当函数被调用后，这个特殊的活动对象就被创建了。它包含普通参数与特殊参数对象（具有索引属性的参数映射表）。<br>  在函数执行上下文中，VO是不能直接访问的，此时由活动对象AO扮演VO的角色。</p>
-<p>  Arguments对象是活动对象的一个属性，它包括如下属性：</p>
-<p>  callee — 指向当前函数的引用<br>  length — 真正传递的参数个数<br>  properties-indexes (字符串类型的整数) 属性的值就是函数的参数值(按参数列表从左到右排列)。<br>  properties-indexes内部元素的个数等于arguments.length. properties-indexes 的值和实际传递进来的参数之间是共享的。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x, y, z</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 声明的函数参数数量arguments (x, y, z)</span></span><br><span class="line">  alert(foo.length); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 真正传进来的参数个数(only x, y)</span></span><br><span class="line">  alert(<span class="built_in">arguments</span>.length); <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 参数的callee是函数自身</span></span><br><span class="line">  alert(<span class="built_in">arguments</span>.callee === foo); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 参数共享</span></span><br><span class="line"></span><br><span class="line">  alert(x === <span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">// true</span></span><br><span class="line">  alert(x); <span class="comment">// 10</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">arguments</span>[<span class="number">0</span>] = <span class="number">20</span>;</span><br><span class="line">  alert(x); <span class="comment">// 20</span></span><br><span class="line"></span><br><span class="line">  x = <span class="number">30</span>;</span><br><span class="line">  alert(<span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">// 30</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 不过，没有传进来的参数z，和参数的第3个索引值是不共享的</span></span><br><span class="line"></span><br><span class="line">  z = <span class="number">40</span>;</span><br><span class="line">  alert(<span class="built_in">arguments</span>[<span class="number">2</span>]); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">arguments</span>[<span class="number">2</span>] = <span class="number">50</span>;</span><br><span class="line">  alert(z); <span class="comment">// 40</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="number">10</span>, <span class="number">20</span>);</span><br></pre></td></tr></table></figure></p>
-<h4 id="具体流程"><a href="#具体流程" class="headerlink" title="具体流程"></a>具体流程</h4><p>函数的作用域在函数定义的时候就决定了。<br>这是因为函数有一个内部属性 [[scope]]，当函数创建的时候，就会保存所有父变量对象到其中，你可以理解 [[scope]] 就是所有父变量对象的层级链，但是注意：[[scope]] 并不代表完整的作用域链！</p>
-<h5 id="函数创建"><a href="#函数创建" class="headerlink" title="函数创建"></a>函数创建</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 函数创建时，各自的[[scope]]为：</span></span><br><span class="line">foo.[[scope]] = [</span><br><span class="line">  globalContext.VO</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">bar.[[scope]] = [</span><br><span class="line">  fooContext.AO,</span><br><span class="line">  globalContext.VO</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
-<h4 id="函数调用："><a href="#函数调用：" class="headerlink" title="函数调用："></a>函数调用：</h4><p>当函数激活时，进入函数上下文，创建 VO/AO 后，就会将活动对象添加到作用链的前端。</p>
-<p>这时候执行上下文的作用域链，我们命名为 Scope：</p>
-<p>Scope = [AO].concat([[Scope]]);</p>
-<p>至此，作用域链创建完毕。</p>
-<p>创建阶段：<br>  <!-- 1. 创建执行环境，即执行上下文。 环境有与之关联的变量对象(即作用域)。  --><br>   <!-- fnContext = {VO: {形参， 变量， 函数声明}} --></p>
-<ol>
-<li>将父级变量对象即父级作用域保存在内部不可见属性[[scope]]中<br>fn.[[scope]] = [<br>globalContext.VO;<br>]</li>
-</ol>
-<p>执行阶段：<br>执行前阶段： 创建执行环境，即执行上下文。 每个环境都有与之关联的变量对象(即作用域)。 并且当前环境被推入环境栈。（执行上下文栈）</p>
-<ol>
-<li>ECStack = [fnContext, globalContent];</li>
-</ol>
-<p>将fn[[scope]]属性赋予当前执行环境。</p>
-<ol>
-<li><p>fnContext = { Scope: [fn.[[scope]]]}</p>
-</li>
-<li><p>在函数中，活动对象即为变量对象。起初只有arguments对象。 随着初始化活动对象，加入形参、函数声明、变量声明。<br>fnContext = {<br>AO: {     // 形参<br> arguments: {<br>   length: 0<br> },<br> ‘函数内声明的变量’: undefined,<br> ‘函数内声明的函数’: undefined<br>},<br>Scope: [fn.[[scope]]]<br>}</p>
-</li>
-<li><p>活动对象压入fn作用域链顶端，即活动对象作为变量对象放入变量对象数组头部。</p>
-</li>
-</ol>
-<p>fnContext = {<br>  AO: {     // 形参<br>    arguments: {<br>      length: 0<br>    },<br>    ‘声明的变量’: undefined,<br>    ‘声明的函数’: undefined<br>  },<br>  Scope: [AO, fn.[[scope]]]<br>}</p>
-<p>随着函数执行，修改AO的值：</p>
-<p>最后函数执行完毕， 函数环境从环境栈中弹出。<br>ECStack = [<br>    globalContext<br>];</p>
-
-          
+          <p><img src="/2018/09/20/js系列-5-作用域/bg.jpg" alt="bg"><br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/20/js系列-5-作用域/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2075,7 +2136,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">50.1k</span>
+    <span title="Site words total count">52.3k</span>
   
 </div>
 
