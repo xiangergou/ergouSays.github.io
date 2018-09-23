@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="月落天白">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://xiangergou.github.io/2018/09/02/js系列-1-内置类型/-.jpg">
-<meta property="og:updated_time" content="2018-09-11T14:05:06.000Z">
+<meta property="og:updated_time" content="2018-09-23T08:49:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js深入理解(1) - 内置类型">
 <meta name="twitter:image" content="https://xiangergou.github.io/2018/09/02/js系列-1-内置类型/-.jpg">
@@ -227,6 +227,16 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
           </a>
         </li>
       
@@ -355,7 +365,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2,253 字
+                  2,692 字
                 </span>
               
 
@@ -371,7 +381,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  9 分钟
+                  11 分钟
                 </span>
               
             </div>
@@ -483,6 +493,13 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 若想改变a为[4，5，6，7]</span></span><br><span class="line"> x.length = <span class="number">0</span>; <span class="comment">// 清空数组 </span></span><br><span class="line"> x.push( <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span> );</span><br><span class="line"> x; <span class="comment">// [4,5,6,7]</span></span><br></pre></td></tr></table></figure>
 <p>** 我们无法自行决定使用值复制还是引用复制，一切由值的类型来决定。</p>
 <p>如果要将标量基本类型值传递到函数内并进行更改，就需要将该值封装到一个复合<br>值(对象、数组等)中，然后通过引用复制的方式传递。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">wrapper</span>) </span>&#123;</span><br><span class="line">   wrapper.a = <span class="number">42</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">var</span> obj = &#123; <span class="attr">a</span>: <span class="number">2</span> &#125;;</span><br><span class="line"> foo( obj );</span><br><span class="line"> obj.a; <span class="comment">// 42</span></span><br></pre></td></tr></table></figure></p>
+<p>ps：</p>
+<blockquote>
+<p>由于计算机只能处理数字，如果要处理文本，就必须先把文本转换为数字才能处理。在计算机中，1个字节（byte）由 8个比特（bit）组成，所以 1 个字节能表示的最大整数就是 255，如果想表示更大整数，就必须用更多的字节，比如 2 个字节可以表示的最大整数为 65535 。最早，只有 127 个字符被编码到计算机里，也就是大小写英文字母、数字和一些符号，这个编码表被称为 ASCII 编码，比如大写字母 A 的编码是 65，小写字母 z 的编码是122。</p>
+<p>但如果要表示中文字符，显然一个字节是不够的，至少需要两个字节。所以，中国制定了 GB2312 编码，用来表示中文字符。基于同样的原因，各个国家都制定了自己的编码规则 。这样就会出现一个问题，即在多语言混合的文本中，不同的编码会出现冲突，导致乱码出现 。</p>
+<p>为了解决这个问题，Unicode 编码应运而生，它把所有的语言都统一到一套编码中，采用 2 个字节表示一个字符，即最多可以表示 65535 个字符，这样基本上可以覆盖世界上常用的文字，如果要表示更多的文字，也可以采用 4 个字节进行编码，这是一种通用的编码规范 。</p>
+<p>因此，JavaScript 中的字符也采用 Unicode 来编码 ，也就是说，JavaScript 中的英文字符和中文字符都会占用 2 个字节的空间大小 ，这种多字节字符，通常被称为宽字符。</p>
+</blockquote>
 <p>以上。</p>
 <p><br>  </p>
 <p>参考资料：<br>《javascript高级程序设计》<br>《javascript权威指南》<br>《你不知道的javascript》</p>
@@ -620,7 +637,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -631,7 +648,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -699,7 +716,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">52.3k</span>
+    <span title="Site words total count">53.0k</span>
   
 </div>
 
