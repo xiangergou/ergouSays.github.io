@@ -89,7 +89,7 @@
 
 
 
-  <meta name="keywords" content="谷歌插件," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -100,20 +100,17 @@
 
 
 
-<meta name="description" content="360翻译的Chrome开发文档点开，大照着helloworld敲，调试，完成。能有多复杂。主要无非就三个文件，manifest.json + popup.html + popup.js,  对，另外再加一个icon。   作为demo的”历史上的今天”说白了只是调了免费接口，将数据展示在谷歌扩展而已，html文件对应ui，js文件操作数据。manifest作为扩展参数设置。">
-<meta name="keywords" content="谷歌插件">
+<meta name="description" content="Objectvar myObject = { };myObject[true] = “foo”;myObject[3] = “bar”;myObject[myObject] = “baz”;myObject[“true”]; // “foo”myObject[“3”]; // “bar”myObject[“[object Object]”]; // “baz” 属性特性:writable 可写。是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="谷歌自定义小拓展-历史上的今天">
-<meta property="og:url" content="https://xiangergou.github.io/2018/05/07/chrome-plugin/index.html">
+<meta property="og:title" content="js深入理解(6)-引用类型(draft)">
+<meta property="og:url" content="https://xiangergou.github.io/2018/09/25/js系列-6-引用类型/index.html">
 <meta property="og:site_name" content="月落天白">
-<meta property="og:description" content="360翻译的Chrome开发文档点开，大照着helloworld敲，调试，完成。能有多复杂。主要无非就三个文件，manifest.json + popup.html + popup.js,  对，另外再加一个icon。   作为demo的”历史上的今天”说白了只是调了免费接口，将数据展示在谷歌扩展而已，html文件对应ui，js文件操作数据。manifest作为扩展参数设置。">
+<meta property="og:description" content="Objectvar myObject = { };myObject[true] = “foo”;myObject[3] = “bar”;myObject[myObject] = “baz”;myObject[“true”]; // “foo”myObject[“3”]; // “bar”myObject[“[object Object]”]; // “baz” 属性特性:writable 可写。是">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://xiangergou.github.io/2018/05/07/chrome-plugin/history.jpeg">
-<meta property="og:updated_time" content="2018-05-13T07:58:08.000Z">
+<meta property="og:updated_time" content="2018-09-28T07:34:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="谷歌自定义小拓展-历史上的今天">
-<meta name="twitter:description" content="360翻译的Chrome开发文档点开，大照着helloworld敲，调试，完成。能有多复杂。主要无非就三个文件，manifest.json + popup.html + popup.js,  对，另外再加一个icon。   作为demo的”历史上的今天”说白了只是调了免费接口，将数据展示在谷歌扩展而已，html文件对应ui，js文件操作数据。manifest作为扩展参数设置。">
-<meta name="twitter:image" content="https://xiangergou.github.io/2018/05/07/chrome-plugin/history.jpeg">
+<meta name="twitter:title" content="js深入理解(6)-引用类型(draft)">
+<meta name="twitter:description" content="Objectvar myObject = { };myObject[true] = “foo”;myObject[3] = “bar”;myObject[myObject] = “baz”;myObject[“true”]; // “foo”myObject[“3”]; // “bar”myObject[“[object Object]”]; // “baz” 属性特性:writable 可写。是">
 
 
 
@@ -143,13 +140,13 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/2018/05/07/chrome-plugin/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/09/25/js系列-6-引用类型/"/>
 
 
 
 
 
-  <title>谷歌自定义小拓展-历史上的今天 | 月落天白</title>
+  <title>js深入理解(6)-引用类型(draft) | 月落天白</title>
   
 
 
@@ -285,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/05/07/chrome-plugin/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/09/25/js系列-6-引用类型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -302,7 +299,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">谷歌自定义小拓展-历史上的今天</h1>
+          <h1 class="post-title" itemprop="name headline">js深入理解(6)-引用类型(draft)</h1>
         
 
         <div class="post-meta">
@@ -314,8 +311,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-07T14:13:14+08:00">
-                2018-05-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T18:31:38+08:00">
+                2018-09-25
               </time>
             
 
@@ -324,28 +321,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/闲来无事/" itemprop="url" rel="index">
-                    <span itemprop="name">闲来无事</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -368,7 +343,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  237 字
+                  1,162 字
                 </span>
               
 
@@ -384,7 +359,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -405,10 +380,28 @@
       
 
       
-        <p><div style="width:348px;height:451px;margin:0 auto"><br>  <img src="/2018/05/07/chrome-plugin/history.jpeg" alt="实例"><br></div><br><strong><a href="http://open.chrome.360.cn/extension_dev/getstarted.html" target="_blank" rel="noopener">360翻译的Chrome开发文档</a></strong>点开，大照着helloworld敲，调试，完成。<br>能有多复杂。<br>主要无非就三个文件，manifest.json + popup.html + popup.js,  对，另外再加一个icon。  </p>
-<p>作为demo的”历史上的今天”说白了只是调了免费接口，将数据展示在谷歌扩展而已，html文件对应ui，js文件操作数据。manifest作为扩展参数设置。<br><a id="more"></a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  &#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"My First Extension"</span>,</span><br><span class="line">    <span class="string">"version"</span>: <span class="string">"1.0"</span>,</span><br><span class="line">    <span class="string">"description"</span>: <span class="string">"历史上的今天~"</span>,</span><br><span class="line">    <span class="string">"browser_action"</span>: &#123;</span><br><span class="line">        <span class="string">"default_title"</span>: <span class="string">"history"</span>,</span><br><span class="line">        <span class="string">"default_icon"</span>: <span class="string">"icon.png"</span>,</span><br><span class="line">        <span class="string">"default_popup"</span>: <span class="string">"popup.html"</span> <span class="comment">// 拓展默认主页</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"permissions"</span>: [</span><br><span class="line">       <span class="string">"tabs"</span>, <span class="string">"http://*/*"</span>, <span class="string">"https://*/*"</span> <span class="comment">// 跨域</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"manifest_version"</span>: <span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>小坑不提，主要”manifest_version”: 2,这个配置得加上,官方教程未指出。<br>再者，跨域方式得加上。<br>还有什么来着…算了忘了，反正demo很简单，要想做点更好玩儿的东西，下功夫琢磨文档就够了。<br>娘的，没做之前还以为多高大上的东西呢。 </p>
-
+        <h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>var myObject = { };<br>myObject[true] = “foo”;<br>myObject[3] = “bar”;<br>myObject[myObject] = “baz”;<br>myObject[“true”]; // “foo”<br>myObject[“3”]; // “bar”<br>myObject[“[object Object]”]; // “baz”</p>
+<p>属性特性:<br>writable 可写。是否可以设置该属性的值<br>enumberable, 可枚举。是否可被for in 遍历<br>configurable 可配置 是否可以删除或修改该属性。</p>
+<p>原型<br>除null以外，每个javascript都有原型且与之关联。<br>Object.prototype没有原型。</p>
+<p>delete<br>delete可以删除对象的属性，但事实上只是断开了属性和宿主对象的联系。 delete删除属性、删除不存在的属性、以及删除原型属性都返回true。<br>不能删除可配置型为false的属性。</p>
+<p>检测属性<br>propertyIsEnumerable是hasOwnProperty()的增强版，只有检测到自有属性且为可枚举时才返回true。<br>in可以区分不存在的属性和存在但值为undefined的属性。</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>数组检测</p>
+<h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><p>问题在于，若当前网页包含多个框架，那实际上就存在多个全局执行环境，就可能存在不同版本的Array构造函数。</p>
+<h4 id="Array-isArray"><a href="#Array-isArray" class="headerlink" title="Array.isArray"></a>Array.isArray</h4><p>转换<br>所有对象都有toLocaleString，toString、valueOf方法。<br>数组也是对象，所以虽然每个下标都是整数，你仍然可以给数组添加属性:<br>var myArray = [ “foo”, 42, “bar” ];<br> myArray.baz = “baz”;<br> myArray.length; // 3<br>myArray.baz; // “baz”</p>
+<p>虽然添加了命名属性，数组的 length 值并未发 生变化。</p>
+<p>如果你试图向数组添加一个属性，但是属性名“看起来”像一个数字，那它会变成 一个数值下标(因此会修改数组的内容而不是添加一个属性):<br>var myArray = [ “foo”, 42, “bar” ]; myArray[“3”] = “baz”; myArray.length; // 4<br>myArray[3]; // “baz”</p>
+<p>在 ES5 之前，JavaScript 语言本身并没有提供可以直接检测属性特性的方法，比如判断属<br>性是否是只读。<br>但是从 ES5 开始，所有的属性都具备了属性描述符。 思考下面的代码:<br>var myObject = { a:2<br>};<br>     Object.getOwnPropertyDescriptor( myObject, “a” );<br>     // {<br>// value: 2,<br>// writable: true,<br>// enumerable: true,<br>// con gurable: true // }</p>
+<p>如果你想禁止一个对象添加新属性并且保留已有属性，可以使用Object.prevent Extensions(..):<br>var myObject = { a:2<br>     };<br>     Object.preventExtensions( myObject );<br>     myObject.b = 3;<br>     myObject.b; // undefined<br>在非严格模式下，创建属性 b 会静默失败。在严格模式下，将会抛出 TypeError 错误。</p>
+<ol start="3">
+<li><p>密封<br>Object.seal(..) 会创建一个“密封”的对象，这个方法实际上会在一个现有对象上调用 Object.preventExtensions(..) 并把所有现有属性标记为 configurable:false。<br>所以，密封之后不仅不能添加新属性，也不能重新配置或者删除任何现有属性(虽然可以 修改属性的值)。</p>
+</li>
+<li><p>冻结<br>Object.freeze(..) 会创建一个冻结对象，这个方法实际上会在一个现有对象上调用 Object.seal(..) 并把所有“数据访问”属性标记为 writable:false，这样就无法修改它们 的值。<br>这个方法是你可以应用在对象上的级别最高的不可变性，它会禁止对于对象本身及其任意 直接属性的修改</p>
+</li>
+</ol>
+<p>Getter和Setter<br>对象默认的 [[Put]] 和 [[Get]] 操作分别可以控制属性值的设置和获取。<br>var myObject = {<br>// 给 a 定义一个 getter get a() {<br>return 2; }<br>};<br>Object.defineProperty( myObject, // 目标对象 “b”, // 属性名<br>{ //描述符<br>// 给 b 设置一个 getter<br>get: function(){ return this.a * 2 },<br>// 确保 b 会出现在对象的属性列表中<br>             enumerable: true<br>         }<br>     );<br>     myObject.a; // 2<br>     myObject.b; // 4</p>
+<p>那么如何直接遍历值而不是数组下标(或者对象属性)呢?幸好，ES6 增加了一种用来遍 历数组的for..of循环语法(如果对象本身定义了迭代器的话也可以遍历对象):<br>var myArray = [ 1, 2, 3 ];<br>for (var v of myArray) { console.log( v );<br>} // 1 // 2 // 3<br>for..of 循环首先会向被访问对象请求一个迭代器对象，然后通过调用迭代器对象的 next() 方法来遍历所有返回值。<br>数组有内置的 @@iterator，因此 for..of 可以直接应用在数组上。我们使用内置的 @@ iterator 来手动遍历数组，看看它是怎么工作的:<br>var myArray = [ 1, 2, 3 ];<br>var it = myArray<a href="">Symbol.iterator</a>;<br>it.next(); // { value:1, done:false } it.next(); // { value:2, done:false } it.next(); // { value:3, done:false } it.next(); // { done:true }</p>
+<p>当然，你可以给任何想遍历的对象定义 @@iterator，举例来说:<br>var myObject = { a: 2,<br>b: 3 };<br>Object.defineProperty( myObject, Symbol.iterator, { enumerable: false,<br>writable: false,<br>configurable: true,<br>value: function() { var o = this;<br>var idx = 0;<br>var ks = Object.keys( o ); return {<br>next: function() { return {<br>                         value: o[ks[idx++]],<br>                         done: (idx &gt; ks.length)<br>                     };<br>} };<br>} } );<br>// 手动遍历 myObject<br>var it = myObject<a href="">Symbol.iterator</a>; it.next(); // { value:2, done:false } it.next(); // { value:3, done:false } it.next(); // { value:unde ned, done:true }<br>// 用 for..of 遍历 myObject for (var v of myObject) { console.log( v );<br>} // 2 // 3</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3>
       
     </div>
     
@@ -423,12 +416,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/谷歌插件/" rel="tag"># 谷歌插件</a>
-          
-        </div>
-      
 
       
       
@@ -438,8 +425,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/29/caoZhengChun/" rel="next" title="曹正淳：我不过,不想再跪着">
-                <i class="fa fa-chevron-left"></i> 曹正淳：我不过,不想再跪着
+              <a href="/2018/09/22/八月/" rel="next" title="八月">
+                <i class="fa fa-chevron-left"></i> 八月
               </a>
             
           </div>
@@ -448,8 +435,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/08/danmaku-demo/" rel="prev" title="danmaku-demo-js实现的弹幕效果">
-                danmaku-demo-js实现的弹幕效果 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/" rel="prev" title="图解http读书笔记-3- HTTP报文内的HTTP信息及首部字段(draft)">
+                图解http读书笔记-3- HTTP报文内的HTTP信息及首部字段(draft) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -502,8 +489,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -567,6 +563,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object"><span class="nav-number">1.</span> <span class="nav-text">Object</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组"><span class="nav-number">2.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#instanceof"><span class="nav-number">2.1.</span> <span class="nav-text">instanceof</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Array-isArray"><span class="nav-number">2.2.</span> <span class="nav-text">Array.isArray</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">3.</span> <span class="nav-text">函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
