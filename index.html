@@ -282,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/09/28/es6笔记之四/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -301,7 +301,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/" itemprop="url">图解http读书笔记-3- HTTP报文内的HTTP信息及首部字段(draft)</a></h1>
+                <a class="post-title-link" href="/2018/09/28/es6笔记之四/" itemprop="url">《深入理解ES6》读书笔记(3) -- 对象扩展</a></h1>
         
 
         <div class="post-meta">
@@ -313,8 +313,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-27T21:03:05+08:00">
-                2018-09-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-28T16:51:43+08:00">
+                2018-09-28
               </time>
             
 
@@ -345,7 +345,179 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,054 字
+                  0 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="留下">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="月落天白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/" itemprop="url">图解http读书笔记-3- HTTP报文内的HTTP信息及首部字段</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-27T21:03:05+08:00">
+                2018-09-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTTP/" itemprop="url" rel="index">
+                    <span itemprop="name">HTTP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,074 字
                 </span>
               
 
@@ -383,20 +555,14 @@
 
       
         
-          
-            <p>HTTP报文：报文首部 + 空行（CR回车符+LF换行符）+ 报文主体<br>请求报文：请求行（请求方法+URL+版本）+请求首部字段+通用首部字段+实体首部字段+其他<br>响应报文：状态行（状态码+原因短语+版本）+响应首部字段+通用首部字段+实体首部字段+其他<br>可能包含HTTP的RFC里未定义的首部（Cookie等）</p>
-<p>3.1 编码提升传输速率<br>报文主体和实体主体的差异<br>报文：是HTTP通信中的基本单位，由8位组字节流组成，通过HTTP通信传输。<br>实体：作为请求或响应的有效载荷数据被传输，内容由实体首部和主体组成。<br>HTTP报文的主体用于传输请求或响应的实体主体。报文主体等于实体主体，只有编码时候才会有差异。</p>
-<p>压缩传输的内容编码：发邮件添加附件时，为了让邮件的体积变小，通常将附件进行压缩，再发送。HTTP中也有类似功能。常见的内容编码有以下几种：<br>gzip<br>compress<br>deflate （deflate是一种压缩算法,是huffman编码的一种加强。）<br>identity（不进行编码）</p>
-<p>对于gzip压缩的要点有两点：</p>
-<p>浏览器发送一个请求头，告诉服务器接受压缩版本的文件（gzip和deflate是两种压缩算法）Accept-Encoding:gzip,deflate<br>如果文件压缩了,服务器返回一个头信息:Content-Encoding:gzip</p>
-<p>如果服务器没有返回Content-Encoding的头信息，意味着这文件是没压缩的（浏览器可以直接解析的）。请求头Accept-Encoding只是浏览器的一个请求，而不是命令。如果服务器不返回压缩文件，浏览器就不得不处理那庞大的源文件。<br>Content-encoding: gzip” 的头信息意味着内容压缩了传过来的</p>
-<p>分割发送：请求的编码实体资源尚未完全传输完成之前，浏览器无法显示请求页面的内容。在传输大容量数据时，通过把数据分割成多块，能够让浏览器逐步显示页面。（先分后编码再传）</p>
-<p>发送多种数据的多部分对象集合：（类似发送邮件时可以发送不同类型的文件采用了MIME多用途英特网邮件扩展），HTTP协议中也采用了多部分对象集合，发送的一份报文主体内可含有多类型实体。通常是在图片或文本文件等上传时使用。多部分对象集合包含的对象如下：<br>multipart/form-data：在web表单文件上传时使用；<br>multipart/byteranges：响应报文包含了多个范围的内容时使用。<br>使用boundary字符串来划分多部分对象集合指明的各类实体。在boundary字符串指定的各个实体的起始行之前插入‘–’标记， 最后插入 –XXX–作为结尾。</p>
-<p>获取部分内容的范围请求，曾经加载一个尺寸稍大的图片或者文件就很吃力了，如果网络中断，必须重头开始，现在就有一种恢复机制（从中断处恢复）——指定范围发送的请求叫做范围请求。<br>对一份10000字节大小的资源，如果使用范围请求，可以只请求5000-10000字节内多资源；<br>Range: bytes=5001-10000：5000-10000字节<br>Range: bytes=5001-：5000到最后<br>Range: bytes=-3000：最开始到3000<br>Range: bytes=-3000, 5000-7000：多重范围（响应会在首部字段Content-type标明multipart/byteranges后返回响应报文）<br>如果无法响应范围请求，则会返回状态码200 OK和完整实体内容。</p>
-<p>内容协商返回最合适的内容（英文版或中文版内容）<br>服务器驱动协商：以请求到首部字段为参考，在服务器端自动处理。<br>客户端驱动协商：由客户端进行内容协商，从浏览器显示的可选项列表中手动选择（比如自行切换pc版或手机版）<br>透明协商：服务端客户端都自行协商。</p>
-<p>HTTP首部</p>
-
-          
+          <p><img src="/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/bg.jpg" alt="bg"><br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1840,183 +2006,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/09/15/js系列-4-变量与内存机制/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="留下">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avater.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="月落天白">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/15/js系列-4-变量与内存机制/" itemprop="url">js深入理解(4)-变量与内存机制</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-15T16:02:06+08:00">
-                2018-09-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/js深入理解系列/" itemprop="url" rel="index">
-                    <span itemprop="name">js深入理解系列</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1,595 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  6 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="/2018/09/15/js系列-4-变量与内存机制/bgm.jpg" alt="bgm"><br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/15/js系列-4-变量与内存机制/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2071,7 +2060,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2082,7 +2071,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2093,7 +2082,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -2145,7 +2134,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">57.1k</span>
+    <span title="Site words total count">57.2k</span>
   
 </div>
 
