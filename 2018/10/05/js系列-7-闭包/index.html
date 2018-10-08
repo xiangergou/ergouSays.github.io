@@ -100,16 +100,17 @@
 
 
 
-<meta name="description" content="以前看见山，总想知道山后面是什么">
-<meta property="og:type" content="website">
-<meta property="og:title" content="月落天白">
-<meta property="og:url" content="https://xiangergou.github.io/tags/http/index.html">
+<meta name="description" content="闭包是函数和声明该函数的词法环境的组合。  闭包是由函数以及创建该函数的词法环境组合而成。这个环境包含了这个闭包创建时所能访问的所有局部变量。  请注意两个计数器 counter1 和 counter2 是如何维护它们各自的独立性的。每个闭包都是引用自己词法作用域内的变量 privateCounter 。  每次调用其中一个计数器时，通过改变这个变量的值，会改变这个闭包的词法环境。然而在一个闭包内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js系列-7-闭包">
+<meta property="og:url" content="https://xiangergou.github.io/2018/10/05/js系列-7-闭包/index.html">
 <meta property="og:site_name" content="月落天白">
-<meta property="og:description" content="以前看见山，总想知道山后面是什么">
+<meta property="og:description" content="闭包是函数和声明该函数的词法环境的组合。  闭包是由函数以及创建该函数的词法环境组合而成。这个环境包含了这个闭包创建时所能访问的所有局部变量。  请注意两个计数器 counter1 和 counter2 是如何维护它们各自的独立性的。每个闭包都是引用自己词法作用域内的变量 privateCounter 。  每次调用其中一个计数器时，通过改变这个变量的值，会改变这个闭包的词法环境。然而在一个闭包内">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-07T04:26:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="月落天白">
-<meta name="twitter:description" content="以前看见山，总想知道山后面是什么">
+<meta name="twitter:title" content="js系列-7-闭包">
+<meta name="twitter:description" content="闭包是函数和声明该函数的词法环境的组合。  闭包是由函数以及创建该函数的词法环境组合而成。这个环境包含了这个闭包创建时所能访问的所有局部变量。  请注意两个计数器 counter1 和 counter2 是如何维护它们各自的独立性的。每个闭包都是引用自己词法作用域内的变量 privateCounter 。  每次调用其中一个计数器时，通过改变这个变量的值，会改变这个闭包的词法环境。然而在一个闭包内">
 
 
 
@@ -139,13 +140,13 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/tags/http/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/10/05/js系列-7-闭包/"/>
 
 
 
 
 
-  <title>Tag: http | 月落天白</title>
+  <title>js系列-7-闭包 | 月落天白</title>
   
 
 
@@ -164,7 +165,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -267,82 +268,179 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>http<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/10/05/js系列-7-闭包/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="留下">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="月落天白">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/09/21/图解http读书笔记-2-简单的http/" itemprop="url">
-              
-                <span itemprop="name">图解http读书笔记-2-简单的http</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">js系列-7-闭包</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-21T16:04:57+08:00"
-              content="2018-09-21" >
-          09-21
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-05T11:25:41+08:00">
+                2018-10-05
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  174 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/09/18/图解http读书笔记-1-web与网络基础/" itemprop="url">
-              
-                <span itemprop="name">图解http读书笔记(1) - web与网络基础</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-18T22:48:42+08:00"
-              content="2018-09-18" >
-          09-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
+        <p>闭包是函数和声明该函数的词法环境的组合。</p>
+<p> 闭包是由函数以及创建该函数的词法环境组合而成。这个环境包含了这个闭包创建时所能访问的所有局部变量。</p>
+<p> 请注意两个计数器 counter1 和 counter2 是如何维护它们各自的独立性的。每个闭包都是引用自己词法作用域内的变量 privateCounter 。</p>
+<p> 每次调用其中一个计数器时，通过改变这个变量的值，会改变这个闭包的词法环境。然而在一个闭包内对变量的修改，不会影响到另外一个闭包中的变量。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/28/es6笔记之四/" rel="next" title="《深入理解ES6》读书笔记(3) -- 对象扩展">
+                <i class="fa fa-chevron-left"></i> 《深入理解ES6》读书笔记(3) -- 对象扩展
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/05/图解http读书笔记-4-前端缓存/" rel="prev" title="图解http读书笔记-4-前端缓存">
+                图解http读书笔记-4-前端缓存 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -350,6 +448,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -599,6 +701,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

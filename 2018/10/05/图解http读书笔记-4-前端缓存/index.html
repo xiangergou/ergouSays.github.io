@@ -100,17 +100,20 @@
 
 
 
-<meta name="description" content="年轻游侠儿泪眼模糊，凄然一笑，站起身，拿木剑对准墙壁，狠狠折断。 此后江湖再无温华的消息，这名才出江湖便已名动天下的木剑游侠儿，一夜之间，以最决然的苍凉姿态，离开了江湖。 刺骨大雪中，他最后对自己说了一句。 “不练剑了。”">
+<meta name="description" content="web缓存体系 浏览器缓存浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。我们将缓存分为强制缓存和协商缓存。 浏览器HTTP缓存可以分为强缓存和协商缓存。强缓存和协商缓存最大也是最根本的区别是：强缓存命中的话不会发请求到服务器（比如chrome中的200 from memory cache），协商缓存一定会发请求到服务器，通过资源的请求首部字段验证资源是否命中协">
 <meta property="og:type" content="article">
-<meta property="og:title" content="木剑温华的江湖">
-<meta property="og:url" content="https://xiangergou.github.io/2018/05/30/木剑温华/index.html">
+<meta property="og:title" content="图解http读书笔记-4-前端缓存">
+<meta property="og:url" content="https://xiangergou.github.io/2018/10/05/图解http读书笔记-4-前端缓存/index.html">
 <meta property="og:site_name" content="月落天白">
-<meta property="og:description" content="年轻游侠儿泪眼模糊，凄然一笑，站起身，拿木剑对准墙壁，狠狠折断。 此后江湖再无温华的消息，这名才出江湖便已名动天下的木剑游侠儿，一夜之间，以最决然的苍凉姿态，离开了江湖。 刺骨大雪中，他最后对自己说了一句。 “不练剑了。”">
+<meta property="og:description" content="web缓存体系 浏览器缓存浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。我们将缓存分为强制缓存和协商缓存。 浏览器HTTP缓存可以分为强缓存和协商缓存。强缓存和协商缓存最大也是最根本的区别是：强缓存命中的话不会发请求到服务器（比如chrome中的200 from memory cache），协商缓存一定会发请求到服务器，通过资源的请求首部字段验证资源是否命中协">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-08T05:13:05.000Z">
+<meta property="og:image" content="https://xiangergou.github.io/2018/10/05/图解http读书笔记-4-前端缓存/head.png">
+<meta property="og:image" content="https://xiangergou.github.io/2018/10/05/图解http读书笔记-4-前端缓存/memory.jpeg">
+<meta property="og:updated_time" content="2018-10-08T07:23:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="木剑温华的江湖">
-<meta name="twitter:description" content="年轻游侠儿泪眼模糊，凄然一笑，站起身，拿木剑对准墙壁，狠狠折断。 此后江湖再无温华的消息，这名才出江湖便已名动天下的木剑游侠儿，一夜之间，以最决然的苍凉姿态，离开了江湖。 刺骨大雪中，他最后对自己说了一句。 “不练剑了。”">
+<meta name="twitter:title" content="图解http读书笔记-4-前端缓存">
+<meta name="twitter:description" content="web缓存体系 浏览器缓存浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。我们将缓存分为强制缓存和协商缓存。 浏览器HTTP缓存可以分为强缓存和协商缓存。强缓存和协商缓存最大也是最根本的区别是：强缓存命中的话不会发请求到服务器（比如chrome中的200 from memory cache），协商缓存一定会发请求到服务器，通过资源的请求首部字段验证资源是否命中协">
+<meta name="twitter:image" content="https://xiangergou.github.io/2018/10/05/图解http读书笔记-4-前端缓存/head.png">
 
 
 
@@ -140,13 +143,13 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/2018/05/30/木剑温华/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/10/05/图解http读书笔记-4-前端缓存/"/>
 
 
 
 
 
-  <title>木剑温华的江湖 | 月落天白</title>
+  <title>图解http读书笔记-4-前端缓存 | 月落天白</title>
   
 
 
@@ -282,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/05/30/木剑温华/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/10/05/图解http读书笔记-4-前端缓存/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -299,7 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">木剑温华的江湖</h1>
+          <h1 class="post-title" itemprop="name headline">图解http读书笔记-4-前端缓存</h1>
         
 
         <div class="post-meta">
@@ -311,8 +314,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T23:52:28+08:00">
-                2018-05-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-05T11:27:37+08:00">
+                2018-10-05
               </time>
             
 
@@ -321,28 +324,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -365,7 +346,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  521 字
+                  1,466 字
                 </span>
               
 
@@ -381,7 +362,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -402,23 +383,25 @@
       
 
       
-        <p>年轻游侠儿泪眼模糊，凄然一笑，站起身，拿木剑对准墙壁，狠狠折断。 此后江湖再无温华的消息，这名才出江湖便已名动天下的木剑游侠儿，一夜之间，以最决然的苍凉姿态，离开了江湖。 刺骨大雪中，他最后对自己说了一句。 “不练剑了。”<br><br><br><a id="more"></a><br>我最喜欢你现在的模样<br>本本分分做着活计<br>脸上总挂着光</p>
-<p>你上给靠窗客人三两牛肉半斤绿蚁酒<br>转头回应隔壁嚷嚷着的小二结账<br>时常被小孩纠缠江湖是怎样剑影刀光  </p>
-<p>你说曾见识过那些仙子风月情长<br>也见过缺着门牙总爱陪主子傻笑的忠仆老黄<br>少不了再说说和你拜把子的那位长的是如何人模狗样  </p>
-<p>最调皮的二狗说你又扯谎<br>你还欠着他家两只鸡三袋粮<br>又怎么可能见过那么多人去过那么远的地方  </p>
-<p>你笑笑转头看见那位远处冒雨来看你的姑娘<br>你上前为她挡雨脸色涨红有些慌张<br>没来由嘀咕了句嘿江湖从来都在身旁不在远方   </p>
-<p>橘黄橘黄色的夕阳落在街上<br>村口又有少年骑着矮马出门闯荡<br>踌躇满志一腔热血一如你当年一样  </p>
-<p>那年浅草没了马蹄<br>那年春风春雨绿了湖堤<br>那年你背着木剑看了三千里山河无趣  </p>
-<!-- 那年你没有了四处撩拨姑娘的勇气 
-还穿那身江湖归去满经风霜的麻衣 
-也再未听你说要做天下第一  -->
-<!-- 那年你心心念月光长长至故里
-还穿着那身江湖归去满经风霜的麻衣  -->
-<p>你心里没有了快意恩仇的侠气<br>更愿意陪那群小孩聊天打屁<br>说江湖路远不如归去  </p>
-<p>你从不提起曾只差一步就能江湖美人无限风光<br>也不曾听你说白云苍狗世事无常<br>只是转头回应那句小二上酒铿锵高亢  </p>
-<p>我最喜欢你现在的模样<br>揣着几斤情义放在家里热炕头上<br>等下酒时念叨几句曾有段浪荡的过往  </p>
-<p style="width:100%;text-align:right"><br> —木剑温华的江湖<br> </p> 
-
+        <h3 id="web缓存体系"><a href="#web缓存体系" class="headerlink" title="web缓存体系"></a>web缓存体系</h3><p><img src="/2018/10/05/图解http读书笔记-4-前端缓存/head.png" alt="head"></p>
+<h3 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h3><p>浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。我们将缓存分为强制缓存和协商缓存。</p>
+<p>浏览器HTTP缓存可以分为强缓存和协商缓存。<br>强缓存和协商缓存最大也是最根本的区别是：强缓存命中的话不会发请求到服务器（比如chrome中的200 from memory cache），协商缓存一定会发请求到服务器，通过资源的请求首部字段验证资源是否命中协商缓存，如果协商缓存命中，服务器会将这个请求返回，但是不会返回这个资源的实体，而是通知客户端可以从缓存中加载这个资源（304 not modified）。简略流程图如下：<br><img src="/2018/10/05/图解http读书笔记-4-前端缓存/memory.jpeg" alt="memory"></p>
+<h4 id="强制缓存相关字段"><a href="#强制缓存相关字段" class="headerlink" title="强制缓存相关字段"></a>强制缓存相关字段</h4><p>░ Pragma<br>在 HTTP/1.1 之前，如果想使用 no-cache，通常是使用 Pragma 字段。<br>Pragma: no-cache(这也是 Pragma 字段唯一的取值)。但是这个字段只是浏览器约定俗成的实现，并没有确切规范，因此缺乏可靠性。它应该只作为一个兼容字段出现，在当前的网络环境下其实用处已经很小。</p>
+<p>░ Expires<br>Exprires的值为服务端返回的数据到期时间。当再次请求时的请求时间小于返回的此时间，则直接使用缓存数据。但由于服务端时间和客户端时间可能有误差，这也将导致缓存命中的误差，另一方面，Expires是HTTP1.0的产物，故现在大多数使用Cache-Control替代。</p>
+<p>░ Cache-Control<br>Cache-Control有很多属性，不同的属性代表的意义也不同。<br>private：客户端可以缓存public：客户端和代理服务器都可以缓存<br>max-age=t：缓存内容将在t秒后失效<br>no-cache：需要使用协商缓存来验证缓存数据no-store：所有内容都不会缓存。</p>
+<h4 id="协商缓存相关字段"><a href="#协商缓存相关字段" class="headerlink" title="协商缓存相关字段"></a>协商缓存相关字段</h4><p>协商缓存需要进行对比判断是否可以使用缓存。浏览器第一次请求数据时，服务器会将缓存标识与数据一起响应给客户端，客户端将它们备份至缓存中。再次请求时，客户端会将缓存中的标识发送给服务器，服务器根据此标识判断。若未失效，返回304状态码，浏览器拿到此状态码就可以直接使用缓存数据了。  事实上，协商缓存在请求数上和没有缓存是一致的。</p>
+<p>░ Last-Modified &amp; If-Modified-Since<br>If-Modified-Since是一个请求首部字段，并且只能用在GET或者HEAD请求中。Last-Modified是一个响应首部字段，包含服务器认定的资源作出修改的日期及时间。</p>
+<p>第一次请求时，服务器通过 Last-Modified 字段告知客户端，资源最后一次被修改的时间， 浏览器将这个值和内容一起记录在缓存数据库中。 再次请求时，当带着If-Modified-Since(值为上次的 Last-Modified 的值)头访问服务器请求资源时，服务器会检查Last-Modified，如果Last-Modified的时间早于或等于If-Modified-Since则会返回一个不带主体的304响应，否则将重新返回资源。</p>
+<p>但是他还是有一定缺陷的：</p>
+<blockquote>
+<p>1.如果资源更新的速度是秒以下单位，那么该缓存是不能被使用的，因为它的时间单位最低是秒。<br>2.如果文件是通过服务器动态生成的，那么该方法的更新时间永远是生成的时间，尽管文件可能没有变化，所以起不到缓存的作用。</p>
+</blockquote>
+<p>░ ETag &amp; If-None-Match<br>为处理上述问题，ETag应运而生。<br>ETag是一个响应首部字段，它是根据实体内容生成的一段hash字符串，标识资源的状态，由服务端产生。<br>If-None-Match是一个条件式的请求首部。如果请求资源时在请求首部加上这个字段，值为之前服务器端返回的资源上的ETag，则当且仅当服务器上没有任何资源的ETag属性值与这个首部中列出的时候，服务器才会返回带有所请求资源实体的200响应，否则服务器会返回不带实体的304响应。ETag优先级比Last-Modified高，同时存在时会以ETag为准。</p>
+<h4 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h4><blockquote>
+<p>░ ETag值通常由服务器端计算，并在响应客户端请求时将它返回给客户端可以通过时间戳就可以最简单的得到ETag头信息；但不建议这么做，这么做和Last-Modified头信息就没什么两样了<br>░ ETag值可以是唯一标识资源的任何东西，如持久化存储中的某个资源关联的版本、一个或者多个文件属性，实体头信息和校验值、(CheckSum)，也可以计算实体信息的散列值。<br>░ 有时候，为了计算一个ETag值可能有比较大的代价，此时可以采用生成唯一值等方式(如常见的GUID)。<br>░ ETag常与If-None-Match或者If-Match一起，由客户端通过HTTP头信息(包括ETag值)发送给服务端处理。<br>░ Apache默认通过FileEtag中FileEtag INode Mtime Size的配置自动生成ETag(当然也可以通过用户自定义的方式)。<br>░ 由于Etag由服务器构造，所以在集群环境中一定要保证Etag的唯一性<br>░ 如果是 max-age=0, must-revalidate 就和 no-cache 等价了<br>░ 优先级： Pragma &gt; Cache-Control &gt; Expires &gt; ETag &gt; Last-Modified</p>
+</blockquote>
+<p>以上。</p>
+<p>参考资料:<br><a href="https://juejin.im/post/5b9346dcf265da0aac6fbe57" target="_blank" rel="noopener">前端优化：浏览器缓存技术介绍</a><br><a href="https://juejin.im/entry/5baef5cef265da0ad13b8c01?utm_source=gold_browser_extension" target="_blank" rel="noopener">一文读懂前端缓存</a></p>
 
       
     </div>
@@ -443,8 +426,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/26/imgUpload/" rel="next" title="vue移动端图片上传预览裁剪组件">
-                <i class="fa fa-chevron-left"></i> vue移动端图片上传预览裁剪组件
+              <a href="/2018/10/05/js系列-7-闭包/" rel="next" title="js系列-7-闭包">
+                <i class="fa fa-chevron-left"></i> js系列-7-闭包
               </a>
             
           </div>
@@ -452,10 +435,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/31/proxy-表单验证到双向绑定/" rel="prev" title="策略模式改造表单验证(一)">
-                策略模式改造表单验证(一) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -507,8 +486,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -572,6 +560,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#web缓存体系"><span class="nav-number">1.</span> <span class="nav-text">web缓存体系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器缓存"><span class="nav-number">2.</span> <span class="nav-text">浏览器缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#强制缓存相关字段"><span class="nav-number">2.1.</span> <span class="nav-text">强制缓存相关字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协商缓存相关字段"><span class="nav-number">2.2.</span> <span class="nav-text">协商缓存相关字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Attention"><span class="nav-number">2.3.</span> <span class="nav-text">Attention</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
