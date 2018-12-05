@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #000; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #000, 0 0 5px     #000; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #000;    /*上边框颜色*/
+        border-left-color: #000;    /*左边框颜色*/
+    }
+    .header-line{
+      width:100%;
+      height:3px;
+      position: absolute;
+      top:0;left:0;
+      background:#000;
+      z-index:999;
+    }
+</style>
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/icon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="干柿鬼鲛 “你的人生，很艰辛吧。” 这么许多年，我时常会想起这句话。 她曾经喜欢我，可我杀了她。 我叫干柿鬼鲛，一个雾忍孤儿。 我天生没有父母，或者因为我的怪异的长相没了父母。 孤儿无论在哪个世道活下去都是很艰难的事，所以当西瓜山收留我，教我忍术时，纵让我为任务杀死同伴，我也依旧唯命是从。 因为他的命令我杀了这世上唯一喜欢过我的人，可他自己却背叛村子。 我不明白，我坚守的究竟是什么。 我杀了他，拿">
+<meta property="og:type" content="article">
+<meta property="og:title" content="晓 (demo)">
+<meta property="og:url" content="https://xiangergou.github.io/2018/12/05/晓/index.html">
+<meta property="og:site_name" content="月落天白">
+<meta property="og:description" content="干柿鬼鲛 “你的人生，很艰辛吧。” 这么许多年，我时常会想起这句话。 她曾经喜欢我，可我杀了她。 我叫干柿鬼鲛，一个雾忍孤儿。 我天生没有父母，或者因为我的怪异的长相没了父母。 孤儿无论在哪个世道活下去都是很艰难的事，所以当西瓜山收留我，教我忍术时，纵让我为任务杀死同伴，我也依旧唯命是从。 因为他的命令我杀了这世上唯一喜欢过我的人，可他自己却背叛村子。 我不明白，我坚守的究竟是什么。 我杀了他，拿">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-05T12:45:01.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="晓 (demo)">
+<meta name="twitter:description" content="干柿鬼鲛 “你的人生，很艰辛吧。” 这么许多年，我时常会想起这句话。 她曾经喜欢我，可我杀了她。 我叫干柿鬼鲛，一个雾忍孤儿。 我天生没有父母，或者因为我的怪异的长相没了父母。 孤儿无论在哪个世道活下去都是很艰难的事，所以当西瓜山收留我，教我忍术时，纵让我为任务杀死同伴，我也依旧唯命是从。 因为他的命令我杀了这世上唯一喜欢过我的人，可他自己却背叛村子。 我不明白，我坚守的究竟是什么。 我杀了他，拿">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xiangergou.github.io/2018/12/05/晓/"/>
+
+
+
+
+
+  <title>晓 (demo) | 月落天白</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">月落天白</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-随笔">
+          <a href="/categories/随笔" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/12/05/晓/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="留下">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="月落天白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">晓 (demo)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-05T20:20:12+08:00">
+                2018-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,578 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>干柿鬼鲛</p>
+<p>“你的人生，很艰辛吧。”</p>
+<p>这么许多年，我时常会想起这句话。 她曾经喜欢我，可我杀了她。</p>
+<p>我叫干柿鬼鲛，一个雾忍孤儿。</p>
+<p>我天生没有父母，或者因为我的怪异的长相没了父母。 孤儿无论在哪个世道活下去都是很艰难的事，所以当西瓜山收留我，教我忍术时，纵让我为任务杀死同伴，我也依旧唯命是从。</p>
+<p>因为他的命令我杀了这世上唯一喜欢过我的人，可他自己却背叛村子。</p>
+<p>我不明白，我坚守的究竟是什么。</p>
+<p>我杀了他，拿了鲛肌。</p>
+<p>可我依旧不明白。</p>
+<p>我究竟算怎样一个存在。</p>
+<p>无归宿之人，如伸出大雾看不清方向。</p>
+<p>四代水影对我的诘问充耳不闻，却是一双写轮眼告诉我，这世界本就如此。</p>
+<p>要改变，跟我走。</p>
+<p>他说月之眼很好，我想去试试。</p>
+<p>人不是鱼，无论是谁，只有到最后一刻，才能看清自己究竟是怎样的人。与鼬先生共事这么多年，我一直在思考这句话。 我究竟是怎样的人，我说不清楚，不过想来在世人眼中，我从来不是什么好人。 </p>
+<p>其实我不怕死，却很怕鼬，因为我觉得会幻术的人都是玩弄人心的鬼。 我不怕鬼，可我怕我的心。</p>
+<p>蝎：我想有人陪我，傀儡也行。</p>
+<p>我叫赤砂之蝎，是个傀儡师。</p>
+<p>很少有人选择这一职业。  风忍村常年风沙，风忍术和土忍术往往得天独厚。而傀儡师要求耐心、灵感甚至需要精通术数。    所以当我唯一的朋友ben问我为什么做这样的选择，我告诉他，因为傀儡好玩。</p>
+<p>其实我骗了他。我不喜欢风土两系忍术，甚至所有的元素忍术我都不喜欢。 这些术法都是对元素招来挥去。撤去召唤之后，元素消散，再一次看不见摸不着。</p>
+<p>我不喜欢。</p>
+<p>我想有人一直陪着我，傀儡也行。</p>
+<p>二、</p>
+<p>没有事的时候，我常站在村里最高的建筑上，背靠着墙望着东方，奶奶千代说那是父母离开的方向。 她说他们去了很远的执行任务，要过些日子才能回来。</p>
+<p>后来知道他们不会回来了。</p>
+<p>后来我做出了傀儡“父”与“母”。</p>
+<p>奶奶夸我是天才，其实她错了。 任何人都可以成为所谓天才，只要他像我一样，没有父母，也没有朋友。</p>
+<p>在后来，我认识了小虫，他是唯一一个不会笑我是没有父母的野孩子的人。 那年，我15岁。</p>
+<p>小虫在一次出任务的时候，断了右手。依照我心里懵懂的人体傀儡的设想，我给他的假肢上做了很多机关。</p>
+<p>后来，后来小虫死了，是因为假肢里的毒。</p>
+<p>我去看了小虫最后一眼，他躺在床上，不说话，不呼吸。</p>
+<p>这就是死么？   </p>
+<p>2.</p>
+<p>“看来你年纪也十四五出头,这十几年来,总有事你想重温,”</p>
+<p>“或有些人你想再见.”</p>
+<p>“因为他们没能履行他们的承诺.”</p>
+<p>“或者你也想过……”</p>
+<p>“想再见到他们，你又不知道该怎么做.”</p>
+<p>“其实见一个死去的人很简单.”</p>
+<p>“我有个术法，它，很神奇.”</p>
+<p>“不过最近我最近遇到了点麻烦,只要你能帮杀一个人,我一定可以帮你实现你的愿望.”</p>
+<p>“你尽管考虑一下.”</p>
+<p>记着那天风很大，我遇见一个有着蛇一样的眼神的怪人。看着他叽叽歪歪，我在考虑将它做成我的第七具人体傀儡的可能性。 </p>
+<p>“听说你执着一种叫“永恒”的艺术？正好，我这儿有点东西，你帮忙看看。”</p>
+<p>随后他施了一个术，10分钟后我和他达成了一个交易。</p>
+<p>我没法拒绝，因为这个术之后，我看到了已经死去很久的初代火影，活生生的站在我面前。</p>
+<p>正好，我的父母也死了很久。</p>
+<p>3.</p>
+<p>我不知道大蛇丸为什么要杀三代风影，也不想知道。这世界总有一些人为了这样那样的理由奔走杀戮，我虽然不理解，但我早已习惯尊重。我只想复活我的父母，其他的都不重要。</p>
+<p>三代很强。突袭，下毒，再以双腿俱断为代价才得以拼掉他。我看着断掉的双腿，心中没有过多波澜。</p>
+<p>我逐一将身体换成了傀儡，自此再也感觉不到疼痛，在也不会腐朽，心想这或许是傀儡师的重点罢。我一直在构想傀儡师的终点，想不到命运已经帮我做了选择。</p>
+<p>我还算个人么？ 我不知道，我只想再看看我的父母。其他的都不重要。</p>
+<ol>
+<li><p>大蛇丸旅行约定的时间尚早。我开始在忍界流浪，寻找值得收藏的素材。</p>
+</li>
+</ol>
+<p>记得那天风很大，依旧是漫天黄沙。我遇到一个叫小南的人。 </p>
+<p>她叫我加入晓。我很奇怪为什么会有这样的组织，心想这个组织里面的人一定会很有趣。</p>
+<p>晓之玉女，有趣的名字。</p>
+<p>5.</p>
+<p>再次进入风忍村已是20年后，我和迪拉达带走了这一代风影。 他是个跟我一样有着红头发的年轻人，我看着他为救村民耗尽查克拉的时候，没来由的想起三代，可笑的是，杀他的人都曾生存在着村里，我当初杀他是因为父母，帮我杀他的人却是为了所谓地位。</p>
+<p>6.</p>
+<p>我没想到这么快就</p>
+<p>大纲</p>
+<ol>
+<li><p>蝎不喜欢等人。  =》父母一直等不到。</p>
+</li>
+<li><p>ben离世 =》 永恒艺术。</p>
+</li>
+</ol>
+<p>（大蛇丸答应蝎杀死四代风影后用瞬土转生让蝎看自己的父母一眼）</p>
+<p>结果在大蛇丸没应约蝎之前手被猿飞日斩封印无法再结印</p>
+<ol start="3">
+<li><p>盗取三代尸首。制作傀儡。</p>
+</li>
+<li><p>进晓。</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/29/webpack沾惹/" rel="next" title="webpack沾惹">
+                <i class="fa fa-chevron-left"></i> webpack沾惹
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avater.jpeg"
+                alt="留下" />
+            
+              <p class="site-author-name" itemprop="name">留下</p>
+              <p class="site-description motion-element" itemprop="description">以前看见山，总想知道山后面是什么</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">留下</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">67.2k</span>
+  
+</div>
+
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
