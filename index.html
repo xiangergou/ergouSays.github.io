@@ -270,6 +270,185 @@
     <section id="posts" class="posts-expand">
     
         
+            
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/12/15/es6笔记之五/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="留下">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="月落天白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/15/es6笔记之五/" itemprop="url">《深入理解ES6》读书笔记(4) -- proxy、reflect和双向绑定</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-15T16:23:07+08:00">
+                2018-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ES6/" itemprop="url" rel="index">
+                    <span itemprop="name">ES6</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  720 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="/2018/12/15/es6笔记之五/bg.jpg" alt="bg"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/15/es6笔记之五/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+        
+    
+        
     
         
             
@@ -386,32 +565,14 @@
 
       
         
-          
-            <h3 id="主要概念"><a href="#主要概念" class="headerlink" title="主要概念"></a>主要概念</h3><p>Entry（入口）、Output（输出）、loader和Plugins（插件）</p>
-<p>▇ 1. Entry<br>Entry是Webpack的入口起点指示。 它指示webpack应该从哪个模块开始着手，来作为其构建内部依赖图的开始。可以在配置文件（webpack.config.js）中配置entry属性来指定一个或多个入口点，默认为./src（webpack 4开始引入默认值）。</p>
-<p>▇ 2. Output<br>Output属性告诉webpack在哪里输出它所创建的bundles，也可指定bundles的名称，默认位置为./dist。整个应用结构都会被编译到指定的输出文件夹中去，最基本的属性包括filename（文件名）和path（输出路径）。</p>
-<p>值得注意的是,output.filename必须是绝对路径，如果是一个相对路径，打包时webpack会抛出异常。</p>
-<p>▇ 3. Loaders<br>loader可以理解为webpack的编译器，它使得webpack可以处理一些非JavaScript文件，比如png、csv、xml、css、json等各种类型的文件，使用合适的loader可以让JavaScript的import导入非JavaScript模块。JavaScript只认为JavaScript文件是模块，而webpack的设计思想即万物皆模块，为了使得webpack能够认识其他“模块”，所以需要loader这个“编译器”。<br>webpack中配置loader有两个目标：</p>
-<p>（1）test属性：标志有哪些后缀的文件应该被处理，是一个正则表达式。<br>（2）use属性：指定test类型的文件应该使用哪个loader进行预处理。</p>
-<p>▇ 4. Plugins<br>loader用于转换非JavaScript类型的文件，而插件可以用于执行范围更广的任务，包括打包、优化、压缩、搭建服务器等等，功能十分强大。要是用一个插件，一般是先使用npm包管理器进行安装，然后在配置文件中引入，最后将其实例化后传递给plugins数组属性。<br>插件是webpack的支柱功能，目前主要是解决loader无法实现的其他许多复杂功能，通过plugins属性使用插件：</p>
-<p>▇ 5. Mode<br>模式（Mode）可以通过配置对象的mode属性进行配置，主要值为production或者development。两种模式的区别在于一个是为生产环境编译打包，一个是为了开发环境编译打包。生产环境模式下，webpack会自动对代码进行压缩等优化，省去了配置的麻烦。</p>
-<h3 id="webpack构建流程"><a href="#webpack构建流程" class="headerlink" title="webpack构建流程"></a>webpack构建流程</h3><p>从启动webpack构建到输出结果经历了一系列过程，它们是：</p>
-<ol>
-<li>解析webpack配置参数，合并从shell传入和webpack.config.js文件里配置的参数，生产最后的配置结果。</li>
-<li>注册所有配置的插件，好让插件监听webpack构建生命周期的事件节点，以做出对应的反应。</li>
-<li>从配置的entry入口文件开始解析文件构建AST语法树，找出每个文件所依赖的文件，递归下去。</li>
-<li>在解析文件递归的过程中根据文件类型和loader配置找出合适的loader用来对文件进行转换。</li>
-<li>递归完后得到每个文件的最终结果，根据entry配置生成代码块chunk。</li>
-<li>输出所有chunk到文件系统。<br>需要注意的是，在构建生命周期中有一系列插件在合适的时机做了合适的事情，比如UglifyJsPlugin会在loader转换递归完后对结果再使用UglifyJs压缩覆盖之前的结果。</li>
-</ol>
-<p>webpack启动后会在entry里配置的module开始递归解析entry所依赖的所有module，没找到一个module, 就会根据配置的loader去找相应的转换规则，对module进行转换后在解析当前module所依赖的module，这些模块会以entry为分组，一个entry和所有相依赖的module也就是一个chunk，最后webpack会把所有chunk转换成文件输出，在整个流程中webpack会在恰当的时机执行plugin的逻辑</p>
-<h3 id="代码分割优化"><a href="#代码分割优化" class="headerlink" title="代码分割优化"></a>代码分割优化</h3><p>一个好的代码分割对浏览器首屏效果提升很大。比如对于最常见的react体系可以先抽出基础库react react-dom redux react-redux到一个单独的文件而不是和其它文件放在一起打包为一个文件，这样做的好处是只要你不升级他们的版本这个文件永远不会被刷新。如果你把这些基础库和业务代码打包在一个文件里每次改动业务代码都会导致文件hash值变化从而导致缓存失效浏览器重复下载这些包含基础库的代码。以上的配置为：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// vender.js 文件抽离基础库到单独的一个文件里防止跟随业务代码被刷新</span></span><br><span class="line">  <span class="comment">// 所有页面都依赖的第三方库</span></span><br><span class="line">  <span class="comment">// react基础</span></span><br><span class="line">  <span class="keyword">import</span> <span class="string">'react'</span>;</span><br><span class="line">  <span class="keyword">import</span> <span class="string">'react-dom'</span>;</span><br><span class="line">  <span class="keyword">import</span> <span class="string">'react-redux'</span>;</span><br><span class="line">  <span class="comment">// redux基础</span></span><br><span class="line">  <span class="keyword">import</span> <span class="string">'redux'</span>;</span><br><span class="line">  <span class="keyword">import</span> <span class="string">'redux-thunk'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// webpack配置</span></span><br><span class="line">&#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    vendor: <span class="string">'./path/to/vendor.js'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>再通过CommonsChunkPlugin可以提取出多个代码块都依赖的代码形成一个单独的chunk。在应用有多个页面的场景下提取出所有页面公共的代码减少单个页面的代码，在不同页面之间切换时所有页面公共的代码之前被加载过而不必重新加载。</p>
-<h3 id="一个项目里管理多个单页应用"><a href="#一个项目里管理多个单页应用" class="headerlink" title="一个项目里管理多个单页应用"></a>一个项目里管理多个单页应用</h3><p>一般项目里会包含多个单页应用，虽然多个单页应用也可以合并成一个但是这样做会导致用户没访问的部分也加载了。如果项目里有很多个单页应用，为每个单页应用配置一个entry和WebPlugin？如果项目又新增了一个单页应用，又去新增webpack配置？这样做太麻烦了，web-webpack-plugin里的AutoWebPlugin可以方便的解决这些问题。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="comment">// 所有页面的入口目录</span></span><br><span class="line">    <span class="keyword">new</span> AutoWebPlugin(<span class="string">'./src/'</span>),</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>参开资料：<br><a href="http://imweb.io/topic/59324940b9b65af940bf58ae" target="_blank" rel="noopener">webpack原理与实战 – 吴浩麟</a><br>深入浅出webpack – 吴浩麟</p>
-
-          
+          <p><img src="/2018/11/29/webpack沾惹/bg.jpg" alt="webpack沾惹"><br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/29/webpack沾惹/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1500,8 +1661,6 @@
 
         
     
-        
-    
   </section>
 
   
@@ -1556,7 +1715,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1630,7 +1789,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">67.2k</span>
+    <span title="Site words total count">67.9k</span>
   
 </div>
 

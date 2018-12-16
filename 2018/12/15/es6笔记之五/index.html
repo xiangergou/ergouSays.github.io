@@ -100,17 +100,16 @@
 
 
 
-<meta name="description" content="什么是单例？ “保证一个类仅有一个实例，并提供一个访问他的全局访问点。”       ——曾探 javascript设计模式与探索实践                 “单例实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。”">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Singleton">
-<meta property="og:url" content="https://xiangergou.github.io/2018/04/27/Singleton/index.html">
+<meta property="og:title" content="《深入理解ES6》读书笔记(4) -- proxy、reflect和双向绑定">
+<meta property="og:url" content="https://xiangergou.github.io/2018/12/15/es6笔记之五/index.html">
 <meta property="og:site_name" content="月落天白">
-<meta property="og:description" content="什么是单例？ “保证一个类仅有一个实例，并提供一个访问他的全局访问点。”       ——曾探 javascript设计模式与探索实践                 “单例实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。”">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-22T12:03:05.000Z">
+<meta property="og:image" content="https://xiangergou.github.io/2018/12/15/es6笔记之五/bg.jpg">
+<meta property="og:updated_time" content="2018-12-16T15:10:43.628Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Singleton">
-<meta name="twitter:description" content="什么是单例？ “保证一个类仅有一个实例，并提供一个访问他的全局访问点。”       ——曾探 javascript设计模式与探索实践                 “单例实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。”">
+<meta name="twitter:title" content="《深入理解ES6》读书笔记(4) -- proxy、reflect和双向绑定">
+<meta name="twitter:image" content="https://xiangergou.github.io/2018/12/15/es6笔记之五/bg.jpg">
 
 
 
@@ -140,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/2018/04/27/Singleton/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/12/15/es6笔记之五/"/>
 
 
 
 
 
-  <title>Singleton | 月落天白</title>
+  <title>《深入理解ES6》读书笔记(4) -- proxy、reflect和双向绑定 | 月落天白</title>
   
 
 
@@ -282,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/04/27/Singleton/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/12/15/es6笔记之五/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -299,7 +298,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Singleton</h1>
+          <h1 class="post-title" itemprop="name headline">《深入理解ES6》读书笔记(4) -- proxy、reflect和双向绑定</h1>
         
 
         <div class="post-meta">
@@ -311,8 +310,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-27T15:07:00+08:00">
-                2018-04-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-15T16:23:07+08:00">
+                2018-12-15
               </time>
             
 
@@ -334,8 +333,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
+                  <a href="/categories/ES6/" itemprop="url" rel="index">
+                    <span itemprop="name">ES6</span>
                   </a>
                 </span>
 
@@ -365,7 +364,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  696 字
+                  720 字
                 </span>
               
 
@@ -402,25 +401,127 @@
       
 
       
-        <h3 id="什么是单例？"><a href="#什么是单例？" class="headerlink" title="什么是单例？"></a>什么是单例？</h3><p></p><p> “保证一个类仅有一个实例，并提供一个访问他的全局访问点。”<br>    <span style="float:right;display:block">   ——曾探 javascript设计模式与探索实践</span><br></p>    <p></p>
-<p><div><br>    <p><br>        “单例实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。”<br>    <span style="float:right;display:block">   ——汤姆大叔的博客 深入理解javascript系列(25)单例模式</span><br>    </p><br>    单例模式是一种十分简单而且能够很简单的方式实现的一种设计模式。它是指在一个类中只有一个实例，即使你多次实例化这个类，它也只会返回一次实例化的对象，可以有效地避免资源的浪费，能减少不必要的内存开销, 并且在减少全局的函数和变量冲突也具有重要的意义。<br></div><br><a id="more"></a></p>
-<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><ul>
-<li>最简单的实现方式<br>在这之前，且让我们牢记单例的核心:<blockquote>
-<p>1.确保只有一个实例。<br>2.提供全局访问。  </p>
-</blockquote>
-</li>
-</ul>
-<p>&emsp;”这不就全局变量么~?”<br>&emsp;”不然，且看”<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ep</span></span><br><span class="line"><span class="keyword">let</span> number = &#123;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>number独一无二，放在全局作用域下，我们可以在任意位置调用。这已然满足了单例模式的条件。<br>然而事实上，全局变量并不算单例模式，只是在js开发中，我们只将其当做单例模式来使用。 全局变量存在诸多问题，最主要的当属命名空间污染。 js创造者Brendan Eich也曾名言全局变量是设计上的失误。</p>
-<p>  所谓命名空间污染，最常见的情况是，项目由两个人合作，若都不注意全局污染，就容易出现变量重复声明。以下几种方式可以相对减少全局变量带来的命名污染。<br>  </p>
-<ul>
-<li><p>使用命名空间<br>适当的使用命名空间，不会杜绝全局变量，但可以减少其数量。比如  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 开发者A</span></span><br><span class="line"><span class="keyword">let</span> devA = &#123;</span><br><span class="line">	name: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;  </span><br><span class="line">		alert(<span class="string">'a'</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 开发者B</span></span><br><span class="line"><span class="keyword">let</span> devB = &#123;</span><br><span class="line">	name: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">		alert(<span class="string">'b'</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>闭包封装私有变量<br>实现思路在于使用闭包方式来模拟私有数据。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mySingleton = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">/* 这里声明私有变量和方法 */</span></span><br><span class="line">    <span class="keyword">var</span> privateVariable = <span class="string">'something private'</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showPrivate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(privateVariable);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* 公有变量和方法（可以访问私有变量和方法） */</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        publicMethod: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            showPrivate();</span><br><span class="line">        &#125;,</span><br><span class="line">        publicVar: <span class="string">'the public can see this!'</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> single = mySingleton();</span><br><span class="line">single.publicMethod();  <span class="comment">// 输出 'something private'</span></span><br><span class="line"><span class="built_in">console</span>.log(single.publicVar); <span class="comment">// 输出 'the public can see this!'</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+        <p><img src="/2018/12/15/es6笔记之五/bg.jpg" alt="bg"></p>
+<a id="more"></a>
+<h3 id="proxy、reflect"><a href="#proxy、reflect" class="headerlink" title="proxy、reflect"></a>proxy、reflect</h3><p>Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，ES6 原生提供 Proxy 构造函数，用来生成 Proxy 实例。</p>
+<p>var proxy = new Proxy(target, handler);</p>
+<p>其中target, handler其实都是对象，target为目标、要代理的对象，handler定义了一堆代理的方法。</p>
+<p>proxy内置13个方法，与Reflect方法对应。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align:left">proxy</th>
+<th style="text-align:left">reflect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>get();</td>
+<td style="text-align:left">拦截读取操作</td>
+<td style="text-align:left">(target,name,receiver)查找并返回target的name属性</td>
+</tr>
+<tr>
+<td>set();</td>
+<td style="text-align:left">拦截赋值操作</td>
+<td style="text-align:left">(target,name,value, receiver)</td>
+</tr>
+<tr>
+<td>apply();</td>
+<td style="text-align:left">拦截函数的调用、call 和 apply 操作</td>
+<td style="text-align:left">Reflect.apply(Math.min, Math, age) === Math.min.apply(Math, age)</td>
+</tr>
+<tr>
+<td>has();</td>
+<td style="text-align:left">可以拦截hasProperty的操作，返回一个布尔值。对in方法生效，对for in不生效。</td>
+<td style="text-align:left">(obj,name) Reflect.has(obj,name) =&gt; true</td>
+</tr>
+<tr>
+<td>construct();</td>
+<td style="text-align:left">// 拦截new命令，必须返回对象，否则报错。</td>
+<td style="text-align:left">new Greet(‘落白’)  === Reflect.construct(Greet, [‘落白’])</td>
+</tr>
+<tr>
+<td>deleteProperty();</td>
+<td style="text-align:left">拦截delete操作。 configrable的属性不能被此方法输出，否则报错。</td>
+<td style="text-align:left">(obj, ‘name’)删除成功或属性不存在则返回true</td>
+</tr>
+<tr>
+<td>defineProperty();</td>
+<td style="text-align:left">拦截defineProperty方法。</td>
+<td style="text-align:left">Object.defineProperty() === Reflect.defineProperty()</td>
+</tr>
+<tr>
+<td>getOwnPropertyDescriptor();</td>
+<td style="text-align:left">拦截Object.getOwnPropertyDescriptor();</td>
+<td style="text-align:left">===</td>
+</tr>
+<tr>
+<td>getPrototypeOf();</td>
+<td style="text-align:left">拦截对象原型。</td>
+<td style="text-align:left">let myobj = new Fancy(); Object.getPrototypeOf(myobj) === Reflect.getPrototypeOf(myObj) === Fancy.prototype();</td>
+</tr>
+<tr>
+<td>isExtensible();</td>
+<td style="text-align:left">拦截Object.isExtensible();</td>
+<td style="text-align:left">返回布尔值，表对象是否可拓展</td>
+</tr>
+<tr>
+<td>ownKeys();</td>
+<td style="text-align:left">拦截对象自身属性的读取(Object.keys()..</td>
+<td style="text-align:left">返回对线的所有属性</td>
+</tr>
+<tr>
+<td>preventExtensions();</td>
+<td style="text-align:left">拦截Object.preventExtensions()</td>
+<td style="text-align:left">使对象不可扩展</td>
+</tr>
+<tr>
+<td>setPrototypeOf();</td>
+<td style="text-align:left">拦截Object.setPrototypeOf();</td>
+<td style="text-align:left">(obj,newProto)</td>
+</tr>
+</tbody>
+</table>
+<p>proxy.revocable用于取消Proxy实例。<br>目标对象的this会指向Proxy代理。</p>
+<h3 id="definePropety"><a href="#definePropety" class="headerlink" title="definePropety"></a>definePropety</h3><p>语法<br>  Object.defineProperty(obj, prop, descriptor)</p>
+<p>  obj: 要在其上定义属性的对象。</p>
+<p>prop:  要定义或修改的属性的名称。</p>
+<p>descriptor: 将被定义或修改的属性的描述符。</p>
+<ol>
+<li>configurable 可配置、删除</li>
+<li>enumerable 可枚举<br>数据描述符： </li>
+<li>value 该属性对应的值</li>
+<li>writable 可读写<br>存取描述符：</li>
+<li>get: 提供 getter 的方法,默认为 undefined</li>
+<li>set: 提供 setter 的方法, 默认为 undefined</li>
+</ol>
+<p>** 属性描述符必须是数据描述符或者存取描述符两种形式之一，不能同时是两者。</p>
+<h3 id="实现简单的双向绑定"><a href="#实现简单的双向绑定" class="headerlink" title="实现简单的双向绑定"></a>实现简单的双向绑定</h3><p>数据驱动dom，即当数据改变的时候，自动进行渲染工作。举个例子：<br>HTML 中有个 span 标签和 button 标签<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"container"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"button"</span>&gt;</span>点击加 1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>当点击按钮的时候，span 标签里的值加 1。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'#button'</span>).addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> container = <span class="built_in">document</span>.querySelector(<span class="string">"#container"</span>);</span><br><span class="line">    container.innerHTML = <span class="built_in">Number</span>(container.innerHTML) + <span class="number">1</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>defineProperty方式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    value: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 储存 obj.value 的值</span></span><br><span class="line"><span class="keyword">var</span> value = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">"value"</span>, &#123;</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;,</span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>&#123;</span><br><span class="line">        value = newValue;</span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">'container'</span>).innerHTML = newValue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'button'</span>).addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    obj.value += <span class="number">1</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>proxy实现</p>
+<pre><code class="js"><span class="keyword">var</span> obj = {
+  value: <span class="number">1</span>
+}
+
+<span class="comment">// 储存 obj.value 的值</span>
+<span class="keyword">var</span> value = <span class="number">1</span>;
+
+<span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(obj, {
+  get: <span class="function">(<span class="params">target, key</span>) =&gt;</span> value,
+  set: <span class="function">(<span class="params">target, key, newValue</span>) =&gt;</span> {
+    value = newValue;
+    <span class="built_in">document</span>.getElementById(<span class="string">'container'</span>).innerHTML = newValue;
+  }
+})
+
+<span class="built_in">document</span>.getElementById(<span class="string">'button'</span>).addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+  proxy.value += <span class="number">1</span>;
+});
+</code></pre>
+<p>参考资料：<br>《ES6标准入门》<br><a href="https://juejin.im/post/5be4f7cfe51d453339084530" target="_blank" rel="noopener">ES6 系列之 defineProperty 与 proxy</a></p>
 
       
     </div>
@@ -445,15 +546,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/12/05/晓/" rel="next" title="晓 (demo)">
+                <i class="fa fa-chevron-left"></i> 晓 (demo)
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/29/list-with-big-data/" rel="prev" title="页面海量数据加载 -- 分时函数 + requestAnimationFrame">
-                页面海量数据加载 -- 分时函数 + requestAnimationFrame <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -589,7 +690,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是单例？"><span class="nav-number">1.</span> <span class="nav-text">什么是单例？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现方式"><span class="nav-number">2.</span> <span class="nav-text">实现方式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy、reflect"><span class="nav-number">1.</span> <span class="nav-text">proxy、reflect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#definePropety"><span class="nav-number">2.</span> <span class="nav-text">definePropety</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现简单的双向绑定"><span class="nav-number">3.</span> <span class="nav-text">实现简单的双向绑定</span></a></li></ol></div>
             
 
           </div>
