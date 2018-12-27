@@ -89,7 +89,7 @@
 
 
 
-  <meta name="keywords" content="随笔," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -100,17 +100,17 @@
 
 
 
-<meta name="keywords" content="随笔">
+<meta name="description" content="官方的原文：由于 JavaScript 的限制， Vue 不能检测以下变动的数组：  当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue当你修改数组的长度时，例如： vm.items.length = newLength  这句话是什么意思？我测试了下Object.defineProperty是可以通过索引属性来设置属性的访问器属性的，那为何做不">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一些想法">
-<meta property="og:url" content="https://xiangergou.github.io/2018/08/26/三省吾身/index.html">
+<meta property="og:title" content="Vue为什么不能检测数组变动">
+<meta property="og:url" content="https://xiangergou.github.io/2018/12/18/Vue为什么不能检测数组变动/index.html">
 <meta property="og:site_name" content="月落天白">
+<meta property="og:description" content="官方的原文：由于 JavaScript 的限制， Vue 不能检测以下变动的数组：  当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue当你修改数组的长度时，例如： vm.items.length = newLength  这句话是什么意思？我测试了下Object.defineProperty是可以通过索引属性来设置属性的访问器属性的，那为何做不">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://xiangergou.github.io/2018/08/26/三省吾身/bg.jpg">
-<meta property="og:updated_time" content="2018-12-27T14:07:31.564Z">
+<meta property="og:updated_time" content="2018-12-18T16:11:22.643Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一些想法">
-<meta name="twitter:image" content="https://xiangergou.github.io/2018/08/26/三省吾身/bg.jpg">
+<meta name="twitter:title" content="Vue为什么不能检测数组变动">
+<meta name="twitter:description" content="官方的原文：由于 JavaScript 的限制， Vue 不能检测以下变动的数组：  当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue当你修改数组的长度时，例如： vm.items.length = newLength  这句话是什么意思？我测试了下Object.defineProperty是可以通过索引属性来设置属性的访问器属性的，那为何做不">
 
 
 
@@ -140,13 +140,13 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/2018/08/26/三省吾身/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/12/18/Vue为什么不能检测数组变动/"/>
 
 
 
 
 
-  <title>一些想法 | 月落天白</title>
+  <title>Vue为什么不能检测数组变动 | 月落天白</title>
   
 
 
@@ -282,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/08/26/三省吾身/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/12/18/Vue为什么不能检测数组变动/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -299,7 +299,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">一些想法</h1>
+          <h1 class="post-title" itemprop="name headline">Vue为什么不能检测数组变动</h1>
         
 
         <div class="post-meta">
@@ -311,8 +311,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-26T16:05:31+08:00">
-                2018-08-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-18T23:44:09+08:00">
+                2018-12-18
               </time>
             
 
@@ -321,28 +321,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -365,7 +343,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  581 字
+                  728 字
                 </span>
               
 
@@ -381,7 +359,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -402,13 +380,18 @@
       
 
       
-        <p><img src="/2018/08/26/三省吾身/bg.jpg" alt="一些想法"><br><a id="more"></a><br>前段时间裸辞。<br>我把自己关起来，想了很多事。<br>越慌越想，越想越慌。<br>理不出头绪的时候，我试着逐步将层级往上，从前端进阶，到前端这条路，再到it这行业，再到我究竟适合做什么，最终，我到底想得到什么。</p>
-<p>我想要得到什么呢。 我想多赚点钱，然后出去看看。 说白了，就是想财政自由。呵，这谁不想。</p>
-<p>我适合做什么。  在我看来，“适合”夹杂着玄学， 适合干某事，其实就是这件事喜欢做并且能做好，还能通过这件事赚很多钱。 这便是适合了。 可想知道是否适合，你总得出去试试，试试，意味着从0接触这件事，意味着你笃定之前做的事是不适合你的，意味着你之前的积累归0，意味着很长一段时间，收入崩塌式坍缩。 人活一世，说的话做的事，多少有些惯性使然，我当初出于兴趣也好危机感也罢选了前端，便一直亦步亦趋跟着它走，我在这样一种环境中过活，若没有大的风波或转折，转行一事就永排不上日程。</p>
-<p>it这行业，我说不好，我接触的依旧片面且狭窄，只在it及其细小的分支偏居一隅，所以并没多少发言权。 但从事it这一行，我自我感觉最好的一点，便是没有所谓的职场的是是非非。 </p>
-<p>前端这条路，满打满算，我接触这行三年，大三开始，大四，毕业。我自知生性惫懒天赋一般，毕业一年依旧没有足以自傲的产出，每念次，羞愧的紧。</p>
-<p>前端进阶，我之前与很多同行沟通过，想着大前端，全栈，是前端最终要走的路，借node以观后端，有能力了再过度到全栈。        再后来，我去了大厂面试，才发现自己的想法不能说错，只能说好高了些，两年内不打算在深挖node，夯实基础才是王道。 确实是这个道理，学再多的框架，不接触底层，永远只能永远停留在使用阶段，没有意义。 </p>
-<p>以上。</p>
+        <p>官方的原文：由于 JavaScript 的限制， Vue 不能检测以下变动的数组：</p>
+<blockquote>
+<p>当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue<br>当你修改数组的长度时，例如： vm.items.length = newLength</p>
+</blockquote>
+<p>这句话是什么意思？我测试了下Object.defineProperty是可以通过索引属性来设置属性的访问器属性的，那为何做不了监听？</p>
+<p>Q1: 有些论坛上的人说因为数组长度是可变的，即使长度为5，但是未必有索引4.</p>
+<p>A1: 我就想问问这个答案哪里来的，修改length，新增的元素会被添加到最后，它的值为undefined，通过索引一样可以获取他们的值，怎么就叫做“未必有索引4”了呢？</p>
+<p>Q2: 既然知道数组的长度为何不能遍历所有元素并通过索引这个属性全部添加set和get不就可以同时更新视图了吗？</p>
+<p>如果非要说的话，考虑到性能的问题，假设元素内容只有4个有意义的值，但是长度确实1000，我们不可能为1000个元素做检测操作。但是官方说的由于JS限制，我想知道这个限制是什么内容？</p>
+<p>A2: 首先，长度为1000，但只有4个元素的数组并不一定会影响性能，因为js中对数据的遍历除了for循环还有forEach、map、filter、some等，除了for循环外(for,for…of)，其他的遍历都是对键值的遍历，(这句话不对, 不是不会遍历, 是不会对不存在的值执行回调.)也就是除了那四个元素外的空位并不会进行遍历，所以也就不会造成性能损耗，因为循环体中没有操作的话，所带来的性能影响可以忽略不计，下面是长度为10000，但只有两个元素的数组分别使用for及forEach遍历的结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>]; arr[<span class="number">10000</span>] = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.time()</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;arr.length;i++)<span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">console</span>.timeEnd()</span><br><span class="line">&#125;</span><br><span class="line">a(); <span class="comment">//default: 567.1669921875ms</span></span><br><span class="line">a(); <span class="comment">//default: 566.2451171875ms</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.time()</span><br><span class="line">    arr.forEach(<span class="function"><span class="params">item</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(<span class="number">2</span>)&#125;)</span><br><span class="line">    <span class="built_in">console</span>.timeEnd()</span><br><span class="line">&#125;</span><br><span class="line">b(); <span class="comment">//default: 0.81982421875ms</span></span><br><span class="line">b(); <span class="comment">//default: 0.434814453125ms</span></span><br></pre></td></tr></table></figure></p>
+<p>Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。数组的索引也是属性，所以我们是可以监听到数组元素的变化的<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">arr.forEach(<span class="function">(<span class="params">item,index</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(arr,index,&#123;</span><br><span class="line">        set:<span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'set'</span>)</span><br><span class="line">            item = val</span><br><span class="line">        &#125;,</span><br><span class="line">        get:<span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'get'</span>)</span><br><span class="line">            <span class="keyword">return</span> item</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">arr[<span class="number">1</span>]; <span class="comment">// get  2</span></span><br><span class="line">arr[<span class="number">1</span>] = <span class="number">1</span>; <span class="comment">// set  1</span></span><br></pre></td></tr></table></figure></p>
+<p>但是我们新增一个元素，就不会触发监听事件，因为这个新属性我们并没有监听，删除一个属性也是。</p>
 
       
     </div>
@@ -424,12 +407,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/随笔/" rel="tag"># 随笔</a>
-          
-        </div>
-      
 
       
       
@@ -439,8 +416,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/20/js实现区块链/" rel="next" title="js实现区块链">
-                <i class="fa fa-chevron-left"></i> js实现区块链
+              <a href="/2018/12/17/proxy的观察者模式探索/" rel="next" title="proxy的观察者模式探索">
+                <i class="fa fa-chevron-left"></i> proxy的观察者模式探索
               </a>
             
           </div>
@@ -448,10 +425,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/01/js事件循环详解/" rel="prev" title="js事件循环的理解">
-                js事件循环的理解 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

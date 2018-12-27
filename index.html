@@ -283,6 +283,170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/12/18/Vue为什么不能检测数组变动/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="留下">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="月落天白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/18/Vue为什么不能检测数组变动/" itemprop="url">Vue为什么不能检测数组变动</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-18T23:44:09+08:00">
+                2018-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  728 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>官方的原文：由于 JavaScript 的限制， Vue 不能检测以下变动的数组：</p>
+<blockquote>
+<p>当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue<br>当你修改数组的长度时，例如： vm.items.length = newLength</p>
+</blockquote>
+<p>这句话是什么意思？我测试了下Object.defineProperty是可以通过索引属性来设置属性的访问器属性的，那为何做不了监听？</p>
+<p>Q1: 有些论坛上的人说因为数组长度是可变的，即使长度为5，但是未必有索引4.</p>
+<p>A1: 我就想问问这个答案哪里来的，修改length，新增的元素会被添加到最后，它的值为undefined，通过索引一样可以获取他们的值，怎么就叫做“未必有索引4”了呢？</p>
+<p>Q2: 既然知道数组的长度为何不能遍历所有元素并通过索引这个属性全部添加set和get不就可以同时更新视图了吗？</p>
+<p>如果非要说的话，考虑到性能的问题，假设元素内容只有4个有意义的值，但是长度确实1000，我们不可能为1000个元素做检测操作。但是官方说的由于JS限制，我想知道这个限制是什么内容？</p>
+<p>A2: 首先，长度为1000，但只有4个元素的数组并不一定会影响性能，因为js中对数据的遍历除了for循环还有forEach、map、filter、some等，除了for循环外(for,for…of)，其他的遍历都是对键值的遍历，(这句话不对, 不是不会遍历, 是不会对不存在的值执行回调.)也就是除了那四个元素外的空位并不会进行遍历，所以也就不会造成性能损耗，因为循环体中没有操作的话，所带来的性能影响可以忽略不计，下面是长度为10000，但只有两个元素的数组分别使用for及forEach遍历的结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>]; arr[<span class="number">10000</span>] = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.time()</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;arr.length;i++)<span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">console</span>.timeEnd()</span><br><span class="line">&#125;</span><br><span class="line">a(); <span class="comment">//default: 567.1669921875ms</span></span><br><span class="line">a(); <span class="comment">//default: 566.2451171875ms</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.time()</span><br><span class="line">    arr.forEach(<span class="function"><span class="params">item</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(<span class="number">2</span>)&#125;)</span><br><span class="line">    <span class="built_in">console</span>.timeEnd()</span><br><span class="line">&#125;</span><br><span class="line">b(); <span class="comment">//default: 0.81982421875ms</span></span><br><span class="line">b(); <span class="comment">//default: 0.434814453125ms</span></span><br></pre></td></tr></table></figure></p>
+<p>Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。数组的索引也是属性，所以我们是可以监听到数组元素的变化的<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">arr.forEach(<span class="function">(<span class="params">item,index</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(arr,index,&#123;</span><br><span class="line">        set:<span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'set'</span>)</span><br><span class="line">            item = val</span><br><span class="line">        &#125;,</span><br><span class="line">        get:<span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'get'</span>)</span><br><span class="line">            <span class="keyword">return</span> item</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">arr[<span class="number">1</span>]; <span class="comment">// get  2</span></span><br><span class="line">arr[<span class="number">1</span>] = <span class="number">1</span>; <span class="comment">// set  1</span></span><br></pre></td></tr></table></figure></p>
+<p>但是我们新增一个元素，就不会触发监听事件，因为这个新属性我们并没有监听，删除一个属性也是。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+        
+    
+        
+            
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/12/17/proxy的观察者模式探索/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1460,185 +1624,6 @@
 
         
     
-        
-            
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="留下">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avater.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="月落天白">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/" itemprop="url">图解http读书笔记-3- HTTP报文内的HTTP信息及首部字段</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-27T21:03:05+08:00">
-                2018-09-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HTTP/" itemprop="url" rel="index">
-                    <span itemprop="name">HTTP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1,074 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  4 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/bg.jpg" alt="bg"><br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-        
-    
   </section>
 
   
@@ -1693,7 +1678,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1767,7 +1752,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">68.9k</span>
+    <span title="Site words total count">69.7k</span>
   
 </div>
 
