@@ -100,17 +100,17 @@
 
 
 
-<meta name="description" content="公司后台管理系统设计tab切换，就有了切换页面时保留数据的需求，几经探索，有了三种方案。 ####需求分析1.tab页切换保留数据，表单数据保留2.列表页点进详情页，详情页若做了修改，此时列表页数据需要再次触发各种钩子，数据重新获取。3.tab关闭则清除数据保留。 方案1 所有路由meta属性添加iskeepAlive(默认true)、isUseCache(默认false)1234&amp;lt;keep">
+<meta name="description" content="公司后台管理系统设计tab切换，就有了切换页面时保留数据的需求，几经探索，有了三种方案。 ####需求分析 方案1 所有路由meta属性添加iskeepAlive(默认true)、isUseCache(默认false)1234&amp;lt;keep-alive&amp;gt;          &amp;lt;router-view v-if=&quot;$route.meta.keepAlive&quot;/&amp;gt;    &amp;lt;/k">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue keep-alive探索">
 <meta property="og:url" content="https://xiangergou.github.io/2019/01/03/vue-keepAlive探索/index.html">
 <meta property="og:site_name" content="月落天白">
-<meta property="og:description" content="公司后台管理系统设计tab切换，就有了切换页面时保留数据的需求，几经探索，有了三种方案。 ####需求分析1.tab页切换保留数据，表单数据保留2.列表页点进详情页，详情页若做了修改，此时列表页数据需要再次触发各种钩子，数据重新获取。3.tab关闭则清除数据保留。 方案1 所有路由meta属性添加iskeepAlive(默认true)、isUseCache(默认false)1234&amp;lt;keep">
+<meta property="og:description" content="公司后台管理系统设计tab切换，就有了切换页面时保留数据的需求，几经探索，有了三种方案。 ####需求分析 方案1 所有路由meta属性添加iskeepAlive(默认true)、isUseCache(默认false)1234&amp;lt;keep-alive&amp;gt;          &amp;lt;router-view v-if=&quot;$route.meta.keepAlive&quot;/&amp;gt;    &amp;lt;/k">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-04T14:45:15.900Z">
+<meta property="og:updated_time" content="2019-02-15T07:18:50.513Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue keep-alive探索">
-<meta name="twitter:description" content="公司后台管理系统设计tab切换，就有了切换页面时保留数据的需求，几经探索，有了三种方案。 ####需求分析1.tab页切换保留数据，表单数据保留2.列表页点进详情页，详情页若做了修改，此时列表页数据需要再次触发各种钩子，数据重新获取。3.tab关闭则清除数据保留。 方案1 所有路由meta属性添加iskeepAlive(默认true)、isUseCache(默认false)1234&amp;lt;keep">
+<meta name="twitter:description" content="公司后台管理系统设计tab切换，就有了切换页面时保留数据的需求，几经探索，有了三种方案。 ####需求分析 方案1 所有路由meta属性添加iskeepAlive(默认true)、isUseCache(默认false)1234&amp;lt;keep-alive&amp;gt;          &amp;lt;router-view v-if=&quot;$route.meta.keepAlive&quot;/&amp;gt;    &amp;lt;/k">
 
 
 
@@ -343,7 +343,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  450 字
+                  404 字
                 </span>
               
 
@@ -381,7 +381,7 @@
 
       
         <p>公司后台管理系统设计tab切换，就有了切换页面时保留数据的需求，几经探索，有了三种方案。</p>
-<p>####需求分析<br>1.tab页切换保留数据，表单数据保留<br>2.列表页点进详情页，详情页若做了修改，此时列表页数据需要再次触发各种钩子，数据重新获取。<br>3.tab关闭则清除数据保留。</p>
+<p>####需求分析</p>
 <h3 id="方案1"><a href="#方案1" class="headerlink" title="方案1"></a>方案1</h3><ol>
 <li>所有路由meta属性添加iskeepAlive(默认true)、isUseCache(默认false)<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;keep-alive&gt;      </span><br><span class="line">    &lt;router-view v-<span class="keyword">if</span>=<span class="string">"$route.meta.keepAlive"</span>/&gt;    </span><br><span class="line">&lt;<span class="regexp">/keep-alive&gt;    </span></span><br><span class="line"><span class="regexp">&lt;router-view v-if="!$route.meta.keepAlive"/</span>&gt;</span><br></pre></td></tr></table></figure>
 </li>
@@ -394,8 +394,7 @@
 <!--TODO 匹配首先检查组件自身的 name 选项，如果 name 选项不可用，则匹配它的局部注册名称-->
 <p><keep-alive :exclude="keepAliveConf.value"><br>    <router-view class="child-view" :key="$route.fullPath"></router-view><br></keep-alive><br><!-- 或者   --></p>
 <p><keep-alive :include="keepAliveConf.value"><br>    <router-view class="child-view" :key="$route.fullPath"></router-view><br></keep-alive><br><!-- 具体使用 include 还是exclude 根据项目是否需要缓存的页面数量多少来决定--></p>
-<p>import keepAliveConf from ‘keepAliveConf.js’<br>Vue.mixin({<br>  methods: {<br>    // 传入需要重置的组件名字<br>    resetKeepAive(name) {<br>        const conf = keepAliveConf.value;<br>        let arr = keepAliveConf.value.split(‘,’);<br>        if (name &amp;&amp; typeof name === ‘string’) {<br>            let i = arr.indexOf(name);<br>            if (i &gt; -1) {<br>                arr.splice(i, 1);<br>                keepAliveConf.value = arr.join();<br>                setTimeout(() =&gt; {<br>                    keepAliveConf.value = conf<br>                }, 500);<br>            }<br>        }<br>    },<br>  }<br>})</p>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> keepAliveConf <span class="keyword">from</span> <span class="string">'keepAliveConf.js'</span></span><br><span class="line">Vue.mixin(&#123;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="comment">// 传入需要重置的组件名字</span></span><br><span class="line">    resetKeepAive(name) &#123;</span><br><span class="line">        <span class="keyword">const</span> conf = keepAliveConf.value;</span><br><span class="line">        <span class="keyword">let</span> arr = keepAliveConf.value.split(<span class="string">','</span>);</span><br><span class="line">        <span class="keyword">if</span> (name &amp;&amp; <span class="keyword">typeof</span> name === <span class="string">'string'</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> i = arr.indexOf(name);</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">-1</span>) &#123;</span><br><span class="line">                arr.splice(i, <span class="number">1</span>);</span><br><span class="line">                keepAliveConf.value = arr.join();</span><br><span class="line">                setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                    keepAliveConf.value = conf</span><br><span class="line">                &#125;, <span class="number">500</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -602,7 +601,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">71.0k</span>
+    <span title="Site words total count">70.9k</span>
   
 </div>
 
