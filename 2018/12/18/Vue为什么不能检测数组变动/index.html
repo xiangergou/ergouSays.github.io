@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="月落天白">
 <meta property="og:description" content="官方的原文：由于 JavaScript 的限制， Vue 不能检测以下变动的数组：  当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue当你修改数组的长度时，例如： vm.items.length = newLength  这句话是什么意思？我测试了下Object.defineProperty是可以通过索引属性来设置属性的访问器属性的，那为何做不">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-15T07:18:07.090Z">
+<meta property="og:updated_time" content="2019-02-15T07:39:43.196Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue为什么不能检测数组变动(draft)">
 <meta name="twitter:description" content="官方的原文：由于 JavaScript 的限制， Vue 不能检测以下变动的数组：  当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue当你修改数组的长度时，例如： vm.items.length = newLength  这句话是什么意思？我测试了下Object.defineProperty是可以通过索引属性来设置属性的访问器属性的，那为何做不">
@@ -343,7 +343,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  728 字
+                  794 字
                 </span>
               
 
@@ -392,6 +392,10 @@
 <p>A2: 首先，长度为1000，但只有4个元素的数组并不一定会影响性能，因为js中对数据的遍历除了for循环还有forEach、map、filter、some等，除了for循环外(for,for…of)，其他的遍历都是对键值的遍历，(这句话不对, 不是不会遍历, 是不会对不存在的值执行回调.)也就是除了那四个元素外的空位并不会进行遍历，所以也就不会造成性能损耗，因为循环体中没有操作的话，所带来的性能影响可以忽略不计，下面是长度为10000，但只有两个元素的数组分别使用for及forEach遍历的结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>]; arr[<span class="number">10000</span>] = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.time()</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;arr.length;i++)<span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">console</span>.timeEnd()</span><br><span class="line">&#125;</span><br><span class="line">a(); <span class="comment">//default: 567.1669921875ms</span></span><br><span class="line">a(); <span class="comment">//default: 566.2451171875ms</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.time()</span><br><span class="line">    arr.forEach(<span class="function"><span class="params">item</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(<span class="number">2</span>)&#125;)</span><br><span class="line">    <span class="built_in">console</span>.timeEnd()</span><br><span class="line">&#125;</span><br><span class="line">b(); <span class="comment">//default: 0.81982421875ms</span></span><br><span class="line">b(); <span class="comment">//default: 0.434814453125ms</span></span><br></pre></td></tr></table></figure></p>
 <p>Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。数组的索引也是属性，所以我们是可以监听到数组元素的变化的<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">arr.forEach(<span class="function">(<span class="params">item,index</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(arr,index,&#123;</span><br><span class="line">        set:<span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'set'</span>)</span><br><span class="line">            item = val</span><br><span class="line">        &#125;,</span><br><span class="line">        get:<span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'get'</span>)</span><br><span class="line">            <span class="keyword">return</span> item</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">arr[<span class="number">1</span>]; <span class="comment">// get  2</span></span><br><span class="line">arr[<span class="number">1</span>] = <span class="number">1</span>; <span class="comment">// set  1</span></span><br></pre></td></tr></table></figure></p>
 <p>但是我们新增一个元素，就不会触发监听事件，因为这个新属性我们并没有监听，删除一个属性也是。</p>
+<p>嗯哼？<br>源码上翻了翻，发现当数据是数组时，会停止对数据属性的监测。</p>
+<p>这是为何？</p>
+<p>github有人对此提问，尤大的回答是，性能代价和获得的用户体验收益不成正比。</p>
+<p>喵喵喵？？</p>
 
       
     </div>
@@ -574,7 +578,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">70.9k</span>
+    <span title="Site words total count">71.0k</span>
   
 </div>
 
