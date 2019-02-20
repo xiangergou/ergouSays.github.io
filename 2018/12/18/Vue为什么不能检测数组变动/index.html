@@ -100,17 +100,17 @@
 
 
 
-<meta name="description" content="官方的原文：由于 JavaScript 的限制， Vue 不能检测以下变动的数组：  当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue当你修改数组的长度时，例如： vm.items.length = newLength  这句话是什么意思？我测试了下Object.defineProperty是可以通过索引属性来设置属性的访问器属性的，那为何做不">
+<meta name="description" content="官方的原文：由于 JavaScript 的限制， Vue 不能检测以下变动的数组：  当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue当你修改数组的长度时，例如： vm.items.length = newLength">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue为什么不能检测数组变动(draft)">
 <meta property="og:url" content="https://xiangergou.github.io/2018/12/18/Vue为什么不能检测数组变动/index.html">
 <meta property="og:site_name" content="月落天白">
-<meta property="og:description" content="官方的原文：由于 JavaScript 的限制， Vue 不能检测以下变动的数组：  当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue当你修改数组的长度时，例如： vm.items.length = newLength  这句话是什么意思？我测试了下Object.defineProperty是可以通过索引属性来设置属性的访问器属性的，那为何做不">
+<meta property="og:description" content="官方的原文：由于 JavaScript 的限制， Vue 不能检测以下变动的数组：  当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue当你修改数组的长度时，例如： vm.items.length = newLength">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-15T07:39:43.196Z">
+<meta property="og:updated_time" content="2019-02-20T02:48:25.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue为什么不能检测数组变动(draft)">
-<meta name="twitter:description" content="官方的原文：由于 JavaScript 的限制， Vue 不能检测以下变动的数组：  当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue当你修改数组的长度时，例如： vm.items.length = newLength  这句话是什么意思？我测试了下Object.defineProperty是可以通过索引属性来设置属性的访问器属性的，那为何做不">
+<meta name="twitter:description" content="官方的原文：由于 JavaScript 的限制， Vue 不能检测以下变动的数组：  当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue当你修改数组的长度时，例如： vm.items.length = newLength">
 
 
 
@@ -382,7 +382,7 @@
       
         <p>官方的原文：由于 JavaScript 的限制， Vue 不能检测以下变动的数组：</p>
 <blockquote>
-<p>当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue<br>当你修改数组的长度时，例如： vm.items.length = newLength</p>
+<p>当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue<br>当你修改数组的长度时，例如： vm.items.length = newLength<br><a id="more"></a></p>
 </blockquote>
 <p>这句话是什么意思？我测试了下Object.defineProperty是可以通过索引属性来设置属性的访问器属性的，那为何做不了监听？</p>
 <p>Q1: 有些论坛上的人说因为数组长度是可变的，即使长度为5，但是未必有索引4.</p>
