@@ -100,12 +100,12 @@
 
 
 
-<meta name="description" content="加载和执行js代码的下载执行会阻塞浏览器其他处理过程，诸如用户界面绘制。每次遇到&amp;#60;script&amp;#62;标签，页面必须停下来等待代码下载(如果是外部的)并执行，然后再继续处理页面其他部分。但是，有几种方法可以减少 JavaScript 对性能的影响:   1 将所有&amp;#60;script&amp;#62;标签放置在页面的底部，紧靠 body 关闭标签的上方。此法可以保证页面在脚本 运行之前完成解析">
+<meta name="description" content="致力于寻找高质量代码。 加载和执行js代码的下载执行会阻塞浏览器其他处理过程，诸如用户界面绘制。每次遇到&amp;#60;script&amp;#62;标签，页面必须停下来等待代码下载(如果是外部的)并执行，然后再继续处理页面其他部分。但是，有几种方法可以减少 JavaScript 对性能的影响:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="精读高性能JavaScript(draft)">
+<meta property="og:title" content="精读高性能JavaScript">
 <meta property="og:url" content="https://xiangergou.github.io/2019/04/09/精读高性能JavaScript/index.html">
 <meta property="og:site_name" content="月落天白">
-<meta property="og:description" content="加载和执行js代码的下载执行会阻塞浏览器其他处理过程，诸如用户界面绘制。每次遇到&amp;#60;script&amp;#62;标签，页面必须停下来等待代码下载(如果是外部的)并执行，然后再继续处理页面其他部分。但是，有几种方法可以减少 JavaScript 对性能的影响:   1 将所有&amp;#60;script&amp;#62;标签放置在页面的底部，紧靠 body 关闭标签的上方。此法可以保证页面在脚本 运行之前完成解析">
+<meta property="og:description" content="致力于寻找高质量代码。 加载和执行js代码的下载执行会阻塞浏览器其他处理过程，诸如用户界面绘制。每次遇到&amp;#60;script&amp;#62;标签，页面必须停下来等待代码下载(如果是外部的)并执行，然后再继续处理页面其他部分。但是，有几种方法可以减少 JavaScript 对性能的影响:">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://xiangergou.github.io/2019/04/09/精读高性能JavaScript/chapter1.jpg">
 <meta property="og:image" content="https://xiangergou.github.io/2019/04/09/精读高性能JavaScript/chapter2.jpg">
@@ -115,10 +115,10 @@
 <meta property="og:image" content="https://xiangergou.github.io/2019/04/09/精读高性能JavaScript/chapter7.jpg">
 <meta property="og:image" content="https://xiangergou.github.io/2019/04/09/精读高性能JavaScript/chapter8.jpg">
 <meta property="og:image" content="https://xiangergou.github.io/2019/04/09/精读高性能JavaScript/chapter9.jpg">
-<meta property="og:updated_time" content="2019-04-16T14:44:14.238Z">
+<meta property="og:updated_time" content="2019-04-25T09:22:14.656Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="精读高性能JavaScript(draft)">
-<meta name="twitter:description" content="加载和执行js代码的下载执行会阻塞浏览器其他处理过程，诸如用户界面绘制。每次遇到&amp;#60;script&amp;#62;标签，页面必须停下来等待代码下载(如果是外部的)并执行，然后再继续处理页面其他部分。但是，有几种方法可以减少 JavaScript 对性能的影响:   1 将所有&amp;#60;script&amp;#62;标签放置在页面的底部，紧靠 body 关闭标签的上方。此法可以保证页面在脚本 运行之前完成解析">
+<meta name="twitter:title" content="精读高性能JavaScript">
+<meta name="twitter:description" content="致力于寻找高质量代码。 加载和执行js代码的下载执行会阻塞浏览器其他处理过程，诸如用户界面绘制。每次遇到&amp;#60;script&amp;#62;标签，页面必须停下来等待代码下载(如果是外部的)并执行，然后再继续处理页面其他部分。但是，有几种方法可以减少 JavaScript 对性能的影响:">
 <meta name="twitter:image" content="https://xiangergou.github.io/2019/04/09/精读高性能JavaScript/chapter1.jpg">
 
 
@@ -155,7 +155,7 @@
 
 
 
-  <title>精读高性能JavaScript(draft) | 月落天白</title>
+  <title>精读高性能JavaScript | 月落天白</title>
   
 
 
@@ -308,7 +308,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">精读高性能JavaScript(draft)</h1>
+          <h1 class="post-title" itemprop="name headline">精读高性能JavaScript</h1>
         
 
         <div class="post-meta">
@@ -352,7 +352,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2,636 字
+                  2,646 字
                 </span>
               
 
@@ -389,7 +389,8 @@
       
 
       
-        <h3 id="加载和执行"><a href="#加载和执行" class="headerlink" title="加载和执行"></a>加载和执行</h3><p><img src="/2019/04/09/精读高性能JavaScript/chapter1.jpg" alt="加载和执行"><br>js代码的下载执行会阻塞浏览器其他处理过程，诸如用户界面绘制。每次遇到&#60;script&#62;标签，页面必须停下来等待代码下载(如果是外部的)并执行，然后再继续处理页面其他部分。但是，有几种方法可以减少 JavaScript 对性能的影响:</p>
+        <p>致力于寻找高质量代码。</p>
+<h3 id="加载和执行"><a href="#加载和执行" class="headerlink" title="加载和执行"></a>加载和执行</h3><p><img src="/2019/04/09/精读高性能JavaScript/chapter1.jpg" alt="加载和执行"><br>js代码的下载执行会阻塞浏览器其他处理过程，诸如用户界面绘制。每次遇到&#60;script&#62;标签，页面必须停下来等待代码下载(如果是外部的)并执行，然后再继续处理页面其他部分。但是，有几种方法可以减少 JavaScript 对性能的影响:<br><a id="more"></a></p>
 <blockquote>
 <p> 1 将所有&#60;script&#62;标签放置在页面的底部，紧靠 body 关闭标签的上方。此法可以保证页面在脚本 运行之前完成解析。<br>2 将脚本成组打包。页面的&#60;script&#62;标签越少，页面的加载速度就越快，响应也更加迅速。不论外部脚本 文件还是内联代码都是如此。</p>
 </blockquote>
@@ -459,6 +460,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/25/基于Node实现markdown转html/" rel="prev" title="基于Node fs 实现markdown转html">
+                基于Node fs 实现markdown转html <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -539,7 +544,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -629,7 +634,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">73.6k</span>
+    <span title="Site words total count">74.4k</span>
   
 </div>
 
