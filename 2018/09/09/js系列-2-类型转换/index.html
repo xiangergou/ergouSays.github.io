@@ -102,14 +102,14 @@
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="js深入理解(2)-类型转换">
-<meta property="og:url" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/09/js系列-2-类型转换/index.html">
+<meta property="og:url" content="https://xiangergou.github.io/2018/09/09/js系列-2-类型转换/index.html">
 <meta property="og:site_name" content="月落天白">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/09/js系列-2-类型转换/bg.jpg">
+<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/09/js系列-2-类型转换/bg.jpg">
 <meta property="og:updated_time" content="2018-09-15T07:09:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js深入理解(2)-类型转换">
-<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/09/js系列-2-类型转换/bg.jpg">
+<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/09/js系列-2-类型转换/bg.jpg">
 
 
 
@@ -139,7 +139,7 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/yunbooks.github.io/2018/09/09/js系列-2-类型转换/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/09/09/js系列-2-类型转换/"/>
 
 
 
@@ -281,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/09/js系列-2-类型转换/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/2018/09/09/js系列-2-类型转换/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -401,7 +401,7 @@
       
 
       
-        <p><img src="/yunbooks.github.io/yunbooks.github.io/2018/09/09/js系列-2-类型转换/bg.jpg" alt="类型转换"><br><a id="more"></a></p>
+        <p><img src="/yunbooks.github.io/2018/09/09/js系列-2-类型转换/bg.jpg" alt="类型转换"><br><a id="more"></a></p>
 <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>js类型转换分为显示转换和隐式转换，虽这样分，两者却并无特别生硬的强制界限。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">var</span> b = a + <span class="string">""</span>; <span class="comment">// 隐式强制类型转换 </span></span><br><span class="line"><span class="keyword">var</span> c = <span class="built_in">String</span>( a ); <span class="comment">// 显式强制类型转换</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="抽象值操作"><a href="#抽象值操作" class="headerlink" title="抽象值操作"></a>抽象值操作</h3><p>介绍显式和隐式强制类型转换之前，我们需要了解字符串、数字和布尔值之间类型转换的基本规则。</p>
 <h4 id="ToString"><a href="#ToString" class="headerlink" title="ToString"></a>ToString</h4><p>如果对象有自己的 toString() 方法，字符串化时就会调用该方法并使用其返回值。<br>数组的默认 toString() 方法经过了重新定义，将所有单元字符串化以后再用 “,” 连接起来:</p>

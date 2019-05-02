@@ -103,14 +103,14 @@
 <meta name="keywords" content="ES6">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手写promsise">
-<meta property="og:url" content="https://xiangergou.github.io/yunbooks.github.io/2018/07/10/手写promsise/index.html">
+<meta property="og:url" content="https://xiangergou.github.io/2018/07/10/手写promsise/index.html">
 <meta property="og:site_name" content="月落天白">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/07/10/手写promsise/bg.jpg">
+<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/07/10/手写promsise/bg.jpg">
 <meta property="og:updated_time" content="2018-09-28T07:35:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="手写promsise">
-<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/07/10/手写promsise/bg.jpg">
+<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/07/10/手写promsise/bg.jpg">
 
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/yunbooks.github.io/2018/07/10/手写promsise/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/07/10/手写promsise/"/>
 
 
 
@@ -282,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/07/10/手写promsise/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/2018/07/10/手写promsise/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -402,7 +402,7 @@
       
 
       
-        <p><img src="/yunbooks.github.io/yunbooks.github.io/2018/07/10/手写promsise/bg.jpg" alt="bg"><br><a id="more"></a></p>
+        <p><img src="/yunbooks.github.io/2018/07/10/手写promsise/bg.jpg" alt="bg"><br><a id="more"></a></p>
 <h3 id="step-1-骨架搭建"><a href="#step-1-骨架搭建" class="headerlink" title="step 1 骨架搭建"></a>step 1 骨架搭建</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'执行'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//  “执行”</span></span><br></pre></td></tr></table></figure>
 <p>可以看出<br>░ 1.Promise是一个类。<br>░ 2.参数是一个函数。 promise A+规范定义其为executor。该函数包含两个方法参数resolve,reject。这个函数在promise内部是立即执行的。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  step 1 </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyPromise</span></span>&#123;</span><br><span class="line">  <span class="comment">// 构造器</span></span><br><span class="line">  <span class="keyword">constructor</span>(executor)&#123;</span><br><span class="line">    <span class="comment">// 成功</span></span><br><span class="line">    <span class="keyword">let</span> resolve = <span class="function"><span class="params">()</span> =&gt;</span> &#123; &#125;;</span><br><span class="line">    <span class="comment">// 失败</span></span><br><span class="line">    <span class="keyword">let</span> reject = <span class="function"><span class="params">()</span> =&gt;</span> &#123; &#125;;</span><br><span class="line">    <span class="comment">// 立即执行</span></span><br><span class="line">    executor(resolve, reject);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

@@ -103,14 +103,14 @@
 <meta name="keywords" content="ES6">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《深入理解ES6》读书笔记(2) -- Set与Map">
-<meta property="og:url" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/17/es6笔记之二 /index.html">
+<meta property="og:url" content="https://xiangergou.github.io/2018/09/17/es6笔记之二 /index.html">
 <meta property="og:site_name" content="月落天白">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/17/es6笔记之二%20/bg.jpg">
+<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/17/es6笔记之二%20/bg.jpg">
 <meta property="og:updated_time" content="2018-12-16T15:11:06.691Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《深入理解ES6》读书笔记(2) -- Set与Map">
-<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/17/es6笔记之二%20/bg.jpg">
+<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/17/es6笔记之二%20/bg.jpg">
 
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/yunbooks.github.io/2018/09/17/es6笔记之二 /"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/09/17/es6笔记之二 /"/>
 
 
 
@@ -282,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/17/es6笔记之二 /">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/2018/09/17/es6笔记之二 /">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -402,7 +402,7 @@
       
 
       
-        <p><img src="/yunbooks.github.io/yunbooks.github.io/2018/09/17/es6笔记之二 /bg.jpg" alt="bg"><br><a id="more"></a><br>Map和Set都叫做集合，但是他们也有所不同。Set常被用来检查对象中是否存在某个键名，Map集合常被用来获取已存的信息。<br>使用之前先测试浏览器是否支持Set与Map</p>
+        <p><img src="/yunbooks.github.io/2018/09/17/es6笔记之二 /bg.jpg" alt="bg"><br><a id="more"></a><br>Map和Set都叫做集合，但是他们也有所不同。Set常被用来检查对象中是否存在某个键名，Map集合常被用来获取已存的信息。<br>使用之前先测试浏览器是否支持Set与Map</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"><span class="keyword">var</span> m = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line"><span class="keyword">var</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'你的浏览器支持Map和Set！'</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>set是一种有序列表，类似于数组，其成员为相互独立的非重复值。 Set本身是一个构造函数，用来生成Set数据结构。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Set函数可以接受一个数组（或类似数组的对象）作为参数，用来初始化。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> setArr = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>();</span><br><span class="line"></span><br><span class="line">[<span class="number">5</span>, <span class="string">'5'</span>].map(<span class="function"><span class="params">x</span> =&gt;</span> s.add(x));</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">of</span> s) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 2 '2'</span></span><br></pre></td></tr></table></figure>

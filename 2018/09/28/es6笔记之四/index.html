@@ -102,14 +102,14 @@
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="《深入理解ES6》读书笔记(4) -- 对象扩展">
-<meta property="og:url" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/28/es6笔记之四/index.html">
+<meta property="og:url" content="https://xiangergou.github.io/2018/09/28/es6笔记之四/index.html">
 <meta property="og:site_name" content="月落天白">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/28/es6笔记之四/bg.jpg">
+<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/28/es6笔记之四/bg.jpg">
 <meta property="og:updated_time" content="2018-12-16T15:10:53.249Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《深入理解ES6》读书笔记(4) -- 对象扩展">
-<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/28/es6笔记之四/bg.jpg">
+<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/28/es6笔记之四/bg.jpg">
 
 
 
@@ -139,7 +139,7 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/yunbooks.github.io/2018/09/28/es6笔记之四/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/09/28/es6笔记之四/"/>
 
 
 
@@ -281,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/28/es6笔记之四/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/2018/09/28/es6笔记之四/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -401,7 +401,7 @@
       
 
       
-        <p><img src="/yunbooks.github.io/yunbooks.github.io/2018/09/28/es6笔记之四/bg.jpg" alt="es6"><br><a id="more"></a></p>
+        <p><img src="/yunbooks.github.io/2018/09/28/es6笔记之四/bg.jpg" alt="es6"><br><a id="more"></a></p>
 <h3 id="属性名表达式"><a href="#属性名表达式" class="headerlink" title="属性名表达式"></a>属性名表达式</h3><p>在ES5中，定义对象的属性有两种方法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法一：标识符作为属性名</span></span><br><span class="line">obj.foo = <span class="literal">true</span>;</span><br><span class="line"><span class="comment">// 方法二：表达式作为属性名</span></span><br><span class="line">obj[<span class="string">"foo"</span>] = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure></p>
 <p>如果使用字面量方式定义对象，在ES5中只能使用方法一，而在ES6中可以使用方法二：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> yuan = <span class="string">"monkey"</span>;</span><br><span class="line"><span class="keyword">let</span> animal = &#123;</span><br><span class="line">  <span class="string">"type"</span>: <span class="string">"animal"</span>,</span><br><span class="line">  [yuan]: <span class="string">"yuan is not monkey"</span></span><br><span class="line">&#125;</span><br><span class="line">animal[<span class="string">"type"</span>]; <span class="comment">// "animal"</span></span><br><span class="line">animal[yuan]; <span class="comment">// "yuan is not monkey"</span></span><br><span class="line">animal[<span class="string">"monkey"</span>]; <span class="comment">// "yuan is not monkey"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> monkey = &#123;</span><br><span class="line">  [<span class="string">'yuan'</span>]() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"yuan is a monkey"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">monkey.yuan(); <span class="comment">// "yuan is a monkey"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意，属性名表达式如果是一个对象，默认情况下会自动将对象转为字符串[object Object]</span></span><br><span class="line"><span class="keyword">const</span> keyA = &#123;<span class="attr">a</span>: <span class="number">1</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> keyB = &#123;<span class="attr">b</span>: <span class="number">2</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> myObject = &#123;</span><br><span class="line">  [keyA]: <span class="string">'valueA'</span>,</span><br><span class="line">  [keyB]: <span class="string">'valueB'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">myObject <span class="comment">// Object &#123;[object Object]: "valueB"&#125;</span></span><br></pre></td></tr></table></figure>

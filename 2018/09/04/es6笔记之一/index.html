@@ -103,14 +103,14 @@
 <meta name="keywords" content="ES6">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《深入理解ES6》读书笔记(1) -- 块级作用域">
-<meta property="og:url" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/04/es6笔记之一/index.html">
+<meta property="og:url" content="https://xiangergou.github.io/2018/09/04/es6笔记之一/index.html">
 <meta property="og:site_name" content="月落天白">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/04/es6笔记之一/bg.jpg">
+<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/04/es6笔记之一/bg.jpg">
 <meta property="og:updated_time" content="2018-12-16T15:11:30.278Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《深入理解ES6》读书笔记(1) -- 块级作用域">
-<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/04/es6笔记之一/bg.jpg">
+<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/04/es6笔记之一/bg.jpg">
 
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/yunbooks.github.io/2018/09/04/es6笔记之一/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/09/04/es6笔记之一/"/>
 
 
 
@@ -282,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/04/es6笔记之一/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/2018/09/04/es6笔记之一/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -402,7 +402,7 @@
       
 
       
-        <p><img src="/yunbooks.github.io/yunbooks.github.io/2018/09/04/es6笔记之一/bg.jpg" alt="道阻且长"><br><a id="more"></a></p>
+        <p><img src="/yunbooks.github.io/2018/09/04/es6笔记之一/bg.jpg" alt="道阻且长"><br><a id="more"></a></p>
 <h3 id="ES5变量提升与函数提升"><a href="#ES5变量提升与函数提升" class="headerlink" title="ES5变量提升与函数提升"></a>ES5变量提升与函数提升</h3><h4 id="var声明及变量提升"><a href="#var声明及变量提升" class="headerlink" title="var声明及变量提升"></a>var声明及变量提升</h4><p>   通过var声明的变量，无论在实际在何处声明，都会被当成在当前作用域顶部声明，这就所谓的变量提升(Hoisting)机制。</p>
   <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">false</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> value = <span class="string">'blue'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(value); <span class="comment">// =&gt; undefined</span></span><br></pre></td></tr></table></figure>
 <p>  此处输出’undefined’而非’undeclared’ (not defined);  此处即使if条件语句为false，变量value依旧会被创建。在预编译阶段，该方法会被改造成这样：<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value;</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">false</span>) &#123;</span><br><span class="line">  value = <span class="string">'blue'</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="built_in">console</span>.log(value);</span><br></pre></td></tr></table></figure></p>

@@ -103,15 +103,15 @@
 <meta name="keywords" content="HTTP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图解http读书笔记-3- HTTP报文内的HTTP信息及首部字段">
-<meta property="og:url" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/index.html">
+<meta property="og:url" content="https://xiangergou.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/index.html">
 <meta property="og:site_name" content="月落天白">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/bg.jpg">
-<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/bg.png">
+<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/bg.jpg">
+<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/bg.png">
 <meta property="og:updated_time" content="2018-10-02T02:58:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图解http读书笔记-3- HTTP报文内的HTTP信息及首部字段">
-<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/bg.jpg">
+<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/bg.jpg">
 
 
 
@@ -141,7 +141,7 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/yunbooks.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/"/>
 
 
 
@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -403,7 +403,7 @@
       
 
       
-        <p><img src="/yunbooks.github.io/yunbooks.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/bg.jpg" alt="bg"><br><a id="more"></a></p>
+        <p><img src="/yunbooks.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/bg.jpg" alt="bg"><br><a id="more"></a></p>
 <h3 id="HTTP报文内的HTTP信息-（第三章）"><a href="#HTTP报文内的HTTP信息-（第三章）" class="headerlink" title="HTTP报文内的HTTP信息 （第三章）"></a>HTTP报文内的HTTP信息 （第三章）</h3><p>░ HTTP报文：报文首部 + 空行（CR回车符+LF换行符）+ 报文主体<br>░ 请求报文：请求行（请求方法+URL+版本）+请求首部字段+通用首部字段+实体首部字段+其他<br>░ 响应报文：状态行（状态码+原因短语+版本）+响应首部字段+通用首部字段+实体首部字段+其他<br>░ 可能包含HTTP的RFC里未定义的首部（Cookie等）</p>
 <h4 id="编码提升传输速率"><a href="#编码提升传输速率" class="headerlink" title="编码提升传输速率"></a>编码提升传输速率</h4><p>报文主体和实体主体的差异<br>░ 报文：是HTTP通信中的基本单位，由8位组字节流组成，通过HTTP通信传输。<br>░ 实体：作为请求或响应的有效载荷数据被传输，内容由实体首部和主体组成。<br>HTTP报文的主体用于传输请求或响应的实体主体。报文主体等于实体主体，只有编码时候才会有差异。</p>
 <p>░ 压缩传输的内容编码：发邮件添加附件时，为了让邮件的体积变小，通常将附件进行压缩，再发送。HTTP中也有类似功能。常见的内容编码有以下几种：</p>
@@ -420,7 +420,7 @@
 </blockquote>
 <p>░ 获取部分内容的范围请求，曾经加载一个尺寸稍大的图片或者文件就很吃力了，如果网络中断，必须重头开始，现在就有一种恢复机制（从中断处恢复）——指定范围发送的请求叫做范围请求。<br>对一份10000字节大小的资源，如果使用范围请求，可以只请求5000-10000字节内多资源；<br>Range: bytes=5001-10000：5000-10000字节<br>Range: bytes=5001-：5000到最后<br>Range: bytes=-3000：最开始到3000<br>Range: bytes=-3000, 5000-7000：多重范围（响应会在首部字段Content-type标明multipart/byteranges后返回响应报文）<br>如果无法响应范围请求，则会返回状态码200 OK和完整实体内容。</p>
 <p>░ 内容协商返回最合适的内容（英文版或中文版内容）<br>服务器驱动协商：以请求到首部字段为参考，在服务器端自动处理。<br>客户端驱动协商：由客户端进行内容协商，从浏览器显示的可选项列表中手动选择（比如自行切换pc版或手机版）<br>透明协商：服务端客户端都自行协商。</p>
-<h3 id="HTTP首部-（第六章）"><a href="#HTTP首部-（第六章）" class="headerlink" title="HTTP首部 （第六章）"></a>HTTP首部 （第六章）</h3><p><img src="/yunbooks.github.io/yunbooks.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/bg.png" alt="http"></p>
+<h3 id="HTTP首部-（第六章）"><a href="#HTTP首部-（第六章）" class="headerlink" title="HTTP首部 （第六章）"></a>HTTP首部 （第六章）</h3><p><img src="/yunbooks.github.io/2018/09/27/图解http读书笔记-3-HTTP报文内的HTTP信息及首部字段/bg.png" alt="http"></p>
 <p>以上。</p>
 <p>参考资料：<br>《图解http》</p>
 

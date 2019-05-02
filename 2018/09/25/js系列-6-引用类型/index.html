@@ -103,14 +103,14 @@
 <meta name="keywords" content="js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js深入理解(6)-引用类型">
-<meta property="og:url" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/25/js系列-6-引用类型/index.html">
+<meta property="og:url" content="https://xiangergou.github.io/2018/09/25/js系列-6-引用类型/index.html">
 <meta property="og:site_name" content="月落天白">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/25/js系列-6-引用类型/bg.jpg">
+<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/25/js系列-6-引用类型/bg.jpg">
 <meta property="og:updated_time" content="2018-10-03T07:26:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js深入理解(6)-引用类型">
-<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/25/js系列-6-引用类型/bg.jpg">
+<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/25/js系列-6-引用类型/bg.jpg">
 
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/yunbooks.github.io/2018/09/25/js系列-6-引用类型/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/09/25/js系列-6-引用类型/"/>
 
 
 
@@ -282,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/25/js系列-6-引用类型/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/2018/09/25/js系列-6-引用类型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -402,7 +402,7 @@
       
 
       
-        <p><img src="/yunbooks.github.io/yunbooks.github.io/2018/09/25/js系列-6-引用类型/bg.jpg" alt="bg"><br><a id="more"></a></p>
+        <p><img src="/yunbooks.github.io/2018/09/25/js系列-6-引用类型/bg.jpg" alt="bg"><br><a id="more"></a></p>
 <h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myObject = &#123; &#125;;</span><br><span class="line">myObject[<span class="literal">true</span>] = <span class="string">"foo"</span>;</span><br><span class="line">myObject[<span class="number">3</span>] = <span class="string">"bar"</span>; </span><br><span class="line">myObject[myObject] = <span class="string">"baz"</span>;</span><br><span class="line">myObject[<span class="string">"true"</span>]; <span class="comment">// "foo"</span></span><br><span class="line">myObject[<span class="string">"3"</span>]; <span class="comment">// "bar"</span></span><br><span class="line">myObject[<span class="string">"[object Object]"</span>]; <span class="comment">// "baz"</span></span><br></pre></td></tr></table></figure>
 <h4 id="属性特性"><a href="#属性特性" class="headerlink" title="属性特性:"></a>属性特性:</h4><p>░ writable 可写。是否可以设置该属性的值<br>░ enumberable, 可枚举。是否可被for in 遍历<br>░ configurable 可配置 是否可以删除或修改该属性。</p>
 <h4 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h4><p>除null以外，每个javascript都有原型且与之关联。<br>Object.prototype没有原型。</p>

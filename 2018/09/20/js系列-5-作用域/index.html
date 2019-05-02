@@ -102,14 +102,14 @@
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="js深入理解(5)-执行环境与作用域链">
-<meta property="og:url" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/20/js系列-5-作用域/index.html">
+<meta property="og:url" content="https://xiangergou.github.io/2018/09/20/js系列-5-作用域/index.html">
 <meta property="og:site_name" content="月落天白">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/20/js系列-5-作用域/bg.jpg">
+<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/20/js系列-5-作用域/bg.jpg">
 <meta property="og:updated_time" content="2018-09-23T08:12:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js深入理解(5)-执行环境与作用域链">
-<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/20/js系列-5-作用域/bg.jpg">
+<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/20/js系列-5-作用域/bg.jpg">
 
 
 
@@ -139,7 +139,7 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/yunbooks.github.io/2018/09/20/js系列-5-作用域/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/09/20/js系列-5-作用域/"/>
 
 
 
@@ -281,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/20/js系列-5-作用域/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/2018/09/20/js系列-5-作用域/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -401,7 +401,7 @@
       
 
       
-        <p><img src="/yunbooks.github.io/yunbooks.github.io/2018/09/20/js系列-5-作用域/bg.jpg" alt="bg"><br><a id="more"></a></p>
+        <p><img src="/yunbooks.github.io/2018/09/20/js系列-5-作用域/bg.jpg" alt="bg"><br><a id="more"></a></p>
 <h3 id="执行环境-执行上下文"><a href="#执行环境-执行上下文" class="headerlink" title="执行环境(执行上下文)"></a>执行环境(执行上下文)</h3><p>░ 执行环境有全局执行环境（也称为全局环境）和函数执行环境之分；<br>░ 函数的局部环境不仅有权访问函数作用域中的变量，而且有权访问其包含（父）环境，乃至全局环境；<br>░ 全局环境只能访问在全局环境中定义的变量和函数，而不能访问局部环境中的任何数据；<br>░ 变量的执行环境有助于确定何时释放内存。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">context = &#123;</span><br><span class="line">  VO, <span class="comment">// (若环境为函数，则AO当做VO)</span></span><br><span class="line">  Scope,</span><br><span class="line">  <span class="keyword">this</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>执行环境只有在函数被执行时方才创建，这也就解释了ES5中的this指向在执行函数的时候绑定。</p>

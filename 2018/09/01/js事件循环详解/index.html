@@ -102,15 +102,15 @@
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="js事件循环的理解">
-<meta property="og:url" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/01/js事件循环详解/index.html">
+<meta property="og:url" content="https://xiangergou.github.io/2018/09/01/js事件循环详解/index.html">
 <meta property="og:site_name" content="月落天白">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/01/js事件循环详解/bg.jpg">
-<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/01/js事件循环详解/task.png">
+<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/01/js事件循环详解/bg.jpg">
+<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/01/js事件循环详解/task.png">
 <meta property="og:updated_time" content="2018-09-20T11:27:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js事件循环的理解">
-<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/01/js事件循环详解/bg.jpg">
+<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/09/01/js事件循环详解/bg.jpg">
 
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/yunbooks.github.io/2018/09/01/js事件循环详解/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/09/01/js事件循环详解/"/>
 
 
 
@@ -282,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/09/01/js事件循环详解/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/2018/09/01/js事件循环详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -380,7 +380,7 @@
       
 
       
-        <p><img src="/yunbooks.github.io/yunbooks.github.io/2018/09/01/js事件循环详解/bg.jpg" alt="&#39;bg&#39;"><br><a id="more"></a></p>
+        <p><img src="/yunbooks.github.io/2018/09/01/js事件循环详解/bg.jpg" alt="&#39;bg&#39;"><br><a id="more"></a></p>
 <p>javascript是一门单线程的非阻塞的脚本语言。</p>
 <p>所谓单线程，是指在JS引擎中负责解释和执行JavaScript代码的线程只有一个。不妨叫它<strong>主线程</strong>。</p>
 <p>但是实际上还存在其他的线程。例如：处理AJAX请求的线程、处理DOM事件的线程、定时器线程、读写文件的线程(例如在Node.js中)等等。这些线程可能存在于JS引擎之内，也可能存在于JS引擎之外，在此我们不做区分。不妨叫它们<strong>工作线程</strong>。</p>
@@ -412,7 +412,7 @@
 <h4 id="事件循环的步骤："><a href="#事件循环的步骤：" class="headerlink" title="事件循环的步骤："></a>事件循环的步骤：</h4><blockquote>
 <p>1、运行主线程（函数调用栈）中的同步任务。<br>2、主线程执行到异步任务源时，通知相应的工作线程进行相应的执行异步任务，将任务源指定的异步任务完成之后，将结果(回调)放入任务队列中。 这之中，宏仁务放入宏仁务队列，遇到微任务放入微任务队列，执行其他函数的时候放入执行环境。<br>3、主线程（函数调用栈）中的任务执行完毕后，然后执行所有的微任务，再执行宏任务，等到一个任务队列执行完毕，再执行所有的微任务<br>4、不断执行第三步。<br><br></p>
 </blockquote>
-<p><img src="/yunbooks.github.io/yunbooks.github.io/2018/09/01/js事件循环详解/task.png" alt="任务队列"></p>
+<p><img src="/yunbooks.github.io/2018/09/01/js事件循环详解/task.png" alt="任务队列"></p>
 <p>举例<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'timeout1'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise1'</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">        i == <span class="number">99</span> &amp;&amp; resolve();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise2'</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'then1'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'global1'</span>);</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>1.事件循环从宏任务队列开始，这个时候，宏任务队列中，只有一个script(整体代码)任务。每一个任务的执行顺序，都依靠执行栈来搞定，而当遇到任务源时，则会先分发任务到对应的队列中去</li>

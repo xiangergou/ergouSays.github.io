@@ -102,15 +102,15 @@
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="proxy的观察者模式探索">
-<meta property="og:url" content="https://xiangergou.github.io/yunbooks.github.io/2018/12/17/proxy的观察者模式探索/index.html">
+<meta property="og:url" content="https://xiangergou.github.io/2018/12/17/proxy的观察者模式探索/index.html">
 <meta property="og:site_name" content="月落天白">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/12/17/proxy的观察者模式探索/vue3.jpeg">
-<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/12/17/proxy的观察者模式探索/vue.png">
+<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/12/17/proxy的观察者模式探索/vue3.jpeg">
+<meta property="og:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/12/17/proxy的观察者模式探索/vue.png">
 <meta property="og:updated_time" content="2018-12-18T09:17:34.512Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="proxy的观察者模式探索">
-<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/12/17/proxy的观察者模式探索/vue3.jpeg">
+<meta name="twitter:image" content="https://xiangergou.github.io/yunbooks.github.io/2018/12/17/proxy的观察者模式探索/vue3.jpeg">
 
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/yunbooks.github.io/2018/12/17/proxy的观察者模式探索/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2018/12/17/proxy的观察者模式探索/"/>
 
 
 
@@ -282,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/yunbooks.github.io/2018/12/17/proxy的观察者模式探索/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/yunbooks.github.io/2018/12/17/proxy的观察者模式探索/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="留下">
@@ -380,7 +380,7 @@
       
 
       
-        <p><img src="/yunbooks.github.io/yunbooks.github.io/2018/12/17/proxy的观察者模式探索/vue3.jpeg" alt="vue"><br><a id="more"></a><br>vueConf大会，尤小右实锤vue3.0将改definePrototype为proxy。</p>
+        <p><img src="/yunbooks.github.io/2018/12/17/proxy的观察者模式探索/vue3.jpeg" alt="vue"><br><a id="more"></a><br>vueConf大会，尤小右实锤vue3.0将改definePrototype为proxy。</p>
 <h3 id="却之为何"><a href="#却之为何" class="headerlink" title="却之为何"></a>却之为何</h3><p>1.在Vue中，Object.defineProperty无法监控到数组下标的变化，导致直接通过数组的下标给数组设置值，不能实时响应。 为了解决这个问题，经过vue内部处理后可以使用以下几种方法来监听数组。（事实上，Object.defineProperty本身是可以监控到数组下标的变化的，参Vue<a href="https://segmentfault.com/a/1190000015783546" target="_blank" rel="noopener">为什么不能检测数组变动</a>）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">push()</span><br><span class="line">pop()</span><br><span class="line">shift()</span><br><span class="line">unshift()</span><br><span class="line">splice()</span><br><span class="line">sort()</span><br><span class="line">reverse()</span><br></pre></td></tr></table></figure></p>
 <p>由于只针对了以上八种方法进行了hack处理,所以其他数组的属性也是检测不到的，还是具有一定的局限性。</p>
 <p>Object.defineProperty只能劫持对象的属性,因此我们需要对每个对象的每个属性进行遍历。Vue里，是通过递归以及遍历data 对象来实现对数据的监控的，如果属性值也是对象那么需要深度遍历,显然如果能劫持一个完整的对象，不管是对操作性还是性能都会有一个很大的提升。</p>
@@ -390,7 +390,7 @@
 <li>有13种劫持操作</li>
 </ol>
 <p>vue2.x之前之所以不用Proxy，主要Proxy是es6提供的新特性，兼容性不好，最主要的是这个属性无法用polyfill来兼容。</p>
-<h3 id="基于proxy的vue数据双向绑定实现"><a href="#基于proxy的vue数据双向绑定实现" class="headerlink" title="基于proxy的vue数据双向绑定实现"></a>基于proxy的vue数据双向绑定实现</h3><p><img src="/yunbooks.github.io/yunbooks.github.io/2018/12/17/proxy的观察者模式探索/vue.png" alt="vue"></p>
+<h3 id="基于proxy的vue数据双向绑定实现"><a href="#基于proxy的vue数据双向绑定实现" class="headerlink" title="基于proxy的vue数据双向绑定实现"></a>基于proxy的vue数据双向绑定实现</h3><p><img src="/yunbooks.github.io/2018/12/17/proxy的观察者模式探索/vue.png" alt="vue"></p>
 <p>■ Observer: 基于proxy处理代理，当属性修改时通知Dep。<br>■ compile:  解析指令，订阅数据变化，绑定更新函数。 根据对应指令绑定相应watcher。<br>■ Dep: 为全局对象subscribe添加对应属性,当数据变化，通知watcher，调用相关update方法<br>■ Watcher: 主要update方法，修改相关node节点数据。</p>
 <h4 id="1-页面结构"><a href="#1-页面结构" class="headerlink" title="1. 页面结构"></a>1. 页面结构</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- input框， 包含v-model指令 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"num"</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- input框， 包含v-model指令 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"btn"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"添加到Todolist"</span> <span class="attr">v-click</span>=<span class="string">"addList"</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>您输入的是：<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- span， 包含v-bind指令 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-bind</span>=<span class="string">"num"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h4 id="2-参照vue调用"><a href="#2-参照vue调用" class="headerlink" title="2. 参照vue调用"></a>2. 参照vue调用</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> proxyVue(&#123;</span><br><span class="line">  el: <span class="string">"#app"</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    num: <span class="number">0</span>,</span><br><span class="line">    arr: []</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    addList() &#123;</span><br><span class="line">      <span class="keyword">this</span>.arr.push(<span class="keyword">this</span>.num);</span><br><span class="line">      Render.addList(<span class="keyword">this</span>.num);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
