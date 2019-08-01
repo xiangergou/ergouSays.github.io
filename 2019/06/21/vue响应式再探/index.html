@@ -100,16 +100,17 @@
 
 
 
-<meta name="description" content="以前看见山，总想知道山后面是什么">
-<meta property="og:type" content="website">
-<meta property="og:title" content="月落天白">
-<meta property="og:url" content="https://xiangergou.github.io/categories/webpack/index.html">
+<meta name="description" content="最近在看vue源码，开在响应式了，原先对响应式的理解还是过于肤浅流于表面。 理解一个东西最好是一个环，比如增删改查。其次是一条线，比如草蛇灰线，伏延千里。 响应式，说到底无非Object.defineproperty。通过设置其get、set来做出一些事情。 当数据更改，即触发set方法时，相应的一件或者几件事件就会被执行。 算了, hexo还适合， 换vuepress吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue源码探索">
+<meta property="og:url" content="https://xiangergou.github.io/2019/06/21/vue响应式再探/index.html">
 <meta property="og:site_name" content="月落天白">
-<meta property="og:description" content="以前看见山，总想知道山后面是什么">
+<meta property="og:description" content="最近在看vue源码，开在响应式了，原先对响应式的理解还是过于肤浅流于表面。 理解一个东西最好是一个环，比如增删改查。其次是一条线，比如草蛇灰线，伏延千里。 响应式，说到底无非Object.defineproperty。通过设置其get、set来做出一些事情。 当数据更改，即触发set方法时，相应的一件或者几件事件就会被执行。 算了, hexo还适合， 换vuepress吧">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-01T01:59:15.350Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="月落天白">
-<meta name="twitter:description" content="以前看见山，总想知道山后面是什么">
+<meta name="twitter:title" content="vue源码探索">
+<meta name="twitter:description" content="最近在看vue源码，开在响应式了，原先对响应式的理解还是过于肤浅流于表面。 理解一个东西最好是一个环，比如增删改查。其次是一条线，比如草蛇灰线，伏延千里。 响应式，说到底无非Object.defineproperty。通过设置其get、set来做出一些事情。 当数据更改，即触发set方法时，相应的一件或者几件事件就会被执行。 算了, hexo还适合， 换vuepress吧">
 
 
 
@@ -139,13 +140,13 @@
 
 
 
-  <link rel="canonical" href="https://xiangergou.github.io/categories/webpack/"/>
+  <link rel="canonical" href="https://xiangergou.github.io/2019/06/21/vue响应式再探/"/>
 
 
 
 
 
-  <title>Category: webpack | 月落天白</title>
+  <title>vue源码探索 | 月落天白</title>
   
 
 
@@ -164,7 +165,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -267,55 +268,176 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>webpack<small>Category</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2019/06/21/vue响应式再探/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="留下">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="月落天白">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/09/17/webpack4实践/" itemprop="url">
-              
-                <span itemprop="name">webpack4实践</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">vue源码探索</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-17T12:04:38+08:00"
-              content="2018-09-17" >
-          09-17
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-21T17:57:59+08:00">
+                2019-06-21
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  127 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近在看vue源码，开在响应式了，原先对响应式的理解还是过于肤浅流于表面。</p>
+<p>理解一个东西最好是一个环，比如增删改查。其次是一条线，比如草蛇灰线，伏延千里。</p>
+<p>响应式，说到底无非Object.defineproperty。通过设置其get、set来做出一些事情。</p>
+<p>当数据更改，即触发set方法时，相应的一件或者几件事件就会被执行。</p>
+<p>算了, hexo还适合， 换vuepress吧</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/02/杂-1/" rel="next" title="杂">
+                <i class="fa fa-chevron-left"></i> 杂
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -323,6 +445,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -565,6 +691,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
