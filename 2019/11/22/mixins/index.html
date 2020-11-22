@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="月落天白">
 <meta property="og:description" content="table th:first-of-type {     width: 50px; }    需求场景因公司业务需求，同时维护了两个高度相似的小程序项目，分别运行在支付宝端和淘宝端。 两者底层都采用支付宝小程序实现，但因容器差异而有着些许的出入，团队每次迭代项目时都需要同时开发两套相近的代码，安排两次测试任务，延长了近一倍的无意义的开发许多故而针对这个问题，结合对vue mixins源码分析，有">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-11-22T08:26:49.974Z">
+<meta property="og:updated_time" content="2020-11-22T08:30:03.749Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="支付宝小程序添加mixins扩展">
 <meta name="twitter:description" content="table th:first-of-type {     width: 50px; }    需求场景因公司业务需求，同时维护了两个高度相似的小程序项目，分别运行在支付宝端和淘宝端。 两者底层都采用支付宝小程序实现，但因容器差异而有着些许的出入，团队每次迭代项目时都需要同时开发两套相近的代码，安排两次测试任务，延长了近一倍的无意义的开发许多故而针对这个问题，结合对vue mixins源码分析，有">
@@ -389,6 +389,7 @@ table th:first-of-type {
 
 <h3 id="需求场景"><a href="#需求场景" class="headerlink" title="需求场景"></a>需求场景</h3><p>因公司业务需求，同时维护了两个高度相似的小程序项目，分别运行在支付宝端和淘宝端。 两者底层都采用支付宝小程序实现，但因容器差异而有着些许的出入，团队每次迭代项目时都需要同时开发两套相近的代码，安排两次测试任务，延长了近一倍的无意义的开发许多故而针对这个问题，结合对vue mixins源码分析，有了mixins扩展添加的尝试。</p>
 <p>一开始也走了很多弯路，探索的过程总是崎岖且蜿蜒，但好在最终算是完成了需求。</p>
+<a id="more"></a>
 <p>回顾Vue Mixins用法</p>
 <blockquote>
 <p>混入 (mixin) 提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能。一个混入对象可以包含任意组件选项。当组件使用混入对象时，所有混入对象的选项将被“混合”进入该组件本身的选项。</p>
