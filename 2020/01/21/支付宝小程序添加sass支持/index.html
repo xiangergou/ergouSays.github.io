@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #000; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #000, 0 0 5px     #000; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #000;    /*上边框颜色*/
+        border-left-color: #000;    /*左边框颜色*/
+    }
+    .header-line{
+      width:100%;
+      height:3px;
+      position: absolute;
+      top:0;left:0;
+      background:#000;
+      z-index:999;
+    }
+</style>
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/icon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="支付宝小程序的acss类似原生css，在之前项目中习惯了动态css，所以一直在琢磨将sass添加进小程序。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="支付宝小程序添加sass支持">
+<meta property="og:url" content="https://xiangergou.github.io/2020/01/21/支付宝小程序添加sass支持/index.html">
+<meta property="og:site_name" content="月落天白">
+<meta property="og:description" content="支付宝小程序的acss类似原生css，在之前项目中习惯了动态css，所以一直在琢磨将sass添加进小程序。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://xiangergou.github.io/2020/01/21/支付宝小程序添加sass支持/sass.png">
+<meta property="og:updated_time" content="2020-11-24T08:21:23.186Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="支付宝小程序添加sass支持">
+<meta name="twitter:description" content="支付宝小程序的acss类似原生css，在之前项目中习惯了动态css，所以一直在琢磨将sass添加进小程序。">
+<meta name="twitter:image" content="https://xiangergou.github.io/2020/01/21/支付宝小程序添加sass支持/sass.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xiangergou.github.io/2020/01/21/支付宝小程序添加sass支持/"/>
+
+
+
+
+
+  <title>支付宝小程序添加sass支持 | 月落天白</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">月落天白</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-随笔">
+          <a href="/categories/随笔" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2020/01/21/支付宝小程序添加sass支持/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="轻语">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/theShy.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="月落天白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">支付宝小程序添加sass支持</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-21T13:35:52+08:00">
+                2020-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  851 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>支付宝小程序的acss类似原生css，在之前项目中习惯了动态css，所以一直在琢磨将sass添加进小程序。<br><a id="more"></a></p>
+<p>实现：</p>
+<blockquote>
+<p>使用Webstorm/IDEA的File Watchers功能实时转换。</p>
+</blockquote>
+<ol>
+<li>安装Ruby和sass(sass -v 测试是否安装成功)</li>
+<li>安装File Watchers</li>
+<li>添加scss的转换脚本</li>
+</ol>
+<p>现在安装完插件打开项目会自动弹出scss转css的向导，方便了很多。但还需要做一些修改，配置如下：<br> <img src="/2020/01/21/支付宝小程序添加sass支持/sass.png" alt="配置"><br>首先要将生成文件的后缀名改掉，比如这里我的支付宝小程序就得是acss。</p>
+<p>其次，将Arguments改为:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$FileName$:$FileNameWithoutExtension$.acss --no-cache --sourcemap=none --<span class="keyword">default</span>-encoding utf<span class="number">-8</span> --style expanded</span><br></pre></td></tr></table></figure></p>
+<p>注：</p>
+<blockquote>
+<p>如果不加–no-cache，scss文件同目录下会出现一个.sass-cache目录。<br>如果不加–sourcemap=none, scss文件同目录下会出现一个.map文件。<br>如果不加–default-encoding utf-8, scss文件如果有中文注释转换就会报错。<br>style可不加，这里用的是无缩进和压缩的风格，反正小程序打包发布时还会压，这里保持可读性。</p>
+</blockquote>
+<p>现在这个scss转换是单独作用于项目的，如果新建一个小程序项目，就需要重新添加（不建议设置成global，容易误伤）。</p>
+<p>注意到File Watchers列表的右侧操作栏下方有导入导出按钮，可以将现在配好的设置导出保存，将来新建项目时只要导入一下就行了。</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>之后还有一个问题，如果我手动将编译后的acss文件删除，scss文件不改动的话，就不会重新编译出css文件。 或者万一监听失效或者不够及时，css还有可能是旧的。 所以还需要一个命令，用来将整个目录下的scss文件统一转换，确保没有遗漏和保持代码最新。</p>
+<p>不过我看了半天sass和sass-convert的文档，没有找到一个可用的写法，能让命令行遍历指定目录下的所有scss文件，将其转换成css放到源文件所在目录，并且将后缀名改为wxss或者acss。</p>
+<p>所以遍历这个行为只能交给nodejs来实现，代码如下：</p>
+<p>创建编译脚本build/scss-convert.js：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>)</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; exec &#125; = <span class="built_in">require</span>(<span class="string">'child_process'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> basePath = path.resolve(__dirname, <span class="string">'../'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mapDir</span>(<span class="params">dir, callback, finish</span>) </span>&#123;</span><br><span class="line">  fs.readdir(dir, <span class="function"><span class="keyword">function</span>(<span class="params">err, files</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(err)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    files.forEach(<span class="function">(<span class="params">filename, index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> pathname = path.join(dir, filename)</span><br><span class="line">      fs.stat(pathname, (err, stats) =&gt; &#123; <span class="comment">// 读取文件信息</span></span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'获取文件stats失败'</span>)</span><br><span class="line">          <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (stats.isDirectory()) &#123;</span><br><span class="line">          mapDir(pathname, callback, finish)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (stats.isFile()) &#123;</span><br><span class="line">          <span class="keyword">if</span> (![<span class="string">'.scss'</span>].includes(path.extname(pathname))) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">          &#125;</span><br><span class="line">          callback(pathname)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">      <span class="keyword">if</span> (index === files.length - <span class="number">1</span>) &#123;</span><br><span class="line">        finish &amp;&amp; finish()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mapDir(</span><br><span class="line">  basePath,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">file</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> newFileWithoutExt = path.basename(file, <span class="string">'.scss'</span>)</span><br><span class="line">    <span class="keyword">if</span> (newFileWithoutExt.startsWith(<span class="string">'_'</span>)) &#123;</span><br><span class="line">      <span class="keyword">return</span>  <span class="comment">// 按照scss规则，下划线开头的文件不会生成css</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// exec可以让nodejs执行外部命令</span></span><br><span class="line">    exec(<span class="string">`sass --no-cache --sourcemap=none --default-encoding utf-8 --style expanded <span class="subst">$&#123;file&#125;</span>:<span class="subst">$&#123;newFileWithoutExt&#125;</span>.acss`</span>, &#123;</span><br><span class="line">      cwd: path.dirname(file) <span class="comment">// 不写这个会导致生成的文件出现在根目录</span></span><br><span class="line">    &#125;, (err, stdout, stderr) =&gt; &#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`stdout: <span class="subst">$&#123;stdout&#125;</span>`</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// console.log('xxx文件目录遍历完了')</span></span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<p>在package.json里添加一条script:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">  <span class="string">"scss"</span>: <span class="string">"node build/scss-convert"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/22/支付宝小程序mixins/" rel="next" title="支付宝小程序添加mixins扩展">
+                <i class="fa fa-chevron-left"></i> 支付宝小程序添加mixins扩展
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/05/支付宝小程序Iconfont组件/" rel="prev" title="支付宝小程序Iconfont组件">
+                支付宝小程序Iconfont组件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/theShy.jpeg"
+                alt="轻语" />
+            
+              <p class="site-author-name" itemprop="name">轻语</p>
+              <p class="site-description motion-element" itemprop="description">以前看见山，总想知道山后面是什么</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">轻语</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">90.1k</span>
+  
+</div>
+
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

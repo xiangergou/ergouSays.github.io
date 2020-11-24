@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2019/11/22/mixins/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2020/08/18/vue-diff/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="轻语">
@@ -302,7 +302,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/11/22/mixins/" itemprop="url">支付宝小程序添加mixins扩展</a></h1>
+                <a class="post-title-link" href="/2020/08/18/vue-diff/" itemprop="url">vue diff</a></h1>
         
 
         <div class="post-meta">
@@ -314,8 +314,953 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-22T14:22:15+08:00">
-                2019-11-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-18T16:32:49+08:00">
+                2020-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,383 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Vue 数据渲染中最核心的的部分就是 diff算法 的应用，本文从源码入手，结合实例，一步步解析 diff 算法的整个流程。</p>
+<h3 id="diff算法简介"><a href="#diff算法简介" class="headerlink" title="diff算法简介"></a>diff算法简介</h3><p>diff算法是一种通过同层的树节点进行比较的高效算法，避免了对树进行逐层搜索遍历，所以时间复杂度只有 O(n)。diff算法的在很多场景下都有应用，例如在 vue 虚拟 dom 渲染成真实 dom 的新旧 VNode 节点比较更新时，就用到了该算法。diff算法有两个比较显著的特点：</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/08/18/vue-diff/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+        
+    
+        
+            
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2020/06/28/支付宝小程序EventBus扩展/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="轻语">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/theShy.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="月落天白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/28/支付宝小程序EventBus扩展/" itemprop="url">支付宝小程序EventBus扩展</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-28T16:02:32+08:00">
+                2020-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,085 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="原理-发布订阅"><a href="#原理-发布订阅" class="headerlink" title="原理 (发布订阅)"></a>原理 (发布订阅)</h3><p>所有的订阅的消息通过一个全局的字典（Map）来存储，其中的key是事件标识，每个key对应一个数组（这里用数组而不用单个对象是为了能在不同的页面能用相同的key订阅事件，因为有时候一个页面发布消息需要多个页面响应），数组中每个元素是一个对象，其中target表示订阅消息的发起者，callback表示对应发起者的回调函数。然后发布消息的时候直接通过对应的key来拿到消息队列，然后遍历队列发布消息。<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/06/28/支付宝小程序EventBus扩展/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+        
+    
+        
+            
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2020/05/08/支付宝小程序异步接口promise化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="轻语">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/theShy.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="月落天白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/08/支付宝小程序异步接口promise化/" itemprop="url">支付宝小程序异步接口promise化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-08T15:30:29+08:00">
+                2020-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  527 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>ES6的 Promise 解决了 Javascript 代码中比较常见的回调地狱问题，搭配 async/await 可以用同步的方式写异步逻辑，大大提高了开发效率。<br>但支付宝小程序的 api 仍未支持Promise化，是故有了将支付宝小程序api promise化的尝试<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/05/08/支付宝小程序异步接口promise化/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+        
+    
+        
+            
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2020/03/28/支付宝小程序异常监控收集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="轻语">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/theShy.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="月落天白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/28/支付宝小程序异常监控收集/" itemprop="url">支付宝小程序异常监控收集</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-28T15:07:30+08:00">
+                2020-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  395 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>由于线上环境复杂，一些问题只会在特定网络环境或者设备上发生，对于这类问题，异常信息的收集就显得格外重要了，我们不但希望收集错误的堆栈信息，还需要用户操作流程，设备信息等，以便复现错误。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/03/28/支付宝小程序异常监控收集/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+        
+    
+        
+            
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2020/03/05/支付宝小程序Iconfont组件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="轻语">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/theShy.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="月落天白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/05/支付宝小程序Iconfont组件/" itemprop="url">支付宝小程序Iconfont组件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-05T13:58:40+08:00">
+                2020-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  407 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Iconfont 是由阿里推出，功能强大且图标内容很丰富的矢量图标库，提供矢量图标下载、在线存储、格式转换等功能，几乎国内成了矢量图标库的事实标准。</p>
+<p>在vue经常用到，但不幸的是小程序不支持引入外部 css 文件，为此我寻遍网络，竟没有找到 Iconfont 在小程序中的正确用法。</p>
+<p>本文根据我在实践经验所得，是我目前能找到在小程序中使用 Iconfont 最简的方法。<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/03/05/支付宝小程序Iconfont组件/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+        
+    
+        
+            
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2020/01/21/支付宝小程序添加sass支持/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="轻语">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/theShy.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="月落天白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/21/支付宝小程序添加sass支持/" itemprop="url">支付宝小程序添加sass支持</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-21T13:35:52+08:00">
+                2020-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  851 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>支付宝小程序的acss类似原生css，在之前项目中习惯了动态css，所以一直在琢磨将sass添加进小程序。<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/01/21/支付宝小程序添加sass支持/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+        
+    
+        
+            
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2019/12/22/支付宝小程序mixins/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="轻语">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/theShy.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="月落天白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/22/支付宝小程序mixins/" itemprop="url">支付宝小程序添加mixins扩展</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-22T14:22:15+08:00">
+                2019-12-22
               </time>
             
 
@@ -395,7 +1340,7 @@ table th:first-of-type {
 <p>一开始也走了很多弯路，探索的过程总是崎岖且蜿蜒，但好在最终算是完成了需求。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/11/22/mixins/#more" rel="contents">
+            <a class="btn" href="/2019/12/22/支付宝小程序mixins/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -448,7 +1393,7 @@ table th:first-of-type {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2019/06/21/vue响应式再探/">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2019/06/21/vue构造函数概览/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="轻语">
@@ -467,7 +1412,7 @@ table th:first-of-type {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/21/vue响应式再探/" itemprop="url">vue源码探索</a></h1>
+                <a class="post-title-link" href="/2019/06/21/vue构造函数概览/" itemprop="url">vue构造骨架</a></h1>
         
 
         <div class="post-meta">
@@ -511,7 +1456,7 @@ table th:first-of-type {
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  6,465 字
+                  6,454 字
                 </span>
               
 
@@ -552,11 +1497,10 @@ table th:first-of-type {
           <h1 id="Vue-构造函数"><a href="#Vue-构造函数" class="headerlink" title="Vue 构造函数"></a>Vue 构造函数</h1><p>我们知道，我们在使用 <code>Vue</code> 的时候，要使用 <code>new</code> 操作符进行调用，这说明 <code>Vue</code> 应该是一个构造函数，所以我们要做的第一件事就是：把 <code>Vue</code> 构造函数搞清楚。</p>
 <h2 id="Vue-构造函数的原型"><a href="#Vue-构造函数的原型" class="headerlink" title="Vue 构造函数的原型"></a>Vue 构造函数的原型</h2><p> Vue 会以 <code>npm run dev</code> 为切入点：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"dev"</span>: <span class="string">"rollup -w -c scripts/config.js --environment TARGET:web-full-dev"</span>,</span><br></pre></td></tr></table></figure>
-<p>当我们执行 <code>npm run dev</code> 时，根据 <code>scripts/config.js</code> 文件中的配置：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Runtime+compiler development build (Browser)</span></span><br><span class="line"><span class="string">'web-full-dev'</span>: &#123;</span><br><span class="line">  entry: resolve(<span class="string">'web/entry-runtime-with-compiler.js'</span>),</span><br><span class="line">  dest: resolve(<span class="string">'dist/vue.js'</span>),</span><br><span class="line">  format: <span class="string">'umd'</span>,</span><br><span class="line">  env: <span class="string">'development'</span>,</span><br><span class="line">  alias: &#123; <span class="attr">he</span>: <span class="string">'./entity-decoder'</span> &#125;,</span><br><span class="line">  banner</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当我们执行 <code>npm run dev</code> 时，根据 <code>scripts/config.js</code> 文件中的配置：<br></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/06/21/vue响应式再探/#more" rel="contents">
+            <a class="btn" href="/2019/06/21/vue构造函数概览/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -754,514 +1698,6 @@ table th:first-of-type {
 
         
     
-        
-            
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2019/04/25/基于Node实现markdown转html/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="轻语">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/theShy.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="月落天白">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/25/基于Node实现markdown转html/" itemprop="url">基于Node fs 实现markdown转html</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-25T17:24:14+08:00">
-                2019-04-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/node/" itemprop="url" rel="index">
-                    <span itemprop="name">node</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  760 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  4 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>hexo可以将Markdown 格式的内容自动生成方便发布的 HTML 格式。本文将尝试探讨 hexo 的运行原理。</p>
-<p>创建md文件，键入markdown格式数据。 </p>
-<p>实现思路：</p>
-<ol>
-<li>基于node fs模块，读取md文件，生成字符串。</li>
-<li>借助markdown-it(Markdown 文件解析器)，将md文件以字符串形式传入。</li>
-<li>结合模板生成html文件。</li></ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/04/25/基于Node实现markdown转html/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-        
-    
-        
-            
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2019/04/09/精读高性能JavaScript/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="轻语">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/theShy.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="月落天白">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/09/精读高性能JavaScript/" itemprop="url">精读高性能JavaScript</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-09T09:23:04+08:00">
-                2019-04-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  2,646 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  9 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>致力于寻找高质量代码。</p>
-<h3 id="加载和执行"><a href="#加载和执行" class="headerlink" title="加载和执行"></a>加载和执行</h3><p><img src="/2019/04/09/精读高性能JavaScript/chapter1.jpg" alt="加载和执行"><br>js代码的下载执行会阻塞浏览器其他处理过程，诸如用户界面绘制。每次遇到&#60;script&#62;标签，页面必须停下来等待代码下载(如果是外部的)并执行，然后再继续处理页面其他部分。但是，有几种方法可以减少 JavaScript 对性能的影响:<br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/04/09/精读高性能JavaScript/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-        
-    
-        
-            
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2019/01/04/一键生成vue模块seed文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="轻语">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/theShy.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="月落天白">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/04/一键生成vue模块seed文件/" itemprop="url">命令行一键生成vue项目相关模块文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-04T17:36:09+08:00">
-                2019-01-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  789 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  4 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>vue项目中(基于vue-cli脚手架)，新建模块时必然伴随新建vue文件夹、router文件、api文件，一阵复制粘贴噼里啪, low且繁琐。 本章探讨基于node实现一键生成模块seed(模板)文件。</p>
-<h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><p>我们的预期是执行node命令，生成以下文件<br>src &gt; views &gt; 模块文件夹 &gt; index.vue + children文件夹 + commons文件夹<br>src &gt; router &gt; 模块文件</p>
-<p>其中index.vue、router.js设置固定模板。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/04/一键生成vue模块seed文件/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-        
-    
-        
-    
-        
-    
-        
-    
   </section>
 
   
@@ -1316,7 +1752,7 @@ table th:first-of-type {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1390,7 +1826,7 @@ table th:first-of-type {
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">84.5k</span>
+    <span title="Site words total count">90.1k</span>
   
 </div>
 

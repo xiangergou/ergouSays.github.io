@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #000; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #000, 0 0 5px     #000; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #000;    /*上边框颜色*/
+        border-left-color: #000;    /*左边框颜色*/
+    }
+    .header-line{
+      width:100%;
+      height:3px;
+      position: absolute;
+      top:0;left:0;
+      background:#000;
+      z-index:999;
+    }
+</style>
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/icon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言Vue 数据渲染中最核心的的部分就是 diff算法 的应用，本文从源码入手，结合实例，一步步解析 diff 算法的整个流程。 diff算法简介diff算法是一种通过同层的树节点进行比较的高效算法，避免了对树进行逐层搜索遍历，所以时间复杂度只有 O(n)。diff算法的在很多场景下都有应用，例如在 vue 虚拟 dom 渲染成真实 dom 的新旧 VNode 节点比较更新时，就用到了该算法。di">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue diff">
+<meta property="og:url" content="https://xiangergou.github.io/2020/08/18/vue-diff/index.html">
+<meta property="og:site_name" content="月落天白">
+<meta property="og:description" content="前言Vue 数据渲染中最核心的的部分就是 diff算法 的应用，本文从源码入手，结合实例，一步步解析 diff 算法的整个流程。 diff算法简介diff算法是一种通过同层的树节点进行比较的高效算法，避免了对树进行逐层搜索遍历，所以时间复杂度只有 O(n)。diff算法的在很多场景下都有应用，例如在 vue 虚拟 dom 渲染成真实 dom 的新旧 VNode 节点比较更新时，就用到了该算法。di">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://xiangergou.github.io/2020/08/18/vue-diff/diff1.png">
+<meta property="og:image" content="https://xiangergou.github.io/2020/08/18/vue-diff/diff2.png">
+<meta property="og:image" content="https://xiangergou.github.io/2020/08/18/vue-diff/diff3.png">
+<meta property="og:image" content="https://xiangergou.github.io/2020/08/18/vue-diff/diff4.png">
+<meta property="og:image" content="https://xiangergou.github.io/2020/08/18/vue-diff/diff5.png">
+<meta property="og:image" content="https://xiangergou.github.io/2020/08/18/vue-diff/diff6.png">
+<meta property="og:image" content="https://xiangergou.github.io/2020/08/18/vue-diff/diff7.png">
+<meta property="og:image" content="https://xiangergou.github.io/2020/08/18/vue-diff/diff8.png">
+<meta property="og:image" content="https://xiangergou.github.io/2020/08/18/vue-diff/diff9.png">
+<meta property="og:updated_time" content="2020-11-24T08:59:24.325Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue diff">
+<meta name="twitter:description" content="前言Vue 数据渲染中最核心的的部分就是 diff算法 的应用，本文从源码入手，结合实例，一步步解析 diff 算法的整个流程。 diff算法简介diff算法是一种通过同层的树节点进行比较的高效算法，避免了对树进行逐层搜索遍历，所以时间复杂度只有 O(n)。diff算法的在很多场景下都有应用，例如在 vue 虚拟 dom 渲染成真实 dom 的新旧 VNode 节点比较更新时，就用到了该算法。di">
+<meta name="twitter:image" content="https://xiangergou.github.io/2020/08/18/vue-diff/diff1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xiangergou.github.io/2020/08/18/vue-diff/"/>
+
+
+
+
+
+  <title>vue diff | 月落天白</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">月落天白</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-随笔">
+          <a href="/categories/随笔" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2020/08/18/vue-diff/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="轻语">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/theShy.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="月落天白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue diff</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-18T16:32:49+08:00">
+                2020-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,383 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Vue 数据渲染中最核心的的部分就是 diff算法 的应用，本文从源码入手，结合实例，一步步解析 diff 算法的整个流程。</p>
+<h3 id="diff算法简介"><a href="#diff算法简介" class="headerlink" title="diff算法简介"></a>diff算法简介</h3><p>diff算法是一种通过同层的树节点进行比较的高效算法，避免了对树进行逐层搜索遍历，所以时间复杂度只有 O(n)。diff算法的在很多场景下都有应用，例如在 vue 虚拟 dom 渲染成真实 dom 的新旧 VNode 节点比较更新时，就用到了该算法。diff算法有两个比较显著的特点：</p>
+<a id="more"></a>
+<p>1、比较只会在同层级进行, 不会跨层级比较。<br><img src="/2020/08/18/vue-diff/diff1.png" alt="diff"></p>
+<p>2、在diff比较的过程中，循环从两边向中间收拢<br><img src="/2020/08/18/vue-diff/diff2.png" alt="diff"></p>
+<h3 id="diff流程"><a href="#diff流程" class="headerlink" title="diff流程"></a>diff流程</h3><p>本着对 diff 过程的认识和 vue 源码的学习，我们通过 vue 源码的解读和实例分析来理清楚 diff 算法的整个流程，下面把整个 diff 流程拆成三步来具体分析：</p>
+<h4 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h4><p>vue 的虚拟 dom 渲染真实 dom 的过程中首先会对新老 VNode 的开始和结束位置进行标记：oldStartIdx、oldEndIdx、newStartIdx、newEndIdx。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> oldStartIdx = <span class="number">0</span> <span class="comment">// 旧节点开始下标</span></span><br><span class="line"><span class="keyword">let</span> newStartIdx = <span class="number">0</span> <span class="comment">// 新节点开始下标</span></span><br><span class="line"><span class="keyword">let</span> oldEndIdx = oldCh.length - <span class="number">1</span> <span class="comment">// 旧节点结束下标</span></span><br><span class="line"><span class="keyword">let</span> oldStartVnode = oldCh[<span class="number">0</span>]  <span class="comment">// 旧节点开始vnode</span></span><br><span class="line"><span class="keyword">let</span> oldEndVnode = oldCh[oldEndIdx] <span class="comment">// 旧节点结束vnode</span></span><br><span class="line"><span class="keyword">let</span> newEndIdx = newCh.length - <span class="number">1</span> <span class="comment">// 新节点结束下标</span></span><br><span class="line"><span class="keyword">let</span> newStartVnode = newCh[<span class="number">0</span>] <span class="comment">// 新节点开始vnode</span></span><br><span class="line"><span class="keyword">let</span> newEndVnode = newCh[newEndIdx] <span class="comment">// 新节点结束vnode</span></span><br></pre></td></tr></table></figure></p>
+<p>经过第一步之后，我们初始的新旧 VNode 节点如下图所示：<br><img src="/2020/08/18/vue-diff/diff3.png" alt="diff"></p>
+<h4 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h4><p>标记好节点位置之后，就开始进入到的 while 循环处理中，这里是 diff 算法的核心流程，分情况进行了新老节点的比较并移动对应的 VNode 节点。while 循环的退出条件是直到老节点或者新节点的开始位置大于结束位置。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (oldStartIdx &lt;= oldEndIdx &amp;&amp; newStartIdx &lt;= newEndIdx) &#123;</span><br><span class="line">    ....<span class="comment">//处理逻辑</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来具体介绍 while 循环中的处理逻辑， 循环过程中首先对新老 VNode 节点的头尾进行比较，寻找相同节点，如果有相同节点满足 sameVnode（可以复用的相同节点） 则直接进行 patchVnode (该方法进行节点复用处理)，并且根据具体情形，移动新老节点的 VNode 索引，以便进入下一次循环处理，一共有 2 * 2 = 4 种情形。下面根据代码展开分析:</p>
+<p>情形一：当新老 VNode 节点的 start 满足sameVnode 时，直接 patchVnode 即可，同时新老 VNode 节点的开始索引都加1。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (sameVnode(oldStartVnode, newStartVnode)) &#123;</span><br><span class="line">  patchVnode(oldStartVnode, newStartVnode, insertedVnodeQueue, newCh, newStartIdx)</span><br><span class="line">  oldStartVnode = oldCh[++oldStartIdx]</span><br><span class="line">  newStartVnode = newCh[++newStartIdx]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>情形二：当新老 VNode 节点的 end 满足 sameVnode 时，同样直接 patchVnode 即可，同时新老 VNode 节点的结束索引都减1。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (sameVnode(oldEndVnode, newEndVnode)) &#123;</span><br><span class="line">  patchVnode(oldEndVnode, newEndVnode, insertedVnodeQueue, newCh, newEndIdx)</span><br><span class="line">  oldEndVnode = oldCh[--oldEndIdx]</span><br><span class="line">  newEndVnode = newCh[--newEndIdx]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>情形三：当老 VNode 节点的 start 和新 VNode 节点的 end 满足 sameVnode 时，这说明这次数据更新后 oldStartVnode 已经跑到了 oldEndVnode 后面去了。这时候在 patchVnode 后，还需要将当前真实 dom 节点移动到 oldEndVnode 的后面，同时老 VNode 节点开始索引加1，新 VNode 节点的结束索引减1。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">else if (sameVnode(oldStartVnode, newEndVnode)) &#123; // Vnode moved right</span><br><span class="line">  patchVnode(oldStartVnode, newEndVnode, insertedVnodeQueue, newCh, newEndIdx)</span><br><span class="line">  canMove &amp;&amp; nodeOps.insertBefore(parentElm, oldStartVnode.elm, nodeOps.nextSibling(oldEndVnode.elm))</span><br><span class="line">  oldStartVnode = oldCh[++oldStartIdx]</span><br><span class="line">  newEndVnode = newCh[--newEndIdx]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>情形四：当老 VNode 节点的 end 和新 VNode 节点的 start 满足 sameVnode 时，这说明这次数据更新后 oldEndVnode 跑到了 oldStartVnode 的前面去了。这时候在 patchVnode 后，还需要将当前真实 dom 节点移动到 oldStartVnode 的前面，同时老 VNode 节点结束索引减1，新 VNode 节点的开始索引加1。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (sameVnode(oldEndVnode, newStartVnode)) &#123; <span class="comment">// Vnode moved left</span></span><br><span class="line">  patchVnode(oldEndVnode, newStartVnode, insertedVnodeQueue, newCh, newStartIdx)</span><br><span class="line">  canMove &amp;&amp; nodeOps.insertBefore(parentElm, oldEndVnode.elm, oldStartVnode.elm)</span><br><span class="line">  oldEndVnode = oldCh[--oldEndIdx]</span><br><span class="line">  newStartVnode = newCh[++newStartIdx]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果都不满足以上四种情形，那说明没有相同的节点可以复用，于是则通过查找事先建立好的以旧的 VNode 为 key 值，对应 index 序列为 value 值的哈希表。从这个哈希表中找到与 newStartVnode 一致 key 的旧的 VNode 节点，如果两者满足 sameVnode 的条件，在进行 patchVnode 的同时会将这个真实 dom 移动到 oldStartVnode 对应的真实 dom 的前面；如果没有找到，则说明当前索引下的新的 VNode 节点在旧的 VNode 队列中不存在，无法进行节点的复用，那么就只能调用 createElm 创建一个新的 dom 节点放到当前 newStartIdx 的位置。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> &#123;<span class="comment">// 没有找到相同的可以复用的节点，则新建节点处理</span></span><br><span class="line">  <span class="comment">/* 生成一个key与旧VNode的key对应的哈希表（只有第一次进来undefined的时候会生成，也为后面检测重复的key值做铺垫） 比如childre是这样的 [&#123;xx: xx, key: 'key0'&#125;, &#123;xx: xx, key: 'key1'&#125;, &#123;xx: xx, key: 'key2'&#125;] beginIdx = 0 endIdx = 2 结果生成&#123;key0: 0, key1: 1, key2: 2&#125; */</span></span><br><span class="line">  <span class="keyword">if</span> (isUndef(oldKeyToIdx)) oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx)</span><br><span class="line">  <span class="comment">/*如果newStartVnode新的VNode节点存在key并且这个key在oldVnode中能找到则返回这个节点的idxInOld（即第几个节点，下标）*/</span></span><br><span class="line">  idxInOld = isDef(newStartVnode.key)</span><br><span class="line">    ? oldKeyToIdx[newStartVnode.key]</span><br><span class="line">    : findIdxInOld(newStartVnode, oldCh, oldStartIdx, oldEndIdx)</span><br><span class="line">  <span class="keyword">if</span> (isUndef(idxInOld)) &#123; <span class="comment">// New element</span></span><br><span class="line">    <span class="comment">/*newStartVnode没有key或者是该key没有在老节点中找到则创建一个新的节点*/</span></span><br><span class="line">    createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm, <span class="literal">false</span>, newCh, newStartIdx)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">/*获取同key的老节点*/</span></span><br><span class="line">    vnodeToMove = oldCh[idxInOld]</span><br><span class="line">    <span class="keyword">if</span> (sameVnode(vnodeToMove, newStartVnode)) &#123;</span><br><span class="line">      <span class="comment">/*如果新VNode与得到的有相同key的节点是同一个VNode则进行patchVnode*/</span></span><br><span class="line">      patchVnode(vnodeToMove, newStartVnode, insertedVnodeQueue, newCh, newStartIdx)</span><br><span class="line">      <span class="comment">//因为已经patchVnode进去了，所以将这个老节点赋值undefined</span></span><br><span class="line">      oldCh[idxInOld] = <span class="literal">undefined</span></span><br><span class="line">      <span class="comment">/*当有标识位canMove实可以直接插入oldStartVnode对应的真实Dom节点前面*/</span></span><br><span class="line">      canMove &amp;&amp; nodeOps.insertBefore(parentElm, vnodeToMove.elm, oldStartVnode.elm)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// same key but different element. treat as new element</span></span><br><span class="line">      <span class="comment">/*当新的VNode与找到的同样key的VNode不是sameVNode的时候（比如说tag不一样或者是有不一样type的input标签），创建一个新的节点*/</span></span><br><span class="line">      createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm, <span class="literal">false</span>, newCh, newStartIdx)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  newStartVnode = newCh[++newStartIdx]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>再来看我们的实例，第一次循环后，找到了旧节点的末尾和新节点的开头(都是D)相同，于是直接复用 D 节点作为 diff 后创建的第一个真实节点。同时旧节点的 endIndex 移动到了 C，新节点的 startIndex 移动到了 C。<br><img src="/2020/08/18/vue-diff/diff4.png" alt="diff"></p>
+<p>紧接着开始第二次循环，第二次循环后，同样是旧节点的末尾和新节点的开头(都是C)相同，同理，diff 后创建了 C 的真实节点插入到第一次创建的 B 节点后面。同时旧节点的 endIndex 移动到了 B，新节点的 startIndex 移动到了 E。<br><img src="/2020/08/18/vue-diff/diff5.png" alt="diff"></p>
+<p>接下来第三次循环中，发现 patchVnode 的4种情形都不符合，于是在旧节点队列中查找当前的新节点 E，结果发现没有找到，这时候只能直接创建新的真实节点 E，插入到第二次创建的 C 节点之后。同时新节点的 startIndex 移动到了 A。旧节点的 startIndex 和 endIndex 都保持不动。![]<br><img src="/2020/08/18/vue-diff/diff6.png" alt="diff"></p>
+<p>第四次循环中，发现了新旧节点的开头(都是A)相同，于是 diff 后创建了 A 的真实节点，插入到前一次创建的 E 节点后面。同时旧节点的 startIndex 移动到了B，新节点的startIndex 移动到了B。<br><img src="/2020/08/18/vue-diff/diff7.png" alt="diff"></p>
+<p>第五次循环中，情形同第四次循环一样，因此 diff 后创建了 B 真实节点 插入到前一次创建的 A 节点后面。同时旧节点的 startIndex 移动到了C，新节点的 startIndex 移动到了F。<br><img src="/2020/08/18/vue-diff/diff8.png" alt="diff"></p>
+<p>这时候发现新节点的 startIndex 已经大于 endIndex 了。不再满足循环的条件了。因此结束循环，接下来走后面的逻辑。</p>
+<h3 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h3><p>当 while 循环结束后，根据新老节点的数目不同，做相应的节点添加或者删除。若新节点数目大于老节点则需要把多出来的节点创建出来加入到真实 dom 中，反之若老节点数目大于新节点则需要把多出来的老节点从真实 dom 中删除。至此整个 diff 过程就已经全部完成了。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">if</span> (oldStartIdx &gt; oldEndIdx) &#123;</span><br><span class="line">  <span class="comment">/*全部比较完成以后，发现oldStartIdx &gt; oldEndIdx的话，说明老节点已经遍历完了，新节点比老节点多， 所以这时候多出来的新节点需要一个一个创建出来加入到真实Dom中*/</span></span><br><span class="line">  refElm = isUndef(newCh[newEndIdx + <span class="number">1</span>]) ? <span class="literal">null</span> : newCh[newEndIdx + <span class="number">1</span>].elm</span><br><span class="line">  addVnodes(parentElm, refElm, newCh, newStartIdx, newEndIdx, insertedVnodeQueue) <span class="comment">//创建 newStartIdx - newEndIdx 之间的所有节点</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (newStartIdx &gt; newEndIdx) &#123;</span><br><span class="line">  <span class="comment">/*如果全部比较完成以后发现newStartIdx &gt; newEndIdx，则说明新节点已经遍历完了，老节点多于新节点，这个时候需要将多余的老节点从真实Dom中移除*/</span></span><br><span class="line">  removeVnodes(oldCh, oldStartIdx, oldEndIdx) <span class="comment">//移除 oldStartIdx - oldEndIdx 之间的所有节点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>再回过头看我们的实例，新节点的数目大于旧节点，需要创建 newStartIdx 和 newEndIdx 之间的所有节点。在我们的实例中就是节点 F，因此直接创建 F 节点对应的真实节点放到 B 节点后面即可。<br><img src="/2020/08/18/vue-diff/diff9.png" alt="diff"></p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>通过上述的源码和实例的分析，完成了 Vue 中 diff 算法的完整解读。</p>
+<p>以上。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/28/支付宝小程序EventBus扩展/" rel="next" title="支付宝小程序EventBus扩展">
+                <i class="fa fa-chevron-left"></i> 支付宝小程序EventBus扩展
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/theShy.jpeg"
+                alt="轻语" />
+            
+              <p class="site-author-name" itemprop="name">轻语</p>
+              <p class="site-description motion-element" itemprop="description">以前看见山，总想知道山后面是什么</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diff算法简介"><span class="nav-number">2.</span> <span class="nav-text">diff算法简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diff流程"><span class="nav-number">3.</span> <span class="nav-text">diff流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一步"><span class="nav-number">3.1.</span> <span class="nav-text">第一步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二步"><span class="nav-number">3.2.</span> <span class="nav-text">第二步</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步"><span class="nav-number">4.</span> <span class="nav-text">第三步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后"><span class="nav-number">5.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">轻语</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">90.1k</span>
+  
+</div>
+
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

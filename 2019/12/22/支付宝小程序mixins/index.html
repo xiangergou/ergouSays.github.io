@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #000; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #000, 0 0 5px     #000; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #000;    /*上边框颜色*/
+        border-left-color: #000;    /*左边框颜色*/
+    }
+    .header-line{
+      width:100%;
+      height:3px;
+      position: absolute;
+      top:0;left:0;
+      background:#000;
+      z-index:999;
+    }
+</style>
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/icon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="table th:first-of-type {     width: 50px; }    需求场景因公司业务需求，同时维护了两个高度相似的小程序项目，分别运行在支付宝端和淘宝端。 两者底层都采用支付宝小程序实现，但因容器差异而有着些许的出入，团队每次迭代项目时都需要同时开发两套相近的代码，安排两次测试任务，延长了近一倍的无意义的开发许多故而针对这个问题，结合对vue mixins源码分析，有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="支付宝小程序添加mixins扩展">
+<meta property="og:url" content="https://xiangergou.github.io/2019/12/22/支付宝小程序mixins/index.html">
+<meta property="og:site_name" content="月落天白">
+<meta property="og:description" content="table th:first-of-type {     width: 50px; }    需求场景因公司业务需求，同时维护了两个高度相似的小程序项目，分别运行在支付宝端和淘宝端。 两者底层都采用支付宝小程序实现，但因容器差异而有着些许的出入，团队每次迭代项目时都需要同时开发两套相近的代码，安排两次测试任务，延长了近一倍的无意义的开发许多故而针对这个问题，结合对vue mixins源码分析，有">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-11-24T08:18:38.459Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="支付宝小程序添加mixins扩展">
+<meta name="twitter:description" content="table th:first-of-type {     width: 50px; }    需求场景因公司业务需求，同时维护了两个高度相似的小程序项目，分别运行在支付宝端和淘宝端。 两者底层都采用支付宝小程序实现，但因容器差异而有着些许的出入，团队每次迭代项目时都需要同时开发两套相近的代码，安排两次测试任务，延长了近一倍的无意义的开发许多故而针对这个问题，结合对vue mixins源码分析，有">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xiangergou.github.io/2019/12/22/支付宝小程序mixins/"/>
+
+
+
+
+
+  <title>支付宝小程序添加mixins扩展 | 月落天白</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">月落天白</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-随笔">
+          <a href="/categories/随笔" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangergou.github.io/2019/12/22/支付宝小程序mixins/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="轻语">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/theShy.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="月落天白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">支付宝小程序添加mixins扩展</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-22T14:22:15+08:00">
+                2019-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,297 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <style>
+table th:first-of-type {
+    width: 50px;
+}
+</style>
+
+
+<h3 id="需求场景"><a href="#需求场景" class="headerlink" title="需求场景"></a>需求场景</h3><p>因公司业务需求，同时维护了两个高度相似的小程序项目，分别运行在支付宝端和淘宝端。 两者底层都采用支付宝小程序实现，但因容器差异而有着些许的出入，团队每次迭代项目时都需要同时开发两套相近的代码，安排两次测试任务，延长了近一倍的无意义的开发许多故而针对这个问题，结合对vue mixins源码分析，有了mixins扩展添加的尝试。</p>
+<p>一开始也走了很多弯路，探索的过程总是崎岖且蜿蜒，但好在最终算是完成了需求。</p>
+<a id="more"></a>
+<p>回顾Vue Mixins用法</p>
+<blockquote>
+<p>混入 (mixin) 提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能。一个混入对象可以包含任意组件选项。当组件使用混入对象时，所有混入对象的选项将被“混合”进入该组件本身的选项。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mixin = &#123;</span><br><span class="line">  data: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      message: <span class="string">'hello'</span>,</span><br><span class="line">      foo: <span class="string">'abc'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  mixins: [mixin],</span><br><span class="line">  data: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      message: <span class="string">'goodbye'</span>,</span><br><span class="line">      bar: <span class="string">'def'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  created: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.$data)</span><br><span class="line">    <span class="comment">// =&gt; &#123; message: "goodbye", foo: "abc", bar: "def" &#125;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>vue mixins混入规则如下</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">mixins重复</th>
+<th style="text-align:center">mixins component重合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>  data</td>
+<td style="text-align:center">取最后一个mixin的data</td>
+<td style="text-align:center">取组建自身的data</td>
+</tr>
+<tr>
+<td>  methods</td>
+<td style="text-align:center">取最后一个mixin的方法</td>
+<td style="text-align:center">取组件自身的方法</td>
+</tr>
+<tr>
+<td>  lifecycle</td>
+<td style="text-align:center">按mixins中配置，顺序多次执行</td>
+<td style="text-align:center">先顺序执行mixins的liefcycle，之后执行组件的周期方法</td>
+</tr>
+</tbody>
+</table>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>小程序的页面注册方式为Page方法添加固有参数，如data、methods等，如<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  data: <span class="string">''</span>,</span><br><span class="line">  onLoad: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  onReady: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  methods: <span class="string">''</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>mixins的实现方案即为劫持，即对所传参数做一层封装，即<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Page(createPage(&#123;</span><br><span class="line">  mixins: [],</span><br><span class="line">  data: <span class="string">''</span>,</span><br><span class="line">  onLoad: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  onReady: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  methods: <span class="string">''</span></span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure></p>
+<p>在 createPage 方法中，添加mixins的处理逻辑，并将原有的参数以其既有的格式暴露出去。</p>
+<h3 id="step1-基于Object-assign的对象合并，后面的参数将覆盖前面的参数"><a href="#step1-基于Object-assign的对象合并，后面的参数将覆盖前面的参数" class="headerlink" title="step1 基于Object.assign的对象合并，后面的参数将覆盖前面的参数"></a>step1 基于Object.assign的对象合并，后面的参数将覆盖前面的参数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// createPage.js</span></span><br><span class="line"><span class="keyword">const</span> config =&gt; &#123;</span><br><span class="line">  <span class="built_in">Object</span>.assign(config, &#123;</span><br><span class="line">    data: getMixinsData(), <span class="comment">// 获取混入后的data</span></span><br><span class="line">    methods: getMixinsMethods(), <span class="comment">// 获取混入后的data</span></span><br><span class="line">    lifeCycle: getMixinsLifeCycle(), <span class="comment">// 获取混入后的data</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> config;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="step2"><a href="#step2" class="headerlink" title="step2"></a>step2</h3><p>mixin不止一个，比如<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mixin1 = &#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    a: <span class="number">1</span>,</span><br><span class="line">    b: <span class="number">2</span></span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    add() &#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  onShow () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'mixin1Show'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> mixin2 = &#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    c: <span class="number">3</span>,</span><br><span class="line">    d: <span class="number">4</span></span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    remove() &#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  onHide () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'mixin2Hide'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="data合并"><a href="#data合并" class="headerlink" title="data合并"></a>data合并</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// createPage.js</span></span><br><span class="line"><span class="keyword">const</span> config =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> &#123; mixins = [] &#125; = config;</span><br><span class="line">  <span class="keyword">let</span> nativeData = config.data || &#123;&#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">let</span> minxinData = getMixinData(mixins);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">Object</span>.assign(config, &#123;</span><br><span class="line">    data: mixData(minxinData, nativeData), <span class="comment">// 获取混入后的data</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> config;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// mixins Data合并</span></span><br><span class="line"><span class="keyword">const</span> getMixinData = <span class="function"><span class="params">mixins</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line">  <span class="comment">// mixins data混入，取最后一个mixin的data</span></span><br><span class="line">  mixins.forEach(<span class="function"><span class="params">mixin</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> &#123; data = &#123;&#125; &#125; = mixin;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Object</span>.keys(data).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">      obj[key] = data[key];</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> obj;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment">  mixins data 与组件 data合并，组件自身优先级最高；</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">const</span> mixData = <span class="function">(<span class="params">minxinData, nativeData</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">Object</span>.keys(minxinData).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">    !nativeData[key] &amp;&amp; (nativeData[key] = minxinData[key]);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> nativeData;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="解析methods-lifeCycle"><a href="#解析methods-lifeCycle" class="headerlink" title="解析methods lifeCycle"></a>解析methods lifeCycle</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// createPage.js</span></span><br><span class="line"><span class="keyword">const</span> config =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> &#123; mixins = [] &#125; = config;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> mixinMethods = getMixinMethods(mixins);</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">Object</span>.assign(config, &#123;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> config;</span><br><span class="line">&#125;;</span><br><span class="line">  config = mixMethods(mixinMethods, config);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*  mixins 方法和声明周期合并</span></span><br><span class="line"><span class="comment">*  lifecycle 先顺序执行mixins中的lifecycle，再执行组件自身的lifecycle</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">  <span class="comment">// 定义周期数组</span></span><br><span class="line"><span class="keyword">const</span> LIFE_EVENT = [<span class="string">'onLoad'</span>, <span class="string">'onReady'</span>, <span class="string">'onShow'</span>, <span class="string">'onHide'</span>, <span class="string">'onUnload'</span>, <span class="string">'onPullDownRefresh'</span>, <span class="string">'onReachBottom'</span>, <span class="string">'onShareAppMessage'</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getMixinMethods = <span class="function"><span class="params">mixins</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> obj = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  mixins.forEach(<span class="function"><span class="params">mixin</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> &#123; methods = &#123;&#125; &#125; = mixin;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 提取methods mixins数组后面的方法会覆盖前面的方法</span></span><br><span class="line">    <span class="built_in">Object</span>.keys(methods).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> (methods[key]) === <span class="string">'function'</span>) &#123;</span><br><span class="line">        obj[key] = methods[key];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 提取lifecycle</span></span><br><span class="line">    LIFE_EVENT.forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span>(mixin[key]) === <span class="string">'function'</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (obj[key]) &#123;</span><br><span class="line">          <span class="comment">// 多个mixin有相同lifecycle时，将方法转为数组存储</span></span><br><span class="line">          obj[key] = obj[key].concat(mixin[key]);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          obj[key] = [mixin[key]];</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> obj;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//处理方法合并顺序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compose</span>(<span class="params">...funcs</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (funcs.length === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">arg</span> =&gt;</span> arg;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (funcs.length === <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> funcs[<span class="number">0</span>];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> last = funcs[funcs.length - <span class="number">1</span>];</span><br><span class="line">  <span class="keyword">const</span> rest = funcs.slice(<span class="number">0</span>, <span class="number">-1</span>);</span><br><span class="line">  <span class="comment">// 从未到头执行，每次中间件函数拿到的参数 是上一个函数执行的返回值</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> rest.reduceRight(<span class="function">(<span class="params">composed, f</span>) =&gt;</span> f(composed), last(...args));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 合并 组件和mixins， 组件自身生命周期最后执行</span></span><br><span class="line"><span class="keyword">const</span> mixMethods = <span class="function">(<span class="params">mixinMethods, config</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">Object</span>.keys(mixinMethods).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// lifecycle方法</span></span><br><span class="line">    <span class="keyword">if</span> (LIFE_EVENT.includes(key)) &#123;</span><br><span class="line">      <span class="keyword">let</span> methodsList = mixinMethods[key];</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> (config[key]) === <span class="string">'function'</span>) &#123;</span><br><span class="line">        methodsList.push(config[key]);</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      config[key] = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">          compose(...methodsList.reverse().map(<span class="function"><span class="params">f</span> =&gt;</span> f.bind(<span class="keyword">this</span>)))(...args);</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;)();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 普通方法</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (config[key] == <span class="literal">null</span>) &#123;</span><br><span class="line">        config[key] = mixinMethods[key];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> config;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="step3-添加其他方法"><a href="#step3-添加其他方法" class="headerlink" title="step3 添加其他方法"></a>step3 添加其他方法</h3><p>以上即可满足基本功能，项目又要求记录页面激活时间，即用户处于当前页面时间。<br>在此基础上实现此类功能异常简单，只需在onShow，onHide定义自执行函数，完成页面路径与离开时间的记录即可<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">config[<span class="string">'onShow'</span>] = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...arg</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 记录页面路径 - 访问路径</span></span><br><span class="line">    logger.pageShow(&#123;<span class="attr">query</span>: <span class="keyword">this</span>.query&#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br><span class="line">config[<span class="string">'onHide'</span>] = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...arg</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 记录离开时间</span></span><br><span class="line">    logger.pageHide()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+<p>以上。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/21/vue构造函数概览/" rel="next" title="vue构造骨架">
+                <i class="fa fa-chevron-left"></i> vue构造骨架
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/21/支付宝小程序添加sass支持/" rel="prev" title="支付宝小程序添加sass支持">
+                支付宝小程序添加sass支持 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/theShy.jpeg"
+                alt="轻语" />
+            
+              <p class="site-author-name" itemprop="name">轻语</p>
+              <p class="site-description motion-element" itemprop="description">以前看见山，总想知道山后面是什么</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求场景"><span class="nav-number">1.</span> <span class="nav-text">需求场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#step1-基于Object-assign的对象合并，后面的参数将覆盖前面的参数"><span class="nav-number">3.</span> <span class="nav-text">step1 基于Object.assign的对象合并，后面的参数将覆盖前面的参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#step2"><span class="nav-number">4.</span> <span class="nav-text">step2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#data合并"><span class="nav-number">4.1.</span> <span class="nav-text">data合并</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解析methods-lifeCycle"><span class="nav-number">4.2.</span> <span class="nav-text">解析methods lifeCycle</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#step3-添加其他方法"><span class="nav-number">5.</span> <span class="nav-text">step3 添加其他方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">轻语</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">90.1k</span>
+  
+</div>
+
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
